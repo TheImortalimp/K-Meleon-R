@@ -57,3 +57,15 @@ jobs:
               echo "FAIL  $p.diff"; head -5 /tmp/err
             fi
           done
+
+      - name: Are the patches already in the tree? (reverse check)
+        shell: bash
+        working-directory: goanna
+        run: |
+          for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
+            if git apply --check -R --whitespace=nowarn "../$p.diff" 2>/dev/null; then echo "ALREADY-APPLIED  $p.diff"; else echo "NOT-APPLIED      $p.diff"; fi
+          done
+          echo '--- km markers in tree'
+          grep -rIl 'kmeleon' --include=confvars.sh --include=configure.in . 2>/dev/null | head
+          ls browser/confvars.sh; grep -n 'MOZ_APP_BASENAME\|MOZ_APP_NAME' browser/confvars.sh | head -3
+          git log --oneline -300 --format='%s' | grep -i 'k-meleon\|kmeleon\|xulrunner' | head -8
