@@ -1,0 +1,51 @@
+name: Patch matrix against Goanna revisions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  matrix:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Disable CRLF conversion
+        run: git config --global core.autocrlf false
+
+      - name: Check out K-Meleon-R
+        uses: actions/checkout@v4
+
+      - name: Blobless clone of the engine
+        shell: bash
+        run: |
+          git clone --no-checkout --filter=blob:none https://github.com/roytam1/palemoon27.git goanna
+
+      - name: Try patches against candidate revisions
+        shell: bash
+        working-directory: goanna
+        run: |
+          patches="goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour"
+          cands=""
+          for d in 2024-03-01 2024-04-19 2024-04-25 2024-06-01 2024-09-01; do
+            c=$(git rev-list -1 --before="$d" origin/kmeleon76)
+            cands="$cands kmeleon76@$d:$c"
+          done
+          cands="$cands kmeleon76@tip:$(git rev-parse origin/kmeleon76) master@tip:$(git rev-parse origin/master) classic@tip:$(git rev-parse origin/classic)"
+          for cand in $cands; do
+            name=${cand%%:*}; sha=${cand##*:}
+            echo "################ $name ($sha)"
+            git checkout -q -f "$sha" || { echo checkout failed; continue; }
+            for p in $patches; do
+              out=$(patch -p1 --dry-run -F3 -l < "../$p.diff" 2>&1)
+              total=$(echo "$out" | grep -c '^Hunk #\|^patching file')
+              failed=$(echo "$out" | grep -c 'FAILED')
+              missing=$(echo "$out" | grep -c "can't find file\|No such file")
+              echo "  $p: failed-hunks=$failed missing-files=$missing"
+            done
+          done
+
+      - name: Detail for best-looking revision (kmeleon76 tip)
+        shell: bash
+        working-directory: goanna
+        run: |
+          git checkout -q -f origin/kmeleon76
+          patch -p1 --dry-run -F3 -l < ../goanna-xulrunner-km-adapt.diff 2>&1 | grep -B1 -A0 'FAILED\|can.t find' | head -80
