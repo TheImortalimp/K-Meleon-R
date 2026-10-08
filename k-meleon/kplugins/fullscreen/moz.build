@@ -17,8 +17,9 @@ DISABLE_STL_WRAPPING = True
 
 OS_LIBS += [
   'shell32.lib',
-  CONFIG['XPCOM_GLUE_LDOPTS'],
 ]
+
+USE_LIBS += ['xpcomglue_s']
 
 LOCAL_INCLUDES += [
   '../../shared'

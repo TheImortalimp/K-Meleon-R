@@ -14,9 +14,9 @@ DEFINES['_UNICODE'] = True
 
 DISABLE_STL_WRAPPING = True
 
-OS_LIBS += [
-  CONFIG['XPCOM_GLUE_LDOPTS'],
-  CONFIG['NSPR_LIBS']
+USE_LIBS += [
+  'nspr',
+  'xpcomglue_s',
 ]
 
 LOCAL_INCLUDES += [
