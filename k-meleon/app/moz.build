@@ -62,7 +62,6 @@ SOURCES += [
     'TooltipsProvider.cpp',
     'UnknownContentTypeHandler.cpp',
     'urlbar.cpp',
-    'Utils.cpp',
     'VisualStylesXP.cpp',
 ]
 
