@@ -8,7 +8,8 @@ if not CONFIG['LIBXUL_SDK']:
     app_libxul_static_dirs = []
     include('/toolkit/toolkit.mozbuild')
 
-DIRS += ['/%s' % CONFIG['MOZ_BRANDING_DIRECTORY']]
+if CONFIG['MOZ_BRANDING_DIRECTORY']:
+    DIRS += ['/%s' % CONFIG['MOZ_BRANDING_DIRECTORY']]
 
 if CONFIG['MOZ_WEBAPP_RUNTIME']:
     DIRS += ['/webapprt']
