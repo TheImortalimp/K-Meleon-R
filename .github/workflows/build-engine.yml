@@ -91,6 +91,10 @@ jobs:
             if ((Get-Item C:\yasm\yasm.exe).Length -gt 100000) { break }
           }
           & C:\yasm\yasm.exe --version
+          Test-Path C:\Windows\System32\msvcr100.dll
+          choco install vcredist2010 -y --no-progress
+          Test-Path C:\Windows\System32\msvcr100.dll
+          & C:\yasm\yasm.exe --version; "yasm exit $LASTEXITCODE"
           Copy-Item C:\yasm\yasm.exe C:\mozilla-build\yasm\yasm.exe -Force
           "yasm exit $LASTEXITCODE"
           if ($LASTEXITCODE -ne 0) { choco install yasm -y --no-progress; Get-Command yasm* -All | Format-List Source }

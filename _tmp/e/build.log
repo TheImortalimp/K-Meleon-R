@@ -1,0 +1,23 @@
+MozillaBuild Install Directory: C:\mozilla-build
+Python 2.7.11
+--- A msys path, with -Zi
+rc=53
+--- B no -Zi
+rc=53
+--- C C:/yasm
+rc=53
+--- D via cmd
+rc=53
+--- E mozilla yasm version
+rc=53
+/c/mozilla-build/yasm:
+total 614
+drwxr-xr-x  2 runneradmin Administrators      0 Oct  8 19:06 .
+drwxr-xr-x 17 runneradmin Administrators   4096 Oct  8 19:06 ..
+-rwxr-xr-x  1 runneradmin Administrators 624640 Oct  8 19:06 yasm.exe
+
+/c/yasm:
+total 622
+drwxr-xr-x  2 runneradmin Administrators      0 Oct  8 19:06 .
+drwxr-xr-x 43 runneradmin Administrators  12288 Oct  8 19:06 ..
+-rwxr-xr-x  1 runneradmin Administrators 624640 Oct  8 19:06 yasm.exe
