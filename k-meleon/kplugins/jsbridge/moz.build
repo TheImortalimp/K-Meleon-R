@@ -1,11 +1,13 @@
 # -*- Mode: python; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 40 -*-
 # vim: set filetype=python:
 
-DIRS += [
-  'idl'
-]                                      
-
 SharedLibrary('jsbridge')
+
+XPIDL_SOURCES += [
+  'idl/nsIJSBridge.idl',
+]
+
+XPIDL_MODULE = 'jsbridge'
 
 SOURCES += [
   'jscomp.cpp',
