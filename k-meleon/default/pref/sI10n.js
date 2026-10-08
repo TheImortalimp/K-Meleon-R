@@ -29,9 +29,9 @@ pref("kmeleon.plugins.macros.search.kmforums", "http://kmeleon.sourceforge.net/f
 // Web Search
 
 // Default Search Engine URL  (MUST be one out of kmeleon.plugins.macros.search.engine[0..?].url)
-pref("kmeleon.general.searchEngine", "http://duckduckgo.com/?q=");
+pref("kmeleon.general.searchEngine", "https://www.bing.com/search?q=");
 // Default Search Engine Name (MUST be one out of kmeleon.plugins.macros.search.engine[0..?].name)
-pref("kmeleon.general.searchEngineName", "DuckDuckGo");
+pref("kmeleon.general.searchEngineName", "Bing - Web");
 
 
 // Web Search (engine[0..POSITIVE_INFINITY] possible)
@@ -41,7 +41,7 @@ pref("kmeleon.plugins.macros.search.engine0.url", "http://duckduckgo.com/?q=");
 pref("kmeleon.plugins.macros.search.engine1.name", "Google");
 pref("kmeleon.plugins.macros.search.engine1.url", "http://www.google.com/search?q=");
 pref("kmeleon.plugins.macros.search.engine2.name", "Bing - Web");
-pref("kmeleon.plugins.macros.search.engine2.url", "http://www.bing.com/search?q=");
+pref("kmeleon.plugins.macros.search.engine2.url", "https://www.bing.com/search?q=");
 
 // Metasearch (meta[0..POSITIVE_INFINITY] possible)
 // Make sure these engines are defined in search.xml!

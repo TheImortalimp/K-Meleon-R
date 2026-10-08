@@ -335,6 +335,16 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
         return -1;
 
+	// Dark title bar (Windows 10 20H1+ / 11). Loaded dynamically so older systems just ignore it.
+	if (HMODULE hDwm = ::LoadLibrary(_T("dwmapi.dll"))) {
+		typedef HRESULT (WINAPI *DwmSetAttr)(HWND, DWORD, LPCVOID, DWORD);
+		if (DwmSetAttr set = (DwmSetAttr)::GetProcAddress(hDwm, "DwmSetWindowAttribute")) {
+			BOOL dark = TRUE;
+			set(m_hWnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
+		}
+		::FreeLibrary(hDwm);
+	}
+
 	// Will be deleted in CBrowserView::PostNcDestroy()
 	m_wndBrowserView = new CBrowserView();
 

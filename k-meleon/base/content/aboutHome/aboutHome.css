@@ -52,7 +52,7 @@ a {
 
 /* Search */
 #searchForm {
-    width: 520px;
+    width: 600px;
     margin: 0 auto;
     display: -moz-box;
 }
@@ -94,6 +94,20 @@ a {
 
 #searchSubmit:hover {
     background: #7a5cf0;
+}
+
+#askGemini {
+    margin-left: 8px;
+    padding: 0 16px;
+    color: #fff;
+    background: linear-gradient(90deg, #4285f4, #9b72cb);
+    border: 0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#askGemini:hover {
+    box-shadow: 0 0 10px rgba(155,114,203,.6);
 }
 
 /* Speed dial */

@@ -184,5 +184,9 @@ function onDialCancel() {
 
 window.addEventListener("load", function () {
     document.getElementById("dialCancel").addEventListener("click", onDialCancel);
+    // Gemini has no documented URL for prefilling a prompt, so just open it.
+    document.getElementById("askGemini").addEventListener("click", function () {
+        window.location.href = "https://gemini.google.com/app";
+    });
     renderDial();
 });
