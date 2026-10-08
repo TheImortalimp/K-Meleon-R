@@ -17,7 +17,7 @@ if [ "$STAGE" = build ]; then
         objdir=$(grep -m1 'In the directory' /tmp/retry.log | sed 's/.*directory *//')
         if [ -n "$line" ]; then
           echo "=== include trace for $d ==="
-          (cd "$objdir" && eval "${line#*mozbuild.action.cl cl } -showIncludes" 2>&1 | sed -n '1,/error C/p' | tail -n 60)
+          (cd "$objdir" && eval "cl ${line#*mozbuild.action.cl cl } -showIncludes" 2>&1 | sed -n '1,/error C/p' | tail -n 60)
         fi
       fi
     done
