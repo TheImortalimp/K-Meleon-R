@@ -78,8 +78,17 @@ jobs:
           ac_add_options --disable-installer
           ac_add_options --disable-webrtc
           ac_add_options --disable-require-d3d-compilers
-          mk_add_options MOZ_MAKE_FLAGS=-j4
+          mk_add_options MOZ_MAKE_FLAGS="-j4 -k"
+          export CFLAGS=-DNOMINMAX
+          export CXXFLAGS=-DNOMINMAX
           EOF
+
+      - name: Restore object cache
+        uses: actions/cache/restore@v4
+        with:
+          path: goanna/obj-x64
+          key: obj-none
+          restore-keys: obj-
 
       - name: Configure / build
         shell: cmd
@@ -96,6 +105,13 @@ jobs:
           set RC=%ERRORLEVEL%
           type build.log | more +0 > nul
           exit /b %RC%
+
+      - name: Save object cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: goanna/obj-x64
+          key: obj-${{ github.run_id }}
 
       - name: Log tail
         if: always()
