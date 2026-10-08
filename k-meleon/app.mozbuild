@@ -8,12 +8,10 @@ if not CONFIG['LIBXUL_SDK']:
     app_libxul_static_dirs = []
     include('/toolkit/toolkit.mozbuild')
 
-add_tier_dir('app', [CONFIG['MOZ_BRANDING_DIRECTORY']])
+DIRS += ['/%s' % CONFIG['MOZ_BRANDING_DIRECTORY']]
 
 if CONFIG['MOZ_WEBAPP_RUNTIME']:
-    add_tier_dir('app', 'webapprt')
+    DIRS += ['/webapprt']
 
-# Never add tier dirs after browser because they apparently won't get
-# packaged properly on Mac.
-add_tier_dir('app', 'kmeleon')
-
+# Keep application directories at the end so they are packaged correctly on Mac.
+DIRS += ['/kmeleon']
