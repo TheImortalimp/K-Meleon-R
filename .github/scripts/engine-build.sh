@@ -23,6 +23,12 @@ if [ "$STAGE" = build ]; then
       fi
     done
   fi
+  if [ $rc -ne 0 ]; then
+    echo '=== asm diagnostics ==='
+    cd obj-x64/media/libvpx && rm -f x86inc.obj && mozmake x86inc.obj V=1 2>&1 | head -n 15
+    grep -E '^(AS|ASFLAGS|AS_DASH_C_FLAG) *=' backend.mk Makefile ../../config/autoconf.mk 2>/dev/null | head
+    grep -E '^(AS|ASFLAGS) *=' ../../config/autoconf.mk | head
+  fi
   exit $rc
 else
   python mach configure
