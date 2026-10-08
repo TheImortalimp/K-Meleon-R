@@ -3,6 +3,7 @@
 cd "$(cygpath -u "$GITHUB_WORKSPACE")/goanna" || exit 1
 export PATH="$PATH:/c/mozilla-build/python:/c/mozilla-build/python27"
 python --version
+which yasm; yasm --version; echo yasm-rc=$?; ls -la /c/mozilla-build/yasm 2>&1 | head
 if [ "$STAGE" = build ]; then
   python mach build
   rc=$?

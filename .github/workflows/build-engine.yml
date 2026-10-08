@@ -121,7 +121,7 @@ jobs:
         with:
           path: goanna/obj-x64
           key: obj-none
-          restore-keys: obj-
+          restore-keys: obj-none-
 
       - name: Keep restored objdir from being clobbered
         shell: bash
