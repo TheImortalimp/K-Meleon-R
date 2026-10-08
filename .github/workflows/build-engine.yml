@@ -75,6 +75,7 @@ jobs:
           set MOZCONFIG=%CD%\goanna\mozconfig
           set PATH=C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
           set MOZ_NO_RESET_PATH=1
+          set MOZILLABUILD=C:\mozilla-build
           set STAGE=${{ inputs.stage }}
           C:\mozilla-build\msys\bin\bash.exe -lc "cd \"$(cygpath -u \"%CD%\")/goanna\"; export PATH=\"$PATH:/c/mozilla-build/python:/c/mozilla-build/python27\"; python --version; if [ $STAGE = build ]; then python mach build; else python mach configure; fi" > build.log 2>&1
           set RC=%ERRORLEVEL%
