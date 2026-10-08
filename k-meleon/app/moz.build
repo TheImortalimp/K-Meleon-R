@@ -5,6 +5,11 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 Program(CONFIG['MOZ_APP_NAME'])
+OS_LIBS += [
+    'mozjs.lib',
+    'xpcomglue_s.lib',
+]
+
 SOURCES += [
     '../shared/Utils.cpp',
     'AccelParser.cpp',

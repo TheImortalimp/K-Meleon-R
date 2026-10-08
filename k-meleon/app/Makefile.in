@@ -26,22 +26,7 @@ DEFINES += \
 #PREF_JS_EXPORTS += $(srcdir)/profile/channel-prefs.js
 #endif #} LIBXUL_SDK
 
-# Build a binary bootstrapping with XRE_main
-
-LIBS += \
-	$(XPCOM_STANDALONE_GLUE_LDOPTS) \
-  $(MOZ_JS_LIBS) \
-	$(NULL)
-	
 #OS_LIBS		+= $(call EXPAND_LIBNAME,ole32 comdlg32 shell32 version)
-
-ifdef MOZ_LINKER
-LIBS += $(MOZ_ZLIB_LIBS)
-endif
-
-ifdef HAVE_CLOCK_MONOTONIC
-LIBS += $(REALTIME_LIBS)
-endif
 
 ifndef MOZ_WINCONSOLE
 ifdef MOZ_DEBUG
