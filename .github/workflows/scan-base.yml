@@ -18,8 +18,8 @@ jobs:
         working-directory: goanna
         run: |
           set +e +o pipefail
-          git rev-list --first-parent origin/classic --since=2023-01-01 | awk 'NR%40==1' | head -60 > ../cands.txt
-          wc -l ../cands.txt
+          git rev-list --first-parent origin/classic | awk 'NR%60==1' | head -50 > ../cands.txt
+          wc -l ../cands.txt; git log -1 --format='tip %cs' origin/classic
           while read sha; do
             git checkout -q -f "$sha" 2>/dev/null || continue
             d=$(git log -1 --format=%cs)
