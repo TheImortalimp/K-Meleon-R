@@ -3,7 +3,7 @@
 
 DIST_SUBDIR = 'kplugins'
 
-PARALLEL_DIRS += [
+DIRS += [
     'bmpmenu',
     'bookmarks',
     'favorites',
@@ -20,4 +20,3 @@ PARALLEL_DIRS += [
     'spellcheck',
     'toolbars'
 ]
-
