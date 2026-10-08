@@ -11,12 +11,9 @@ DIRS += [
     'gestures',
     'hotlist',
     'jsbridge',
-#    'update',
-    'login',
-    'macros',
+    'macros2',
     'privacy',
     'rebar_menu',
     'sessions',
     'spellcheck',
-    'toolbars'
 ]
