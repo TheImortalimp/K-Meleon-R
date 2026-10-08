@@ -124,6 +124,17 @@ jobs:
           $toolset = Get-ChildItem "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.29*" -Directory | Where-Object { (Test-Path (Join-Path $_.FullName "atlmfc\include\afxwin.h")) -and (Test-Path (Join-Path $_.FullName "atlmfc\include\atlbase.h")) } | Select-Object -First 1
           if (-not $toolset) { throw "v142 ATL/MFC headers were not installed" }
 
+      - name: Install v142 MFC headers
+        shell: pwsh
+        run: |
+          $installer = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vs_installer.exe"
+          if (-not (Test-Path $installer)) { throw "Visual Studio Installer not found: $installer" }
+          $arguments = 'modify --installPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise" --add Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC --add Microsoft.VisualStudio.Component.VC.14.29.16.11.ATL --quiet --wait --norestart'
+          $process = Start-Process -FilePath $installer -ArgumentList $arguments -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "Failed to install v142 ATL/MFC components (exit $($process.ExitCode))" }
+          $toolset = Get-ChildItem "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.29*" -Directory | Where-Object { (Test-Path (Join-Path $_.FullName "atlmfc\include\afxwin.h")) -and (Test-Path (Join-Path $_.FullName "atlmfc\include\atlbase.h")) } | Select-Object -First 1
+          if (-not $toolset) { throw "v142 ATL/MFC headers were not installed" }
+
       - name: Write mozconfig
         shell: bash
         run: |
