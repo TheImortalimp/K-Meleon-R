@@ -1,0 +1,51 @@
+name: Find Goanna base revision for patches
+
+on:
+  workflow_dispatch:
+
+jobs:
+  find-base:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Disable CRLF conversion
+        run: git config --global core.autocrlf false
+
+      - name: Check out K-Meleon-R
+        uses: actions/checkout@v4
+
+      - name: Full-history clone of the engine
+        shell: bash
+        run: |
+          git clone --no-checkout --filter=blob:none https://github.com/roytam1/palemoon27.git goanna
+          cd goanna
+          git branch -r | head -20
+
+      - name: Locate the base commit from patch blob hashes
+        shell: bash
+        working-directory: goanna
+        run: |
+          # first "index <old>..<new>" line of each patch names the pre-patch blob
+          grep -E '^(diff --git|index )' ../goanna-gre-prefs.diff | head -4
+          for pair in "f8965daaf modules/libpref/Makefile.in"; do
+            set -- $pair
+            echo "=== commits touching blob $1 ($2) on any branch"
+            git log --all --format='%h %ad %s' --date=short --find-object="$1" -- "$2" | head -5
+          done
+          echo "=== branches containing the matching commit"
+          c=$(git log --all --format='%H' --find-object=f8965daaf -- modules/libpref/Makefile.in | tail -1)
+          echo "oldest commit with that blob: $c"
+          [ -n "$c" ] && git branch -r --contains "$c" | head -10
+          [ -n "$c" ] && git log -1 --format='%h %ad %s' --date=short "$c"
+
+      - name: Test patches against the candidate commit
+        shell: bash
+        working-directory: goanna
+        run: |
+          c=$(git log --all --format='%H' --find-object=f8965daaf -- modules/libpref/Makefile.in | head -1)
+          echo "candidate: $c"
+          [ -z "$c" ] && { echo "no candidate found"; exit 0; }
+          git checkout -q "$c"
+          for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
+            if git apply --check --whitespace=nowarn "../$p.diff" 2>/tmp/err; then echo "OK    $p.diff"; else echo "FAIL  $p.diff"; head -3 /tmp/err; fi
+          done
