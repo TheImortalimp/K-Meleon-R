@@ -5,6 +5,7 @@
 #include "../../shared/rapidjson/filestream.h" 
 #include "../../shared/rapidjson/writer.h" 
 #include <fstream>
+#include <vector>
 
 /*
 {
@@ -275,11 +276,11 @@ bool SessionStore::Load()
 		if (_tstat(sessionFile, &st) == -1)
 			return false;
 		
-		std::auto_ptr<char> input(new char[st.st_size+1]);
-		f.read(input.get(), st.st_size);
-		input.get()[f.gcount()] = 0;
+		std::vector<char> input(st.st_size + 1);
+		f.read(input.data(), st.st_size);
+		input[f.gcount()] = 0;
 
-		data.Parse(input.get());
+		data.Parse(input.data());
 		if (data.HasParseError() || !data["sessions"].IsArray())
 			InitData();
 		UpdateSessionList();

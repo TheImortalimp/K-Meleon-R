@@ -23,6 +23,8 @@
 #  include "../missing.h"
 #endif
 
+#include <algorithm>
+
 #include "op_hotlist.h"
 #include "kmeleon_plugin.h"
 #include "../rebar_menu/hot_tracking.h"
@@ -484,7 +486,7 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
 }
 
 
-int CALLBACK EditProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK EditProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
    static HHOOK hHook;
    static HWND hTree;
@@ -1685,7 +1687,7 @@ static void OnSize(int height, int width) {
    // move/resize properties widgets
    int x_max = convX(EDITBOXES_LEFT+DATES_WIDTH)+BORDER;
    int x_half = width/2 + BORDER/2;
-   int x2 = min(x_max, x_half);
+   int x2 = (std::min)(x_max, x_half);
    int w1 = x2 - convX(EDITBOXES_LEFT) - BORDER;
    int w2 = width - x2 - 2*BORDER;
 

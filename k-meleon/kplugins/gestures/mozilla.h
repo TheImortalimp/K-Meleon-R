@@ -223,7 +223,8 @@ NS_IMETHODIMP CDomEventListener::HandleEvent(nsIDOMEvent* aEvent)
 		doc->GetLocation(getter_AddRefs(loc));
 		if (!loc) return NS_ERROR_FAILURE;
 		loc->GetProtocol(protocol);
-		if (protocol.Compare(L"about") == 0 || protocol.Compare(L"chrome") == 0)
+		if (protocol.Equals(NS_LITERAL_STRING("about")) ||
+		    protocol.Equals(NS_LITERAL_STRING("chrome")))
 			return NS_OK;
 
 		nsCOMPtr<nsIDOMMouseEvent> mouseEvent(do_QueryInterface(aEvent));
@@ -290,7 +291,8 @@ NS_IMETHODIMP CDomEventListener::HandleEvent(nsIDOMEvent* aEvent)
 				targetNode->GetNodeType(&ntype);
 				nsString name;
 				targetNode->GetNodeName(name);
-				if (ntype == nsIDOMNode::TEXT_NODE && name.Compare(L"#text") == 0) {
+				if (ntype == nsIDOMNode::TEXT_NODE &&
+				    name.Equals(NS_LITERAL_STRING("#text"))) {
 					type = HAS_TEXT;
 					data = _data;
 				}

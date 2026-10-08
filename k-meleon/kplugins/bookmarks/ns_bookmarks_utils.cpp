@@ -23,6 +23,8 @@
 #  include "../missing.h"
 #endif
 
+#include <algorithm>
+
 #include "stdafx.h"
 #include "resource.h"
 #include "wininet.h"    // for INTERNET_MAX_URL_LENGTH
@@ -888,7 +890,7 @@ void BuildMenu(HMENU menu, CBookmarkNode *node, BOOL isContinuation)
    // if bmp_menu is enabled, the menu items will actually be at least 18 pixels... but this system call won't reflect that
    // in any case, SM_CYMENU gets the height of the menu bar, not a menu item
    // for now we'll just assume bmp_menu is enabled and they're 18 pixels...
-int cmenu = max(18,GetSystemMetrics(SM_CYMENU));
+int cmenu = (std::max)(18,GetSystemMetrics(SM_CYMENU));
 
 // space to allow above menu for title bar, menu bar (assuming maximized window), and extra frame junk
 #define MENUPADDING 50
@@ -1215,7 +1217,7 @@ void addLink(const char *url, const char *title, const char* nick, const char* i
 	Rebuild();
 }
 
-int CALLBACK AddProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK AddProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static HWND hWnd = 0;
 	

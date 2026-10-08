@@ -25,6 +25,8 @@
 
 #define KMELEON_PLUGIN_EXPORTS
 
+#include <algorithm>
+
 #include "op_hotlist.h"
 #include "kmeleon_plugin.h"
 #include "../rebar_menu/hot_tracking.h"
@@ -178,7 +180,7 @@ void BuildMenu(HMENU menu, CBookmarkNode *node, BOOL isContinuation)
    // if bmp_menu is enabled, the menu items will actually be at least 18 pixels... but this system call won't reflect that
    // in any case, SM_CYMENU gets the height of the menu bar, not a menu item
    // for now we'll just assume bmp_menu is enabled and they're 18 pixels...
-int cmenu = max(18,GetSystemMetrics(SM_CYMENU));
+int cmenu = (std::max)(18,GetSystemMetrics(SM_CYMENU));
    
    // space to allow above menu for title bar, menu bar (assuming maximized window), and extra frame junk
 #define MENUPADDING 50

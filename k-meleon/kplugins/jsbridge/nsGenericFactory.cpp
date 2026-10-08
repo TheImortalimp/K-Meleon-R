@@ -95,11 +95,6 @@ NS_IMETHODIMP nsGenericFactory::GetInterfaces(PRUint32 *countp,
     return NS_OK;
 }
 
-NS_IMETHODIMP nsGenericFactory::GetScriptableHelper(nsIXPCScriptable** retval){
-	*retval = nullptr;
-	return NS_OK;
-}
-
 NS_IMETHODIMP nsGenericFactory::GetContractID(char **aContractID)
 {
     if (mInfo->mContractID) {

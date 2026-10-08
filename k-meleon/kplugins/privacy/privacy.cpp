@@ -32,7 +32,6 @@
 #include "Utils.h"
 #include "LocalesUtils.h"
 
-#include "mozilla/ChaosMode.h" // ChaosMode hack
 
 Locale* gLoc = NULL;
 
@@ -326,7 +325,7 @@ INT Load()
 void Create(HWND parent)
 {
    KMeleonWndProc = (void *) GetWindowLong(parent, GWL_WNDPROC);
-   SetWindowLong(parent, GWL_WNDPROC, (LONG)WndProc);
+   SetWindowLong(parent, GWL_WNDPROC, (LONG_PTR)WndProc);
    hMainWindow = parent;
 }
 
@@ -611,14 +610,3 @@ extern "C"
           return 14; // 14 = icon width
    }
 }
-
-#if 1 //ChaosMode hack
-namespace mozilla {
-	namespace detail {
-
-		Atomic<uint32_t> gChaosModeCounter(0);
-		ChaosFeature gChaosFeatures = None;
-
-	} /* namespace detail */
-} /* namespace mozilla */
-#endif

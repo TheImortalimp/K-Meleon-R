@@ -16,7 +16,6 @@
 #include "nsIJSBridge.h"
 #include "jscomp.h"
 
-#include "mozilla/ChaosMode.h" // ChaosMode hack
 
 #define KMELEON_PLUGIN_EXPORTS
 #include "kmeleon_plugin.h"
@@ -128,7 +127,7 @@ CJSBridge* getJSB() {
 void Create(HWND hWnd)
 {
 	KMeleonWndProc = (WNDPROC) GetWindowLong(hWnd, GWL_WNDPROC);
-	SetWindowLong(hWnd, GWL_WNDPROC, (LONG)WndProc);
+	SetWindowLong(hWnd, GWL_WNDPROC, (LONG_PTR)WndProc);
 	if (getJSB()) getJSB()->OnCreateWindow(hWnd, 0);
 }
 
@@ -270,14 +269,3 @@ KMELEON_PLUGIN kmeleonPlugin *GetKmeleonPlugin() {
 }
 
 }
-
-#if 1 //ChaosMode hack
-namespace mozilla {
-namespace detail {
-
-Atomic<uint32_t> gChaosModeCounter(0);
-ChaosFeature gChaosFeatures = None;
-
-} /* namespace detail */
-} /* namespace mozilla */
-#endif

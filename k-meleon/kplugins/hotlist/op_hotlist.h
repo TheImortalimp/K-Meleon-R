@@ -79,7 +79,7 @@ int SaveHotlistEntry(FILE *bmFile, CBookmarkNode *node);
 int addLink(char *url, char *title);
 void findNick(char *nick, char **url);
 LRESULT APIENTRY WndTBSubclassProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-int CALLBACK EditProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK EditProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 UINT GetSiteIcon(char* url);
 
 extern "C" {

@@ -29,6 +29,14 @@
 #undef SetWindowLong
 #endif
 
+#ifdef GetWindowLong
+#undef GetWindowLong
+#endif
+
+#if defined(_WIN64) && !defined(GWL_WNDPROC)
+#define GWL_WNDPROC GWLP_WNDPROC
+#endif
+
 typedef int (__cdecl* DRAWBITMAPPROC)(DRAWITEMSTRUCT *dis);
 typedef void (__cdecl* DOWNLOADPROC)(const char* url, const char* path, int result, void* data) ;
 
@@ -36,9 +44,13 @@ typedef void (__cdecl* DOWNLOADPROC)(const char* url, const char* path, int resu
 	(IsWindowUnicode(hWnd) ? CallWindowProcW(proc, hWnd, message, wParam, lParam) : \
 	                        CallWindowProcA(proc, hWnd, message, wParam, lParam))
 
+#define GetWindowLong(hWnd, nIndex) \
+	(IsWindowUnicode(hWnd) ? GetWindowLongPtrW(hWnd, nIndex) : \
+	                        GetWindowLongPtrA(hWnd, nIndex))
+
 #define SetWindowLong(hWnd, nIndex, dwNewLong) \
-	(IsWindowUnicode(hWnd) ? SetWindowLongW(hWnd, nIndex, dwNewLong) : \
-                            SetWindowLongA(hWnd, nIndex, dwNewLong))
+	(IsWindowUnicode(hWnd) ? SetWindowLongPtrW(hWnd, nIndex, (LONG_PTR)(dwNewLong)) : \
+	                         SetWindowLongPtrA(hWnd, nIndex, (LONG_PTR)(dwNewLong)))
 
 class nsIWebBrowser;
 class nsIDOMNode;

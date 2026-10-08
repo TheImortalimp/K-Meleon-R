@@ -757,7 +757,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Create(HWND hWndParent) {
 	KMeleonWndProc = (WNDPROC) GetWindowLong(hWndParent, GWL_WNDPROC);
-	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG)WndProc);
+	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG_PTR)WndProc);
 
 	PostMessage(hWndParent, WM_COMMAND, wm_deferopenmsg, 0);
 }

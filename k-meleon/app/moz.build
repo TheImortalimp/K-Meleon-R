@@ -64,7 +64,7 @@ SOURCES += [
     'ReBarEx.cpp',
     'SaveAsHandler.cpp',
     'SideBar.cpp',
-    'stdafx.cpp',
+    'StdAfx.cpp',
     'TabReBar.cpp',
     'ToolBarEx.cpp',
     'Tooltips.cpp',
@@ -96,10 +96,10 @@ if CONFIG['_MSC_VER']:
     # Always enter a Windows program through wmain, whether or not we're
     # a console application.
     WIN32_EXE_LDFLAGS += ['-ENTRY:wWinMainCRTStartup']
-    CXXFLAGS += ['/EHsc']
+    CXXFLAGS += ['-EHsc']
 
 if CONFIG['OS_ARCH'] == 'WINNT':
-    RCINCLUDE = 'mfcembed.rc'
+    RCINCLUDE = 'MfcEmbed.rc'
     DEFINES['MOZ_PHOENIX'] = True
     DEFINES['UNICODE'] = True
     DEFINES['_UNICODE'] = True

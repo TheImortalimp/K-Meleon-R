@@ -39,7 +39,6 @@
 #include "LocalesUtils.h"
 #include "mozilla.h"
 
-#include "mozilla/ChaosMode.h" // ChaosMode hack
 
 Locale* gLoc;
 
@@ -321,7 +320,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Create(HWND hWndParent) {
 	KMeleonWndProc = (WNDPROC) GetWindowLong(hWndParent, GWL_WNDPROC);
-	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG)WndProc);
+	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG_PTR)WndProc);
 	BOOL bLast = FALSE;
 	kPlugin.kFuncs->GetPreference(PREF_BOOL, "kmeleon.plugins.fullscreen.last", &bLast, (void *)&bLast);
 	if (bAutoFullscreen || bLast)
@@ -474,14 +473,3 @@ KMELEON_PLUGIN kmeleonPlugin *GetKmeleonPlugin() {
 //}
 
 }
-
-#if 1 //ChaosMode hack
-namespace mozilla {
-	namespace detail {
-
-		Atomic<uint32_t> gChaosModeCounter(0);
-		ChaosFeature gChaosFeatures = None;
-
-	} /* namespace detail */
-} /* namespace mozilla */
-#endif

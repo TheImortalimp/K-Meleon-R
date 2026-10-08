@@ -230,7 +230,7 @@ int Load(){
 
 void Create(HWND parent){
    KMeleonWndProc = (WNDPROC) GetWindowLong(parent, GWL_WNDPROC);
-   SetWindowLong(parent, GWL_WNDPROC, (LONG)WndProc);
+   SetWindowLong(parent, GWL_WNDPROC, (LONG_PTR)WndProc);
 }
 
 void Close(HWND hWnd) { 

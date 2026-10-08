@@ -38,7 +38,6 @@
 #include "strconv.h"
 #include "mozilla.h"
 
-#include "mozilla/ChaosMode.h" // ChaosMode hack
 
 BOOL APIENTRY DllMain (
         HANDLE hModule,
@@ -164,7 +163,7 @@ int Init(){
 
 void Create(HWND parent){
     KMeleonWndProc = (void *)GetWindowLong(parent, GWL_WNDPROC);
-    SetWindowLong(parent, GWL_WNDPROC, (LONG)WndProc);
+    SetWindowLong(parent, GWL_WNDPROC, (LONG_PTR)WndProc);
 }
 
 void CreateTab(HWND hWndParent, HWND hTab) {
@@ -532,14 +531,3 @@ extern "C" {
         return &kPlugin;
     }
 }
-
-#if 1 //ChaosMode hack
-namespace mozilla {
-	namespace detail {
-
-		Atomic<uint32_t> gChaosModeCounter(0);
-		ChaosFeature gChaosFeatures = None;
-
-	} /* namespace detail */
-} /* namespace mozilla */
-#endif

@@ -224,7 +224,7 @@ void RegisterNotification(HWND hwnd) {
 
 void Create(HWND parent){
    KMeleonWndProc = (void *) GetWindowLong(parent, GWL_WNDPROC);
-   SetWindowLong(parent, GWL_WNDPROC, (LONG)WndProc);
+   SetWindowLong(parent, GWL_WNDPROC, (LONG_PTR)WndProc);
    RegisterNotification(parent);
    pNewTB = create_TB(parent);
 }
@@ -550,7 +550,7 @@ void DoRebar(HWND rebarWnd){
       
       if (nButtonMinWidth > 0)
          wpOrigTBWndProc = (WNDPROC) SetWindowLong(hWndTB, 
-            GWL_WNDPROC, (LONG) WndTBSubclassProc);
+            GWL_WNDPROC, (LONG_PTR) WndTBSubclassProc);
 
       pNewTB = NULL;
 

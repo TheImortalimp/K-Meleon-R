@@ -41,17 +41,7 @@
 #include <nsILocalFile.h>
 
 #include <nsIServiceManager.h>
-#include <nsIAccessible.h>
-#include <nsIAccessibleRetrieval.h>
-#include <ISimpleDOMText.h>
-#include <oleacc.h>
-#include <servprov.h>
 #include <mozISpellCheckingEngine.h>
-
-#include "mozilla/fallible.h"
-#include "mozilla/a11y/Accessible.h"
-
-#include "mozilla/ChaosMode.h" // ChaosMode hack
 
 #include <algorithm>
 
@@ -273,7 +263,7 @@ void Load()
 void Create(HWND hWndParent)
 {	
 	KMeleonWndProc = (WNDPROC) GetWindowLong(hWndParent, GWL_WNDPROC);
-	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG)WndProc);
+	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG_PTR)WndProc);
 }
 
 
@@ -660,53 +650,6 @@ int message_box(HWND hwnd, LPCSTR lpText, LPCSTR lpTitle, UINT style)
 	return MessageBoxA(hwnd, kPlugin.kFuncs->Translate(lpText), kPlugin.kFuncs->Translate(lpTitle), style);
 }
 
-/*
-  Get screen position of a word by accesibility API
-  provided mozilla and windows .
- */
-BOOL get_word_pos(HWND hwnd, nsCOMPtr<nsIDOMNode>& node, PRInt32 offset, int& rx, int& ry)
-{
-	nsresult rv;
-	
-	nsCOMPtr<nsIAccessibleRetrieval> accessibleretrieval = do_GetService("@mozilla.org/accessibleRetrieval;1");
-	NS_ENSURE_TRUE(accessibleretrieval, FALSE);
-	
-	nsCOMPtr<nsIAccessible> accessible;
-	rv = accessibleretrieval->GetAccessibleFor(node, getter_AddRefs(accessible));
-	NS_ENSURE_SUCCESS(rv, FALSE);
-	NS_ENSURE_TRUE(accessible, FALSE);
-	
-	// below code is related with Microsoft Active Accessibility
-	
-	mozilla::a11y::Accessible* acc = accessible->ToInternalAccessible();
-	
-	// This is MS COM component, isn't XPCOM.
-	IAccessible* pAccessible = NULL;
-	acc->GetNativeInterface((void**) &pAccessible);
-	NS_ENSURE_SUCCESS(rv, FALSE);
-	NS_ENSURE_TRUE(pAccessible, FALSE);
-	
-	HRESULT hresult;
-	IServiceProvider *pServProv = NULL;
-	hresult = pAccessible->QueryInterface(IID_IServiceProvider, (void**) &pServProv);
-	pAccessible->Release();
-	if (FAILED(hresult) || pServProv == NULL) return FALSE;
-	
-	const GUID refguid = {0x0c539790, 0x12e4, 0x11cf, 0xb6, 0x61, 0x00, 0xaa, 0x00, 0x4c, 0xd6, 0xd8};
-	ISimpleDOMText *pSimpleDOMText = NULL;
-	hresult = pServProv->QueryService(refguid, IID_ISimpleDOMText, (void**) &pSimpleDOMText);
-	pServProv->Release();
-	if (FAILED(hresult) || pSimpleDOMText == NULL) return FALSE;
-	
-	int x, y, w, h;
-	hresult = pSimpleDOMText->get_clippedSubstringBounds(offset, offset + 1, &x, &y, &w, &h);
-	pSimpleDOMText->Release();
-	if (FAILED(hresult)) return FALSE;
-	
-	rx = x; ry = y + h;
-	return TRUE;
-}
-
 
 /*
   Sort Suggestion List.
@@ -870,12 +813,10 @@ BOOL DoCommand(HWND hwnd, BOOL bHere)
 	NS_ENSURE_SUCCESS(rv, FALSE);
 	
 	// get menu position
-	int x, y;
-	if (! bHere || ! get_word_pos(hwnd, node, offset, x, y)) {
-		POINT point = {0};
-		GetCursorPos(&point);
-		x = point.x; y = point.y;
-	}
+	POINT point = {0};
+	GetCursorPos(&point);
+	int x = point.x;
+	int y = point.y;
 	
 	// show menu
 	INT result = select_menu(hwnd, suggests, dics, dict.get(), x, y);
@@ -916,14 +857,3 @@ BOOL DoCommand(HWND hwnd, BOOL bHere)
 	
 	return TRUE;
 }
-
-#if 1 //ChaosMode hack
-namespace mozilla {
-namespace detail {
-
-Atomic<uint32_t> gChaosModeCounter(0);
-ChaosFeature gChaosFeatures = None;
-
-} /* namespace detail */
-} /* namespace mozilla */
-#endif

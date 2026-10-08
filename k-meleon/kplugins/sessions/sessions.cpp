@@ -411,7 +411,7 @@ int Init()
 void Create(HWND hWndParent)
 {
 	KMeleonWndProc = (WNDPROC) GetWindowLong(hWndParent, GWL_WNDPROC);
-	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG)WndProc);
+	SetWindowLong(hWndParent, GWL_WNDPROC, (LONG_PTR)WndProc);
 	currentSession.addWindow(hWndParent);
 }
 
@@ -775,4 +775,3 @@ extern "C" {
 		return &kPlugin;
 	}
 }
-

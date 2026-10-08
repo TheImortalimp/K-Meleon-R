@@ -20,6 +20,7 @@
 #include <map>
 #include <stdio.h>
 #include <ctime>
+#include <vector>
 
 ///////////////////////////
 // Utilities 
@@ -386,15 +387,15 @@ Value ExecuteFunction(const char* name);
 		if (preftype == PREF_UNISTRING) {
 			long len = kFuncs->GetPreference(PREF_STRING, pref, 0, L"");			
 			if (!len) return Value("");
-			std::auto_ptr<char> cRetval((char*)calloc(sizeof(char), len+1));
-			kFuncs->GetPreference(PREF_STRING, pref, cRetval.get(), L"");
-			if (strncmp(cRetval.get(), "chrome:",7) == 0) {
+			std::vector<char> cRetval(len + 1);
+			kFuncs->GetPreference(PREF_STRING, pref, cRetval.data(), L"");
+			if (strncmp(cRetval.data(), "chrome:",7) == 0) {
 				len = kFuncs->GetPreference(PREF_LOCALIZED, pref, 0, L"");			
 				if (!len) return Value("");
-				cRetval.reset((char*)calloc(sizeof(char), len+1));
-				kFuncs->GetPreference(PREF_LOCALIZED, pref, cRetval.get(), L"");
+				cRetval.assign(len + 1, '\0');
+				kFuncs->GetPreference(PREF_LOCALIZED, pref, cRetval.data(), L"");
 			}
-			Value v(cRetval.get());
+			Value v(cRetval.data());
 			return v;
 		}
 		else if (preftype == PREF_INT) {
