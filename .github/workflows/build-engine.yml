@@ -90,7 +90,8 @@ jobs:
             "$u -> $((Get-Item C:\yasm\yasm.exe).Length) bytes"
             if ((Get-Item C:\yasm\yasm.exe).Length -gt 100000) { break }
           }
-          & C:\mozilla-build\yasm\yasm.exe --version; Get-ChildItem C:\mozilla-build\yasm
+          & C:\yasm\yasm.exe --version
+          Copy-Item C:\yasm\yasm.exe C:\mozilla-build\yasm\yasm.exe -Force
           "yasm exit $LASTEXITCODE"
           if ($LASTEXITCODE -ne 0) { choco install yasm -y --no-progress; Get-Command yasm* -All | Format-List Source }
       - name: Write mozconfig

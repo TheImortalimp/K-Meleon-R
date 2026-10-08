@@ -2,819 +2,852 @@ MozillaBuild Install Directory: C:\mozilla-build
 Python 2.7.11
 /c/mozilla-build/yasm/yasm.exe
 yasm-rc=53
-total 497
-drwxr-xr-x  2 runneradmin Administrators      0 Oct  8 18:07 .
-drwxr-xr-x 17 runneradmin Administrators   4096 Oct  8 18:07 ..
--rwxr-xr-x  1 runneradmin Administrators 504320 Mar 29  2016 yasm.exe
- 0:01.13 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s configure
- 0:34.49 Clobber not needed.
- 0:34.49 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
- 0:34.49 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
- 0:34.49 cd d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure
- 0:34.49 Adding configure options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
- 0:34.49   --enable-application=xulrunner
- 0:34.49   --target=x86_64-pc-mingw32
- 0:34.49   --host=x86_64-pc-mingw32
- 0:34.49   --enable-optimize
- 0:34.49   --disable-debug
- 0:34.49   --disable-tests
- 0:34.49   --disable-updater
- 0:34.49   --disable-crashreporter
- 0:34.49   --disable-maintenance-service
- 0:34.49   --disable-installer
- 0:34.49   --disable-webrtc
- 0:34.49   --disable-require-d3d-compilers
- 0:34.49 creating cache ./config.cache
- 0:34.49 checking host system type... x86_64-pc-mingw32
- 0:34.49 checking target system type... x86_64-pc-mingw32
- 0:34.49 checking build system type... x86_64-pc-mingw32
- 0:34.49 checking for mawk... no
- 0:34.49 checking for gawk... gawk
- 0:34.49 checking for python2.7... /c/mozilla-build/python/python2.7
- 0:34.49 Creating Python environment
- 0:34.49 New python executable in d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/_virtualenv\Scripts\python2.7.exe
- 0:34.49 Also creating executable in d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/_virtualenv\Scripts\python.exe
- 0:34.49 Installing setuptools, pip...done.
- 0:34.49 running build_ext
- 0:34.49 
- 0:34.49 building '_psutil_windows' extension
- 0:34.49 
- 0:34.49 error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
- 0:34.49 
- 0:34.49 
- 0:34.49 Error processing command. Ignoring because optional. (optional:setup.py:python/psutil:build_ext:--inplace)
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/python/mozbuild/mozbuild/virtualenv.py:318: UserWarning: Hacking environment to allow binary Python extensions to build. You can make this warning go away by installing Visual Studio 2008. You can download the Express Edition installer from http://go.microsoft.com/?linkid=7729279
- 0:34.49   warnings.warn('Hacking environment to allow binary Python '
- 0:34.49 checking Python environment is Mozilla virtualenv... yes
- 0:34.49 checking for perl5... no
- 0:34.49 checking for perl... /usr/bin/perl
- 0:34.49 checking for gcc... cl
- 0:34.49 checking whether the C compiler (cl -DNOMINMAX ) works... yes
- 0:34.49 checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
- 0:34.49 checking whether we are using GNU C... no
- 0:34.49 checking whether cl accepts -g... no
- 0:34.49 checking for c++... cl
- 0:34.49 checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
- 0:34.49 checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
- 0:34.49 checking whether we are using GNU C++... no
- 0:34.49 checking whether cl accepts -g... no
- 0:34.49 checking for ranlib... ranlib
- 0:34.49 checking for ml64... /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
- 0:34.49 checking for ar... ar
- 0:34.49 checking for ld... link
- 0:34.49 checking for strip... strip
- 0:34.49 checking for windres... windres
- 0:34.49 checking for otool... no
- 0:34.49 checking for midl... midl
- 0:34.49 configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
- 0:34.49 checking for std::_Throw... no
- 0:34.49 checking for overridable _RAISE... no
- 0:34.49 configure: warning: exception wrapping disabled
- 0:34.49 checking for highest Windows version supported by this SDK... 0x0A00
- 0:34.49 checking for Windows SDK being recent enough... yes
- 0:34.49 checking how to run the C preprocessor... cl -E -nologo
- 0:34.49 checking how to run the C++ preprocessor... cl -TP -E -nologo
- 0:34.49 checking for a BSD compatible install... /usr/bin/install -c
- 0:34.49 checking whether ln -s works... no
- 0:34.49 checking for minimum required perl version >= 5.006... 5.008008
- 0:34.49 checking for full perl installation... yes
- 0:34.49 checking for doxygen... :
- 0:34.49 checking for autoconf... /usr/bin/autoconf
- 0:34.49 checking for unzip... /c/mozilla-build/info-zip/unzip
- 0:34.49 checking for zip... /c/mozilla-build/info-zip/zip
- 0:34.49 checking for xargs... /usr/bin/xargs
- 0:34.49 checking for rpmbuild... :
- 0:34.49 checking for c:/Strawberry/c/bin/gmake.EXE... d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/local/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/7zip/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/info-zip/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/kdiff3/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/mozmake/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-3.0b3/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-3.0b1/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-2.46u/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/Scripts/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/upx391w/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/watchman/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/wget/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/yasm/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: ./c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/local/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/mingw/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/moztools-x64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/yasm/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python27/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/VCPackages/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TestWindow/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/bin/Roslyn/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.8 Tools/x64//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/HTML Help Workshop/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/FSharp/Tools/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Team Tools/DiagnosticsHub/Collector/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/x64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/bin/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/Microsoft.NET/Framework64/v4.0.30319/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/MongoDB/Server/7.0/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/aliyun-cli/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/vcpkg/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/NSIS//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/zstd/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Mercurial//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/stack/3.11.1/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/cabal/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ghcup/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mingw64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/dotnet/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/MySQL/MySQL Server 8.0/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/R/R-4.6.1/bin/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/GeckoDriver/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/EdgeDriver//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/ChromeDriver/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/GitHub CLI/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/pipx_bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/npm/prefix/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/go/1.24.13/x64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/Scripts/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Ruby/3.3.12/x64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/OpenSSL/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/kotlinc/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/ImageMagick-7.1.2-Q16-HDRI/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SDKs/Azure/CLI2/wbin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/kind/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/Chocolatey/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/system32/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/Wbem/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/WindowsPowerShell/v1.0//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/OpenSSH//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/dotnet//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/PowerShell/7//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft/Web Platform Installer//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/TortoiseSVN/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/150/Tools/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/WiX Toolset v3.14/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/130/DTS/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/140/DTS/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/150/DTS/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/160/DTS/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/170/DTS/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/c/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/perl/site/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/perl/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/chocolatey/lib/pulumi/tools/Pulumi/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/CMake/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.16/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Service Fabric/bin/Fabric/Fabric.Code/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SDKs/Service Fabric/Tools/ServiceFabricLocalClusterManager/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/nodejs//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/cmd/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/ucrt64/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/usr/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/GitHub CLI//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/php/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/AWSCLIV2//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/SessionManagerPlugin/bin//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/AWSSAMCLI/bin//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/130/Tools/Binn//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/mongosh//c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/LLVM/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/LLVM/bin/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/.dotnet/tools/c: binary operator expected
- 0:34.49 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/.cargo/bin/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/AppData/Local/Microsoft/WindowsApps/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/vcpkg/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python27/c: binary operator expected
- 1:19.94 no
- 1:19.94 checking for make... /usr/local/bin/make
- 1:19.94 checking for X... no
- 1:19.94 checking that static assertion macros used in autoconf tests work... yes
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 8159: test: : integer expression expected
- 1:19.94 checking for 64-bit OS... yes
- 1:19.94 checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4251 -wd4244 -wd4267 -wd4345 -wd4351 -wd4482 -wd4800 -wd4819 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -OPT:REF -OPT:ICF=15 -DYNAMICBASE) actually is a C++ compiler... yes
- 1:19.94 checking NSPR selection... source-tree
- 1:19.94 checking for YASM assembler... checking for yasm... /c/mozilla-build/yasm/yasm.exe
- 1:19.94 checking for application to build... xulrunner
- 1:19.94 checking if app-specific confvars.sh exists... d:/a/K-Meleon-R/K-Meleon-R/goanna/xulrunner/confvars.sh
- 1:19.94 checking __attribute__ ((aligned ())) support... trying 64
- 1:19.94 trying 32
- 1:19.94 trying 16
- 1:19.94 trying 8
- 1:19.94 0
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 19664: test: too many arguments
- 1:19.94 checking for java... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/java
- 1:19.94 checking for javac... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javac
- 1:19.94 checking for javah... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javah
- 1:19.94 checking for jar... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jar
- 1:19.94 checking for jarsigner... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jarsigner
- 1:19.94 checking for keytool... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/keytool
- 1:19.94 ERROR: Invalid key name.
- 1:19.94 Type "REG QUERY /?" for usage.
- 1:19.94 DirectX SDK not found.
- 1:19.94 Couldn't find an acceptable DirectX SDK for ANGLE, needed for d3dcompiler_43.
- 1:19.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 21332: test: : integer expression expected
- 1:19.94 checking for makensisu-3.0a2.exe... no
- 1:19.94 checking for makensisu-2.46.exe... /c/mozilla-build/nsis-2.46u/makensisu-2.46.exe
- 1:19.94 yes
- 1:19.94 checking for Unicode NSIS version 2.46 or greater... yes
- 1:19.94 checking for gnutar... no
- 1:19.94 checking for gtar... no
- 1:19.94 checking for tar... tar
- 1:19.94 checking for wget... wget
- 1:19.94 checking for valid optimization flags... yes
- 1:19.94 LINK : fatal error LNK1146: no argument specified with option '/EXTRACT:'
- 1:19.94 grep: crtdll.obj: No such file or directory
- 1:19.94 cannot get attributes for "d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\crtdll.obj": The system cannot find the file specified.
- 1:19.94 
- 1:19.94 checking what kind of list files are supported by the linker... list
- 1:19.94 checking for stdint.h... yes
- 1:19.94 checking for inttypes.h... yes
- 1:19.94 checking for sys/int_types.h... no
- 1:19.94 checking for d3d9.h... yes
- 1:19.94 checking for d3d10.h... yes
- 1:19.94 checking for posix_fadvise... no
- 1:19.94 checking for posix_fallocate... no
- 1:19.94 updating cache ./config.cache
- 1:19.94 creating ./config.status
- 1:19.94 intl\icu\target> configuring
- 1:19.94 intl\icu\target> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/configure --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --disable-static --enable-shared --disable-extras --disable-icuio --disable-layout --disable-tests --disable-samples --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
- 1:19.94 js\src\ctypes\libffi> configuring
- 1:19.94 js\src\ctypes\libffi> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/configure --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --disable-shared --enable-static --disable-raw-api AS=ml64.exe CC=cl CXX=cl CPP=cl -E -nologo LD=link AR=lib RANLIB=echo not_ranlib STRIP=echo not_strip LD=link CPP=cl -nologo -EP CXXCPP=cl -nologo -EP SHELL=sh.exe CC=/d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 CXX=/d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
- 1:19.94 nsprpub> configuring
- 1:19.94 nsprpub> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/nsprpub/configure --target=x86_64-pc-mingw32 --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --enable-application=xulrunner --enable-optimize --disable-debug --disable-tests --disable-updater --disable-crashreporter --disable-maintenance-service --disable-installer --disable-webrtc --disable-require-d3d-compilers --with-dist-prefix=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist --with-mozilla --disable-debug --enable-optimize --enable-64bit AS=ml64.exe CC= CXX= CPP=cl -E -nologo LD=link AR=lib RANLIB=echo not_ranlib STRIP=echo not_strip --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
- 1:19.94 js\src> configuring
- 1:19.94 js\src> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure --target=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --enable-application=xulrunner --enable-optimize --disable-debug --disable-tests --disable-updater --disable-crashreporter --disable-maintenance-service --disable-installer --disable-webrtc --disable-require-d3d-compilers --enable-threadsafe --enable-ctypes --disable-shared-js --disable-export-js --with-nspr-cflags=-Id:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/include/nspr --with-nspr-libs=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/nspr4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plc4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plds4.lib  --prefix=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist --enable-jemalloc --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
- 1:19.94 js\src> creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
- 1:19.94 js\src> checking host system type... x86_64-pc-mingw32
- 1:19.94 js\src> checking target system type... x86_64-pc-mingw32
- 1:19.94 js\src> checking build system type... x86_64-pc-mingw32
- 1:19.94 js\src> checking for mawk... no
- 1:19.94 js\src> checking for gawk... gawk
- 1:19.94 js\src> checking for perl5... no
- 1:19.94 js\src> checking for perl... /usr/bin/perl
- 1:19.94 js\src> checking for gcc... cl
- 1:19.94 js\src> checking whether the C compiler (cl -DNOMINMAX ) works... yes
- 1:19.94 js\src> checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
- 1:19.94 js\src> checking whether we are using GNU C... no
- 1:19.94 js\src> checking whether cl accepts -g... no
- 1:19.94 js\src> checking for c++... cl
- 1:19.94 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
- 1:19.94 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
- 1:19.94 js\src> checking whether we are using GNU C++... no
- 1:19.94 js\src> checking whether cl accepts -g... no
- 1:19.94 js\src> checking for ranlib... ranlib
- 1:19.94 js\src> checking for ml64... /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
- 1:19.94 js\src> checking for ar... ar
- 1:19.94 js\src> checking for ld... link
- 1:19.94 js\src> checking for strip... strip
- 1:19.94 js\src> checking for windres... windres
- 1:19.94 js\src> configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
- 1:19.94 js\src> checking for highest Windows version supported by this SDK... 0x0A00
- 1:19.94 js\src> checking for Windows SDK being recent enough... yes
- 1:19.94 js\src> checking how to run the C preprocessor... cl -E -nologo
- 1:19.94 js\src> checking how to run the C++ preprocessor... cl -TP -E -nologo
- 1:19.94 js\src> checking for _getc_nolock... yes
- 1:19.94 js\src> checking for sb-conf... no
- 1:19.94 js\src> checking for ve... no
- 1:19.94 js\src> checking for a BSD compatible install... /usr/bin/install -c
- 1:19.94 js\src> checking whether ln -s works... no
- 1:19.94 js\src> checking for tar archiver... checking for gnutar... no
- 1:19.94 js\src> checking for gtar... no
- 1:19.94 js\src> checking for tar... tar
- 1:19.94 js\src> tar
- 1:19.94 js\src> checking for minimum required perl version >= 5.006... 5.008008
- 1:19.94 js\src> checking for full perl installation... yes
- 1:19.94 js\src> Using Python from environment variable $PYTHON
- 1:19.94 js\src> checking Python environment is Mozilla virtualenv... yes
- 1:19.94 js\src> checking for doxygen... :
- 1:19.94 js\src> checking for autoconf... /usr/bin/autoconf
- 1:19.94 js\src> checking for xargs... /usr/bin/xargs
- 1:19.94 js\src> checking for c:/Strawberry/c/bin/gmake.EXE... d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/local/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/7zip/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/info-zip/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/kdiff3/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/mozmake/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-3.0b3/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-3.0b1/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-2.46u/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/Scripts/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/upx391w/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/watchman/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/wget/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/yasm/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: ./c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/local/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/mingw/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/moztools-x64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/yasm/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python27/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/VCPackages/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TestWindow/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/bin/Roslyn/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.8 Tools/x64//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/HTML Help Workshop/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/FSharp/Tools/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Team Tools/DiagnosticsHub/Collector/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/x64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/bin/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/Microsoft.NET/Framework64/v4.0.30319/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/MongoDB/Server/7.0/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/aliyun-cli/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/vcpkg/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/NSIS//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/zstd/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Mercurial//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/stack/3.11.1/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/cabal/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ghcup/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mingw64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/dotnet/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/MySQL/MySQL Server 8.0/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/R/R-4.6.1/bin/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/GeckoDriver/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/EdgeDriver//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/ChromeDriver/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/GitHub CLI/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/pipx_bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/npm/prefix/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/go/1.24.13/x64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/Scripts/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Ruby/3.3.12/x64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/OpenSSL/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/kotlinc/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/ImageMagick-7.1.2-Q16-HDRI/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SDKs/Azure/CLI2/wbin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/kind/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/Chocolatey/bin/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/system32/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/Wbem/c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/WindowsPowerShell/v1.0//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/OpenSSH//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/dotnet//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/PowerShell/7//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft/Web Platform Installer//c: binary operator expected
- 1:19.94 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/TortoiseSVN/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/150/Tools/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/WiX Toolset v3.14/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/130/DTS/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/140/DTS/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/150/DTS/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/160/DTS/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/170/DTS/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/c/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/perl/site/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/perl/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/chocolatey/lib/pulumi/tools/Pulumi/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/CMake/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.16/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Service Fabric/bin/Fabric/Fabric.Code/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SDKs/Service Fabric/Tools/ServiceFabricLocalClusterManager/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/nodejs//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/cmd/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/ucrt64/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/usr/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/GitHub CLI//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/php/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/AWSCLIV2//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/SessionManagerPlugin/bin//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/AWSSAMCLI/bin//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/130/Tools/Binn//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/mongosh//c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/LLVM/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/LLVM/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/.dotnet/tools/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/.cargo/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/AppData/Local/Microsoft/WindowsApps/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/vcpkg/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
- 2:07.99 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python27/c: binary operator expected
- 2:07.99 js\src> no
- 2:07.99 js\src> checking for make... /usr/local/bin/make
- 2:07.99 js\src> checking for X... no
- 2:07.99 js\src> checking that static assertion macros used in autoconf tests work... yes
- 2:07.99 js\src> checking for 64-bit OS... yes
- 2:07.99 js\src> checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -wd4345 -wd4351 -wd4800 -D_CRT_SECURE_NO_WARNINGS -Wv:18 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4244 -wd4267 -wd4251 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -DYNAMICBASE) actually is a C++ compiler... yes
- 2:07.99 js\src> checking NSPR selection... command-line
- 2:07.99 js\src> checking for valid optimization flags... yes
- 2:07.99 js\src> checking what kind of list files are supported by the linker... list
- 2:07.99 js\src> checking for posix_fadvise... no
- 2:07.99 js\src> checking for posix_fallocate... no
- 2:07.99 js\src> checking for malloc.h... yes
- 2:07.99 js\src> checking for setlocale... no
- 2:07.99 js\src> checking for localeconv... no
- 2:07.99 js\src> checking for malloc_size... no
- 2:07.99 js\src> checking for malloc_usable_size... no
- 2:07.99 js\src> updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
- 2:07.99 js\src> creating ./config.status
- 2:07.99 
- 2:07.99 nsprpub> configure: WARNING: unrecognized options: --enable-application, --disable-tests, --disable-updater, --disable-crashreporter, --disable-maintenance-service, --disable-installer, --disable-webrtc, --disable-require-d3d-compilers
- 2:07.99 nsprpub> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
- 2:07.99 nsprpub> checking build system type... x86_64-pc-mingw32
- 2:07.99 nsprpub> checking host system type... x86_64-pc-mingw32
- 2:07.99 nsprpub> checking target system type... x86_64-pc-mingw32
- 2:07.99 nsprpub> checking for cl... cl
- 2:07.99 nsprpub> configure: WARNING: Unknown version of the Microsoft (R) Manifest Tool.
- 2:07.99 nsprpub> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
- 2:07.99 nsprpub> configure: creating ./config.status
- 2:07.99 nsprpub> configure: WARNING: unrecognized options: --enable-application, --disable-tests, --disable-updater, --disable-crashreporter, --disable-maintenance-service, --disable-installer, --disable-webrtc, --disable-require-d3d-compilers
- 2:07.99 nsprpub> config.status: creating Makefile
- 2:07.99 nsprpub> config.status: creating config/Makefile
- 2:07.99 nsprpub> config.status: creating config/autoconf.mk
- 2:07.99 nsprpub> config.status: creating config/nsprincl.mk
- 2:07.99 nsprpub> config.status: creating config/nsprincl.sh
- 2:07.99 nsprpub> config.status: creating config/nspr-config
- 2:07.99 nsprpub> config.status: creating config/nspr.pc
- 2:07.99 nsprpub> config.status: creating lib/Makefile
- 2:07.99 nsprpub> config.status: creating lib/ds/Makefile
- 2:07.99 nsprpub> config.status: creating lib/libc/Makefile
- 2:07.99 nsprpub> config.status: creating lib/libc/include/Makefile
- 2:07.99 nsprpub> config.status: creating lib/libc/src/Makefile
- 2:07.99 nsprpub> config.status: creating lib/tests/Makefile
- 2:07.99 nsprpub> config.status: creating pkg/Makefile
- 2:07.99 nsprpub> config.status: creating pr/Makefile
- 2:07.99 nsprpub> config.status: creating pr/include/Makefile
- 2:07.99 nsprpub> config.status: creating pr/include/md/Makefile
- 2:07.99 nsprpub> config.status: creating pr/include/obsolete/Makefile
- 2:07.99 nsprpub> config.status: creating pr/include/private/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/io/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/linking/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/malloc/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/md/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/md/windows/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/memory/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/misc/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/threads/Makefile
- 2:07.99 nsprpub> config.status: creating pr/tests/Makefile
- 2:07.99 nsprpub> config.status: creating pr/tests/dll/Makefile
- 2:07.99 nsprpub> config.status: creating pr/src/threads/combined/Makefile
- 2:07.99 nsprpub> config.status: executing default commands
- 2:07.99 
- 2:07.99 intl\icu\target> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
- 2:07.99 intl\icu\target> checking for ICU version numbers... release 58.3, library 58.3, unicode version 9.0
- 2:07.99 intl\icu\target> checking build system type... x86_64-pc-mingw32
- 2:07.99 intl\icu\target> checking host system type... x86_64-pc-mingw32
- 2:07.99 intl\icu\target> checking whether to build debug libraries... no
- 2:07.99 intl\icu\target> checking whether to build release libraries... yes
- 2:07.99 intl\icu\target> checking for x86_64-pc-mingw32-clang... cl
- 2:07.99 intl\icu\target> checking whether the C compiler works... yes
- 2:07.99 intl\icu\target> checking for C compiler default output file name... conftest.exe
- 2:07.99 intl\icu\target> checking for suffix of executables... .exe
- 2:07.99 intl\icu\target> checking whether we are cross compiling... no
- 2:07.99 intl\icu\target> checking for suffix of object files... obj
- 2:07.99 intl\icu\target> checking whether we are using the GNU C compiler... no
- 2:07.99 intl\icu\target> checking whether cl accepts -g... yes
- 2:07.99 intl\icu\target> checking for cl option to accept ISO C89... none needed
- 2:07.99 intl\icu\target> checking whether we are using the GNU C++ compiler... no
- 2:07.99 intl\icu\target> checking whether cl accepts -g... yes
- 2:07.99 intl\icu\target> checking for x86_64-pc-mingw32-pkg-config... no
- 2:07.99 intl\icu\target> checking for pkg-config... /c/Strawberry/perl/bin/pkg-config
- 2:07.99 intl\icu\target> checking pkg-config is at least version 0.20... yes
- 2:07.99 intl\icu\target> checking for ICULEHB... no
- 2:07.99 intl\icu\target> checking how to run the C preprocessor... cl -E
- 2:07.99 intl\icu\target> checking for a BSD-compatible install... /usr/bin/install -c
- 2:07.99 intl\icu\target> checking for gmake... /c/Strawberry/c/bin/gmake
- 2:07.99 intl\icu\target> checking for doxygen... no
- 2:07.99 intl\icu\target> checking checking for executable suffix... .exe
- 2:07.99 intl\icu\target> checking whether strict compiling is on... yes
- 2:07.99 intl\icu\target> checking for grep that handles long lines and -e... /usr/bin/grep
- 2:07.99 intl\icu\target> checking for egrep... /usr/bin/grep -E
- 2:07.99 intl\icu\target> checking for ANSI C header files... yes
- 2:07.99 intl\icu\target> checking for sys/types.h... yes
- 2:07.99 intl\icu\target> checking for sys/stat.h... yes
- 2:07.99 intl\icu\target> checking for stdlib.h... yes
- 2:07.99 intl\icu\target> checking for string.h... yes
- 2:07.99 intl\icu\target> checking for memory.h... yes
- 2:07.99 intl\icu\target> checking for strings.h... no
- 2:07.99 intl\icu\target> checking for inttypes.h... yes
- 2:07.99 intl\icu\target> checking for stdint.h... yes
- 2:07.99 intl\icu\target> checking for unistd.h... no
- 2:07.99 intl\icu\target> checking size of void *... 8
- 2:07.99 intl\icu\target> checking whether runnable 64 bit binaries are built by default... yes
- 2:07.99 intl\icu\target> checking which Makefile fragment to use for x86_64-pc-mingw32... mh-msys-msvc
- 2:07.99 intl\icu\target> checking for floor in -lm... no
- 2:07.99 intl\icu\target> checking whether to build shared libraries... yes
- 2:07.99 intl\icu\target> checking whether to build static libraries... no
- 2:07.99 intl\icu\target> checking whether to enable auto cleanup of libraries... no
- 2:07.99 intl\icu\target> checking whether to enable draft APIs... yes
- 2:07.99 intl\icu\target> checking for x86_64-pc-mingw32-ranlib... no
- 2:07.99 intl\icu\target> checking for ranlib... ranlib
- 2:07.99 intl\icu\target> checking for x86_64-pc-mingw32-ar... lib
- 2:07.99 intl\icu\target> checking whether to enable renaming of symbols... yes
- 2:07.99 intl\icu\target> checking whether to enable function and data tracing... no
- 2:07.99 intl\icu\target> checking elf.h usability... no
- 2:07.99 intl\icu\target> checking elf.h presence... no
- 2:07.99 intl\icu\target> checking for elf.h... no
- 2:07.99 intl\icu\target> checking whether to enable dynamic loading of plugins. Ignored if plugins disabled.... yes
- 2:07.99 intl\icu\target> checking dlfcn.h usability... no
- 2:07.99 intl\icu\target> checking dlfcn.h presence... no
- 2:07.99 intl\icu\target> checking for dlfcn.h... no
- 2:07.99 intl\icu\target> checking for library containing dlopen... no
- 2:07.99 intl\icu\target> checking for dlopen... no
- 2:07.99 intl\icu\target> checking for gettimeofday... no
- 2:07.99 intl\icu\target> checking if we have a C++ compiler... Good
- 2:07.99 intl\icu\target> checking if #include <string> works... yes
- 2:07.99 intl\icu\target> checking if #include <atomic> works... yes
- 2:07.99 intl\icu\target> checking for pthread_attr_init in -lpthread... no
- 2:07.99 intl\icu\target> checking for library containing pthread_mutex_destroy... no
- 2:07.99 intl\icu\target> checking for pthread_mutex_init in -lpthread... no
- 2:07.99 intl\icu\target> checking for pthread_mutex_lock... no
- 2:07.99 intl\icu\target> checking for mmap... no
- 2:07.99 intl\icu\target> checking for genccode assembly...
- 2:07.99 intl\icu\target> checking for inttypes.h... (cached) yes
- 2:07.99 intl\icu\target> checking dirent.h usability... no
- 2:07.99 intl\icu\target> checking dirent.h presence... no
- 2:07.99 intl\icu\target> checking for dirent.h... no
- 2:07.99 intl\icu\target> checking whether byte ordering is bigendian... no
- 2:07.99 intl\icu\target> checking for nl_langinfo... no
- 2:07.99 intl\icu\target> checking for namespace support... yes
- 2:07.99 intl\icu\target> checking for properly overriding new and delete... yes
- 2:07.99 intl\icu\target> checking for placement new and delete... yes
- 2:07.99 intl\icu\target> checking for popen... no
- 2:07.99 intl\icu\target> checking for tzset... yes
- 2:07.99 intl\icu\target> checking for tzname... no
- 2:07.99 intl\icu\target> checking for _tzname... no
- 2:07.99 intl\icu\target> checking for timezone... no
- 2:07.99 intl\icu\target> checking for __timezone... no
- 2:07.99 intl\icu\target> checking for _timezone... yes
- 2:07.99 intl\icu\target> checking for strtod_l... no
- 2:07.99 intl\icu\target> checking for int8_t... yes
- 2:07.99 intl\icu\target> checking for uint8_t... yes
- 2:07.99 intl\icu\target> checking for int16_t... yes
- 2:07.99 intl\icu\target> checking for uint16_t... yes
- 2:07.99 intl\icu\target> checking for int32_t... yes
- 2:07.99 intl\icu\target> checking for uint32_t... yes
- 2:07.99 intl\icu\target> checking for int64_t... yes
- 2:07.99 intl\icu\target> checking for uint64_t... yes
- 2:07.99 intl\icu\target> checking wchar.h usability... yes
- 2:07.99 intl\icu\target> checking wchar.h presence... yes
- 2:07.99 intl\icu\target> checking for wchar.h... yes
- 2:07.99 intl\icu\target> checking for library containing wcscpy... no
- 2:07.99 intl\icu\target> checking size of wchar_t... 2
- 2:07.99 intl\icu\target> checking for UTF-16 string literal support... unknown
- 2:07.99 intl\icu\target> checking for a library suffix to use... none
- 2:07.99 intl\icu\target> CPPFLAGS= -DU_USING_ICU_NAMESPACE=0 -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 -DUCONFIG_NO_LEGACY_CONVERSION -DUCONFIG_NO_TRANSLITERATION -DUCONFIG_NO_REGULAR_EXPRESSIONS -DUCONFIG_NO_BREAK_ITERATION -DUCONFIG_NO_IDNA -DU_CHARSET_IS_UTF8 -I/d/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/common -I/d/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/i18n  $(THREADSCPPFLAGS)  -DHAVE_DLOPEN=0 -DU_HAVE_ATOMIC=1 -DU_HAVE_MMAP=0 -DU_HAVE_DIRENT_H=0 -DU_HAVE_POPEN=0 -DU_HAVE_TZNAME=0 -DU_HAVE_STRTOD_L=0 -DU_HAVE_WCSCPY=0
- 2:07.99 intl\icu\target> CFLAGS= -DNOMINMAX -TC -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4244 -wd4267 -wd4819 -we4553 -Zi -UDEBUG -DNDEBUG -O1 -Oi -MD -W4 -W4 $(THREADSCFLAGS)
- 2:07.99 intl\icu\target> CXXFLAGS=-DNOMINMAX -TP -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4251 -wd4244 -wd4267 -wd4345 -wd4351 -wd4482 -wd4800 -wd4819 -we4553 -GR -Zi -UDEBUG -DNDEBUG -O1 -Oi -MD $(THREADSCXXFLAGS)
- 2:07.99 intl\icu\target> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
- 2:07.99 intl\icu\target> configure: creating ./config.status
- 2:07.99 intl\icu\target>
- 2:07.99 intl\icu\target> ICU for C/C++ 58.3 is ready to be built.
- 2:07.99 intl\icu\target> === Important Notes: ===
- 2:07.99 intl\icu\target> Data Packaging: library
- 2:07.99 intl\icu\target>  This means: ICU data will be linked with ICU. A shared data library will be built.
- 2:07.99 intl\icu\target>  To locate data: ICU will use the linked data library. If linked with the stub library located in stubdata/, the application can use udata_setCommonData() or set a data path to override.
- 2:07.99 intl\icu\target> Building ICU: Use a GNU make such as /c/Strawberry/c/bin/gmake to build ICU.
- 2:07.99 intl\icu\target> checking the version of "/c/Strawberry/c/bin/gmake"... gmake[1]: Entering directory 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target'
- 2:07.99 
- 2:07.99 intl\icu\target> 4.2.1 (we wanted at least 3.80)
- 2:07.99 intl\icu\target> gmake[1]: Leaving directory 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target'
- 2:07.99 
- 2:07.99 intl\icu\target> ok
- 2:07.99 intl\icu\target> config.status: creating icudefs.mk
- 2:07.99 intl\icu\target> config.status: creating Makefile
- 2:07.99 intl\icu\target> config.status: creating data/pkgdataMakefile
- 2:07.99 intl\icu\target> config.status: creating config/Makefile.inc
- 2:07.99 intl\icu\target> config.status: creating config/icu.pc
- 2:07.99 intl\icu\target> config.status: creating config/pkgdataMakefile
- 2:07.99 intl\icu\target> config.status: creating data/Makefile
- 2:07.99 intl\icu\target> config.status: creating stubdata/Makefile
- 2:07.99 intl\icu\target> config.status: creating common/Makefile
- 2:07.99 intl\icu\target> config.status: creating i18n/Makefile
- 2:07.99 intl\icu\target> config.status: creating layoutex/Makefile
- 2:07.99 intl\icu\target> config.status: creating io/Makefile
- 2:07.99 intl\icu\target> config.status: creating extra/Makefile
- 2:07.99 intl\icu\target> config.status: creating extra/uconv/Makefile
- 2:07.99 intl\icu\target> config.status: creating extra/uconv/pkgdataMakefile
- 2:07.99 intl\icu\target> config.status: creating extra/scrptrun/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/ctestfw/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/toolutil/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/makeconv/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/genrb/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/genccode/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gencmn/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gencnval/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gendict/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gentest/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gennorm2/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/genbrk/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gensprep/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/icuinfo/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/icupkg/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/icuswap/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/pkgdata/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/tzcode/Makefile
- 2:07.99 intl\icu\target> config.status: creating tools/gencfu/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/compat/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/testdata/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/testdata/pkgdataMakefile
- 2:07.99 intl\icu\target> config.status: creating test/hdrtst/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/intltest/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/cintltst/Makefile
- 2:07.99 intl\icu\target> config.status: creating test/iotest/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/letest/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/collationperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/collperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/collperf2/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/dicttrieperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/ubrkperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/charperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/convperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/normperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/DateFmtPerf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/howExpensiveIs/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/strsrchperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/unisetperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/usetperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/ustrperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/utfperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/utrie2perf/Makefile
- 2:17.73 intl\icu\target> config.status: creating test/perf/leperf/Makefile
- 2:17.73 intl\icu\target> config.status: creating samples/Makefile
- 2:17.73 intl\icu\target> config.status: creating samples/date/Makefile
- 2:17.73 intl\icu\target> config.status: creating samples/cal/Makefile
- 2:17.73 intl\icu\target> config.status: creating samples/layout/Makefile
- 2:17.73 
- 2:17.73 js\src\ctypes\libffi> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
- 2:17.73 js\src\ctypes\libffi> checking build system type... x86_64-pc-mingw32
- 2:17.73 js\src\ctypes\libffi> checking host system type... x86_64-pc-mingw32
- 2:17.73 js\src\ctypes\libffi> checking target system type... x86_64-pc-mingw32
- 2:17.73 js\src\ctypes\libffi> checking for gsed... sed
- 2:17.73 js\src\ctypes\libffi> checking for a BSD-compatible install... /usr/bin/install -c
- 2:17.73 js\src\ctypes\libffi> checking whether build environment is sane... yes
- 2:17.73 js\src\ctypes\libffi> checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
- 2:17.73 js\src\ctypes\libffi> checking for gawk... gawk
- 2:17.73 js\src\ctypes\libffi> checking whether c:/Strawberry/c/bin/gmake.EXE sets $(MAKE)... yes
- 2:17.73 js\src\ctypes\libffi> checking whether c:/Strawberry/c/bin/gmake.EXE supports nested variables... yes
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-gcc... /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64
- 2:17.73 js\src\ctypes\libffi> checking whether the C compiler works... yes
- 2:17.73 js\src\ctypes\libffi> checking for C compiler default output file name... conftest.exe
- 2:17.73 js\src\ctypes\libffi> checking for suffix of executables... .exe
- 2:17.73 js\src\ctypes\libffi> checking whether we are cross compiling... no
- 2:17.73 js\src\ctypes\libffi> checking for suffix of object files... obj
- 2:17.73 js\src\ctypes\libffi> checking whether we are using the GNU C compiler... no
- 2:17.73 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 accepts -g... yes
- 2:17.73 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to accept ISO C89... none needed
- 2:17.73 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 understands -c and -o together... yes
- 2:17.73 js\src\ctypes\libffi> checking for style of include used by c:/Strawberry/c/bin/gmake.EXE... GNU
- 2:17.73 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
- 2:17.73 js\src\ctypes\libffi> checking whether we are using the GNU C++ compiler... no
- 2:17.73 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 accepts -g... yes
- 2:17.73 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
- 2:17.73 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
- 2:17.73 js\src\ctypes\libffi> checking how to print strings... printf
- 2:17.73 js\src\ctypes\libffi> checking for a sed that does not truncate output... /usr/bin/sed
- 2:17.73 js\src\ctypes\libffi> checking for grep that handles long lines and -e... /usr/bin/grep
- 2:17.73 js\src\ctypes\libffi> checking for egrep... /usr/bin/grep -E
- 2:17.73 js\src\ctypes\libffi> checking for fgrep... /usr/bin/grep -F
- 2:17.73 js\src\ctypes\libffi> checking for non-GNU ld... link
- 2:17.73 js\src\ctypes\libffi> checking if the linker (link) is GNU ld... no
- 2:17.73 js\src\ctypes\libffi> checking for BSD- or MS-compatible name lister (nm)... /c/mingw64/bin/nm -B
- 2:17.73 js\src\ctypes\libffi> checking the name lister (/c/mingw64/bin/nm -B) interface... BSD nm
- 2:17.73 js\src\ctypes\libffi> checking whether ln -s works... no, using cp -pR
- 2:17.73 js\src\ctypes\libffi> checking the maximum length of command line arguments... 8192
- 2:17.73 js\src\ctypes\libffi> checking whether the shell understands some XSI constructs... yes
- 2:17.73 js\src\ctypes\libffi> checking whether the shell understands "+="... yes
- 2:17.73 js\src\ctypes\libffi> checking how to convert x86_64-pc-mingw32 file names to x86_64-pc-mingw32 format... func_convert_file_msys_to_w32
- 2:17.73 js\src\ctypes\libffi> checking how to convert x86_64-pc-mingw32 file names to toolchain format... func_convert_file_msys_to_w32
- 2:17.73 js\src\ctypes\libffi> checking for link option to reload object files... -r
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-objdump... no
- 2:17.73 js\src\ctypes\libffi> checking for objdump... objdump
- 2:17.73 js\src\ctypes\libffi> checking how to recognize dependent libraries... file_magic ^x86 archive import|^x86 DLL
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-dlltool... no
- 2:17.73 js\src\ctypes\libffi> checking for dlltool... dlltool
- 2:17.73 js\src\ctypes\libffi> checking how to associate runtime and link libraries... func_cygming_dll_for_implib
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-ar... lib
- 2:17.73 js\src\ctypes\libffi> checking for archiver @FILE support... no
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-strip... echo not_strip
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-ranlib... echo not_ranlib
- 2:17.73 js\src\ctypes\libffi> checking command to parse /c/mingw64/bin/nm -B output from /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 object... ok
- 2:17.73 js\src\ctypes\libffi> checking for sysroot... no
- 2:17.73 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-mt... no
- 2:17.73 js\src\ctypes\libffi> checking for mt... mt
- 2:17.73 js\src\ctypes\libffi> checking if mt is a manifest tool... yes
- 2:17.73 js\src\ctypes\libffi> checking how to run the C preprocessor... cl -nologo -EP
- 2:17.73 js\src\ctypes\libffi> checking for ANSI C header files... yes
- 2:17.73 js\src\ctypes\libffi> checking for sys/types.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for sys/stat.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for stdlib.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for string.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for memory.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for strings.h... no
- 2:17.73 js\src\ctypes\libffi> checking for inttypes.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for stdint.h... yes
- 2:17.73 js\src\ctypes\libffi> checking for unistd.h... no
- 2:17.73 js\src\ctypes\libffi> checking for dlfcn.h... no
- 2:17.73 js\src\ctypes\libffi> checking for objdir... .libs
- 2:17.73 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to produce PIC... -DDLL_EXPORT -DPIC
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 PIC flag -DDLL_EXPORT -DPIC works... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 static flag  works... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... (cached) yes
- 2:17.73 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... yes
- 2:17.73 js\src\ctypes\libffi> checking dynamic linker characteristics... Win32 ld.exe
- 2:17.73 js\src\ctypes\libffi> checking how to hardcode library paths into programs... immediate
- 2:17.73 js\src\ctypes\libffi> checking whether stripping libraries is possible... no
- 2:17.73 js\src\ctypes\libffi> checking if libtool supports shared libraries... yes
- 2:17.73 js\src\ctypes\libffi> checking whether to build shared libraries... no
- 2:17.73 js\src\ctypes\libffi> checking whether to build static libraries... yes
- 2:17.73 js\src\ctypes\libffi> checking how to run the C++ preprocessor... cl -nologo -EP
- 2:17.73 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... no
- 2:17.73 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to produce PIC... -DDLL_EXPORT -DPIC
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 PIC flag -DDLL_EXPORT -DPIC works... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 static flag  works... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... yes
- 2:17.73 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... (cached) yes
- 2:17.73 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... no
- 2:17.73 js\src\ctypes\libffi> checking dynamic linker characteristics... Win32 ld.exe
- 2:17.73 js\src\ctypes\libffi> checking how to hardcode library paths into programs... immediate
- 2:17.73 js\src\ctypes\libffi> checking size of size_t... 8
- 2:17.73 js\src\ctypes\libffi> checking for C compiler vendor... microsoft
- 2:17.73 js\src\ctypes\libffi> checking CFLAGS for maximum warnings... -Wall
- 2:17.73 js\src\ctypes\libffi> checking whether to enable maintainer-specific portions of Makefiles... no
- 2:17.73 js\src\ctypes\libffi> checking sys/mman.h usability... no
- 2:17.73 js\src\ctypes\libffi> checking sys/mman.h presence... no
- 2:17.73 js\src\ctypes\libffi> checking for sys/mman.h... no
- 2:23.14 js\src\ctypes\libffi> checking for mmap... no
- 2:23.14 js\src\ctypes\libffi> checking for sys/mman.h... (cached) no
- 2:23.14 js\src\ctypes\libffi> checking for mmap... (cached) no
- 2:23.14 js\src\ctypes\libffi> checking for ANSI C header files... (cached) yes
- 2:23.14 js\src\ctypes\libffi> checking for memcpy... yes
- 2:23.14 js\src\ctypes\libffi> checking for size_t... yes
- 2:23.14 js\src\ctypes\libffi> checking for working alloca.h... no
- 2:23.14 js\src\ctypes\libffi> checking for alloca... yes
- 2:23.14 js\src\ctypes\libffi> checking size of double... 8
- 2:23.14 js\src\ctypes\libffi> checking size of long double... 8
- 2:23.14 js\src\ctypes\libffi> checking whether byte ordering is bigendian... no
- 2:23.14 js\src\ctypes\libffi> checking assembler .cfi pseudo-op support... no
- 2:23.14 js\src\ctypes\libffi> checking for _ prefix in compiled symbols... no
- 2:23.14 js\src\ctypes\libffi> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
- 2:23.14 js\src\ctypes\libffi> checking that generated files are newer than configure... done
- 2:23.14 js\src\ctypes\libffi> configure: creating ./config.status
- 2:23.14 js\src\ctypes\libffi> config.status: creating include/Makefile
- 2:23.14 js\src\ctypes\libffi> config.status: creating include/ffi.h
- 2:23.14 js\src\ctypes\libffi> config.status: creating Makefile
- 2:23.14 js\src\ctypes\libffi> config.status: creating testsuite/Makefile
- 2:23.14 js\src\ctypes\libffi> config.status: creating man/Makefile
- 2:23.14 js\src\ctypes\libffi> config.status: creating libffi.pc
- 2:23.14 js\src\ctypes\libffi> config.status: creating fficonfig.h
- 2:23.14 js\src\ctypes\libffi> config.status: linking d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/src/x86/ffitarget.h to include/ffitarget.h
- 2:23.14 js\src\ctypes\libffi> config.status: executing buildir commands
- 2:23.14 js\src\ctypes\libffi> config.status: skipping top_srcdir/Makefile - not created
- 2:23.14 js\src\ctypes\libffi> config.status: executing depfiles commands
- 2:23.14 js\src\ctypes\libffi> config.status: executing libtool commands
- 2:23.14 js\src\ctypes\libffi> config.status: executing include commands
- 2:23.14 js\src\ctypes\libffi> config.status: executing src commands
- 2:23.14 
- 2:23.14 Walking the dog...
- 2:23.14 Finished reading 771 moz.build files in 0.82s
- 2:23.14 Processed into 5538 build config descriptors in 1.59s
- 2:23.14 Backend executed in 2.32s
- 2:23.14 1605 total backend files; 1605 created; 0 updated; 0 unchanged; 0 deleted; 77 -> 568 Makefile
- 2:23.14 Total wall time: 4.95s; CPU time: 4.96s; Efficiency: 100%; Untracked: 0.22s
+yasm2-rc=0
+total 622
+drwxr-xr-x  2 runneradmin Administrators      0 Oct  8 18:12 .
+drwxr-xr-x 43 runneradmin Administrators  12288 Oct  8 18:12 ..
+-rwxr-xr-x  1 runneradmin Administrators 624640 Oct  8 18:12 yasm.exe
+PATH=/local/bin
+/c/mozilla-build/7zip
+/c/mozilla-build/info-zip
+/c/mozilla-build/kdiff3
+/c/mozilla-build/mozmake
+/c/mozilla-build/nsis-3.0b3
+/c/mozilla-build/nsis-3.0b1
+/c/mozilla-build/nsis-2.46u
+/c/mozilla-build/python
+/c/mozilla-build/python/Scripts
+/c/mozilla-build/upx391w
+/c/mozilla-build/watchman
+/c/mozilla-build/wget
+/c/mozilla-build/yasm
+.
+/usr/local/bin
+/mingw/bin
+/bin
+/c/mozilla-build/moztools-x64/bin
+/c/yasm
+/c/mozilla-build/yasm
+/c/mozilla-build/python
+/c/mozilla-build/python27
+/c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64
+/c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/VCPackages
+/c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TestWindow
+/c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer
+/c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/bin/Roslyn
+/c/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.8 Tools/x64/
+/c/Program Files (x86)/HTML Help Workshop
+ 0:00.66 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s configure
+ 0:20.78 Clobber not needed.
+ 0:20.78 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
+ 0:20.78 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
+ 0:20.78 cd d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 0:20.78 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure
+ 0:20.78 Adding configure options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
+ 0:20.78   --enable-application=xulrunner
+ 0:20.78   --target=x86_64-pc-mingw32
+ 0:20.78   --host=x86_64-pc-mingw32
+ 0:20.78   --enable-optimize
+ 0:20.78   --disable-debug
+ 0:20.78   --disable-tests
+ 0:20.78   --disable-updater
+ 0:20.78   --disable-crashreporter
+ 0:20.78   --disable-maintenance-service
+ 0:20.78   --disable-installer
+ 0:20.78   --disable-webrtc
+ 0:20.78   --disable-require-d3d-compilers
+ 0:20.78 creating cache ./config.cache
+ 0:20.78 checking host system type... x86_64-pc-mingw32
+ 0:20.78 checking target system type... x86_64-pc-mingw32
+ 0:20.78 checking build system type... x86_64-pc-mingw32
+ 0:20.78 checking for mawk... no
+ 0:20.78 checking for gawk... gawk
+ 0:20.78 checking for python2.7... /c/mozilla-build/python/python2.7
+ 0:20.78 Creating Python environment
+ 0:20.78 New python executable in d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/_virtualenv\Scripts\python2.7.exe
+ 0:20.78 Also creating executable in d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/_virtualenv\Scripts\python.exe
+ 0:20.78 Installing setuptools, pip...done.
+ 0:20.78 running build_ext
+ 0:20.78 
+ 0:20.78 building '_psutil_windows' extension
+ 0:20.78 
+ 0:20.79 error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from http://aka.ms/vcpython27
+ 0:20.79 
+ 0:20.79 
+ 0:20.79 Error processing command. Ignoring because optional. (optional:setup.py:python/psutil:build_ext:--inplace)
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/python/mozbuild/mozbuild/virtualenv.py:318: UserWarning: Hacking environment to allow binary Python extensions to build. You can make this warning go away by installing Visual Studio 2008. You can download the Express Edition installer from http://go.microsoft.com/?linkid=7729279
+ 0:20.79   warnings.warn('Hacking environment to allow binary Python '
+ 0:20.79 checking Python environment is Mozilla virtualenv... yes
+ 0:20.79 checking for perl5... no
+ 0:20.79 checking for perl... /usr/bin/perl
+ 0:20.79 checking for gcc... cl
+ 0:20.79 checking whether the C compiler (cl -DNOMINMAX ) works... yes
+ 0:20.79 checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 0:20.79 checking whether we are using GNU C... no
+ 0:20.79 checking whether cl accepts -g... no
+ 0:20.79 checking for c++... cl
+ 0:20.79 checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
+ 0:20.79 checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 0:20.79 checking whether we are using GNU C++... no
+ 0:20.79 checking whether cl accepts -g... no
+ 0:20.79 checking for ranlib... ranlib
+ 0:20.79 checking for ml64... /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
+ 0:20.79 checking for ar... ar
+ 0:20.79 checking for ld... link
+ 0:20.79 checking for strip... strip
+ 0:20.79 checking for windres... windres
+ 0:20.79 checking for otool... no
+ 0:20.79 checking for midl... midl
+ 0:20.79 configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
+ 0:20.79 checking for std::_Throw... no
+ 0:20.79 checking for overridable _RAISE... no
+ 0:20.79 configure: warning: exception wrapping disabled
+ 0:20.79 checking for highest Windows version supported by this SDK... 0x0A00
+ 0:20.79 checking for Windows SDK being recent enough... yes
+ 0:20.79 checking how to run the C preprocessor... cl -E -nologo
+ 0:20.79 checking how to run the C++ preprocessor... cl -TP -E -nologo
+ 0:20.79 checking for a BSD compatible install... /usr/bin/install -c
+ 0:20.79 checking whether ln -s works... no
+ 0:20.79 checking for minimum required perl version >= 5.006... 5.008008
+ 0:20.79 checking for full perl installation... yes
+ 0:20.79 checking for doxygen... :
+ 0:20.79 checking for autoconf... /usr/bin/autoconf
+ 0:20.79 checking for unzip... /c/mozilla-build/info-zip/unzip
+ 0:20.79 checking for zip... /c/mozilla-build/info-zip/zip
+ 0:20.79 checking for xargs... /usr/bin/xargs
+ 0:20.79 checking for rpmbuild... :
+ 0:20.79 checking for c:/Strawberry/c/bin/gmake.EXE... d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/local/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/7zip/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/info-zip/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/kdiff3/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/mozmake/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-3.0b3/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-3.0b1/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/nsis-2.46u/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/Scripts/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/upx391w/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/watchman/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/wget/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/yasm/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: ./c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/local/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/mingw/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /usr/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/moztools-x64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/yasm/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/yasm/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python27/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/VCPackages/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TestWindow/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/bin/Roslyn/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.8 Tools/x64//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/HTML Help Workshop/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/FSharp/Tools/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Team Tools/DiagnosticsHub/Collector/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/x64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/bin/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/Microsoft.NET/Framework64/v4.0.30319/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/MongoDB/Server/7.0/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/aliyun-cli/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/vcpkg/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/NSIS//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/zstd/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Mercurial//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/stack/3.11.1/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/cabal/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ghcup/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mingw64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/dotnet/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/MySQL/MySQL Server 8.0/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/R/R-4.6.1/bin/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/GeckoDriver/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/EdgeDriver//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/SeleniumWebDrivers/ChromeDriver/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/GitHub CLI/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/pipx_bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/npm/prefix/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/go/1.24.13/x64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/Scripts/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Ruby/3.3.12/x64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/OpenSSL/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/kotlinc/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/ImageMagick-7.1.2-Q16-HDRI/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SDKs/Azure/CLI2/wbin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/kind/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/Chocolatey/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/system32/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/Wbem/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/WindowsPowerShell/v1.0//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Windows/System32/OpenSSH//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/dotnet//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/PowerShell/7//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft/Web Platform Installer//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/TortoiseSVN/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/150/Tools/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/WiX Toolset v3.14/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/130/DTS/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/140/DTS/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/150/DTS/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/160/DTS/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/170/DTS/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/c/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/perl/site/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Strawberry/perl/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/chocolatey/lib/pulumi/tools/Pulumi/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/CMake/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.16/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Service Fabric/bin/Fabric/Fabric.Code/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SDKs/Service Fabric/Tools/ServiceFabricLocalClusterManager/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/nodejs//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/cmd/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/ucrt64/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Git/usr/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/GitHub CLI//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/tools/php/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/AWSCLIV2//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/SessionManagerPlugin/bin//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Amazon/AWSSAMCLI/bin//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft SQL Server/130/Tools/Binn//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/mongosh//c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/LLVM/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files (x86)/LLVM/bin/c: binary operator expected
+ 0:20.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/.dotnet/tools/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/.cargo/bin/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Users/runneradmin/AppData/Local/Microsoft/WindowsApps/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/vcpkg/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python/c: binary operator expected
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 5460: test: /c/mozilla-build/python27/c: binary operator expected
+ 0:50.79 no
+ 0:50.79 checking for make... /usr/local/bin/make
+ 0:50.79 checking for X... no
+ 0:50.79 checking that static assertion macros used in autoconf tests work... yes
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 8159: test: : integer expression expected
+ 0:50.79 checking for 64-bit OS... yes
+ 0:50.79 checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4251 -wd4244 -wd4267 -wd4345 -wd4351 -wd4482 -wd4800 -wd4819 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -OPT:REF -OPT:ICF=15 -DYNAMICBASE) actually is a C++ compiler... yes
+ 0:50.79 checking NSPR selection... source-tree
+ 0:50.79 checking for YASM assembler... checking for yasm... /c/mozilla-build/yasm/yasm.exe
+ 0:50.79 checking for application to build... xulrunner
+ 0:50.79 checking if app-specific confvars.sh exists... d:/a/K-Meleon-R/K-Meleon-R/goanna/xulrunner/confvars.sh
+ 0:50.79 checking __attribute__ ((aligned ())) support... trying 64
+ 0:50.79 trying 32
+ 0:50.79 trying 16
+ 0:50.79 trying 8
+ 0:50.79 0
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 19664: test: too many arguments
+ 0:50.79 checking for java... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/java
+ 0:50.79 checking for javac... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javac
+ 0:50.79 checking for javah... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javah
+ 0:50.79 checking for jar... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jar
+ 0:50.79 checking for jarsigner... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jarsigner
+ 0:50.79 checking for keytool... /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/keytool
+ 0:50.79 ERROR: Invalid key name.
+ 0:50.79 Type "REG QUERY /?" for usage.
+ 0:50.79 DirectX SDK not found.
+ 0:50.79 Couldn't find an acceptable DirectX SDK for ANGLE, needed for d3dcompiler_43.
+ 0:50.79 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 21332: test: : integer expression expected
+ 0:50.79 checking for makensisu-3.0a2.exe... no
+ 0:50.79 checking for makensisu-2.46.exe... /c/mozilla-build/nsis-2.46u/makensisu-2.46.exe
+ 0:50.79 yes
+ 0:50.79 checking for Unicode NSIS version 2.46 or greater... yes
+ 0:50.79 checking for gnutar... no
+ 0:50.79 checking for gtar... no
+ 0:50.79 checking for tar... tar
+ 0:50.79 checking for wget... wget
+ 0:50.79 checking for valid optimization flags... yes
+ 0:50.79 LINK : fatal error LNK1146: no argument specified with option '/EXTRACT:'
+ 0:50.79 grep: crtdll.obj: No such file or directory
+ 0:50.79 cannot get attributes for "d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\crtdll.obj": The system cannot find the file specified.
+ 0:50.79 
+ 0:50.79 checking what kind of list files are supported by the linker... list
+ 0:50.79 checking for stdint.h... yes
+ 0:50.79 checking for inttypes.h... yes
+ 0:50.79 checking for sys/int_types.h... no
+ 0:50.79 checking for d3d9.h... yes
+ 0:50.79 checking for d3d10.h... yes
+ 0:50.79 checking for posix_fadvise... no
+ 0:50.79 checking for posix_fallocate... no
+ 0:50.79 updating cache ./config.cache
+ 0:50.79 creating ./config.status
+ 0:50.79 intl\icu\target> configuring
+ 0:50.79 intl\icu\target> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/configure --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --disable-static --enable-shared --disable-extras --disable-icuio --disable-layout --disable-tests --disable-samples --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
+ 0:50.79 js\src\ctypes\libffi> configuring
+ 0:50.79 js\src\ctypes\libffi> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/configure --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --disable-shared --enable-static --disable-raw-api AS=ml64.exe CC=cl CXX=cl CPP=cl -E -nologo LD=link AR=lib RANLIB=echo not_ranlib STRIP=echo not_strip LD=link CPP=cl -nologo -EP CXXCPP=cl -nologo -EP SHELL=sh.exe CC=/d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 CXX=/d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
+ 0:50.79 nsprpub> configuring
+ 0:50.79 nsprpub> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/nsprpub/configure --target=x86_64-pc-mingw32 --build=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --enable-application=xulrunner --enable-optimize --disable-debug --disable-tests --disable-updater --disable-crashreporter --disable-maintenance-service --disable-installer --disable-webrtc --disable-require-d3d-compilers --with-dist-prefix=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist --with-mozilla --disable-debug --enable-optimize --enable-64bit AS=ml64.exe CC= CXX= CPP=cl -E -nologo LD=link AR=lib RANLIB=echo not_ranlib STRIP=echo not_strip --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
+ 0:50.79 js\src> configuring
+ 0:50.79 js\src> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure --target=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --enable-application=xulrunner --enable-optimize --disable-debug --disable-tests --disable-updater --disable-crashreporter --disable-maintenance-service --disable-installer --disable-webrtc --disable-require-d3d-compilers --enable-threadsafe --enable-ctypes --disable-shared-js --disable-export-js --with-nspr-cflags=-Id:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/include/nspr --with-nspr-libs=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/nspr4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plc4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plds4.lib  --prefix=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist --enable-jemalloc --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
+ 0:50.79 js\src> creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
+ 0:50.79 js\src> checking host system type... x86_64-pc-mingw32
+ 0:50.79 js\src> checking target system type... x86_64-pc-mingw32
+ 0:50.79 js\src> checking build system type... x86_64-pc-mingw32
+ 0:50.79 js\src> checking for mawk... no
+ 0:50.79 js\src> checking for gawk... gawk
+ 0:50.79 js\src> checking for perl5... no
+ 0:50.79 js\src> checking for perl... /usr/bin/perl
+ 0:50.79 js\src> checking for gcc... cl
+ 0:50.79 js\src> checking whether the C compiler (cl -DNOMINMAX ) works... yes
+ 0:50.79 js\src> checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 0:50.79 js\src> checking whether we are using GNU C... no
+ 0:50.79 js\src> checking whether cl accepts -g... no
+ 0:50.79 js\src> checking for c++... cl
+ 0:50.79 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
+ 0:50.79 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 0:50.79 js\src> checking whether we are using GNU C++... no
+ 0:50.79 js\src> checking whether cl accepts -g... no
+ 0:50.79 js\src> checking for ranlib... ranlib
+ 0:50.79 js\src> checking for ml64... /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
+ 0:50.79 js\src> checking for ar... ar
+ 0:50.79 js\src> checking for ld... link
+ 0:50.79 js\src> checking for strip... strip
+ 0:50.79 js\src> checking for windres... windres
+ 0:50.79 js\src> configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
+ 0:50.79 js\src> checking for highest Windows version supported by this SDK... 0x0A00
+ 0:50.79 js\src> checking for Windows SDK being recent enough... yes
+ 0:50.79 js\src> checking how to run the C preprocessor... cl -E -nologo
+ 0:50.79 js\src> checking how to run the C++ preprocessor... cl -TP -E -nologo
+ 0:50.79 js\src> checking for _getc_nolock... yes
+ 0:50.79 js\src> checking for sb-conf... no
+ 0:50.79 js\src> checking for ve... no
+ 0:50.79 js\src> checking for a BSD compatible install... /usr/bin/install -c
+ 0:50.79 js\src> checking whether ln -s works... no
+ 0:50.79 js\src> checking for tar archiver... checking for gnutar... no
+ 0:50.79 js\src> checking for gtar... no
+ 0:50.79 js\src> checking for tar... tar
+ 0:50.79 js\src> tar
+ 0:50.79 js\src> checking for minimum required perl version >= 5.006... 5.008008
+ 0:50.79 js\src> checking for full perl installation... yes
+ 0:50.79 js\src> Using Python from environment variable $PYTHON
+ 0:50.79 js\src> checking Python environment is Mozilla virtualenv... yes
+ 0:50.79 js\src> checking for doxygen... :
+ 0:50.79 js\src> checking for autoconf... /usr/bin/autoconf
+ 0:50.79 js\src> checking for xargs... /usr/bin/xargs
+ 0:50.79 js\src> checking for c:/Strawberry/c/bin/gmake.EXE... d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/local/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/7zip/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/info-zip/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/kdiff3/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/mozmake/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-3.0b3/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-3.0b1/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/nsis-2.46u/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/Scripts/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/upx391w/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/watchman/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/wget/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/yasm/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: ./c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/local/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/mingw/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /usr/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/moztools-x64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/yasm/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/yasm/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python27/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/VCPackages/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TestWindow/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/bin/Roslyn/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.8 Tools/x64//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/HTML Help Workshop/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/FSharp/Tools/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Team Tools/DiagnosticsHub/Collector/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/Llvm/x64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/bin/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/Microsoft.NET/Framework64/v4.0.30319/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/MongoDB/Server/7.0/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/aliyun-cli/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/vcpkg/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/NSIS//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/zstd/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Mercurial//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/stack/3.11.1/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/cabal/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ghcup/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mingw64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/dotnet/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/MySQL/MySQL Server 8.0/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/R/R-4.6.1/bin/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/GeckoDriver/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/EdgeDriver//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/SeleniumWebDrivers/ChromeDriver/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/GitHub CLI/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/pipx_bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/npm/prefix/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/go/1.24.13/x64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/Scripts/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Python/3.12.10/x64/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Ruby/3.3.12/x64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/OpenSSL/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/kotlinc/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/ImageMagick-7.1.2-Q16-HDRI/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SDKs/Azure/CLI2/wbin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/kind/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/Chocolatey/bin/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/system32/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/Wbem/c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/WindowsPowerShell/v1.0//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Windows/System32/OpenSSH//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/dotnet//c: binary operator expected
+ 0:50.79 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/PowerShell/7//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft/Web Platform Installer//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/TortoiseSVN/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/150/Tools/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/WiX Toolset v3.14/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/130/DTS/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/140/DTS/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/150/DTS/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/160/DTS/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/170/DTS/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/c/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/perl/site/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Strawberry/perl/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/chocolatey/lib/pulumi/tools/Pulumi/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/CMake/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/ProgramData/chocolatey/lib/maven/apache-maven-3.9.16/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Service Fabric/bin/Fabric/Fabric.Code/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SDKs/Service Fabric/Tools/ServiceFabricLocalClusterManager/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/nodejs//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/cmd/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/ucrt64/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Git/usr/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/GitHub CLI//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/tools/php/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/sbt/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/AWSCLIV2//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/SessionManagerPlugin/bin//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Amazon/AWSSAMCLI/bin//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft SQL Server/130/Tools/Binn//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/mongosh//c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/LLVM/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files (x86)/LLVM/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/.dotnet/tools/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/.cargo/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Users/runneradmin/AppData/Local/Microsoft/WindowsApps/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/vcpkg/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python/c: binary operator expected
+ 1:30.43 js\src> d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure: line 4641: test: /c/mozilla-build/python27/c: binary operator expected
+ 1:30.43 js\src> no
+ 1:30.43 js\src> checking for make... /usr/local/bin/make
+ 1:30.43 js\src> checking for X... no
+ 1:30.43 js\src> checking that static assertion macros used in autoconf tests work... yes
+ 1:30.43 js\src> checking for 64-bit OS... yes
+ 1:30.43 js\src> checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -wd4345 -wd4351 -wd4800 -D_CRT_SECURE_NO_WARNINGS -Wv:18 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4244 -wd4267 -wd4251 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -DYNAMICBASE) actually is a C++ compiler... yes
+ 1:30.43 js\src> checking NSPR selection... command-line
+ 1:30.43 js\src> checking for valid optimization flags... yes
+ 1:30.43 js\src> checking what kind of list files are supported by the linker... list
+ 1:30.43 js\src> checking for posix_fadvise... no
+ 1:30.43 js\src> checking for posix_fallocate... no
+ 1:30.43 js\src> checking for malloc.h... yes
+ 1:30.43 js\src> checking for setlocale... no
+ 1:30.43 js\src> checking for localeconv... no
+ 1:30.43 js\src> checking for malloc_size... no
+ 1:30.43 js\src> checking for malloc_usable_size... no
+ 1:30.43 js\src> updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
+ 1:30.43 js\src> creating ./config.status
+ 1:30.43 
+ 1:30.43 nsprpub> configure: WARNING: unrecognized options: --enable-application, --disable-tests, --disable-updater, --disable-crashreporter, --disable-maintenance-service, --disable-installer, --disable-webrtc, --disable-require-d3d-compilers
+ 1:30.43 nsprpub> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
+ 1:30.43 nsprpub> checking build system type... x86_64-pc-mingw32
+ 1:30.43 nsprpub> checking host system type... x86_64-pc-mingw32
+ 1:30.43 nsprpub> checking target system type... x86_64-pc-mingw32
+ 1:30.43 nsprpub> checking for cl... cl
+ 1:30.43 nsprpub> configure: WARNING: Unknown version of the Microsoft (R) Manifest Tool.
+ 1:30.43 nsprpub> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/nsprpub/config.cache
+ 1:30.43 nsprpub> configure: creating ./config.status
+ 1:30.43 nsprpub> configure: WARNING: unrecognized options: --enable-application, --disable-tests, --disable-updater, --disable-crashreporter, --disable-maintenance-service, --disable-installer, --disable-webrtc, --disable-require-d3d-compilers
+ 1:30.43 nsprpub> config.status: creating Makefile
+ 1:30.43 nsprpub> config.status: creating config/Makefile
+ 1:30.43 nsprpub> config.status: creating config/autoconf.mk
+ 1:30.43 nsprpub> config.status: creating config/nsprincl.mk
+ 1:30.43 nsprpub> config.status: creating config/nsprincl.sh
+ 1:30.43 nsprpub> config.status: creating config/nspr-config
+ 1:30.43 nsprpub> config.status: creating config/nspr.pc
+ 1:30.43 nsprpub> config.status: creating lib/Makefile
+ 1:30.43 nsprpub> config.status: creating lib/ds/Makefile
+ 1:30.43 nsprpub> config.status: creating lib/libc/Makefile
+ 1:30.43 nsprpub> config.status: creating lib/libc/include/Makefile
+ 1:30.43 nsprpub> config.status: creating lib/libc/src/Makefile
+ 1:30.43 nsprpub> config.status: creating lib/tests/Makefile
+ 1:30.43 nsprpub> config.status: creating pkg/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/include/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/include/md/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/include/obsolete/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/include/private/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/io/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/linking/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/malloc/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/md/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/md/windows/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/memory/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/misc/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/threads/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/tests/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/tests/dll/Makefile
+ 1:30.43 nsprpub> config.status: creating pr/src/threads/combined/Makefile
+ 1:30.43 nsprpub> config.status: executing default commands
+ 1:30.43 
+ 1:30.43 intl\icu\target> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
+ 1:30.43 intl\icu\target> checking for ICU version numbers... release 58.3, library 58.3, unicode version 9.0
+ 1:30.43 intl\icu\target> checking build system type... x86_64-pc-mingw32
+ 1:30.43 intl\icu\target> checking host system type... x86_64-pc-mingw32
+ 1:30.43 intl\icu\target> checking whether to build debug libraries... no
+ 1:30.43 intl\icu\target> checking whether to build release libraries... yes
+ 1:30.43 intl\icu\target> checking for x86_64-pc-mingw32-clang... cl
+ 1:30.43 intl\icu\target> checking whether the C compiler works... yes
+ 1:30.43 intl\icu\target> checking for C compiler default output file name... conftest.exe
+ 1:30.43 intl\icu\target> checking for suffix of executables... .exe
+ 1:30.43 intl\icu\target> checking whether we are cross compiling... no
+ 1:30.43 intl\icu\target> checking for suffix of object files... obj
+ 1:30.43 intl\icu\target> checking whether we are using the GNU C compiler... no
+ 1:30.43 intl\icu\target> checking whether cl accepts -g... yes
+ 1:30.43 intl\icu\target> checking for cl option to accept ISO C89... none needed
+ 1:30.43 intl\icu\target> checking whether we are using the GNU C++ compiler... no
+ 1:30.43 intl\icu\target> checking whether cl accepts -g... yes
+ 1:30.43 intl\icu\target> checking for x86_64-pc-mingw32-pkg-config... no
+ 1:30.43 intl\icu\target> checking for pkg-config... /c/Strawberry/perl/bin/pkg-config
+ 1:30.43 intl\icu\target> checking pkg-config is at least version 0.20... yes
+ 1:30.43 intl\icu\target> checking for ICULEHB... no
+ 1:30.43 intl\icu\target> checking how to run the C preprocessor... cl -E
+ 1:30.43 intl\icu\target> checking for a BSD-compatible install... /usr/bin/install -c
+ 1:30.43 intl\icu\target> checking for gmake... /c/Strawberry/c/bin/gmake
+ 1:30.43 intl\icu\target> checking for doxygen... no
+ 1:30.43 intl\icu\target> checking checking for executable suffix... .exe
+ 1:30.43 intl\icu\target> checking whether strict compiling is on... yes
+ 1:30.43 intl\icu\target> checking for grep that handles long lines and -e... /usr/bin/grep
+ 1:30.43 intl\icu\target> checking for egrep... /usr/bin/grep -E
+ 1:30.43 intl\icu\target> checking for ANSI C header files... yes
+ 1:30.43 intl\icu\target> checking for sys/types.h... yes
+ 1:30.43 intl\icu\target> checking for sys/stat.h... yes
+ 1:30.43 intl\icu\target> checking for stdlib.h... yes
+ 1:30.43 intl\icu\target> checking for string.h... yes
+ 1:30.43 intl\icu\target> checking for memory.h... yes
+ 1:30.43 intl\icu\target> checking for strings.h... no
+ 1:30.43 intl\icu\target> checking for inttypes.h... yes
+ 1:30.43 intl\icu\target> checking for stdint.h... yes
+ 1:30.43 intl\icu\target> checking for unistd.h... no
+ 1:30.43 intl\icu\target> checking size of void *... 8
+ 1:30.43 intl\icu\target> checking whether runnable 64 bit binaries are built by default... yes
+ 1:30.43 intl\icu\target> checking which Makefile fragment to use for x86_64-pc-mingw32... mh-msys-msvc
+ 1:30.43 intl\icu\target> checking for floor in -lm... no
+ 1:30.43 intl\icu\target> checking whether to build shared libraries... yes
+ 1:30.43 intl\icu\target> checking whether to build static libraries... no
+ 1:30.43 intl\icu\target> checking whether to enable auto cleanup of libraries... no
+ 1:30.43 intl\icu\target> checking whether to enable draft APIs... yes
+ 1:30.43 intl\icu\target> checking for x86_64-pc-mingw32-ranlib... no
+ 1:30.43 intl\icu\target> checking for ranlib... ranlib
+ 1:30.43 intl\icu\target> checking for x86_64-pc-mingw32-ar... lib
+ 1:30.43 intl\icu\target> checking whether to enable renaming of symbols... yes
+ 1:30.43 intl\icu\target> checking whether to enable function and data tracing... no
+ 1:30.43 intl\icu\target> checking elf.h usability... no
+ 1:30.43 intl\icu\target> checking elf.h presence... no
+ 1:30.43 intl\icu\target> checking for elf.h... no
+ 1:30.43 intl\icu\target> checking whether to enable dynamic loading of plugins. Ignored if plugins disabled.... yes
+ 1:30.43 intl\icu\target> checking dlfcn.h usability... no
+ 1:30.43 intl\icu\target> checking dlfcn.h presence... no
+ 1:30.43 intl\icu\target> checking for dlfcn.h... no
+ 1:30.43 intl\icu\target> checking for library containing dlopen... no
+ 1:30.43 intl\icu\target> checking for dlopen... no
+ 1:30.43 intl\icu\target> checking for gettimeofday... no
+ 1:30.43 intl\icu\target> checking if we have a C++ compiler... Good
+ 1:30.43 intl\icu\target> checking if #include <string> works... yes
+ 1:30.43 intl\icu\target> checking if #include <atomic> works... yes
+ 1:30.43 intl\icu\target> checking for pthread_attr_init in -lpthread... no
+ 1:30.43 intl\icu\target> checking for library containing pthread_mutex_destroy... no
+ 1:30.43 intl\icu\target> checking for pthread_mutex_init in -lpthread... no
+ 1:30.43 intl\icu\target> checking for pthread_mutex_lock... no
+ 1:30.43 intl\icu\target> checking for mmap... no
+ 1:30.43 intl\icu\target> checking for genccode assembly...
+ 1:30.43 intl\icu\target> checking for inttypes.h... (cached) yes
+ 1:30.43 intl\icu\target> checking dirent.h usability... no
+ 1:30.43 intl\icu\target> checking dirent.h presence... no
+ 1:30.43 intl\icu\target> checking for dirent.h... no
+ 1:30.43 intl\icu\target> checking whether byte ordering is bigendian... no
+ 1:30.43 intl\icu\target> checking for nl_langinfo... no
+ 1:30.43 intl\icu\target> checking for namespace support... yes
+ 1:30.43 intl\icu\target> checking for properly overriding new and delete... yes
+ 1:30.43 intl\icu\target> checking for placement new and delete... yes
+ 1:30.43 intl\icu\target> checking for popen... no
+ 1:30.43 intl\icu\target> checking for tzset... yes
+ 1:30.43 intl\icu\target> checking for tzname... no
+ 1:30.43 intl\icu\target> checking for _tzname... no
+ 1:30.43 intl\icu\target> checking for timezone... no
+ 1:30.43 intl\icu\target> checking for __timezone... no
+ 1:30.43 intl\icu\target> checking for _timezone... yes
+ 1:30.43 intl\icu\target> checking for strtod_l... no
+ 1:30.43 intl\icu\target> checking for int8_t... yes
+ 1:30.43 intl\icu\target> checking for uint8_t... yes
+ 1:30.43 intl\icu\target> checking for int16_t... yes
+ 1:30.43 intl\icu\target> checking for uint16_t... yes
+ 1:30.43 intl\icu\target> checking for int32_t... yes
+ 1:30.43 intl\icu\target> checking for uint32_t... yes
+ 1:30.43 intl\icu\target> checking for int64_t... yes
+ 1:30.43 intl\icu\target> checking for uint64_t... yes
+ 1:30.43 intl\icu\target> checking wchar.h usability... yes
+ 1:30.43 intl\icu\target> checking wchar.h presence... yes
+ 1:30.43 intl\icu\target> checking for wchar.h... yes
+ 1:30.43 intl\icu\target> checking for library containing wcscpy... no
+ 1:30.43 intl\icu\target> checking size of wchar_t... 2
+ 1:30.43 intl\icu\target> checking for UTF-16 string literal support... unknown
+ 1:30.43 intl\icu\target> checking for a library suffix to use... none
+ 1:30.43 intl\icu\target> CPPFLAGS= -DU_USING_ICU_NAMESPACE=0 -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 -DUCONFIG_NO_LEGACY_CONVERSION -DUCONFIG_NO_TRANSLITERATION -DUCONFIG_NO_REGULAR_EXPRESSIONS -DUCONFIG_NO_BREAK_ITERATION -DUCONFIG_NO_IDNA -DU_CHARSET_IS_UTF8 -I/d/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/common -I/d/a/K-Meleon-R/K-Meleon-R/goanna/intl/icu/source/i18n  $(THREADSCPPFLAGS)  -DHAVE_DLOPEN=0 -DU_HAVE_ATOMIC=1 -DU_HAVE_MMAP=0 -DU_HAVE_DIRENT_H=0 -DU_HAVE_POPEN=0 -DU_HAVE_TZNAME=0 -DU_HAVE_STRTOD_L=0 -DU_HAVE_WCSCPY=0
+ 1:30.43 intl\icu\target> CFLAGS= -DNOMINMAX -TC -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4244 -wd4267 -wd4819 -we4553 -Zi -UDEBUG -DNDEBUG -O1 -Oi -MD -W4 -W4 $(THREADSCFLAGS)
+ 1:30.43 intl\icu\target> CXXFLAGS=-DNOMINMAX -TP -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4251 -wd4244 -wd4267 -wd4345 -wd4351 -wd4482 -wd4800 -wd4819 -we4553 -GR -Zi -UDEBUG -DNDEBUG -O1 -Oi -MD $(THREADSCXXFLAGS)
+ 1:30.43 intl\icu\target> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target/config.cache
+ 1:30.43 intl\icu\target> configure: creating ./config.status
+ 1:30.43 intl\icu\target>
+ 1:30.43 intl\icu\target> ICU for C/C++ 58.3 is ready to be built.
+ 1:30.43 intl\icu\target> === Important Notes: ===
+ 1:30.43 intl\icu\target> Data Packaging: library
+ 1:30.43 intl\icu\target>  This means: ICU data will be linked with ICU. A shared data library will be built.
+ 1:30.43 intl\icu\target>  To locate data: ICU will use the linked data library. If linked with the stub library located in stubdata/, the application can use udata_setCommonData() or set a data path to override.
+ 1:30.43 intl\icu\target> Building ICU: Use a GNU make such as /c/Strawberry/c/bin/gmake to build ICU.
+ 1:30.43 intl\icu\target> checking the version of "/c/Strawberry/c/bin/gmake"... gmake[1]: Entering directory 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target'
+ 1:30.43 
+ 1:30.43 intl\icu\target> 4.2.1 (we wanted at least 3.80)
+ 1:30.43 intl\icu\target> gmake[1]: Leaving directory 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/intl/icu/target'
+ 1:30.43 
+ 1:30.43 intl\icu\target> ok
+ 1:30.43 intl\icu\target> config.status: creating icudefs.mk
+ 1:30.43 intl\icu\target> config.status: creating Makefile
+ 1:30.43 intl\icu\target> config.status: creating data/pkgdataMakefile
+ 1:30.43 intl\icu\target> config.status: creating config/Makefile.inc
+ 1:30.43 intl\icu\target> config.status: creating config/icu.pc
+ 1:30.43 intl\icu\target> config.status: creating config/pkgdataMakefile
+ 1:30.43 intl\icu\target> config.status: creating data/Makefile
+ 1:30.43 intl\icu\target> config.status: creating stubdata/Makefile
+ 1:30.43 intl\icu\target> config.status: creating common/Makefile
+ 1:30.43 intl\icu\target> config.status: creating i18n/Makefile
+ 1:30.43 intl\icu\target> config.status: creating layoutex/Makefile
+ 1:30.43 intl\icu\target> config.status: creating io/Makefile
+ 1:30.43 intl\icu\target> config.status: creating extra/Makefile
+ 1:30.43 intl\icu\target> config.status: creating extra/uconv/Makefile
+ 1:30.43 intl\icu\target> config.status: creating extra/uconv/pkgdataMakefile
+ 1:30.43 intl\icu\target> config.status: creating extra/scrptrun/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/ctestfw/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/toolutil/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/makeconv/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/genrb/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/genccode/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gencmn/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gencnval/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gendict/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gentest/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gennorm2/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/genbrk/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gensprep/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/icuinfo/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/icupkg/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/icuswap/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/pkgdata/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/tzcode/Makefile
+ 1:30.43 intl\icu\target> config.status: creating tools/gencfu/Makefile
+ 1:30.43 intl\icu\target> config.status: creating test/Makefile
+ 1:30.43 intl\icu\target> config.status: creating test/compat/Makefile
+ 1:30.43 intl\icu\target> config.status: creating test/testdata/Makefile
+ 1:30.43 intl\icu\target> config.status: creating test/testdata/pkgdataMakefile
+ 1:30.43 intl\icu\target> config.status: creating test/hdrtst/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/intltest/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/cintltst/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/iotest/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/letest/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/collationperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/collperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/collperf2/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/dicttrieperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/ubrkperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/charperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/convperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/normperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/DateFmtPerf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/howExpensiveIs/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/strsrchperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/unisetperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/usetperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/ustrperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/utfperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/utrie2perf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating test/perf/leperf/Makefile
+ 1:37.67 intl\icu\target> config.status: creating samples/Makefile
+ 1:37.67 intl\icu\target> config.status: creating samples/date/Makefile
+ 1:37.67 intl\icu\target> config.status: creating samples/cal/Makefile
+ 1:37.67 intl\icu\target> config.status: creating samples/layout/Makefile
+ 1:37.67 
+ 1:37.67 js\src\ctypes\libffi> configure: creating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
+ 1:37.67 js\src\ctypes\libffi> checking build system type... x86_64-pc-mingw32
+ 1:37.67 js\src\ctypes\libffi> checking host system type... x86_64-pc-mingw32
+ 1:37.67 js\src\ctypes\libffi> checking target system type... x86_64-pc-mingw32
+ 1:37.67 js\src\ctypes\libffi> checking for gsed... sed
+ 1:37.67 js\src\ctypes\libffi> checking for a BSD-compatible install... /usr/bin/install -c
+ 1:37.67 js\src\ctypes\libffi> checking whether build environment is sane... yes
+ 1:37.67 js\src\ctypes\libffi> checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+ 1:37.67 js\src\ctypes\libffi> checking for gawk... gawk
+ 1:37.67 js\src\ctypes\libffi> checking whether c:/Strawberry/c/bin/gmake.EXE sets $(MAKE)... yes
+ 1:37.67 js\src\ctypes\libffi> checking whether c:/Strawberry/c/bin/gmake.EXE supports nested variables... yes
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-gcc... /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64
+ 1:37.67 js\src\ctypes\libffi> checking whether the C compiler works... yes
+ 1:37.67 js\src\ctypes\libffi> checking for C compiler default output file name... conftest.exe
+ 1:37.67 js\src\ctypes\libffi> checking for suffix of executables... .exe
+ 1:37.67 js\src\ctypes\libffi> checking whether we are cross compiling... no
+ 1:37.67 js\src\ctypes\libffi> checking for suffix of object files... obj
+ 1:37.67 js\src\ctypes\libffi> checking whether we are using the GNU C compiler... no
+ 1:37.67 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 accepts -g... yes
+ 1:37.67 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to accept ISO C89... none needed
+ 1:37.67 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 understands -c and -o together... yes
+ 1:37.67 js\src\ctypes\libffi> checking for style of include used by c:/Strawberry/c/bin/gmake.EXE... GNU
+ 1:37.67 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
+ 1:37.67 js\src\ctypes\libffi> checking whether we are using the GNU C++ compiler... no
+ 1:37.67 js\src\ctypes\libffi> checking whether /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 accepts -g... yes
+ 1:37.67 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
+ 1:37.67 js\src\ctypes\libffi> checking dependency style of /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64... msvc7
+ 1:37.67 js\src\ctypes\libffi> checking how to print strings... printf
+ 1:37.67 js\src\ctypes\libffi> checking for a sed that does not truncate output... /usr/bin/sed
+ 1:37.67 js\src\ctypes\libffi> checking for grep that handles long lines and -e... /usr/bin/grep
+ 1:37.67 js\src\ctypes\libffi> checking for egrep... /usr/bin/grep -E
+ 1:37.67 js\src\ctypes\libffi> checking for fgrep... /usr/bin/grep -F
+ 1:37.67 js\src\ctypes\libffi> checking for non-GNU ld... link
+ 1:37.67 js\src\ctypes\libffi> checking if the linker (link) is GNU ld... no
+ 1:37.67 js\src\ctypes\libffi> checking for BSD- or MS-compatible name lister (nm)... /c/mingw64/bin/nm -B
+ 1:37.67 js\src\ctypes\libffi> checking the name lister (/c/mingw64/bin/nm -B) interface... BSD nm
+ 1:37.67 js\src\ctypes\libffi> checking whether ln -s works... no, using cp -pR
+ 1:37.67 js\src\ctypes\libffi> checking the maximum length of command line arguments... 8192
+ 1:37.67 js\src\ctypes\libffi> checking whether the shell understands some XSI constructs... yes
+ 1:37.67 js\src\ctypes\libffi> checking whether the shell understands "+="... yes
+ 1:37.67 js\src\ctypes\libffi> checking how to convert x86_64-pc-mingw32 file names to x86_64-pc-mingw32 format... func_convert_file_msys_to_w32
+ 1:37.67 js\src\ctypes\libffi> checking how to convert x86_64-pc-mingw32 file names to toolchain format... func_convert_file_msys_to_w32
+ 1:37.67 js\src\ctypes\libffi> checking for link option to reload object files... -r
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-objdump... no
+ 1:37.67 js\src\ctypes\libffi> checking for objdump... objdump
+ 1:37.67 js\src\ctypes\libffi> checking how to recognize dependent libraries... file_magic ^x86 archive import|^x86 DLL
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-dlltool... no
+ 1:37.67 js\src\ctypes\libffi> checking for dlltool... dlltool
+ 1:37.67 js\src\ctypes\libffi> checking how to associate runtime and link libraries... func_cygming_dll_for_implib
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-ar... lib
+ 1:37.67 js\src\ctypes\libffi> checking for archiver @FILE support... no
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-strip... echo not_strip
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-ranlib... echo not_ranlib
+ 1:37.67 js\src\ctypes\libffi> checking command to parse /c/mingw64/bin/nm -B output from /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 object... ok
+ 1:37.67 js\src\ctypes\libffi> checking for sysroot... no
+ 1:37.67 js\src\ctypes\libffi> checking for x86_64-pc-mingw32-mt... no
+ 1:37.67 js\src\ctypes\libffi> checking for mt... mt
+ 1:37.67 js\src\ctypes\libffi> checking if mt is a manifest tool... yes
+ 1:37.67 js\src\ctypes\libffi> checking how to run the C preprocessor... cl -nologo -EP
+ 1:37.67 js\src\ctypes\libffi> checking for ANSI C header files... yes
+ 1:37.67 js\src\ctypes\libffi> checking for sys/types.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for sys/stat.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for stdlib.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for string.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for memory.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for strings.h... no
+ 1:37.67 js\src\ctypes\libffi> checking for inttypes.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for stdint.h... yes
+ 1:37.67 js\src\ctypes\libffi> checking for unistd.h... no
+ 1:37.67 js\src\ctypes\libffi> checking for dlfcn.h... no
+ 1:37.67 js\src\ctypes\libffi> checking for objdir... .libs
+ 1:37.67 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to produce PIC... -DDLL_EXPORT -DPIC
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 PIC flag -DDLL_EXPORT -DPIC works... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 static flag  works... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... (cached) yes
+ 1:37.67 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... yes
+ 1:37.67 js\src\ctypes\libffi> checking dynamic linker characteristics... Win32 ld.exe
+ 1:37.67 js\src\ctypes\libffi> checking how to hardcode library paths into programs... immediate
+ 1:37.67 js\src\ctypes\libffi> checking whether stripping libraries is possible... no
+ 1:37.67 js\src\ctypes\libffi> checking if libtool supports shared libraries... yes
+ 1:37.67 js\src\ctypes\libffi> checking whether to build shared libraries... no
+ 1:37.67 js\src\ctypes\libffi> checking whether to build static libraries... yes
+ 1:37.67 js\src\ctypes\libffi> checking how to run the C++ preprocessor... cl -nologo -EP
+ 1:37.67 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... no
+ 1:37.67 js\src\ctypes\libffi> checking for /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 option to produce PIC... -DDLL_EXPORT -DPIC
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 PIC flag -DDLL_EXPORT -DPIC works... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 static flag  works... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... yes
+ 1:37.67 js\src\ctypes\libffi> checking if /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 supports -c -o file.obj... (cached) yes
+ 1:37.67 js\src\ctypes\libffi> checking whether the /d/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/msvcc.sh -m64 linker (link) supports shared libraries... no
+ 1:37.67 js\src\ctypes\libffi> checking dynamic linker characteristics... Win32 ld.exe
+ 1:37.67 js\src\ctypes\libffi> checking how to hardcode library paths into programs... immediate
+ 1:37.67 js\src\ctypes\libffi> checking size of size_t... 8
+ 1:37.67 js\src\ctypes\libffi> checking for C compiler vendor... microsoft
+ 1:37.67 js\src\ctypes\libffi> checking CFLAGS for maximum warnings... -Wall
+ 1:40.99 js\src\ctypes\libffi> checking whether to enable maintainer-specific portions of Makefiles... no
+ 1:40.99 js\src\ctypes\libffi> checking sys/mman.h usability... no
+ 1:40.99 js\src\ctypes\libffi> checking sys/mman.h presence... no
+ 1:40.99 js\src\ctypes\libffi> checking for sys/mman.h... no
+ 1:40.99 js\src\ctypes\libffi> checking for mmap... no
+ 1:40.99 js\src\ctypes\libffi> checking for sys/mman.h... (cached) no
+ 1:40.99 js\src\ctypes\libffi> checking for mmap... (cached) no
+ 1:40.99 js\src\ctypes\libffi> checking for ANSI C header files... (cached) yes
+ 1:40.99 js\src\ctypes\libffi> checking for memcpy... yes
+ 1:40.99 js\src\ctypes\libffi> checking for size_t... yes
+ 1:40.99 js\src\ctypes\libffi> checking for working alloca.h... no
+ 1:40.99 js\src\ctypes\libffi> checking for alloca... yes
+ 1:40.99 js\src\ctypes\libffi> checking size of double... 8
+ 1:40.99 js\src\ctypes\libffi> checking size of long double... 8
+ 1:40.99 js\src\ctypes\libffi> checking whether byte ordering is bigendian... no
+ 1:40.99 js\src\ctypes\libffi> checking assembler .cfi pseudo-op support... no
+ 1:40.99 js\src\ctypes\libffi> checking for _ prefix in compiled symbols... no
+ 1:40.99 js\src\ctypes\libffi> configure: updating cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/ctypes/libffi/config.cache
+ 1:40.99 js\src\ctypes\libffi> checking that generated files are newer than configure... done
+ 1:40.99 js\src\ctypes\libffi> configure: creating ./config.status
+ 1:40.99 js\src\ctypes\libffi> config.status: creating include/Makefile
+ 1:40.99 js\src\ctypes\libffi> config.status: creating include/ffi.h
+ 1:40.99 js\src\ctypes\libffi> config.status: creating Makefile
+ 1:40.99 js\src\ctypes\libffi> config.status: creating testsuite/Makefile
+ 1:40.99 js\src\ctypes\libffi> config.status: creating man/Makefile
+ 1:40.99 js\src\ctypes\libffi> config.status: creating libffi.pc
+ 1:40.99 js\src\ctypes\libffi> config.status: creating fficonfig.h
+ 1:40.99 js\src\ctypes\libffi> config.status: linking d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/ctypes/libffi/src/x86/ffitarget.h to include/ffitarget.h
+ 1:40.99 js\src\ctypes\libffi> config.status: executing buildir commands
+ 1:40.99 js\src\ctypes\libffi> config.status: skipping top_srcdir/Makefile - not created
+ 1:40.99 js\src\ctypes\libffi> config.status: executing depfiles commands
+ 1:40.99 js\src\ctypes\libffi> config.status: executing libtool commands
+ 1:40.99 js\src\ctypes\libffi> config.status: executing include commands
+ 1:40.99 js\src\ctypes\libffi> config.status: executing src commands
+ 1:40.99 
+ 1:40.99 Walking the dog...
+ 1:40.99 Finished reading 771 moz.build files in 0.48s
+ 1:40.99 Processed into 5538 build config descriptors in 0.92s
+ 1:40.99 Backend executed in 1.40s
+ 1:40.99 1605 total backend files; 1605 created; 0 updated; 0 unchanged; 0 deleted; 77 -> 568 Makefile
+ 1:40.99 Total wall time: 2.94s; CPU time: 2.93s; Efficiency: 100%; Untracked: 0.15s
 Configure complete!
 Be sure to run |mach build| to pick up any changes
