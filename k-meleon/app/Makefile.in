@@ -4,26 +4,8 @@
 
 dist_dest   = $(DIST)/$(MOZ_MACBUNDLE_NAME)
 
-PREF_JS_EXPORTS = $(srcdir)/prefs/kmeleon.js \
-  $(srcdir)/prefs/kmprefs.js \
-  $(srcdir)/prefs/skin.js \
-		  $(NULL)
-
-
-# hardcode en-US for the moment
-AB_CD = en-US
-
-DEFINES += \
-  -DAB_CD=$(AB_CD) \
-  -DFIREFOX_ICO='"$(DIST)/branding/firefox.ico"' \
-  -DDOCUMENT_ICO='"$(DIST)/branding/document.ico"' \
-  -DNEWWINDOW_ICO='"$(DIST)/branding/newwindow.ico"' \
-  -DNEWTAB_ICO='"$(DIST)/branding/newtab.ico"' \
-  -DPBMODE_ICO='"$(DIST)/branding/pbmode.ico"' \
-  $(NULL)
-
 #ifdef LIBXUL_SDK #{
-#PREF_JS_EXPORTS += $(srcdir)/profile/channel-prefs.js
+#JS_PREFERENCE_FILES += $(srcdir)/profile/channel-prefs.js
 #endif #} LIBXUL_SDK
 
 #OS_LIBS		+= $(call EXPAND_LIBNAME,ole32 comdlg32 shell32 version)

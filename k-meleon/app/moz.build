@@ -10,6 +10,12 @@ OS_LIBS += [
     'xpcomglue_s.lib',
 ]
 
+JS_PREFERENCE_FILES += [
+    'prefs/kmeleon.js',
+    'prefs/kmprefs.js',
+    'prefs/skin.js',
+]
+
 SOURCES += [
     '../shared/Utils.cpp',
     'AccelParser.cpp',
