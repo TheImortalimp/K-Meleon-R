@@ -1,0 +1,56 @@
+name: Probe x64 build feasibility
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out K-Meleon-R
+        uses: actions/checkout@v4
+
+      - name: Check out Goanna engine (kmeleon76)
+        uses: actions/checkout@v4
+        with:
+          repository: roytam1/palemoon27
+          ref: kmeleon76
+          path: goanna
+          fetch-depth: 1
+
+      - name: Runner toolchain
+        shell: pwsh
+        run: |
+          $vw = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          & $vw -all -products * -format json | ConvertFrom-Json |
+            ForEach-Object { "$($_.displayName) $($_.installationVersion) at $($_.installationPath)" }
+          "--- VC toolsets"
+          Get-ChildItem "${env:ProgramFiles}\Microsoft Visual Studio\*\*\VC\Tools\MSVC" -ErrorAction SilentlyContinue | ForEach-Object Name
+          "--- Windows SDKs"
+          Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\Include" -ErrorAction SilentlyContinue | ForEach-Object Name
+          "--- python"
+          python --version
+          py -0p 2>&1
+          "--- disk"
+          Get-PSDrive C, D -ErrorAction SilentlyContinue | Format-Table Name, Used, Free
+
+      - name: Engine tree facts
+        shell: bash
+        working-directory: goanna
+        run: |
+          git log -1 --format='%H %cd'
+          ls configure.in client.mk 2>&1
+          grep -n "x86_64\|WIN64\|win64" configure.in | head -20
+
+      - name: Do the Goanna patches apply?
+        shell: bash
+        working-directory: goanna
+        run: |
+          for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
+            if git apply --check --whitespace=nowarn "../$p.diff"; then
+              echo "OK    $p.diff"
+            else
+              echo "FAIL  $p.diff"
+            fi
+          done
