@@ -75,6 +75,7 @@ jobs:
           ac_add_options --disable-maintenance-service
           ac_add_options --disable-installer
           ac_add_options --disable-webrtc
+          ac_add_options --disable-require-d3d-compilers
           mk_add_options MOZ_MAKE_FLAGS=-j4
           EOF
 
