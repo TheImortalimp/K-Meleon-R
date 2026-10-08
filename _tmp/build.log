@@ -1,102 +1,1842 @@
 MozillaBuild Install Directory: C:\mozilla-build
 Python 2.7.11
- 0:00.92 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s
- 0:07.79 
- 0:07.79 The CLOBBER file has been updated, indicating that an incremental
- 0:07.79 build since your last build will probably not work. A full/clobber
- 0:07.79 build is required.
- 0:07.79 
- 0:07.79 The reason for the clobber is:
- 0:07.79 
- 0:07.79  Clobber required ICU 58.3 update
- 0:07.79 
- 0:07.79 Clobbering can be performed automatically. However, we didn't
- 0:07.79 automatically clobber this time because:
- 0:07.79 
- 0:07.79   Automatic clobbering is not enabled
- 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.79 
- 0:07.79 The easiest and fastest way to clobber is to run:
- 0:07.79 
- 0:07.79  $ mach clobber
- 0:07.79 
- 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.79 running:
- 0:07.79 
- 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.79 
- 0:07.79 gmake.EXE: *** [client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.79 gmake.EXE: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.79 
- 0:07.79 The CLOBBER file has been updated, indicating that an incremental
- 0:07.79 build since your last build will probably not work. A full/clobber
- 0:07.79 build is required.
- 0:07.79 
- 0:07.79 The reason for the clobber is:
- 0:07.79 
- 0:07.79  Clobber required ICU 58.3 update
- 0:07.79 
- 0:07.79 Clobbering can be performed automatically. However, we didn't
- 0:07.79 automatically clobber this time because:
- 0:07.79 
- 0:07.79   Automatic clobbering is not enabled
- 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.79 
- 0:07.79 The easiest and fastest way to clobber is to run:
- 0:07.79 
- 0:07.79  $ mach clobber
- 0:07.79 
- 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.79 running:
- 0:07.79 
- 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.79 
- 0:07.79 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.79 gmake.EXE[1]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.79 Adding client.mk options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig:
- 0:07.79     CONFIG_GUESS=x86_64-pc-mingw32
- 0:07.79     MOZ_MAKE_FLAGS=-j4 -k
- 0:07.79     MOZ_OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
- 0:07.79     OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
- 0:07.79     FOUND_MOZCONFIG=D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
- 0:07.79 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
- 0:07.79 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
- 0:07.79 
- 0:07.79 The CLOBBER file has been updated, indicating that an incremental
- 0:07.79 build since your last build will probably not work. A full/clobber
- 0:07.79 build is required.
- 0:07.79 
- 0:07.79 The reason for the clobber is:
- 0:07.79 
- 0:07.79  Clobber required ICU 58.3 update
- 0:07.79 
- 0:07.79 Clobbering can be performed automatically. However, we didn't
- 0:07.79 automatically clobber this time because:
- 0:07.79 
- 0:07.79   Automatic clobbering is not enabled
- 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.79 
- 0:07.79 The easiest and fastest way to clobber is to run:
- 0:07.79 
- 0:07.79  $ mach clobber
- 0:07.79 
- 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.79 running:
- 0:07.79 
- 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.79 
- 0:07.79 gmake.EXE[2]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.79 gmake.EXE[2]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.79 gmake.EXE[2]: Target 'configure' not remade because of errors.
- 0:07.79 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:376: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/config.status] Error 2
- 0:07.79 gmake.EXE[1]: Target 'realbuild' not remade because of errors.
- 0:07.79 gmake.EXE: *** [client.mk:171: build] Error 2
- 0:07.82 9 compiler warnings present.
+ 0:01.20 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s
+ 1:05.24 Adding client.mk options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig:
+ 1:05.24     CONFIG_GUESS=x86_64-pc-mingw32
+ 1:05.24     MOZ_MAKE_FLAGS=-j4 -k
+ 1:05.24     MOZ_OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 1:05.24     OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 1:05.24     FOUND_MOZCONFIG=D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
+ 1:05.24 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
+ 1:05.24 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
+ 1:05.24 cd d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 1:05.24 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure
+ 1:05.24 Adding configure options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
+ 1:05.24   --enable-application=xulrunner
+ 1:05.24   --target=x86_64-pc-mingw32
+ 1:05.24   --host=x86_64-pc-mingw32
+ 1:05.24   --enable-optimize
+ 1:05.24   --disable-debug
+ 1:05.24   --disable-tests
+ 1:05.24   --disable-updater
+ 1:05.24   --disable-crashreporter
+ 1:05.24   --disable-maintenance-service
+ 1:05.24   --disable-installer
+ 1:05.24   --disable-webrtc
+ 1:05.24   --disable-require-d3d-compilers
+ 1:05.24 loading cache ./config.cache
+ 1:05.24 checking host system type... x86_64-pc-mingw32
+ 1:05.24 checking target system type... x86_64-pc-mingw32
+ 1:05.24 checking build system type... x86_64-pc-mingw32
+ 1:05.24 checking for mawk... (cached) gawk
+ 1:05.24 checking for python2.7... (cached) /c/mozilla-build/python/python2.7
+ 1:05.24 Creating Python environment
+ 1:05.24 checking Python environment is Mozilla virtualenv... yes
+ 1:05.24 checking for perl5... (cached) /usr/bin/perl
+ 1:05.24 checking for gcc... (cached) cl
+ 1:05.24 checking whether the C compiler (cl -DNOMINMAX ) works... yes
+ 1:05.24 checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 1:05.24 checking whether we are using GNU C... (cached) no
+ 1:05.24 checking whether cl accepts -g... (cached) no
+ 1:05.24 checking for c++... (cached) cl
+ 1:05.24 checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
+ 1:05.24 checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 1:05.24 checking whether we are using GNU C++... (cached) no
+ 1:05.24 checking whether cl accepts -g... (cached) no
+ 1:05.24 checking for ranlib... (cached) ranlib
+ 1:05.24 checking for ml64... (cached) /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
+ 1:05.24 checking for ar... (cached) ar
+ 1:05.24 checking for ld... (cached) link
+ 1:05.24 checking for strip... (cached) strip
+ 1:05.24 checking for windres... (cached) windres
+ 1:05.24 checking for otool... no
+ 1:05.24 checking for midl... (cached) midl
+ 1:05.24 configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
+ 1:05.24 checking for std::_Throw... (cached) no
+ 1:05.24 checking for overridable _RAISE... (cached) no
+ 1:05.24 configure: warning: exception wrapping disabled
+ 1:05.24 checking for highest Windows version supported by this SDK... (cached) 0x0A00
+ 1:05.24 checking for Windows SDK being recent enough... yes
+ 1:05.24 checking how to run the C preprocessor... cl -E -nologo
+ 1:05.24 checking how to run the C++ preprocessor... cl -TP -E -nologo
+ 1:05.24 checking for a BSD compatible install... (cached) /usr/bin/install -c
+ 1:05.24 checking whether ln -s works... (cached) no
+ 1:05.24 checking for minimum required perl version >= 5.006... 5.008008
+ 1:05.24 checking for full perl installation... yes
+ 1:05.24 checking for doxygen... (cached) :
+ 1:05.24 checking for autoconf... (cached) /usr/bin/autoconf
+ 1:05.24 checking for unzip... (cached) /c/mozilla-build/info-zip/unzip
+ 1:05.24 checking for zip... (cached) /c/mozilla-build/info-zip/zip
+ 1:05.24 checking for xargs... (cached) /usr/bin/xargs
+ 1:05.24 checking for rpmbuild... (cached) :
+ 1:05.24 checking for c:/Strawberry/c/bin/gmake.EXE... (cached) /usr/local/bin/make
+ 1:05.24 checking for X... (cached) no
+ 1:05.24 checking that static assertion macros used in autoconf tests work... (cached) yes
+ 1:05.24 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 8159: test: : integer expression expected
+ 1:05.24 checking for 64-bit OS... yes
+ 1:05.24 checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -Wv:18 -wd4091 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4251 -wd4244 -wd4267 -wd4345 -wd4351 -wd4482 -wd4800 -wd4819 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -OPT:REF -OPT:ICF=15 -DYNAMICBASE) actually is a C++ compiler... yes
+ 1:05.24 checking NSPR selection... source-tree
+ 1:05.24 checking for YASM assembler... checking for yasm... (cached) yasm
+ 1:05.24 checking for application to build... xulrunner
+ 1:05.24 checking if app-specific confvars.sh exists... d:/a/K-Meleon-R/K-Meleon-R/goanna/xulrunner/confvars.sh
+ 1:05.24 checking __attribute__ ((aligned ())) support... (cached) 0
+ 1:05.24 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 19664: test: too many arguments
+ 1:05.24 checking for java... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/java
+ 1:05.24 checking for javac... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javac
+ 1:05.24 checking for javah... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/javah
+ 1:05.24 checking for jar... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jar
+ 1:05.24 checking for jarsigner... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/jarsigner
+ 1:05.24 checking for keytool... (cached) /c/hostedtoolcache/windows/Java_Temurin-Hotspot_jdk/8.0.504-1/x64/bin/keytool
+ 1:05.24 ERROR: Invalid key name.
+ 1:05.24 Type "REG QUERY /?" for usage.
+ 1:05.24 DirectX SDK not found.
+ 1:05.24 Couldn't find an acceptable DirectX SDK for ANGLE, needed for d3dcompiler_43.
+ 1:05.24 d:/a/K-Meleon-R/K-Meleon-R/goanna/configure: line 21332: test: : integer expression expected
+ 1:05.24 checking for makensisu-3.0a2.exe... (cached) /c/mozilla-build/nsis-2.46u/makensisu-2.46.exe
+ 1:05.24 yes
+ 1:05.24 checking for Unicode NSIS version 2.46 or greater... yes
+ 1:05.24 checking for gnutar... (cached) tar
+ 1:05.24 checking for wget... (cached) wget
+ 1:05.24 checking for valid optimization flags... yes
+ 1:05.24 LINK : fatal error LNK1146: no argument specified with option '/EXTRACT:'
+ 1:05.24 grep: crtdll.obj: No such file or directory
+ 1:05.24 cannot get attributes for "d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\crtdll.obj": The system cannot find the file specified.
+ 1:05.24 
+ 1:05.24 checking what kind of list files are supported by the linker... list
+ 1:05.24 checking for stdint.h... (cached) yes
+ 1:05.24 checking for inttypes.h... (cached) yes
+ 1:05.24 checking for sys/int_types.h... (cached) no
+ 1:05.24 checking for d3d9.h... (cached) yes
+ 1:05.24 checking for d3d10.h... (cached) yes
+ 1:05.24 checking for posix_fadvise... (cached) no
+ 1:05.24 checking for posix_fallocate... (cached) no
+ 1:05.24 creating ./config.status
+ 1:05.24 js\src> configuring
+ 1:05.24 js\src> running C:/mozilla-build/msys/bin/sh d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure --target=x86_64-pc-mingw32 --host=x86_64-pc-mingw32 --enable-application=xulrunner --enable-optimize --disable-debug --disable-tests --disable-updater --disable-crashreporter --disable-maintenance-service --disable-installer --disable-webrtc --disable-require-d3d-compilers --enable-threadsafe --enable-ctypes --disable-shared-js --disable-export-js --with-nspr-cflags=-Id:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/include/nspr --with-nspr-libs=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/nspr4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plc4.lib d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/lib/plds4.lib  --prefix=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist --enable-jemalloc --cache-file=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
+ 1:05.24 
+ 1:05.24 
+ 1:05.24 intl\icu\target> running config.status
+ 1:05.24 js\src> loading cache d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/js/src/config.cache
+ 1:05.24 js\src> checking host system type... x86_64-pc-mingw32
+ 1:05.24 js\src> checking target system type... x86_64-pc-mingw32
+ 1:05.24 js\src> checking build system type... x86_64-pc-mingw32
+ 1:05.24 js\src> checking for mawk... (cached) gawk
+ 1:05.24 js\src> checking for perl5... (cached) /usr/bin/perl
+ 1:05.24 js\src> checking for gcc... (cached) cl
+ 1:05.24 js\src> checking whether the C compiler (cl -DNOMINMAX ) works... yes
+ 1:05.24 js\src> checking whether the C compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 1:05.24 js\src> checking whether we are using GNU C... (cached) no
+ 1:05.24 js\src> checking whether cl accepts -g... (cached) no
+ 1:05.24 js\src> checking for c++... (cached) cl
+ 1:05.24 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) works... yes
+ 1:05.24 js\src> checking whether the C++ compiler (cl -DNOMINMAX ) is a cross-compiler... no
+ 1:05.24 js\src> checking whether we are using GNU C++... (cached) no
+ 1:05.24 js\src> checking whether cl accepts -g... (cached) no
+ 1:05.24 js\src> checking for ranlib... (cached) ranlib
+ 1:05.24 js\src> checking for ml64... (cached) /c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64/ml64
+ 1:05.24 js\src> checking for ar... (cached) ar
+ 1:05.24 js\src> checking for ld... (cached) link
+ 1:39.34 js\src> checking for strip... (cached) strip
+ 1:39.34 js\src> checking for windres... (cached) windres
+ 1:39.34 js\src> configure: warning: Unknown version of the Microsoft (R) Manifest Tool.
+ 1:39.34 js\src> checking for highest Windows version supported by this SDK... (cached) 0x0A00
+ 1:39.34 js\src> checking for Windows SDK being recent enough... yes
+ 1:39.34 js\src> checking how to run the C preprocessor... cl -E -nologo
+ 1:39.34 js\src> checking how to run the C++ preprocessor... cl -TP -E -nologo
+ 1:39.34 js\src> checking for _getc_nolock... (cached) yes
+ 1:39.34 js\src> checking for sb-conf... no
+ 1:39.34 js\src> checking for ve... no
+ 1:39.34 js\src> checking for a BSD compatible install... (cached) /usr/bin/install -c
+ 1:39.34 js\src> checking whether ln -s works... (cached) no
+ 1:39.34 js\src> checking for tar archiver... checking for gnutar... (cached) tar
+ 1:39.34 js\src> tar
+ 1:39.34 js\src> checking for minimum required perl version >= 5.006... 5.008008
+ 1:39.34 js\src> checking for full perl installation... yes
+ 1:39.34 js\src> Using Python from environment variable $PYTHON
+ 1:39.34 js\src> checking Python environment is Mozilla virtualenv... yes
+ 1:39.34 js\src> checking for doxygen... (cached) :
+ 1:39.34 js\src> checking for autoconf... (cached) /usr/bin/autoconf
+ 1:39.34 js\src> checking for xargs... (cached) /usr/bin/xargs
+ 1:39.34 js\src> checking for c:/Strawberry/c/bin/gmake.EXE... (cached) /usr/local/bin/make
+ 1:39.34 js\src> checking for X... (cached) no
+ 1:39.34 js\src> checking that static assertion macros used in autoconf tests work... (cached) yes
+ 1:39.34 js\src> checking for 64-bit OS... yes
+ 1:39.34 js\src> checking whether the C++ compiler (cl -DNOMINMAX -TP -nologo -wd4345 -wd4351 -wd4800 -D_CRT_SECURE_NO_WARNINGS -Wv:18 -D_HAS_EXCEPTIONS=0 -W3 -Gy -FS -wd4244 -wd4267 -wd4251 -we4553 -GR-  -LARGEADDRESSAWARE -NXCOMPAT -DYNAMICBASE) actually is a C++ compiler... yes
+ 1:39.34 js\src> checking NSPR selection... command-line
+ 1:39.34 js\src> checking for valid optimization flags... yes
+ 1:39.34 js\src> checking what kind of list files are supported by the linker... list
+ 1:39.34 js\src> checking for posix_fadvise... (cached) no
+ 1:39.34 js\src> checking for posix_fallocate... (cached) no
+ 1:39.34 js\src> checking for malloc.h... (cached) yes
+ 1:39.34 js\src> checking for setlocale... (cached) no
+ 1:39.34 js\src> checking for localeconv... (cached) no
+ 1:39.34 js\src> checking for malloc_size... (cached) no
+ 1:39.34 js\src> checking for malloc_usable_size... (cached) no
+ 1:39.34 js\src> creating ./config.status
+ 1:39.34 
+ 1:39.34 intl\icu\target> config.status: creating icudefs.mk
+ 1:39.34 intl\icu\target> config.status: creating Makefile
+ 1:39.34 intl\icu\target> config.status: creating data/pkgdataMakefile
+ 1:39.34 intl\icu\target> config.status: creating config/Makefile.inc
+ 1:39.34 intl\icu\target> config.status: creating config/icu.pc
+ 1:39.34 intl\icu\target> config.status: creating config/pkgdataMakefile
+ 1:39.34 intl\icu\target> config.status: creating data/Makefile
+ 1:39.34 intl\icu\target> config.status: creating stubdata/Makefile
+ 1:39.34 intl\icu\target> config.status: creating common/Makefile
+ 1:39.34 intl\icu\target> config.status: creating i18n/Makefile
+ 1:39.34 intl\icu\target> config.status: creating layoutex/Makefile
+ 1:39.34 intl\icu\target> config.status: creating io/Makefile
+ 1:39.34 intl\icu\target> config.status: creating extra/Makefile
+ 1:39.34 intl\icu\target> config.status: creating extra/uconv/Makefile
+ 1:39.34 intl\icu\target> config.status: creating extra/uconv/pkgdataMakefile
+ 1:39.34 intl\icu\target> config.status: creating extra/scrptrun/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/ctestfw/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/toolutil/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/makeconv/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/genrb/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/genccode/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gencmn/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gencnval/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gendict/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gentest/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gennorm2/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/genbrk/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gensprep/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/icuinfo/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/icupkg/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/icuswap/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/pkgdata/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/tzcode/Makefile
+ 1:39.34 intl\icu\target> config.status: creating tools/gencfu/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/compat/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/testdata/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/testdata/pkgdataMakefile
+ 1:39.34 intl\icu\target> config.status: creating test/hdrtst/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/intltest/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/cintltst/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/iotest/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/letest/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/collationperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/collperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/collperf2/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/dicttrieperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/ubrkperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/charperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/convperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/normperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/DateFmtPerf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/howExpensiveIs/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/strsrchperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/unisetperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/usetperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/ustrperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/utfperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/utrie2perf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating test/perf/leperf/Makefile
+ 1:39.34 intl\icu\target> config.status: creating samples/Makefile
+ 1:39.34 intl\icu\target> config.status: creating samples/date/Makefile
+ 1:39.34 intl\icu\target> config.status: creating samples/cal/Makefile
+ 1:39.34 intl\icu\target> config.status: creating samples/layout/Makefile
+ 1:39.34 
+ 1:39.34 Walking the dog...
+ 1:39.34 Finished reading 771 moz.build files in 0.69s
+ 1:39.34 Processed into 5538 build config descriptors in 1.59s
+ 1:39.34 Backend executed in 2.08s
+ 1:39.34 1605 total backend files; 0 created; 0 updated; 1605 unchanged; 0 deleted; 77 -> 568 Makefile
+ 1:39.34 Total wall time: 4.64s; CPU time: 4.64s; Efficiency: 100%; Untracked: 0.28s
+ 1:39.34 From dist/branding: Kept 0 existing; Added/updated 0; Removed 5 files and 0 directories.
+ 1:39.34 From dist/bin: Kept 223 existing; Added/updated 0; Removed 26 files and 6 directories.
+ 1:39.34 From dist/idl: Kept 1069 existing; Added/updated 2; Removed 0 files and 0 directories.
+ 1:39.34 From dist/public: Kept 0 existing; Added/updated 0; Removed 0 files and 0 directories.
+ 1:39.34 From dist/private: Kept 0 existing; Added/updated 0; Removed 161 files and 2 directories.
+ 1:39.34 From dist/sdk: Kept 0 existing; Added/updated 0; Removed 21 files and 4 directories.
+ 1:39.34 From dist/include: Kept 4103 existing; Added/updated 1; Removed 187 files and 6 directories.
+ 1:39.34 From dist/xpi-stage: Kept 1 existing; Added/updated 0; Removed 3 files and 1 directories.
+ 1:39.34 From _tests: Kept 7586 existing; Added/updated 0; Removed 0 files and 0 directories.
+ 1:39.34 From ../../dist/idl: Kept 1071 existing; Added/updated 0; Removed 0 files and 0 directories.
+ 1:39.34 cd include; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 Creating d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/private/nss
+ 1:39.34 places.xpt
+ 1:39.34 cd mangle; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 xpconnect.xpt
+ 1:39.34 Creating d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/private/dbm
+ 1:39.34 cd src; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd legacydb; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd builtins; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 cd include; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 cd testlib; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 cd pkix; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd certsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 cd include; c:/Strawberry/c/bin/gmake.EXE export
+ 1:39.34 There are no private exports.
+ 1:39.34 cd crlsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 Creating d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/include/dbm
+ 1:39.34 There are no private exports.
+ 1:39.34 cd src; c:/Strawberry/c/bin/gmake.EXE export
+ 1:39.34 cd checker; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 cd mangle; c:/Strawberry/c/bin/gmake.EXE export
+ 1:39.34 cd params; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 Creating d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/dist/include/nss
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd results; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd store; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd top; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd util; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd pkix_pl_nss; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd pki; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd system; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 There are no private exports.
+ 1:39.34 cd module; c:/Strawberry/c/bin/gmake.EXE private_export
+ 1:39.34 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd legacydb; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd legacydb; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd builtins; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd testlib; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 cd include; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd builtins; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd pkix; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 cd testlib; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 cd certsel; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd crlsel; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd checker; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd params; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd results; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd store; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd top; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd util; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd certsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd crlsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd checker; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd params; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd results; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd store; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd top; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd util; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd pkix_pl_nss; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 cd pki; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd system; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd module; c:/Strawberry/c/bin/gmake.EXE export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd pki; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd system; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd module; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd include; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd pkix; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 cd certsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd crlsel; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd checker; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd params; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd results; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd store; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd top; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd util; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 cd pkix_pl_nss; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 cd pki; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd system; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 cd module; c:/Strawberry/c/bin/gmake.EXE private_export
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 There are no private exports.
+ 3:50.31 Unified_cpp_dom_cellbroadcast0.obj
+ 3:50.31 FinalizationWitnessService.obj
+ 3:50.31 Unified_cpp_dom_xslt_xpath0.obj
+ 3:50.31 Unified_cpp_dom_xslt_xpath1.obj
+ 3:50.31 Unified_cpp_uriloader_prefetch0.obj
+ 3:50.31 FinalizationWitnessService.cpp
+ 3:50.31 toolkit_components_finalizationwitness.lib.desc
+ 3:50.31 Unified_cpp_dom_xslt_xpath2.obj
+ 3:50.31 Unified_cpp_dom_xslt_xpath1.cpp
+ 3:50.31 Activity.obj
+ 3:50.31 Unified_cpp_dom_xslt_xpath0.cpp
+ 3:50.31 Activity.cpp
+ 3:50.31 dom_activities.lib.desc
+ 3:50.31 Unified_cpp_dom_cellbroadcast0.cpp
+ 3:50.31 dom_cellbroadcast.lib.desc
+ 3:50.31 nsBaseWidget.obj
+ 3:50.31 Unified_cpp_widget0.obj
+ 3:50.31 Unified_cpp_dom_media_wmf0.obj
+ 3:50.31 Unified_cpp_dom_xslt_xpath2.cpp
+ 3:50.31 dom_xslt_xpath.lib.desc
+ 3:50.31 Unified_cpp_widget1.obj
+ 3:50.31 Unified_cpp_uriloader_prefetch0.cpp
+ 3:50.31 uriloader_prefetch.lib.desc
+ 3:50.31 Unified_cpp_widget2.obj
+ 3:50.31 nsBaseWidget.cpp
+ 3:50.31 Unified_cpp_editor_libeditor0.obj
+ 3:50.31 Unified_cpp_editor_libeditor1.obj
+ 3:50.31 Unified_cpp_widget0.cpp
+ 3:50.31 BatteryManager.obj
+ 3:50.31 Unified_cpp_widget1.cpp
+ 3:50.31 Unified_cpp_editor_libeditor0.cpp
+ 3:50.31 Unified_cpp_editor_libeditor2.obj
+ 3:50.31 Unified_cpp_dom_media_wmf0.cpp
+ 3:50.31 dom_media_wmf.lib.desc
+ 3:50.31 BatteryManager.cpp
+ 3:50.31 dom_battery.lib.desc
+ 3:50.31 Unified_cpp_dom_mathml0.obj
+ 3:50.31 Unified_cpp_dom_mathml0.cpp
+ 3:50.31 dom_mathml.lib.desc
+ 3:50.31 nsLineLayout.obj
+ 3:50.31 nsPluginFrame.obj
+ 3:50.31 Unified_cpp_widget2.cpp
+ 3:50.31 widget.lib.desc
+ 3:50.31 Unified_cpp_editor_libeditor2.cpp
+ 3:50.31 Unified_cpp_layout_generic0.obj
+ 3:50.31 Unified_cpp_layout_generic1.obj
+ 3:50.31 Unified_cpp_editor_libeditor1.cpp
+ 3:50.31 editor_libeditor.lib.desc
+ 3:50.31 Unified_cpp_layout_generic2.obj
+ 3:50.31 nsLineLayout.cpp
+ 3:50.31 Unified_cpp_netwerk_base0.obj
+ 3:50.31 Unified_cpp_netwerk_base1.obj
+ 3:50.31 nsPluginFrame.cpp
+ 3:50.31 Unified_cpp_layout_printing0.obj
+ 3:50.31 Unified_cpp_layout_generic0.cpp
+ 3:50.31 Unified_cpp_netwerk_base2.obj
+ 3:50.31 Unified_cpp_layout_generic1.cpp
+ 3:50.31 Unified_cpp_layout_generic3.obj
+ 3:50.31 Unified_cpp_layout_printing0.cpp
+ 3:50.31 Unified_cpp_netwerk_base1.cpp
+ 3:50.31 layout_printing.lib.desc
+ 3:50.31 Unified_cpp_layout_tables0.obj
+ 3:50.31 Unified_cpp_netwerk_base0.cpp
+ 3:50.31 Unified_cpp_netwerk_base3.obj
+ 3:50.31 Unified_cpp_layout_generic2.cpp
+ 3:50.31 Unified_cpp_netwerk_base2.cpp
+ 3:50.31 RasterImage.obj
+ 3:50.31 imgLoader.obj
+ 3:50.31 Unified_cpp_layout_tables0.cpp
+ 3:50.31 layout_tables.lib.desc
+ 3:50.31 imgRequest.obj
+ 3:50.31 imgLoader.cpp
+ 3:50.31 Unified_cpp_netwerk_base3.cpp
+ 3:50.31 Unified_cpp_layout_generic3.cpp
+ 3:50.31 layout_generic.lib.desc
+ 3:50.31 netwerk_base.lib.desc
+ 3:50.31 Unified_cpp_image0.obj
+ 3:50.31 RasterImage.cpp
+ 3:50.31 Unified_cpp_image1.obj
+ 3:50.31 Unified_cpp_dom_xslt_base0.obj
+ 3:50.31 Unified_cpp_dom_media_webrtc0.obj
+ 3:50.31 Unified_cpp_dom_xslt_base0.cpp
+ 3:50.31 dom_xslt_base.lib.desc
+ 3:50.31 imgRequest.cpp
+ 3:50.31 Unified_cpp_dom_xslt_xslt0.obj
+ 3:50.31 Unified_cpp_dom_xslt_xslt1.obj
+ 3:50.31 Unified_cpp_dom_media_webrtc0.cpp
+ 3:50.31 dom_media_webrtc.lib.desc
+ 3:50.31 Unified_cpp_image0.cpp
+ 3:50.31 Unified_cpp_dom_media_webm0.obj
+ 3:50.31 Unified_cpp_image1.cpp
+ 3:50.31 d:\a\K-Meleon-R\K-Meleon-R\goanna\image\imgFrame.cpp(78): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+ 3:50.31 Unified_cpp_dom_xslt_xslt1.cpp
+ 3:50.31 image.lib.desc
+ 3:50.31 Unified_cpp_dom_time0.obj
+ 3:50.31 Unified_cpp_dom_animation0.obj
+ 3:50.31 Unified_cpp_dom_xslt_xslt0.cpp
+ 3:50.31 dom_xslt_xslt.lib.desc
+ 3:50.31 Voicemail.obj
+ 3:50.31 VoicemailIPCService.obj
+ 3:50.31 Unified_cpp_dom_time0.cpp
+ 3:50.31 dom_time.lib.desc
+ 3:50.31 Unified_cpp_dom_media_webm0.cpp
+ 3:50.31 dom_media_webm.lib.desc
+ 3:50.31 Voicemail.cpp
+ 3:50.31 Unified_cpp_dom_xslt_xml0.obj
+ 3:50.31 Unified_cpp_dom_broadcastchannel0.obj
+ 3:50.31 Unified_cpp_dom_animation0.cpp
+ 3:50.31 dom_animation.lib.desc
+ 3:50.31 Unified_cpp_dom_mobilemessage0.obj
+ 3:50.31 Unified_cpp_dom_xslt_xml0.cpp
+ 3:50.31 dom_xslt_xml.lib.desc
+ 3:50.31 AsmJSCache.obj
+ 3:50.31 VoicemailIPCService.cpp
+ 3:50.31 dom_voicemail.lib.desc
+ 3:50.31 Unified_cpp_layout_svg0.obj
+ 3:50.31 Unified_cpp_layout_svg1.obj
+ 3:50.31 Unified_cpp_dom_broadcastchannel0.cpp
+ 3:50.31 dom_broadcastchannel.lib.desc
+ 3:50.31 Unified_cpp_dom_mobilemessage0.cpp
+ 3:50.31 dom_mobilemessage.lib.desc
+ 3:50.31 Unified_cpp_dom_datastore0.obj
+ 3:50.31 AsmJSCache.cpp
+ 3:50.31 dom_asmjscache.lib.desc
+ 3:50.31 nsJSInspector.obj
+ 3:50.31 nsJSInspector.cpp
+ 3:50.31 toolkit_devtools_server.lib.desc
+ 3:50.31 Unified_cpp_layout_svg0.cpp
+ 3:50.31 Unified_cpp_layout_svg1.cpp
+ 3:50.31 nsView.obj
+ 3:50.31 nsViewManager.obj
+ 3:50.31 Unified_cpp_rdf_base0.obj
+ 3:50.31 layout_svg.lib.desc
+ 3:50.31 Unified_cpp_dom_datastore0.cpp
+ 3:50.31 dom_datastore.lib.desc
+ 3:50.31 Unified_cpp_dom_smil0.obj
+ 3:50.31 Unified_cpp_dom_smil1.obj
+ 3:50.31 Unified_cpp_rdf_base0.cpp
+ 3:50.31 rdf_base.lib.desc
+ 3:50.31 nsView.cpp
+ 3:50.31 Unified_cpp_protocol_viewsource0.obj
+ 3:50.31 nsViewManager.cpp
+ 3:50.31 view.lib.desc
+ 3:50.31 Unified_cpp_dom_svg0.obj
+ 3:50.31 Unified_cpp_dom_svg1.obj
+ 3:50.31 Unified_cpp_dom_smil0.cpp
+ 3:50.31 Unified_cpp_layout_mathml0.obj
+ 3:50.31 Unified_cpp_layout_mathml1.obj
+ 3:50.31 Unified_cpp_protocol_viewsource0.cpp
+ 3:50.31 netwerk_protocol_viewsource.lib.desc
+ 3:50.31 Unified_cpp_dom_svg2.obj
+ 3:50.31 Unified_cpp_dom_smil1.cpp
+ 3:50.31 dom_smil.lib.desc
+ 3:50.31 Unified_cpp_dom_svg0.cpp
+ 3:50.31 nsGeolocation.obj
+ 3:50.31 Unified_cpp_dom_geolocation0.obj
+ 3:50.31 Unified_cpp_dom_svg1.cpp
+ 3:50.32 Unified_cpp_dom_svg3.obj
+ 3:50.32 Unified_cpp_layout_mathml0.cpp
+ 3:50.32 Unified_cpp_modules_libpref0.obj
+ 3:50.32 Unified_cpp_layout_mathml1.cpp
+ 3:50.32 layout_mathml.lib.desc
+ 3:50.32 nsGeolocation.cpp
+ 3:50.32 Unified_cpp_dom_svg4.obj
+ 3:50.32 Unified_cpp_modules_libpref0.cpp
+ 3:50.32 modules_libpref.lib.desc
+ 3:50.32 Unified_cpp_dom_svg5.obj
+ 3:50.32 Unified_cpp_dom_svg2.cpp
+ 3:50.32 Unified_cpp_editor_composer0.obj
+ 3:50.32 Unified_cpp_dom_geolocation0.cpp
+ 3:50.32 dom_geolocation.lib.desc
+ 3:50.32 Unified_cpp_dom_svg6.obj
+ 3:50.32 Unified_cpp_dom_svg3.cpp
+ 3:50.32 Unified_cpp_dom_encoding0.obj
+ 3:50.32 Unified_cpp_editor_composer0.cpp
+ 3:50.32 editor_composer.lib.desc
+ 3:50.32 Unified_cpp_dom_svg7.obj
+ 3:50.32 Unified_cpp_dom_encoding0.cpp
+ 3:50.32 dom_encoding.lib.desc
+ 3:50.32 Unified_cpp_dom_svg4.cpp
+ 3:50.32 Unified_cpp_dom_svg8.obj
+ 3:50.32 Unified_cpp_extensions_cookie0.obj
+ 3:50.32 Unified_cpp_dom_svg5.cpp
+ 3:50.32 Unified_cpp_dom_svg9.obj
+ 3:50.32 Unified_cpp_dom_svg6.cpp
+ 3:50.32 Unified_cpp_dom_svg7.cpp
+ 3:50.32 Unified_cpp_extensions_cookie0.cpp
+ 3:50.32 extensions_cookie.lib.desc
+ 3:50.32 Unified_cpp_shistory_src0.obj
+ 3:50.32 Unified_cpp_xpcom_ds0.obj
+ 3:50.32 Unified_cpp_dom_svg8.cpp
+ 3:50.32 Unified_cpp_dom_media_webaudio0.obj
+ 3:50.32 Unified_cpp_dom_media_webaudio1.obj
+ 3:50.32 Unified_cpp_xpcom_ds0.cpp
+ 3:50.32 xpcom_ds.lib.desc
+ 3:50.32 Unified_cpp_dom_media_webaudio2.obj
+ 3:50.32 Unified_cpp_shistory_src0.cpp
+ 3:50.32 docshell_shistory_src.lib.desc
+ 3:50.32 Unified_cpp_dom_svg9.cpp
+ 3:50.32 dom_svg.lib.desc
+ 3:50.32 Unified_cpp_printingui_win0.obj
+ 3:50.32 Unified_cpp_dom_media_webaudio2.cpp
+ 3:50.32 Unified_cpp_dom_media_webaudio0.cpp
+ 3:50.32 Unified_cpp_dom_xul_templates0.obj
+ 3:50.32 Unified_cpp_dom_xul_templates1.obj
+ 3:50.32 Unified_cpp_netwerk_protocol_ftp0.obj
+ 3:50.32 Unified_cpp_dom_media_webaudio1.cpp
+ 3:50.32 dom_media_webaudio.lib.desc
+ 3:50.32 Unified_cpp_printingui_win0.cpp
+ 3:50.32 embedding_components_printingui_win.lib.desc
+ 3:50.32 Unified_cpp_xpcom_threads0.obj
+ 3:50.32 Unified_cpp_xpcom_threads0.cpp
+ 3:50.32 xpcom_threads.lib.desc
+ 3:50.32 Unified_cpp_components_places0.obj
+ 3:50.32 Unified_cpp_dom_xul_templates0.cpp
+ 3:50.32 Unified_cpp_netwerk_protocol_ftp0.cpp
+ 3:50.32 netwerk_protocol_ftp.lib.desc
+ 3:50.32 Unified_cpp_netwerk_cookie0.obj
+ 3:50.32 Unified_cpp_dom_promise0.obj
+ 3:50.32 Unified_cpp_dom_xul_templates1.cpp
+ 3:50.32 dom_xul_templates.lib.desc
+ 3:50.32 Unified_cpp_layout_build0.obj
+ 8:08.75 Unified_cpp_dom_promise0.cpp
+ 8:08.75 dom_promise.lib.desc
+ 8:08.75 Unified_cpp_permissions0.obj
+ 8:08.75 Unified_cpp_netwerk_cookie0.cpp
+ 8:08.75 netwerk_cookie.lib.desc
+ 8:08.75 Unified_cpp_components_alerts0.obj
+ 8:08.75 Unified_cpp_components_places0.cpp
+ 8:08.75 toolkit_components_places.lib.desc
+ 8:08.75 Unified_cpp_dom_tv0.obj
+ 8:08.75 Unified_cpp_permissions0.cpp
+ 8:08.75 extensions_permissions.lib.desc
+ 8:08.75 nsTextStore.obj
+ 8:08.75 nsWidgetFactory.obj
+ 8:08.75 Unified_cpp_components_alerts0.cpp
+ 8:08.75 toolkit_components_alerts.lib.desc
+ 8:08.75 Unified_cpp_widget_windows0.obj
+ 8:08.75 Unified_cpp_dom_tv0.cpp
+ 8:08.75 dom_tv.lib.desc
+ 8:08.75 Unified_cpp_widget_windows1.obj
+ 8:08.75 Unified_cpp_layout_build0.cpp
+ 8:08.75 layout_build.lib.desc
+ 8:08.75 Unified_cpp_widget_windows2.obj
+ 8:08.75 nsTextStore.cpp
+ 8:08.75 Unified_cpp_layout_xul_grid0.obj
+ 8:08.75 nsWidgetFactory.cpp
+ 8:08.75 Layers.obj
+ 8:08.75 CompositorD3D11.obj
+ 8:08.75 Unified_cpp_layout_xul_grid0.cpp
+ 8:08.75 layout_xul_grid.lib.desc
+ 8:08.75 Unified_cpp_widget_windows0.cpp
+ 8:08.75 Unified_cpp_gfx_layers1.obj
+ 8:08.75 Unified_cpp_widget_windows1.cpp
+ 8:08.75 nsRefreshDriver.obj
+ 8:08.75 Unified_cpp_layout_base0.obj
+ 8:08.75 Layers.cpp
+ 8:08.75 Unified_cpp_layout_base1.obj
+ 8:08.75 CompositorD3D11.cpp
+ 8:08.75 Unified_cpp_gfx_layers2.obj
+ 8:08.75 Unified_cpp_widget_windows2.cpp
+ 8:08.75 widget_windows.lib.desc
+ 8:08.75 Unified_cpp_layout_base2.obj
+ 8:08.75 nsRefreshDriver.cpp
+ 8:08.75 Unified_cpp_gfx_layers3.obj
+ 8:08.75 Unified_cpp_layout_base0.cpp
+ 8:08.75 Blob.obj
+ 8:08.75 ContentChild.obj
+ 8:08.75 Unified_cpp_gfx_layers1.cpp
+ 8:08.75 Blob.cpp
+ 8:08.75 ProcessHangMonitor.obj
+ 8:08.75 Unified_cpp_gfx_layers2.cpp
+ 8:08.75 Unified_cpp_gfx_layers4.obj
+ 8:08.75 Unified_cpp_layout_base1.cpp
+ 8:08.75 Unified_cpp_dom_ipc0.obj
+ 8:08.75 ContentChild.cpp
+ 8:08.75 ProcessHangMonitor.cpp
+ 8:08.75 Unified_cpp_gfx_layers3.cpp
+ 8:08.75 Unified_cpp_gfx_layers5.obj
+ 8:08.75 Unified_cpp_dom_ipc1.obj
+ 8:08.75 Unified_cpp_dom_network0.obj
+ 8:08.75 Unified_cpp_layout_base2.cpp
+ 8:08.75 layout_base.lib.desc
+ 8:08.75 Unified_cpp_dom_network0.cpp
+ 8:08.75 dom_network.lib.desc
+ 8:08.75 Unified_cpp_dom_ipc1.cpp
+ 8:08.75 Unified_cpp_webaudio_blink0.obj
+ 8:08.75 Unified_cpp_gfx_layers4.cpp
+ 8:08.75 nsTypeAheadFind.obj
+ 8:08.75 Unified_cpp_webaudio_blink0.cpp
+ 8:08.75 nsTypeAheadFind.cpp
+ 8:08.75 Unified_cpp_dom_ipc0.cpp
+ 8:08.75 dom_media_webaudio_blink.lib.desc
+ 8:08.75 toolkit_components_typeaheadfind.lib.desc
+ 8:08.75 dom_ipc.lib.desc
+ 8:08.75 Unified_cpp_dom_media_wave0.obj
+ 8:08.75 Unified_cpp_spellcheck_src0.obj
+ 8:08.75 Unified_cpp_gfx_layers5.cpp
+ 8:08.75 gfx_layers.lib.desc
+ 8:08.75 Unified_cpp_netwerk_ipc0.obj
+ 8:08.75 Unified_cpp_protocol_file0.obj
+ 8:08.75 Unified_cpp_protocol_file0.cpp
+ 8:08.75 netwerk_protocol_file.lib.desc
+ 8:08.75 Unified_cpp_media_mediasource0.obj
+ 8:08.75 Unified_cpp_dom_media_wave0.cpp
+ 8:08.75 dom_media_wave.lib.desc
+ 8:08.75 Unified_cpp_layout_forms0.obj
+ 8:08.75 Unified_cpp_layout_forms1.obj
+ 8:08.75 Unified_cpp_spellcheck_src0.cpp
+ 8:08.75 extensions_spellcheck_src.lib.desc
+ 8:08.75 Unified_cpp_netwerk_ipc0.cpp
+ 8:08.75 netwerk_ipc.lib.desc
+ 8:08.75 JSDebugger.obj
+ 8:08.75 JSDebugger.cpp
+ 8:08.75 js_ductwork_debugger.lib.desc
+ 8:08.75 Unified_cpp_media_platforms_wmf0.obj
+ 8:08.75 Unified_cpp_layout_forms0.cpp
+ 8:08.75 Unified_cpp_media_mediasource0.cpp
+ 8:08.75 dom_media_mediasource.lib.desc
+ 8:08.75 InterAppComm.obj
+ 8:08.75 BrowserElementParent.obj
+ 8:08.75 InterAppComm.cpp
+ 8:08.75 dom_apps.lib.desc
+ 8:08.75 Unified_cpp_layout_forms1.cpp
+ 8:08.75 layout_forms.lib.desc
+ 8:08.75 gfxWindowsPlatform.obj
+ 8:08.75 Unified_cpp_gfx_thebes0.obj
+ 8:08.75 nsResProtocolHandler.obj
+ 8:08.75 Unified_cpp_media_platforms_wmf0.cpp
+ 8:08.75 dom_media_platforms_wmf.lib.desc
+ 8:08.75 Unified_cpp_gfx_thebes1.obj
+ 8:08.75 BrowserElementParent.cpp
+ 8:08.75 dom_browser-element.lib.desc
+ 8:08.75 Unified_cpp_gfx_thebes2.obj
+ 8:08.75 nsResProtocolHandler.cpp
+ 8:08.75 netwerk_protocol_res.lib.desc
+ 8:08.75 gfxWindowsPlatform.cpp
+ 8:08.75 Unified_cpp_js_ipc0.obj
+ 8:08.75 Unified_cpp_gfx_thebes0.cpp
+ 8:08.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\gfx\thebes\gfx3DMatrix.cpp(129): warning C4305: 'initializing': truncation from 'double' to 'float'
+ 8:08.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\gfx\thebes\gfx3DMatrix.cpp(793): warning C4305: 'initializing': truncation from 'double' to 'float'
+ 8:08.75 Unified_cpp_dom_xml0.obj
+ 8:08.75 Unified_cpp_gfx_thebes1.cpp
+ 8:08.75 Unified_cpp_dom_fetch0.obj
+ 8:08.75 Unified_cpp_gfx_thebes2.cpp
+ 8:08.75 gfx_thebes.lib.desc
+ 8:08.75 Unified_cpp_components_find0.obj
+ 8:08.75 Unified_cpp_dom_xml0.cpp
+ 8:08.75 dom_xml.lib.desc
+ 8:08.75 Unified_cpp_js_ipc0.cpp
+ 8:08.75 js_ipc.lib.desc
+ 8:08.75 Unified_cpp_dom_fetch0.cpp
+ 8:08.75 dom_fetch.lib.desc
+ 8:08.75 mozJSComponentLoader.obj
+ 8:08.75 mozJSLoaderUtils.obj
+ 8:08.75 Unified_cpp_components_find0.cpp
+ 8:08.75 embedding_components_find.lib.desc
+ 8:08.75 nsJXRDecoder.obj
+ 8:08.75 Unified_cpp_image_decoders0.obj
+ 8:08.75 RegisterBindings.obj
+ 8:08.75 RegisterWorkerBindings.obj
+ 8:08.75 mozJSSubScriptLoader.obj
+ 8:08.75 mozJSLoaderUtils.cpp
+ 8:08.75 mozJSComponentLoader.cpp
+ 8:08.75 nsJXRDecoder.cpp
+ 8:08.75 ResolveSystemBinding.obj
+ 8:08.75 Unified_cpp_image_decoders0.cpp
+ 8:08.75 image_decoders.lib.desc
+ 8:08.75 UnionTypes.obj
+ 8:08.75 mozJSSubScriptLoader.cpp
+ 8:08.75 js_xpconnect_loader.lib.desc
+ 8:08.75 RegisterWorkerBindings.cpp
+ 8:08.75 UnifiedBindings0.obj
+ 8:08.75 Unified_cpp_xpcom_build0.obj
+ 8:08.75 Unified_cpp_xpcom_build1.obj
+ 8:08.75 RegisterBindings.cpp
+ 8:08.75 Unified_cpp_dom_media_directshow0.obj
+ 8:08.75 ResolveSystemBinding.cpp
+ 8:08.75 Unified_cpp_xpcom_build1.cpp
+ 8:08.75 UnifiedBindings1.obj
+ 8:08.75 UnionTypes.cpp
+ 8:08.75 Unified_cpp_embedding_browser0.obj
+ 8:08.75 Unified_cpp_xpcom_build0.cpp
+ 8:08.75 xpcom_build.lib.desc
+ 8:08.75 UnifiedBindings10.obj
+ 8:08.75 Unified_cpp_dom_media_directshow0.cpp
+ 8:08.75 dom_media_directshow.lib.desc
+ 8:08.75 UnifiedBindings11.obj
+ 8:08.75 Unified_cpp_embedding_browser0.cpp
+ 8:08.75 embedding_browser.lib.desc
+ 8:08.75 UnifiedBindings12.obj
+ 8:08.75 UnifiedBindings0.cpp
+ 8:08.75 Unified_cpp_reflect_xptinfo0.obj
+ 8:08.75 UnifiedBindings10.cpp
+ 8:08.75 nsDirectoryViewer.obj
+ 8:08.75 UnifiedBindings1.cpp
+ 8:08.75 Unified_cpp_dom_quota0.obj
+ 8:08.75 UnifiedBindings11.cpp
+ 8:08.75 UnifiedBindings13.obj
+ 8:08.75 Unified_cpp_reflect_xptinfo0.cpp
+ 8:08.75 xpcom_reflect_xptinfo.lib.desc
+ 8:08.75 UnifiedBindings14.obj
+ 8:08.75 nsDirectoryViewer.cpp
+ 8:08.75 xpfe_components_directory.lib.desc
+ 8:08.75 UnifiedBindings15.obj
+ 8:08.75 Unified_cpp_dom_quota0.cpp
+ 8:08.75 dom_quota.lib.desc
+ 8:08.75 UnifiedBindings16.obj
+ 8:08.75 UnifiedBindings12.cpp
+ 8:08.75 Unified_cpp_xpfe_appshell0.obj
+ 8:08.75 UnifiedBindings14.cpp
+ 8:08.75 UnifiedBindings15.cpp
+ 8:08.75 nsSAXXMLReader.obj
+ 8:08.75 NativeOSFileInternals.obj
+ 8:08.75 UnifiedBindings13.cpp
+ 8:08.75 UnifiedBindings17.obj
+ 8:08.75 nsSAXXMLReader.cpp
+ 8:08.75 parser_xml.lib.desc
+ 8:08.75 NativeOSFileInternals.cpp
+ 8:08.75 toolkit_components_osfile.lib.desc
+ 8:08.75 UnifiedBindings18.obj
+ 8:08.75 UnifiedBindings19.obj
+ 8:08.75 Unified_cpp_xpfe_appshell0.cpp
+ 8:08.75 xpfe_appshell.lib.desc
+ 8:08.75 UnifiedBindings2.obj
+ 8:08.75 UnifiedBindings16.cpp
+ 8:08.75 CycleCollectedJSRuntime.obj
+ 8:08.75 HoldDropJSObjects.obj
+ 8:08.75 CycleCollectedJSRuntime.cpp
+ 8:08.75 nsConsoleMessage.obj
+ 8:08.75 UnifiedBindings18.cpp
+ 8:08.75 gmake.EXE[6]: warning: -jN forced in submake: disabling jobserver mode.
+ 8:08.75 Note: rebuild with "c:/Strawberry/c/bin/gmake.EXE VERBOSE=1 " to show all compiler parameters.
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[6]: Making `all' in `stubdata'
+ 8:08.75 UnifiedBindings17.cpp
+ 8:08.75 nsCycleCollector.obj
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[6]: Making `all' in `common'
+ 8:08.75 HoldDropJSObjects.cpp
+ 8:08.75 UnifiedBindings20.obj
+ 8:08.75 nsConsoleMessage.cpp
+ 8:08.75 nsMemoryInfoDumper.obj
+ 8:08.75 config.status: creating common/Makefile
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[6]: Making `all' in `i18n'
+ 8:08.75 nsCycleCollector.cpp
+ 8:08.75 UnifiedBindings19.cpp
+ 8:08.75 UnifiedBindings21.obj
+ 8:08.75 config.status: creating i18n/Makefile
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[6]: Making `all' in `tools'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `toolutil'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `ctestfw'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `makeconv'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `genrb'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `genbrk'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gencnval'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gensprep'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `icuinfo'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `genccode'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gencmn'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `icupkg'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `pkgdata'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gentest'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gennorm2'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gencfu'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[7]: Making `all' in `gendict'
+ 8:08.75 c:/Strawberry/c/bin/gmake.EXE[6]: Making `all' in `data'
+ 8:08.75 Note: rebuild with "c:/Strawberry/c/bin/gmake.EXE VERBOSE=1 all-local" to show all compiler parameters.
+ 8:08.75 nsMemoryInfoDumper.cpp
+ 8:08.75 xpcom_base.lib.desc
+ 8:08.75 UnifiedBindings3.obj
+ 8:08.75 UnifiedBindings4.obj
+ 8:08.75 UnifiedBindings2.cpp
+ 8:08.75 UnifiedBindings5.obj
+ 8:08.75 UnifiedBindings21.cpp
+ 8:08.75 Unified_cpp_gfx_src0.obj
+ 8:08.75 UnifiedBindings3.cpp
+ 8:08.75 nsDocShellModule.obj
+ 8:08.75 UnifiedBindings20.cpp
+ 8:08.75 UnifiedBindings6.obj
+ 8:08.75 Unified_cpp_gfx_src0.cpp
+ 8:08.75 gfx_src.lib.desc
+ 8:08.75 UnifiedBindings7.obj
+ 8:08.75 nsDocShellModule.cpp
+ 8:08.75 docshell_build.lib.desc
+ 8:08.75 UnifiedBindings8.obj
+ 8:08.75 UnifiedBindings4.cpp
+ 8:08.75 UnifiedProtocols0.obj
+ 8:08.75 UnifiedProtocols1.obj
+ 8:08.75 UnifiedProtocols0.cpp
+ 8:08.75 UnifiedBindings7.cpp
+ 8:08.75 UnifiedProtocols10.obj
+ 8:08.75 UnifiedBindings5.cpp
+ 8:08.75 UnifiedProtocols11.obj
+ 8:08.75 UnifiedBindings9.obj
+ 8:08.75 UnifiedBindings6.cpp
+ 8:08.75 UnifiedProtocols12.obj
+ 8:08.76 UnifiedProtocols1.cpp
+ 8:08.76 XrayWrapper.obj
+ 8:08.76 Unified_cpp_xpconnect_wrappers0.obj
+ 8:08.76 UnifiedProtocols10.cpp
+ 8:08.76 StructuredClone.obj
+ 8:08.76 UnifiedProtocols11.cpp
+ 8:08.76 UnifiedProtocols13.obj
+ 8:08.76 XrayWrapper.cpp
+ 8:08.76 UnifiedBindings8.cpp
+ 8:08.76 UnifiedProtocols14.obj
+ 8:08.76 Unified_cpp_xpconnect_wrappers0.cpp
+ 8:08.76 js_xpconnect_wrappers.lib.desc
+ 8:08.76 Unified_cpp_dom_bindings0.obj
+ 8:08.76 UnifiedProtocols12.cpp
+ 8:08.76 UnifiedProtocols13.cpp
+ 8:08.76 UnifiedProtocols15.obj
+ 8:08.76 UnifiedBindings9.cpp
+ 8:08.76 Unified_cpp_layout_xul_tree0.obj
+ 8:08.76 StructuredClone.cpp
+ 8:08.76 UnifiedProtocols16.obj
+ 8:08.76 UnifiedProtocols14.cpp
+ 8:08.76 Unified_cpp_dom_bindings0.cpp
+ 8:08.76 dom_bindings.lib.desc
+ 8:08.76 UnifiedProtocols17.obj
+ 8:08.76 UnifiedProtocols18.obj
+ 8:08.76 Unified_cpp_layout_xul_tree0.cpp
+ 8:08.76 layout_xul_tree.lib.desc
+ 8:08.76 UnifiedProtocols19.obj
+ 8:08.76 UnifiedProtocols15.cpp
+ 8:08.76 UnifiedProtocols2.obj
+ 8:08.76 UnifiedProtocols17.cpp
+ 8:08.76 UnifiedProtocols18.cpp
+ 8:08.76 Unified_cpp_aboutcompartments0.obj
+ 8:08.76 reflect.obj
+ 8:08.76 UnifiedProtocols16.cpp
+ 8:08.76 Unified_cpp_xpcom_io0.obj
+ 8:08.76 reflect.cpp
+ 8:08.76 toolkit_components_reflect.lib.desc
+ 8:08.76 UnifiedProtocols20.obj
+ 8:08.76 Unified_cpp_aboutcompartments0.cpp
+ 8:08.76 toolkit_components_aboutcompartments.lib.desc
+ 8:08.76 UnifiedProtocols3.obj
+ 8:08.76 UnifiedProtocols19.cpp
+ 8:08.76 UnifiedProtocols4.obj
+ 8:08.76 UnifiedProtocols20.cpp
+ 8:08.76 Unified_cpp_parser_html0.obj
+ 8:08.76 Unified_cpp_parser_html1.obj
+ 8:08.76 Unified_cpp_xpcom_io0.cpp
+ 8:08.76 xpcom_io.lib.desc
+ 8:08.76 UnifiedProtocols5.obj
+ 8:08.76 UnifiedProtocols2.cpp
+ 8:08.76 Unified_cpp_parser_html2.obj
+ 8:08.76 UnifiedProtocols3.cpp
+ 8:08.76 Unified_cpp_dom_cache0.obj
+ 8:08.76 Unified_cpp_dom_cache1.obj
+ 8:08.76 Unified_cpp_parser_html0.cpp
+ 8:08.76 UnifiedProtocols6.obj
+ 8:08.76 UnifiedProtocols4.cpp
+ 8:08.76 Unified_cpp_parser_html1.cpp
+ 8:08.76 Unified_cpp_dom_cache0.cpp
+ 8:08.76 UnifiedProtocols7.obj
+ 8:08.76 Unified_cpp_dom_cache1.cpp
+ 8:08.76 dom_cache.lib.desc
+ 8:08.76 UnifiedProtocols8.obj
+ 8:08.76 UnifiedProtocols5.cpp
+ 8:08.76 UnifiedProtocols9.obj
+ 8:08.76 Unified_cpp_parser_html2.cpp
+ 8:08.76 parser_html.lib.desc
+ 8:08.76 UnifiedProtocols8.cpp
+ 8:08.76 Unified_cpp_dom_xbl0.obj
+ 8:08.76 Unified_cpp_dom_xbl1.obj
+ 8:08.76 UnifiedProtocols7.cpp
+ 8:08.76 MobileConnection.obj
+ 8:08.76 Unified_cpp_dom_mobileconnection0.obj
+ 8:08.76 UnifiedProtocols9.cpp
+ 8:08.76 UnifiedProtocols6.cpp
+ 8:08.76 ipc_ipdl.lib.desc
+ 8:08.76 MobileConnection.cpp
+ 8:08.76 Unified_cpp_dom_vr0.obj
+ 8:08.76 Unified_cpp_dom_xbl1.cpp
+ 8:08.76 Unified_cpp_intl_strres0.obj
+ 8:08.76 Unified_cpp_dom_xbl0.cpp
+ 8:08.76 dom_xbl.lib.desc
+ 8:08.76 DecoderTraits.obj
+ 8:08.76 Unified_cpp_dom_media0.obj
+ 8:08.76 Unified_cpp_dom_mobileconnection0.cpp
+ 8:08.76 dom_mobileconnection.lib.desc
+ 8:08.76 Unified_cpp_dom_vr0.cpp
+ 8:08.76 dom_vr.lib.desc
+ 8:08.76 Unified_cpp_intl_strres0.cpp
+ 9:33.75 Unified_cpp_dom_media1.obj
+ 9:33.75 intl_strres.lib.desc
+ 9:33.75 Unified_cpp_dom_media2.obj
+ 9:33.75 Unified_cpp_dom_media3.obj
+ 9:33.75 DecoderTraits.cpp
+ 9:33.75 Unified_cpp_dom_archivereader0.obj
+ 9:33.75 Unified_cpp_dom_media0.cpp
+ 9:33.75 Unified_cpp_dom_camera0.obj
+ 9:33.75 Unified_cpp_dom_media2.cpp
+ 9:33.75 nsImageModule.obj
+ 9:33.75 Unified_cpp_dom_archivereader0.cpp
+ 9:33.75 dom_archivereader.lib.desc
+ 9:33.75 nsImageModule.cpp
+ 9:33.75 image_build.lib.desc
+ 9:33.75 Unified_cpp_printingui_ipc0.obj
+ 9:33.75 Unified_cpp_dom_media1.cpp
+ 9:33.75 Unified_cpp_dom_canvas0.obj
+ 9:33.75 Unified_cpp_dom_canvas1.obj
+ 9:33.75 Unified_cpp_dom_camera0.cpp
+ 9:33.75 dom_camera.lib.desc
+ 9:33.75 Unified_cpp_dom_canvas2.obj
+ 9:33.75 Unified_cpp_dom_media3.cpp
+ 9:33.75 dom_media.lib.desc
+ 9:33.75 Unified_cpp_printingui_ipc0.cpp
+ 9:33.75 embedding_components_printingui_ipc.lib.desc
+ 9:33.75 Unified_cpp_dom_canvas3.obj
+ 9:33.75 Unified_cpp_dom_canvas4.obj
+ 9:33.75 Unified_cpp_dom_canvas3.cpp
+ 9:33.75 Unified_cpp_dom_canvas1.cpp
+ 9:33.75 Unified_cpp_dom_canvas2.cpp
+ 9:33.75 Unified_cpp_dom_canvas5.obj
+ 9:33.75 FontFaceSet.obj
+ 9:33.75 nsCSSRuleProcessor.obj
+ 9:33.75 nsAppRunner.obj
+ 9:33.75 nsEmbedFunctions.obj
+ 9:33.75 Unified_cpp_dom_canvas0.cpp
+ 9:33.75 Unified_cpp_layout_style0.obj
+ 9:33.75 nsCSSRuleProcessor.cpp
+ 9:33.75 FontFaceSet.cpp
+ 9:33.75 Unified_cpp_layout_style1.obj
+ 9:33.75 nsAppRunner.cpp
+ 9:33.75 Unified_cpp_toolkit_xre0.obj
+ 9:33.75 Unified_cpp_dom_canvas4.cpp
+ 9:33.75 Unified_cpp_layout_style2.obj
+ 9:33.75 Unified_cpp_dom_canvas5.cpp
+ 9:33.75 dom_canvas.lib.desc
+ 9:33.75 nsEmbedFunctions.cpp
+ 9:33.75 Unified_cpp_layout_style3.obj
+ 9:33.75 Unified_cpp_layout_style0.cpp
+ 9:33.75 Unified_cpp_layout_style1.cpp
+ 9:33.75 nsFormFillController.obj
+ 9:33.75 Unified_cpp_toolkit_xre0.cpp
+ 9:33.75 toolkit_xre.lib.desc
+ 9:33.75 Unified_cpp_media_imagecapture0.obj
+ 9:33.75 Unified_cpp_layout_style3.cpp
+ 9:33.75 Unified_cpp_dom_power0.obj
+ 9:33.75 nsFormFillController.cpp
+ 9:33.75 toolkit_components_satchel.lib.desc
+ 9:33.75 Unified_cpp_manager_pki_src0.obj
+ 9:33.75 Unified_cpp_media_imagecapture0.cpp
+ 9:33.75 dom_media_imagecapture.lib.desc
+ 9:33.75 Unified_cpp_dom_audiochannel0.obj
+ 9:33.75 Unified_cpp_layout_style2.cpp
+ 9:33.75 Unified_cpp_manager_pki_src0.cpp
+ 9:33.75 security_manager_pki_src.lib.desc
+ 9:33.75 layout_style.lib.desc
+ 9:33.75 Unified_cpp_docshell_base0.obj
+ 9:33.75 BackgroundChildImpl.obj
+ 9:33.75 BackgroundParentImpl.obj
+ 9:33.75 Unified_cpp_dom_power0.cpp
+ 9:33.75 dom_power.lib.desc
+ 9:33.75 Unified_cpp_ipc_glue0.obj
+ 9:33.75 Unified_cpp_dom_audiochannel0.cpp
+ 9:33.75 dom_audiochannel.lib.desc
+ 9:33.75 BackgroundChildImpl.cpp
+ 9:33.75 nsJARChannel.obj
+ 9:33.75 BackgroundParentImpl.cpp
+ 9:33.75 nsJARChannel.cpp
+ 9:33.75 MP4Reader.obj
+ 9:33.75 Unified_cpp_dom_media_fmp40.obj
+ 9:33.75 modules_libjar.lib.desc
+ 9:33.75 Unified_cpp_ipc_glue0.cpp
+ 9:33.75 ipc_glue.lib.desc
+ 9:33.75 Hal.obj
+ 9:33.75 Unified_cpp_hal0.obj
+ 9:33.75 Unified_cpp_docshell_base0.cpp
+ 9:33.75 docshell_base.lib.desc
+ 9:33.75 Unified_cpp_hal1.obj
+ 9:33.75 Unified_cpp_dom_media_fmp40.cpp
+ 9:33.75 Unified_cpp_editor_txtsvc0.obj
+ 9:33.75 Unified_cpp_hal0.cpp
+ 9:33.75 MP4Reader.cpp
+ 9:33.75 dom_media_fmp4.lib.desc
+ 9:33.75 ActorsParent.obj
+ 9:33.75 Unified_cpp_dom_indexedDB0.obj
+ 9:33.75 Hal.cpp
+ 9:33.75 Unified_cpp_dom_indexedDB1.obj
+ 9:33.75 Unified_cpp_editor_txtsvc0.cpp
+ 9:33.75 editor_txtsvc.lib.desc
+ 9:33.75 Unified_cpp_hal1.cpp
+ 9:33.75 hal.lib.desc
+ 9:33.75 Unified_cpp_downloads0.obj
+ 9:33.75 ActorsParent.cpp
+ 9:33.75 ctypes.obj
+ 9:33.75 Unified_cpp_dom_indexedDB0.cpp
+ 9:33.75 Unified_cpp_dom_telephony0.obj
+ 9:33.75 ctypes.cpp
+ 9:33.75 toolkit_components_ctypes.lib.desc
+ 9:33.75 Unified_cpp_dom_devicestorage0.obj
+ 9:33.75 Unified_cpp_dom_indexedDB1.cpp
+ 9:33.75 dom_indexedDB.lib.desc
+ 9:33.75 CustomEvent.obj
+ 9:33.75 EventStateManager.obj
+ 9:33.75 Unified_cpp_downloads0.cpp
+ 9:33.75 toolkit_components_downloads.lib.desc
+ 9:33.75 Unified_cpp_dom_events0.obj
+ 9:33.75 CustomEvent.cpp
+ 9:33.75 Unified_cpp_dom_notification0.obj
+ 9:33.75 Unified_cpp_dom_telephony0.cpp
+ 9:33.75 dom_telephony.lib.desc
+ 9:33.75 Unified_cpp_dom_events1.obj
+ 9:33.75 Unified_cpp_dom_devicestorage0.cpp
+ 9:33.75 dom_devicestorage.lib.desc
+ 9:33.75 Unified_cpp_dom_events2.obj
+ 9:33.75 EventStateManager.cpp
+ 9:33.75 WebSocketChannelChild.obj
+ 9:33.75 Unified_cpp_dom_notification0.cpp
+ 9:33.75 dom_notification.lib.desc
+ 9:33.75 Unified_cpp_dom_events0.cpp
+ 9:33.75 nsWebBrowserPersist.obj
+ 9:33.75 WebSocketChannelChild.cpp
+ 9:33.75 netwerk_protocol_websocket.lib.desc
+ 9:33.75 Unified_cpp_dom_events1.cpp
+ 9:33.75 VsyncParent.obj
+ 9:33.75 Unified_cpp_dom_events2.cpp
+ 9:33.75 Unified_cpp_layout_ipc0.obj
+ 9:33.75 dom_events.lib.desc
+ 9:33.75 Unified_cpp_hunspell_glue0.obj
+ 9:33.75 nsWebBrowserPersist.cpp
+ 9:33.75 embedding_components_webbrowserpersist.lib.desc
+ 9:33.75 Unified_cpp_commandhandler0.obj
+ 9:33.75 VsyncParent.cpp
+ 9:33.75 x86inc.obj
+ 9:33.75 copy_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: x86inc.obj] Error -1073741515
+ 9:33.75 copy_sse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: copy_sse2.obj] Error -1073741515
+ 9:33.75 dequantize_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: copy_sse3.obj] Error -1073741515
+ 9:33.75 idctllm_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: dequantize_mmx.obj] Error -1073741515
+ 9:33.75 idctllm_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: idctllm_mmx.obj] Error -1073741515
+ 9:33.75 iwalsh_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: idctllm_sse2.obj] Error -1073741515
+ 9:33.75 iwalsh_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: iwalsh_mmx.obj] Error -1073741515
+ 9:33.75 loopfilter_block_sse2_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: iwalsh_sse2.obj] Error -1073741515
+ 9:33.75 loopfilter_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: loopfilter_block_sse2_x86_64.obj] Error -1073741515
+ 9:33.75 loopfilter_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: loopfilter_mmx.obj] Error -1073741515
+ 9:33.75 mfqe_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: loopfilter_sse2.obj] Error -1073741515
+ 9:33.75 postproc_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: mfqe_sse2.obj] Error -1073741515
+ 9:33.75 postproc_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: postproc_mmx.obj] Error -1073741515
+ 9:33.75 recon_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: postproc_sse2.obj] Error -1073741515
+ 9:33.75 recon_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: recon_mmx.obj] Error -1073741515
+ 9:33.75 subpixel_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: recon_sse2.obj] Error -1073741515
+ 9:33.75 subpixel_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: subpixel_mmx.obj] Error -1073741515
+ 9:33.75 subpixel_ssse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: subpixel_sse2.obj] Error -1073741515
+ 9:33.75 variance_impl_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: subpixel_ssse3.obj] Error -1073741515
+ 9:33.75 variance_impl_ssse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: variance_impl_sse2.obj] Error -1073741515
+ 9:33.75 vp8_variance_impl_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: variance_impl_ssse3.obj] Error -1073741515
+ 9:33.75 dct_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp8_variance_impl_mmx.obj] Error -1073741515
+ 9:33.75 dct_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: dct_mmx.obj] Error -1073741515
+ 9:33.75 encodeopt.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: dct_sse2.obj] Error -1073741515
+ 9:33.75 fwalsh_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: encodeopt.obj] Error -1073741515
+ 9:33.75 quantize_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: fwalsh_sse2.obj] Error -1073741515
+ 9:33.75 ssim_opt_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: quantize_mmx.obj] Error -1073741515
+ 9:33.75 subtract_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: ssim_opt_x86_64.obj] Error -1073741515
+ 9:33.75 subtract_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: subtract_mmx.obj] Error -1073741515
+ 9:33.75 temporal_filter_apply_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: subtract_sse2.obj] Error -1073741515
+ 9:33.75 vp9_copy_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: temporal_filter_apply_sse2.obj] Error -1073741515
+ 9:33.75 vp9_idct_ssse3_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_copy_sse2.obj] Error -1073741515
+ 9:33.75 vp9_intrapred_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_idct_ssse3_x86_64.obj] Error -1073741515
+ 9:33.75 vp9_intrapred_ssse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_intrapred_sse2.obj] Error -1073741515
+ 9:33.75 vp9_loopfilter_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_intrapred_ssse3.obj] Error -1073741515
+ 9:33.75 vp9_subpixel_8t_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_loopfilter_mmx.obj] Error -1073741515
+ 9:33.75 vp9_subpixel_8t_ssse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subpixel_8t_sse2.obj] Error -1073741515
+ 9:33.75 vp9_subpixel_bilinear_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subpixel_8t_ssse3.obj] Error -1073741515
+ 9:33.75 vp9_subpixel_bilinear_ssse3.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subpixel_bilinear_sse2.obj] Error -1073741515
+ 9:33.75 vp9_dct_mmx.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subpixel_bilinear_ssse3.obj] Error -1073741515
+ 9:33.75 vp9_dct_ssse3_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_dct_mmx.obj] Error -1073741515
+ 9:33.75 vp9_error_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_dct_ssse3_x86_64.obj] Error -1073741515
+ 9:33.75 vp9_quantize_ssse3_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_error_sse2.obj] Error -1073741515
+ 9:33.75 vp9_ssim_opt_x86_64.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_quantize_ssse3_x86_64.obj] Error -1073741515
+ 9:33.75 vp9_subpel_variance.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_ssim_opt_x86_64.obj] Error -1073741515
+ 9:33.75 vp9_subtract_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subpel_variance.obj] Error -1073741515
+ 9:33.75 vp9_temporal_filter_apply_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_subtract_sse2.obj] Error -1073741515
+ 9:33.75 sad4d_sse2.obj
+ 9:33.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: vp9_temporal_filter_apply_sse2.obj] Error -1073741515
+ 9:33.75 sad_mmx.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad4d_sse2.obj] Error -1073741515
+11:31.47 sad_sse2.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad_mmx.obj] Error -1073741515
+11:31.47 sad_sse3.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad_sse2.obj] Error -1073741515
+11:31.47 sad_sse4.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad_sse3.obj] Error -1073741515
+11:31.47 sad_ssse3.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad_sse4.obj] Error -1073741515
+11:31.47 variance_impl_mmx.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: sad_ssse3.obj] Error -1073741515
+11:31.47 emms.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: variance_impl_mmx.obj] Error -1073741515
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: emms.obj] Error -1073741515
+11:31.47 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:31.47 gmake.EXE[4]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/recurse.mk:70: media/libvpx/target] Error 2
+11:31.47 Unified_cpp_commandhandler0.cpp
+11:31.47 embedding_components_commandhandler.lib.desc
+11:31.47 jccolor-sse2-64.obj
+11:31.47 jcgray-sse2-64.obj
+11:31.47 jchuff-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jccolor-sse2-64.obj] Error -1073741515
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jcgray-sse2-64.obj] Error -1073741515
+11:31.47 jcsample-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jchuff-sse2-64.obj] Error -1073741515
+11:31.47 jdcolor-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jcsample-sse2-64.obj] Error -1073741515
+11:31.47 jdmerge-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jdcolor-sse2-64.obj] Error -1073741515
+11:31.47 jdsample-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jdmerge-sse2-64.obj] Error -1073741515
+11:31.47 jfdctflt-sse-64.obj
+11:31.47 Unified_cpp_layout_xul0.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jdsample-sse2-64.obj] Error -1073741515
+11:31.47 Unified_cpp_layout_xul1.obj
+11:31.47 jfdctfst-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jfdctflt-sse-64.obj] Error -1073741515
+11:31.47 jfdctint-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jfdctfst-sse2-64.obj] Error -1073741515
+11:31.47 jidctflt-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jfdctint-sse2-64.obj] Error -1073741515
+11:31.47 jidctfst-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jidctflt-sse2-64.obj] Error -1073741515
+11:31.47 jidctint-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jidctfst-sse2-64.obj] Error -1073741515
+11:31.47 jidctred-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jidctint-sse2-64.obj] Error -1073741515
+11:31.47 jquantf-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jidctred-sse2-64.obj] Error -1073741515
+11:31.47 jquanti-sse2-64.obj
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jquantf-sse2-64.obj] Error -1073741515
+11:31.47 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:924: jquanti-sse2-64.obj] Error -1073741515
+11:31.47 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:31.47 gmake.EXE[4]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/recurse.mk:70: media/libjpeg/target] Error 2
+11:31.47 Unified_cpp_layout_xul2.obj
+11:31.47 Unified_cpp_hunspell_glue0.cpp
+11:31.47 extensions_spellcheck_hunspell_glue.lib.desc
+11:31.47 Unified_cpp_layout_ipc0.cpp
+11:31.47 layout_ipc.lib.desc
+11:31.47 Unified_cpp_layout_inspector0.obj
+11:31.47 Unified_cpp_layout_xul0.cpp
+11:31.47 Unified_cpp_layout_inspector0.cpp
+11:31.47 Unified_cpp_layout_xul1.cpp
+11:31.47 layout_inspector.lib.desc
+11:31.47 Telemetry.obj
+11:31.47 Unified_cpp_dom_workers0.obj
+11:31.47 Unified_cpp_dom_workers1.obj
+11:31.47 Unified_cpp_layout_xul2.cpp
+11:31.47 layout_xul.lib.desc
+11:31.47 MessagePort.obj
+11:31.47 nsContentUtils.obj
+11:31.47 Telemetry.cpp
+11:31.47 toolkit_components_telemetry.lib.desc
+11:31.47 nsDOMWindowUtils.obj
+11:31.47 MessagePort.cpp
+11:31.47 Unified_cpp_dom_json0.obj
+11:31.47 Unified_cpp_dom_json0.cpp
+11:31.47 Unified_cpp_dom_workers0.cpp
+11:31.47 dom_json.lib.desc
+11:31.47 nsHttpChannelAuthProvider.obj
+11:31.47 Unified_cpp_protocol_http0.obj
+11:31.47 nsFrameMessageManager.obj
+11:31.47 Unified_cpp_dom_workers1.cpp
+11:31.47 dom_workers.lib.desc
+11:31.47 Unified_cpp_protocol_http1.obj
+11:31.47 nsHttpChannelAuthProvider.cpp
+11:31.47 nsGlobalWindow.obj
+11:31.47 nsContentUtils.cpp
+11:31.47 nsDOMWindowUtils.cpp
+11:31.47 nsImageLoadingContent.obj
+11:31.47 Unified_cpp_protocol_http0.cpp
+11:31.47 Unified_cpp_dom_security0.obj
+11:31.47 nsFrameMessageManager.cpp
+11:31.47 Unified_cpp_uriloader_exthandler0.obj
+11:31.47 Unified_cpp_dom_security0.cpp
+11:31.47 dom_security.lib.desc
+11:31.47 nsObjectLoadingContent.obj
+11:31.47 Unified_cpp_protocol_http1.cpp
+11:31.47 netwerk_protocol_http.lib.desc
+11:31.47 Unified_cpp_dom_base0.obj
+11:31.47 nsImageLoadingContent.cpp
+11:31.47 Unified_cpp_dom_base1.obj
+11:31.47 nsGlobalWindow.cpp
+11:31.47 d:/a/K-Meleon-R/K-Meleon-R/goanna/dom/base/nsGlobalWindow.cpp(3888): warning C4101: 'rv': unreferenced local variable
+11:31.47 Warning: C4715 in d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\base\nsGlobalWindow.cpp: 'nsGlobalWindow::GetParent': not all control paths return a value
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\base\nsGlobalWindow.cpp(3827) : warning C4715: 'nsGlobalWindow::GetParent': not all control paths return a value
+11:31.47 Warning: C4715 in d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\base\nsGlobalWindow.cpp: 'nsGlobalWindow::GetTop': not all control paths return a value
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\base\nsGlobalWindow.cpp(5828) : warning C4715: 'nsGlobalWindow::GetTop': not all control paths return a value
+11:31.47 PluginDocument.obj
+11:31.47 Unified_cpp_dom_html0.obj
+11:31.47 Unified_cpp_uriloader_exthandler0.cpp
+11:31.47 uriloader_exthandler.lib.desc
+11:31.47 Unified_cpp_dom_base2.obj
+11:31.47 nsObjectLoadingContent.cpp
+11:31.47 Unified_cpp_dom_html1.obj
+11:31.47 PluginDocument.cpp
+11:31.47 Unified_cpp_dom_base3.obj
+11:31.47 Unified_cpp_dom_base0.cpp
+11:31.47 Unified_cpp_dom_html2.obj
+11:31.47 Unified_cpp_dom_base1.cpp
+11:31.47 Unified_cpp_webspeech_synth0.obj
+11:31.47 Unified_cpp_dom_html0.cpp
+11:31.47 Unified_cpp_dom_base4.obj
+11:31.47 Unified_cpp_dom_base2.cpp
+11:31.47 Unified_cpp_dom_html3.obj
+11:31.47 Unified_cpp_webspeech_synth0.cpp
+11:31.47 dom_media_webspeech_synth.lib.desc
+11:31.47 Unified_cpp_dom_base5.obj
+11:31.47 Unified_cpp_dom_html1.cpp
+11:31.47 Unified_cpp_caps0.obj
+11:31.47 Unified_cpp_dom_html2.cpp
+11:31.47 Unified_cpp_dom_html4.obj
+11:31.47 Unified_cpp_dom_base3.cpp
+11:31.47 Unified_cpp_dom_jsurl0.obj
+11:31.47 Unified_cpp_caps0.cpp
+11:31.47 caps.lib.desc
+11:31.47 Unified_cpp_dom_html5.obj
+11:31.47 Unified_cpp_dom_jsurl0.cpp
+11:31.47 dom_jsurl.lib.desc
+11:31.47 Unified_cpp_dom_base6.obj
+11:31.47 Unified_cpp_dom_html3.cpp
+11:31.47 Unified_cpp_dom_filesystem0.obj
+11:31.47 Unified_cpp_dom_html4.cpp
+11:31.47 Unified_cpp_dom_base4.cpp
+11:31.47 Unified_cpp_dom_xul0.obj
+11:31.47 Unified_cpp_dom_filesystem0.cpp
+11:31.47 dom_filesystem.lib.desc
+11:31.47 Unified_cpp_dom_base7.obj
+11:31.47 Unified_cpp_dom_xul0.cpp
+11:31.47 dom_xul.lib.desc
+11:31.47 Unified_cpp_dom_base8.obj
+11:31.47 Unified_cpp_dom_base5.cpp
+11:31.47 Unified_cpp_uriloader_base0.obj
+11:31.47 Unified_cpp_dom_html5.cpp
+11:31.47 dom_html.lib.desc
+11:31.47 Unified_cpp_uriloader_base0.cpp
+11:31.47 uriloader_base.lib.desc
+11:31.47 Unified_cpp_dom_storage0.obj
+11:31.47 Unified_cpp_dom_base6.cpp
+11:31.47 Unified_cpp_dom_system0.obj
+11:31.47 Unified_cpp_dom_base7.cpp
+11:31.47 hnjstdio.obj
+11:31.47 Unified_cpp_dom_system0.cpp
+11:31.47 dom_system.lib.desc
+11:31.47 Unified_cpp_dom_storage0.cpp
+11:31.47 dom_storage.lib.desc
+11:31.47 nsNPAPIPlugin.obj
+11:31.47 nsPluginHost.obj
+11:31.47 Unified_cpp_chrome0.obj
+11:31.47 hnjstdio.cpp
+11:31.47 intl_hyphenation.lib.desc
+11:31.47 Unified_cpp_dom_plugins_base0.obj
+11:31.47 nsNPAPIPlugin.cpp
+11:31.47 XPCComponents.obj
+11:31.47 Unified_cpp_js_xpconnect_src0.obj
+11:31.47 Unified_cpp_chrome0.cpp
+11:31.47 chrome.lib.desc
+11:31.47 nsPluginHost.cpp
+11:31.47 Unified_cpp_js_xpconnect_src1.obj
+11:31.47 Unified_cpp_dom_base8.cpp
+11:31.47 dom_base.lib.desc
+11:31.47 XPCComponents.cpp
+11:31.47 Unified_cpp_pref_autoconfig_src0.obj
+11:31.47 Unified_cpp_pref_autoconfig_src0.cpp
+11:31.47 extensions_pref_autoconfig_src.lib.desc
+11:31.47 TestShellChild.obj
+11:31.47 TestShellParent.obj
+11:31.47 Unified_cpp_dom_plugins_base0.cpp
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\plugins\base\nsPluginDirServiceProvider.cpp(119): warning C4996: 'wcstok': wcstok has been changed to conform with the ISO C standard, adding an extra context parameter. To use the legacy Microsoft wcstok, define _CRT_NON_CONFORMING_WCSTOK.
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\plugins\base\nsPluginDirServiceProvider.cpp(120): warning C4996: 'wcstok': wcstok has been changed to conform with the ISO C standard, adding an extra context parameter. To use the legacy Microsoft wcstok, define _CRT_NON_CONFORMING_WCSTOK.
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\plugins\base\nsPluginDirServiceProvider.cpp(121): warning C4996: 'wcstok': wcstok has been changed to conform with the ISO C standard, adding an extra context parameter. To use the legacy Microsoft wcstok, define _CRT_NON_CONFORMING_WCSTOK.
+11:31.47 d:\a\K-Meleon-R\K-Meleon-R\goanna\dom\plugins\base\nsPluginDirServiceProvider.cpp(122): warning C4996: 'wcstok': wcstok has been changed to conform with the ISO C standard, adding an extra context parameter. To use the legacy Microsoft wcstok, define _CRT_NON_CONFORMING_WCSTOK.
+11:31.47 dom_plugins_base.lib.desc
+11:31.47 XPCShellEnvironment.obj
+11:31.47 Unified_cpp_js_xpconnect_src0.cpp
+11:31.47 TestShellChild.cpp
+11:31.47 PerfMeasurement.obj
+11:31.47 Unified_cpp_js_xpconnect_src1.cpp
+11:31.47 js_xpconnect_src.lib.desc
+11:31.47 AppProtocolHandler.obj
+11:31.47 XPCShellEnvironment.cpp
+11:31.47 PerfMeasurement.cpp
+11:31.47 toolkit_components_perf.lib.desc
+11:31.47 Unified_cpp_recognition0.obj
+11:31.47 Unified_cpp_protocol_about0.obj
+11:31.47 TestShellParent.cpp
+11:31.47 ipc_testshell.lib.desc
+11:31.47 Unified_cpp_storage_src0.obj
+11:31.47 Unified_cpp_storage_src1.obj
+11:31.47 AppProtocolHandler.cpp
+11:31.47 netwerk_protocol_app.lib.desc
+11:31.47 Unified_cpp_protocol_about0.cpp
+11:31.47 netwerk_protocol_about.lib.desc
+11:31.47 Unified_cpp_storage_src0.cpp
+11:31.47 Unified_cpp_dom_media_ogg0.obj
+11:31.47 Unified_cpp_dom_filehandle0.obj
+11:31.47 Unified_cpp_storage_src1.cpp
+11:31.47 storage_src.lib.desc
+11:31.47 Unified_cpp_dom_crypto0.obj
+11:31.47 Unified_cpp_recognition0.cpp
+11:31.47 dom_media_webspeech_recognition.lib.desc
+11:31.47 Unified_cpp_dom_offline0.obj
+11:31.47 Unified_cpp_dom_filehandle0.cpp
+11:31.47 dom_filehandle.lib.desc
+11:31.47 Unified_cpp_dom_crypto0.cpp
+11:31.47 dom_crypto.lib.desc
+11:31.47 Unified_cpp_components_startup0.obj
+11:31.47 Unified_cpp_windowwatcher0.obj
+11:31.47 Unified_cpp_dom_offline0.cpp
+11:31.47 dom_offline.lib.desc
+11:31.47 Unified_cpp_parser_htmlparser0.obj
+11:31.48 Unified_cpp_dom_media_ogg0.cpp
+11:31.48 dom_media_ogg.lib.desc
+11:31.48 Unified_cpp_dom_media_encoder0.obj
+11:31.48 Unified_cpp_components_startup0.cpp
+11:31.48 toolkit_components_startup.lib.desc
+11:31.48 PluginModuleChild.obj
+11:31.48 PluginWidgetChild.obj
+11:31.48 Unified_cpp_windowwatcher0.cpp
+11:31.48 embedding_components_windowwatcher.lib.desc
+11:31.48 PluginWidgetParent.obj
+11:31.48 Unified_cpp_parser_htmlparser0.cpp
+11:31.48 parser_htmlparser.lib.desc
+11:31.48 Unified_cpp_dom_media_encoder0.cpp
+11:31.48 dom_media_encoder.lib.desc
+11:31.48 PluginModuleChild.cpp
+11:31.48 Unified_cpp_dom_plugins_ipc0.obj
+11:31.48 Unified_cpp_mozapps_extensions0.obj
+11:31.48 Unified_cpp_mozapps_extensions0.cpp
+11:31.48 toolkit_mozapps_extensions.lib.desc
+11:31.48 WyciwygChannelChild.obj
+11:31.48 PluginWidgetChild.cpp
+11:31.48 Unified_cpp_glue_staticruntime0.obj
+11:31.48 PluginWidgetParent.cpp
+11:31.48 Unified_cpp_glue_staticruntime0.cpp
+11:31.48 xpcomglue_staticruntime_s.lib
+11:31.48 nsCycleCollectionParticipant.obj
+11:31.48 nsCycleCollectionParticipant.obj
+11:49.75 nsCycleCollectionParticipant.cpp
+11:49.75 xpcomglue_s.lib
+11:49.75 nsCycleCollectionParticipant.cpp
+11:49.75 xpcomglue_staticruntime.lib
+11:49.75 WyciwygChannelChild.cpp
+11:49.75 netwerk_protocol_wyciwyg.lib.desc
+11:49.75 nsCycleCollectionParticipant.obj
+11:49.75 Unified_cpp_dom_plugins_ipc0.cpp
+11:49.75 dom_plugins_ipc.lib.desc
+11:49.75 xulrunner-stub.exe
+11:49.75 libGLESv2.dll
+11:49.75 nsCycleCollectionParticipant.cpp
+11:49.75 xpcomglue.lib
+11:49.75 xulrunner.exe
+11:49.75 Executing: link -NOLOGO -DLL -OUT:libGLESv2.dll -PDB:libGLESv2.pdb -SUBSYSTEM:WINDOWS,5.02 -MACHINE:X64 @d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\gfx\angle\src\libGLESv2\tmpjcfi8h.list module.res -LARGEADDRESSAWARE -NXCOMPAT -OPT:REF -OPT:ICF=15 -DYNAMICBASE -DEBUG -DEBUGTYPE:CV -DEBUG -OPT:REF,ICF -DEF:d:/a/K-Meleon-R/K-Meleon-R/goanna/gfx/angle/src/libGLESv2/libGLESv2.def ../../../../mozglue/build/mozglue.lib /lib/x64/d3d9.lib /lib/x64/dxguid.lib kernel32.lib user32.lib gdi32.lib winmm.lib wsock32.lib advapi32.lib secur32.lib netapi32.lib
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\gfx\angle\src\libGLESv2\tmpjcfi8h.list:
+11:49.75     Unified_cpp_angle_src_libGLESv20.obj
+11:49.75     ..\..\..\..\memory\fallible\fallible.obj
+11:49.75     ..\libANGLE\glslang_lex.obj
+11:49.75     ..\libANGLE\glslang_tab.obj
+11:49.75     ..\libANGLE\Display.obj
+11:49.75     ..\libANGLE\HLSLCompiler.obj
+11:49.75     ..\libANGLE\loadimageSSE2.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE0.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE1.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE10.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE11.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE12.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE2.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE3.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE4.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE5.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE6.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE7.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE8.obj
+11:49.75     ..\libANGLE\Unified_cpp_angle_src_libANGLE9.obj
+11:49.75 
+11:49.75 LINK : warning LNK4044: unrecognized option '/lib/x64/d3d9.lib'; ignored
+11:49.75 
+11:49.75 LINK : warning LNK4044: unrecognized option '/lib/x64/dxguid.lib'; ignored
+11:49.75 
+11:49.75    Creating library libGLESv2.lib and object libGLESv2.exp
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE10.obj : error LNK2019: unresolved external symbol Direct3DCreate9 referenced in function "public: virtual class egl::Error __cdecl rx::Renderer9::initialize(void)" (?initialize@Renderer9@rx@@UEAA?AVError@egl@@XZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE8.obj : error LNK2019: unresolved external symbol "public: static bool __cdecl rx::NativeWindow::isValidNativeWindow(struct HWND__ *)" (?isValidNativeWindow@NativeWindow@rx@@SA_NPEAUHWND__@@@Z) referenced in function "public: virtual bool __cdecl rx::DisplayD3D::isValidNativeWindow(struct HWND__ *)const " (?isValidNativeWindow@DisplayD3D@rx@@UEBA_NPEAUHWND__@@@Z)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE8.obj : error LNK2019: unresolved external symbol "public: struct rx::WorkaroundsD3D const & __cdecl rx::RendererD3D::getWorkarounds(void)const " (?getWorkarounds@RendererD3D@rx@@QEBAAEBUWorkaroundsD3D@2@XZ) referenced in function "public: bool __cdecl rx::DynamicHLSL::generateShaderLinkHLSL(struct gl::Data const &,class gl::Program::Data const &,class rx::ProgramD3DMetadata const &,class rx::VaryingPacking const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > *,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > *)const " (?generateShaderLinkHLSL@DynamicHLSL@rx@@QEBA_NAEBUData@gl@@AEBV3Program@4@AEBVProgramD3DMetadata@2@AEBVVaryingPacking@2@PEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@4@Z)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2001: unresolved external symbol "public: struct rx::WorkaroundsD3D const & __cdecl rx::RendererD3D::getWorkarounds(void)const " (?getWorkarounds@RendererD3D@rx@@QEBAAEBUWorkaroundsD3D@2@XZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol D3DPERF_BeginEvent referenced in function "public: virtual void __cdecl rx::DebugAnnotator9::beginEvent(wchar_t const *)" (?beginEvent@DebugAnnotator9@rx@@UEAAXPEB_W@Z)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol D3DPERF_EndEvent referenced in function "public: virtual void __cdecl rx::DebugAnnotator9::endEvent(void)" (?endEvent@DebugAnnotator9@rx@@UEAAXXZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol D3DPERF_SetMarker referenced in function "public: virtual void __cdecl rx::DebugAnnotator9::setMarker(wchar_t const *)" (?setMarker@DebugAnnotator9@rx@@UEAAXPEB_W@Z)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol D3DPERF_GetStatus referenced in function "public: virtual bool __cdecl rx::DebugAnnotator9::getStatus(void)" (?getStatus@DebugAnnotator9@rx@@UEAA_NXZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol "public: __cdecl rx::NativeWindow::NativeWindow(struct HWND__ *,struct egl::Config const *)" (??0NativeWindow@rx@@QEAA@PEAUHWND__@@PEBUConfig@egl@@@Z) referenced in function "private: __cdecl rx::SurfaceD3D::SurfaceD3D(class rx::RendererD3D *,class egl::Display *,struct egl::Config const *,int,int,int,void *,struct HWND__ *)" (??0SurfaceD3D@rx@@AEAA@PEAVRendererD3D@1@PEAVDisplay@egl@@PEBUConfig@4@HHHPEAXPEAUHWND__@@@Z)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol "public: bool __cdecl rx::NativeWindow::initialize(void)" (?initialize@NativeWindow@rx@@QEAA_NXZ) referenced in function "public: virtual class egl::Error __cdecl rx::SurfaceD3D::initialize(void)" (?initialize@SurfaceD3D@rx@@UEAA?AVError@egl@@XZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol "public: bool __cdecl rx::NativeWindow::getClientRect(struct tagRECT *)" (?getClientRect@NativeWindow@rx@@QEAA_NPEAUtagRECT@@@Z) referenced in function "public: bool __cdecl rx::SurfaceD3D::checkForOutOfDateSwapChain(void)" (?checkForOutOfDateSwapChain@SurfaceD3D@rx@@QEAA_NXZ)
+11:49.75 
+11:49.75 Unified_cpp_angle_src_libANGLE9.obj : error LNK2019: unresolved external symbol "public: bool __cdecl rx::NativeWindow::isIconic(void)" (?isIconic@NativeWindow@rx@@QEAA_NXZ) referenced in function "public: bool __cdecl rx::SurfaceD3D::checkForOutOfDateSwapChain(void)" (?checkForOutOfDateSwapChain@SurfaceD3D@rx@@QEAA_NXZ)
+11:49.75 
+11:49.75 libGLESv2.dll : fatal error LNK1120: 11 unresolved externals
+11:49.75 
+11:49.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:815: libGLESv2.dll] Error 1120
+11:49.75 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:49.75 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:49.75 gmake.EXE[4]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/recurse.mk:70: gfx/angle/src/libGLESv2/target] Error 2
+11:49.75 redit.exe
+11:49.75 Embedding manifest from d:/a/K-Meleon-R/K-Meleon-R/goanna/xulrunner/app/xulrunner.exe.manifest
+11:49.75 Executing: link -NOLOGO -OUT:xulrunner-stub.exe -PDB:xulrunner-stub.pdb -ENTRY:wmainCRTStartup -SUBSYSTEM:WINDOWS,5.02 -STACK:2097152 -LARGEADDRESSAWARE -NXCOMPAT -OPT:REF -OPT:ICF=15 -DYNAMICBASE -DEBUG -DEBUGTYPE:CV -DEBUG -OPT:REF,ICF @d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\xulrunner\stub\tmphhal9y.list module.res ../../xpcom/glue/standalone/staticruntime/xpcomglue_staticruntime.lib kernel32.lib user32.lib gdi32.lib winmm.lib wsock32.lib advapi32.lib secur32.lib netapi32.lib shell32.lib
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\obj-x64\xulrunner\stub\tmphhal9y.list:
+11:49.75     nsXULStub.obj
+11:49.75     ..\..\memory\fallible\fallible.obj
+11:49.75 
+11:49.75 fallible.obj : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MT_StaticRelease' in nsXULStub.obj
+11:49.75 
+11:49.75 xulrunner-stub.exe : fatal error LNK1319: 1 mismatches detected
+11:49.75 
+11:49.75 gmake.EXE[5]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:656: xulrunner-stub.exe] Error 1319
+11:49.75 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:49.75 gmake.EXE[5]: Target 'target' not remade because of errors.
+11:49.75 gmake.EXE[4]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/recurse.mk:70: xulrunner/stub/target] Error 2
+11:49.75 cd include; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 cd builtins; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 cd src; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 cd testlib; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 cd legacydb; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 cd mangle; c:/Strawberry/c/bin/gmake.EXE libs
+11:49.75 Unified_cpp_manager_ssl_src0.obj
+11:49.75 Unified_cpp_manager_ssl_src1.obj
+11:49.75 RegExp.obj
+11:49.75 CTypes.obj
+11:49.75 Library.obj
+11:49.75 Unified_cpp_manager_ssl_src0.cpp
+11:49.75 Parser.obj
+11:49.75 Library.cpp
+11:49.75 RegExp.cpp
+11:49.75 CTypes.cpp
+11:49.75 ExecutableAllocatorWin.obj
+11:49.75 jsarray.obj
+11:49.75 jsatom.obj
+11:49.75 Unified_cpp_manager_ssl_src1.cpp
+11:49.75 security_manager_ssl_src.lib.desc
+11:49.75 jsmath.obj
+11:49.75 ExecutableAllocatorWin.cpp
+11:49.75 TraceLogging.obj
+11:49.75 Parser.cpp
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneFunctionBody(JS::HandleFunction,const js::AutoNameVector &,js::GeneratorKind,js::frontend::Directives,js::frontend::Directives *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(480): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneFunctionBody'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneLazyFunction(JS::HandleFunction,unsigned int,bool,js::GeneratorKind)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(486): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneLazyFunction'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeDefIntoUse(js::frontend::Definition *,js::frontend::SyntaxParseHandler::Node,JSAtom *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(643): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeDefIntoUse'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::isValidForStatementLHS(js::frontend::SyntaxParseHandler::Node,JSVersion,bool,bool,js::frontend::ParseNodeKind)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(649): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::isValidForStatementLHS'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkForHeadConstInitializers(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(651): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkForHeadConstInitializers'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkAndPrepareLexical(bool,const js::frontend::TokenPos &)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(668): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkAndPrepareLexical'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeInitializedLexicalBinding(js::HandlePropertyName,bool,const js::frontend::TokenPos &)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(669): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeInitializedLexicalBinding'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringObject(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75         with
+11:49.75         [
+11:49.75             ParseHandler=js::frontend::SyntaxParseHandler
+11:49.75         ]
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(673): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringObject'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringArray(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75         with
+11:49.75         [
+11:49.75             ParseHandler=js::frontend::SyntaxParseHandler
+11:49.75         ]
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(674): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringArray'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindInitialized(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75         with
+11:49.75         [
+11:49.75             ParseHandler=js::frontend::SyntaxParseHandler
+11:49.75         ]
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(675): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindInitialized'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindDestructuringLHS(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(676): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindDestructuringLHS'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeSetCall(js::frontend::SyntaxParseHandler::Node,unsigned int)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(677): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeSetCall'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneDestructuringDefault(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(678): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneDestructuringDefault'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneLeftHandSide(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(679): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneLeftHandSide'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneParseTree(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(680): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneParseTree'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'bool js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(676): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(678): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(679): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide'
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(713): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(680): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree'
+11:49.75 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneFunctionBody(JS::HandleFunction,const js::AutoNameVector &,js::GeneratorKind,js::frontend::Directives,js::frontend::Directives *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(480): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneFunctionBody'
+11:49.75 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneLazyFunction(JS::HandleFunction,unsigned int,bool,js::GeneratorKind)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(486): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::standaloneLazyFunction'
+11:49.75 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeDefIntoUse(js::frontend::Definition *,js::frontend::SyntaxParseHandler::Node,JSAtom *)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(643): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeDefIntoUse'
+11:49.75 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::isValidForStatementLHS(js::frontend::SyntaxParseHandler::Node,JSVersion,bool,bool,js::frontend::ParseNodeKind)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(649): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::isValidForStatementLHS'
+11:49.75 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkForHeadConstInitializers(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:49.75 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(651): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkForHeadConstInitializers'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkAndPrepareLexical(bool,const js::frontend::TokenPos &)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(668): note: see declaration of 'js::frontend::Parser<js::frojsatom.cpp
+11:53.15 Unified_cpp_js_src0.obj
+11:53.15 jsarray.cpp
+11:53.15 Unified_cpp_js_src1.obj
+11:53.15 ntend::SyntaxParseHandler>::checkAndPrepareLexical'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeInitializedLexicalBinding(js::HandlePropertyName,bool,const js::frontend::TokenPos &)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(669): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeInitializedLexicalBinding'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringObject(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15         with
+11:53.15         [
+11:53.15             ParseHandler=js::frontend::SyntaxParseHandler
+11:53.15         ]
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(673): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringObject'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringArray(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15         with
+11:53.15         [
+11:53.15             ParseHandler=js::frontend::SyntaxParseHandler
+11:53.15         ]
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(674): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::checkDestructuringArray'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindInitialized(js::frontend::BindData<ParseHandler> *,js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15         with
+11:53.15         [
+11:53.15             ParseHandler=js::frontend::SyntaxParseHandler
+11:53.15         ]
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(675): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindInitialized'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindDestructuringLHS(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(676): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::bindDestructuringLHS'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeSetCall(js::frontend::SyntaxParseHandler::Node,unsigned int)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(677): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::makeSetCall'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneDestructuringDefault(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(678): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneDestructuringDefault'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneLeftHandSide(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(679): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneLeftHandSide'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::SyntaxParseHandler::Node js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneParseTree(js::frontend::SyntaxParseHandler::Node)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(680): note: see declaration of 'js::frontend::Parser<js::frontend::SyntaxParseHandler>::cloneParseTree'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'bool js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(676): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(678): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(679): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/frontend/Parser.cpp(423): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(680): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree'
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/FullParseHandler.h(172): warning C4661: 'bool js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(676): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::bindDestructuringLHS'
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/FullParseHandler.h(172): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(678): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneDestructuringDefault'
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/FullParseHandler.h(172): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(679): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneLeftHandSide'
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/FullParseHandler.h(172): warning C4661: 'js::frontend::ParseNode *js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree(js::frontend::ParseNode *)': no suitable definition provided for explicit template instantiation request
+11:53.15 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/Parser.h(680): note: see declaration of 'js::frontend::Parser<js::frontend::FullParseHandler>::cloneParseTree'
+11:53.15 Unified_cpp_js_src10.obj
+11:53.15 jsmath.cpp
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1042): warning C4273: 'log2': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(552): note: see previous definition of 'log2'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1067): warning C4273: 'log1p': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(551): note: see previous definition of 'log1p'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1113): warning C4273: 'expm1': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(537): note: see previous definition of 'expm1'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1217): warning C4273: 'acosh': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(523): note: see previous definition of 'acosh'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1327): warning C4273: 'atanh': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(525): note: see previous definition of 'atanh'
+11:53.15 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1483): warning C4273: 'trunc': inconsistent dll linkage
+11:53.15 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(571): note: see previous definition of 'trunc'
+14:13.94 d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/jsmath.cpp(1534): warning C4273: 'cbrt': inconsistent dll linkage
+14:13.94 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\ucrt\corecrt_math.h(529): note: see previous definition of 'cbrt'
+14:13.94 Unified_cpp_js_src11.obj
+14:13.94 TraceLogging.cpp
+14:13.94 Unified_cpp_js_src12.obj
+14:13.94 Unified_cpp_js_src1.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\frontend/BytecodeEmitter.cpp(7307): warning C4018: '<': signed/unsigned mismatch
+14:13.94 Unified_cpp_js_src2.obj
+14:13.94 Unified_cpp_js_src0.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\asmjs/AsmJSModule.cpp(857): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\asmjs/AsmJSSignalHandlers.cpp(586): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\builtin/MapObject.cpp(630): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\builtin/MapObject.cpp(622): note: while compiling class template member function 'bool js::detail::OrderedHashTable<T,js::OrderedHashSet<T,js::HashableValue::Hasher,js::RuntimeAllocPolicy>::SetOps,AllocPolicy>::rehash(uint32_t)'
+14:13.94         with
+14:13.94         [
+14:13.94             T=js::HashableValue,
+14:13.94             AllocPolicy=js::RuntimeAllocPolicy
+14:13.94         ]
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\builtin/MapObject.cpp(231): note: see reference to function template instantiation 'bool js::detail::OrderedHashTable<T,js::OrderedHashSet<T,js::HashableValue::Hasher,js::RuntimeAllocPolicy>::SetOps,AllocPolicy>::rehash(uint32_t)' being compiled
+14:13.94         with
+14:13.94         [
+14:13.94             T=js::HashableValue,
+14:13.94             AllocPolicy=js::RuntimeAllocPolicy
+14:13.94         ]
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\builtin/MapObject.cpp(755): note: see reference to class template instantiation 'js::detail::OrderedHashTable<T,js::OrderedHashSet<T,js::HashableValue::Hasher,js::RuntimeAllocPolicy>::SetOps,AllocPolicy>' being compiled
+14:13.94         with
+14:13.94         [
+14:13.94             T=js::HashableValue,
+14:13.94             AllocPolicy=js::RuntimeAllocPolicy
+14:13.94         ]
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\builtin/MapObject.cpp(1161): note: see reference to class template instantiation 'js::OrderedHashSet<js::HashableValue,js::HashableValue::Hasher,js::RuntimeAllocPolicy>' being compiled
+14:13.94 Unified_cpp_js_src3.obj
+14:13.94 Unified_cpp_js_src12.cpp
+14:13.94 Unified_cpp_js_src4.obj
+14:13.94 Unified_cpp_js_src11.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 Unified_cpp_js_src5.obj
+14:13.94 Unified_cpp_js_src2.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/AlignmentMaskAnalysis.cpp(18): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.cpp(999): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup'
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.cpp(1000): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<char16_t>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<char16_t>::ParseGroup'
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.cpp(214): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup'
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.cpp(214): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<char16_t>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<char16_t>::ParseGroup'
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\ds/LifoAlloc.h(409): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<JS::Latin1Char>::ParseGroup'
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\ds/LifoAlloc.h(409): warning C4661: 'js::irregexp::RegExpTree *js::irregexp::RegExpParser<char16_t>::ParseGroup(void)': no suitable definition provided for explicit template instantiation request
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\irregexp/RegExpParser.h(181): note: see declaration of 'js::irregexp::RegExpParser<char16_t>::ParseGroup'
+14:13.94 Unified_cpp_js_src6.obj
+14:13.94 Unified_cpp_js_src4.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 Unified_cpp_js_src7.obj
+14:13.94 Unified_cpp_js_src5.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 Unified_cpp_js_src8.obj
+14:13.94 Unified_cpp_js_src3.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/BaselineCompiler.cpp(1010): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/CodeGenerator.cpp(6146): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 Unified_cpp_js_src9.obj
+14:13.94 Unified_cpp_js_src6.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/shared/CodeGenerator-x86-shared.cpp(375): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 Unified_cpp_js_src7.cpp
+14:13.94 Unified_cpp_js_src8.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 Unified_cpp_js_src9.cpp
+14:13.94 Unified_cpp_js_src10.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\vm/MemoryMetrics.cpp(565): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\vm/MemoryMetrics.cpp(723): note: see reference to function template instantiation 'void StatsCellCallback<FineGrained>(JSRuntime *,void *,void *,JSGCTraceKind,size_t)' being compiled
+14:13.94 js_static.lib
+14:13.94 Unified_cpp_js_src_shell0.obj
+14:13.94 Unified_cpp_js_src_shell0.cpp
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/shared/Assembler-x86-shared.h(2729): warning C4805: '|': unsafe mix of type 'bool' and type 'int' in operation
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): warning C4200: nonstandard extension used: zero-sized array in struct/union
+14:13.94 d:\a\K-Meleon-R\K-Meleon-R\goanna\js\src\jit/JitcodeMap.h(248): note: This member will be ignored by a defaulted constructor or copy/move assignment operator
+14:13.94 js.exe
+14:13.94    Creating library js.lib and object js.exp
+14:13.94 
+14:13.94 gmake.EXE[4]: Target 'recurse_compile' not remade because of errors.
+14:13.94 gmake.EXE[3]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/recurse.mk:33: compile] Error 2
+14:13.94 gmake.EXE[2]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
+14:13.94 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:399: realbuild] Error 2
+14:13.94 gmake.EXE: *** [client.mk:171: build] Error 2
+14:13.95 9 compiler warnings present.
 2
 === BUILD FAILED, isolating errors with -j1 ===
 === retry js/ipc ===
- 0:15.01 gmake.EXE[1]: *** No rule to make target '../../netwerk/base/netwerk_base.lib', needed by 'xul_s.lib.desc'.  Stop.
- 0:15.01 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
+ 0:06.71     ..\..\xpcom\base\ErrorNames.obj
+ 0:06.71     ..\..\xpcom\base\nsErrorService.obj
+ 0:06.75 LINK : fatal error LNK1181: cannot open input file '..\..\layout\media\gkmedias.lib'
+ 0:06.75 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:815: xul.dll] Error 1181
+ 0:06.75 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2

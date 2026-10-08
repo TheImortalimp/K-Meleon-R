@@ -90,7 +90,7 @@ jobs:
             "$u -> $((Get-Item C:\yasm\yasm.exe).Length) bytes"
             if ((Get-Item C:\yasm\yasm.exe).Length -gt 100000) { break }
           }
-          & C:\yasm\yasm.exe --version
+          & C:\mozilla-build\yasm\yasm.exe --version; Get-ChildItem C:\mozilla-build\yasm
           "yasm exit $LASTEXITCODE"
           if ($LASTEXITCODE -ne 0) { choco install yasm -y --no-progress; Get-Command yasm* -All | Format-List Source }
       - name: Write mozconfig
@@ -111,7 +111,7 @@ jobs:
           ac_add_options --disable-webrtc
           ac_add_options --disable-require-d3d-compilers
           mk_add_options MOZ_MAKE_FLAGS="-j4 -k"
-          export YASM=/c/yasm/yasm.exe
+          export YASM=/c/mozilla-build/yasm/yasm.exe
           export CFLAGS=-DNOMINMAX
           export CXXFLAGS=-DNOMINMAX
           EOF
@@ -132,7 +132,7 @@ jobs:
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.29
           set MOZCONFIG=%CD%\goanna\mozconfig
-          set PATH=C:\yasm;C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
+          set PATH=C:\mozilla-build\yasm;C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
           set MOZ_NO_RESET_PATH=1
           set MOZILLABUILD=C:\mozilla-build
           set MOZ_TOOLS=C:\mozilla-build\moztools-x64
