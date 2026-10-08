@@ -48,6 +48,8 @@ jobs:
           for f in $(grep -rl "exception wrapping doesn't understand" --include=configure --include=configure.in --include=old-configure* .); do
             sed -i -E "s/(AC_MSG_ERROR|\{ \{ echo \"configure: error:)(.*)exception wrapping doesn't understand[^]]*/AC_MSG_WARN([exception wrapping disabled/" "$f"
           done
+          sed -i 's/^MOZ_REQUIRE_ALL_D3DCS=1/MOZ_REQUIRE_ALL_D3DCS=/' configure.in
+          grep -n 'MOZ_REQUIRE_ALL_D3DCS=' configure.in
           grep -rn "exception wrapping" --include=configure --include=configure.in --include=old-configure* . | head
 
       - name: Install MozillaBuild
