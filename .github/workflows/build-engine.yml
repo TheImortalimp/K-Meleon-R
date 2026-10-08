@@ -1,4 +1,4 @@
-name: Build Goanna engine x64
+name: Build K-Meleon-R browser x64
 
 on:
   workflow_dispatch:
@@ -30,6 +30,11 @@ jobs:
           git fetch -q --depth 1 origin $GOANNA_SHA
           git checkout -q FETCH_HEAD
           git log -1 --format=%H
+
+      - name: Add K-Meleon application sources
+        shell: bash
+        working-directory: goanna
+        run: cp -a ../k-meleon ./kmeleon
 
       - name: Backdate sources so cached objects stay valid
         shell: bash
@@ -68,10 +73,12 @@ jobs:
           printf "\nif CONFIG['OS_ARCH'] == 'WINNT':\n    LDFLAGS += ['-FORCE:MULTIPLE']\n" >> toolkit/library/moz.build
           grep -n stub xulrunner/moz.build || true
 
-      - name: Relax MSVC STL wrapping check (VS2019 STL lacks the hooks)
+      - name: Enable Windows 10 SDK Direct3D and relax STL checks
         shell: bash
         working-directory: goanna
         run: |
+          sed -i 's/0x0603[*])/0x0603*|0x0A00*)/' configure.in
+          grep -n -A4 'case "$MOZ_WINSDK_MAXVER"' configure.in
           grep -rl "exception wrapping doesn't understand" --include=configure --include=configure.in --include=old-configure* . || true
           for f in $(grep -rl "exception wrapping doesn't understand" --include=configure --include=configure.in --include=old-configure* .); do
             sed -i -E "s/(AC_MSG_ERROR|\{ \{ echo \"configure: error:)(.*)exception wrapping doesn't understand[^]]*/AC_MSG_WARN([exception wrapping disabled/" "$f"
@@ -112,7 +119,7 @@ jobs:
         run: |
           cat > goanna/mozconfig <<'EOF'
           mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-x64
-          ac_add_options --enable-application=xulrunner
+          ac_add_options --enable-application=kmeleon
           ac_add_options --target=x86_64-pc-mingw32
           ac_add_options --host=x86_64-pc-mingw32
           ac_add_options --enable-optimize
@@ -171,6 +178,27 @@ jobs:
         if: always()
         shell: bash
         run: tail -n 80 build.log || true
+
+      - name: Verify K-Meleon browser output
+        if: success() && inputs.stage == 'build'
+        shell: pwsh
+        run: |
+          $bin = 'goanna\obj-x64\dist\bin'
+          $app = Get-ChildItem $bin -File -Filter '*meleon*.exe' | Select-Object -First 1
+          if (-not $app) { throw "K-Meleon executable was not produced in $bin" }
+          foreach ($file in 'xul.dll', 'mozglue.dll') {
+            if (-not (Test-Path (Join-Path $bin $file))) { throw "Missing runtime file: $file" }
+          }
+          Write-Output "Verified $($app.FullName)"
+
+      - name: Upload test browser
+        if: success() && inputs.stage == 'build'
+        uses: actions/upload-artifact@v4
+        with:
+          name: K-Meleon-R-x64-browser
+          path: goanna/obj-x64/dist/bin/
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Upload log
         if: always()
