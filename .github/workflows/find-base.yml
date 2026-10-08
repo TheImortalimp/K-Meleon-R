@@ -1,4 +1,4 @@
-name: Find Goanna base revision for patches
+﻿name: Find Goanna base revision for patches
 
 on:
   workflow_dispatch:
@@ -25,27 +25,18 @@ jobs:
         shell: bash
         working-directory: goanna
         run: |
-          # first "index <old>..<new>" line of each patch names the pre-patch blob
-          grep -E '^(diff --git|index )' ../goanna-gre-prefs.diff | head -4
-          for pair in "f8965daaf modules/libpref/Makefile.in"; do
-            set -- $pair
-            echo "=== commits touching blob $1 ($2) on any branch"
-            git log --all --format='%h %ad %s' --date=short --find-object="$1" -- "$2" | head -5
+          find_blob() {  # $1=short blob hash  $2=path
+            git log --all --format='%H' -- "$2" | while read -r c; do
+              b=$(git rev-parse --short=9 "$c:$2" 2>/dev/null) || continue
+              [ "$b" = "$1" ] && echo "$c"
+            done
+          }
+          echo "=== commits where modules/libpref/Makefile.in blob == f8965daaf"
+          find_blob f8965daaf modules/libpref/Makefile.in | head -5 | while read -r c; do
+            git log -1 --format="$c %ad %s" --date=short "$c"
+            git branch -r --contains "$c" | head -5
           done
-          echo "=== branches containing the matching commit"
-          c=$(git log --all --format='%H' --find-object=f8965daaf -- modules/libpref/Makefile.in | tail -1)
-          echo "oldest commit with that blob: $c"
-          [ -n "$c" ] && git branch -r --contains "$c" | head -10
-          [ -n "$c" ] && git log -1 --format='%h %ad %s' --date=short "$c"
-
-      - name: Test patches against the candidate commit
-        shell: bash
-        working-directory: goanna
-        run: |
-          c=$(git log --all --format='%H' --find-object=f8965daaf -- modules/libpref/Makefile.in | head -1)
-          echo "candidate: $c"
-          [ -z "$c" ] && { echo "no candidate found"; exit 0; }
-          git checkout -q "$c"
-          for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
-            if git apply --check --whitespace=nowarn "../$p.diff" 2>/tmp/err; then echo "OK    $p.diff"; else echo "FAIL  $p.diff"; head -3 /tmp/err; fi
+          echo "=== commits where nsResProtocolHandler.cpp blob == 97788082f"
+          find_blob 97788082f netwerk/protocol/res/nsResProtocolHandler.cpp | head -5 | while read -r c; do
+            git log -1 --format="$c %ad %s" --date=short "$c"
           done
