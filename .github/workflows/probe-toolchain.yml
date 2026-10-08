@@ -1,0 +1,35 @@
+name: Probe x64 engine toolchain
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - name: Toolsets and components
+        shell: pwsh
+        run: |
+          $vs = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -all -products * -format json | ConvertFrom-Json
+          $vs | ForEach-Object { "VS: $($_.displayName) $($_.installationVersion) $($_.installationPath)" }
+          foreach ($i in $vs) {
+            "--- toolsets under $($i.installationPath)"
+            Get-ChildItem "$($i.installationPath)\VC\Tools\MSVC" -Name -ErrorAction SilentlyContinue
+            Get-ChildItem "$($i.installationPath)\MSBuild\Microsoft\VC" -Recurse -Directory -Filter 'v14*' -ErrorAction SilentlyContinue | Select-Object -First 12 -ExpandProperty FullName
+            Get-ChildItem "$($i.installationPath)\VC\Tools\MSVC\*\atlmfc\lib" -Name -ErrorAction SilentlyContinue | Select-Object -First 5
+          }
+          "--- python"; where.exe python python2 py 2>&1
+          Get-ChildItem C:\hostedtoolcache\windows\Python -Name -ErrorAction SilentlyContinue
+
+      - name: MozillaBuild availability
+        shell: pwsh
+        run: |
+          foreach ($v in '1.9.0','2.2.0','3.4') {
+            $u = "https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-$v.exe"
+            try { $r = Invoke-WebRequest -Method Head -Uri $u -UseBasicParsing; "$v OK $($r.Headers.'Content-Length')" } catch { "$v MISSING" }
+          }
