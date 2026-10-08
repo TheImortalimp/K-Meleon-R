@@ -1,7 +1,7 @@
 # -*- Mode: python; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 40 -*-
 # vim: set filetype=python:
 
-LIBRARY_NAME = 'sessions'
+SharedLibrary('sessions')
 
 SOURCES += [
   'sessions.cpp',
@@ -12,8 +12,6 @@ SOURCES += [
 DEFINES['UNICODE'] = True
 
 DEFINES['_UNICODE'] = True
-
-FORCE_SHARED_LIB = True
 
 DISABLE_STL_WRAPPING = True
 

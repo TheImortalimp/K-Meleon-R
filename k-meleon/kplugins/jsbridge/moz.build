@@ -5,7 +5,7 @@ DIRS += [
   'idl'
 ]                                      
 
-LIBRARY_NAME = 'jsbridge'
+SharedLibrary('jsbridge')
 
 SOURCES += [
   'jscomp.cpp',
@@ -16,8 +16,6 @@ SOURCES += [
 DEFINES['UNICODE'] = True
 
 DEFINES['_UNICODE'] = True
-
-FORCE_SHARED_LIB = True
 
 DISABLE_STL_WRAPPING = True
 

@@ -1,7 +1,7 @@
 # -*- Mode: python; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 40 -*-
 # vim: set filetype=python:
 
-LIBRARY_NAME = 'hotlist'
+SharedLibrary('hotlist')
 
 SOURCES += [
   '../../shared/Utils.cpp',
@@ -13,8 +13,6 @@ SOURCES += [
   '../../shared/qsort.cpp',
   '../../shared/stristr.cpp',
 ]
-
-FORCE_SHARED_LIB = True
 
 DISABLE_STL_WRAPPING = True
 

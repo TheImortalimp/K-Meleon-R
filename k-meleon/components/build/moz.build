@@ -12,11 +12,9 @@ SOURCES += [
     'nsModule.cpp',
 ]
 
-LIBRARY_NAME = 'browsercomps'
+SharedLibrary('browsercomps')
 
 IS_COMPONENT = True
-
-FORCE_SHARED_LIB = True
 
 LOCAL_INCLUDES += [
     '../about',
