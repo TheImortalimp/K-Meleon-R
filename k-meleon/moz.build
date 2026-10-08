@@ -23,8 +23,5 @@ DIRS += [
     'app',
 ]
 
-if CONFIG['MAKENSISU']:
-    DIRS += ['installer/windows']
-
 DIST_SUBDIR = 'browser'
 export('DIST_SUBDIR')
