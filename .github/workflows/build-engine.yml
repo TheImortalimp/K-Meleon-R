@@ -128,7 +128,7 @@ jobs:
           export YASM=/c/mozilla-build/yasm/yasm.exe
           export CFLAGS=-DNOMINMAX
           export CXXFLAGS=-DNOMINMAX
-          export LDFLAGS=-FORCE:MULTIPLE
+          export LDFLAGS="-link -FORCE:MULTIPLE"
           EOF
 
       - name: Restore object cache
