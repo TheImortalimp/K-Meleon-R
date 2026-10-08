@@ -59,6 +59,14 @@ jobs:
           sed -i "/'\/js\/public',/d" js/ipc/moz.build
           grep -n -A6 LOCAL_INCLUDES js/ipc/moz.build
 
+      - name: Drop xulrunner stub (CRT mismatch, unused by K-Meleon)
+        shell: bash
+        working-directory: goanna
+        run: |
+          grep -n stub xulrunner/moz.build || true
+          sed -i "/'stub'/d" xulrunner/moz.build
+          grep -n stub xulrunner/moz.build || true
+
       - name: Relax MSVC STL wrapping check (VS2019 STL lacks the hooks)
         shell: bash
         working-directory: goanna
@@ -115,10 +123,12 @@ jobs:
           ac_add_options --disable-installer
           ac_add_options --disable-webrtc
           ac_add_options --disable-require-d3d-compilers
+          ac_add_options --disable-webgl
           mk_add_options MOZ_MAKE_FLAGS="-j4 -k"
           export YASM=/c/mozilla-build/yasm/yasm.exe
           export CFLAGS=-DNOMINMAX
           export CXXFLAGS=-DNOMINMAX
+          export LDFLAGS=-FORCE:MULTIPLE
           EOF
 
       - name: Restore object cache
