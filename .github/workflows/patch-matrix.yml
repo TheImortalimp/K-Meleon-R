@@ -23,6 +23,7 @@ jobs:
         shell: bash
         working-directory: goanna
         run: |
+          set +e +o pipefail
           patches="goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour"
           cands=""
           for d in 2024-03-01 2024-04-19 2024-04-25 2024-06-01 2024-09-01; do
