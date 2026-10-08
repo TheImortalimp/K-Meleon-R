@@ -125,7 +125,7 @@ jobs:
 
       - name: Keep restored objdir from being clobbered
         shell: bash
-        run: if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi; ls goanna/obj-x64 2>/dev/null | head -5
+        run: if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi; ls goanna/obj-x64 2>/dev/null | head -5 || true
 
       - name: Configure / build
         shell: cmd
