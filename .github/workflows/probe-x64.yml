@@ -1,4 +1,4 @@
-name: Probe x64 build feasibility
+﻿name: Probe x64 build feasibility
 
 on:
   workflow_dispatch:
@@ -8,6 +8,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
+      - name: Disable CRLF conversion
+        run: git config --global core.autocrlf false
+
       - name: Check out K-Meleon-R
         uses: actions/checkout@v4
 
@@ -48,9 +51,9 @@ jobs:
         working-directory: goanna
         run: |
           for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
-            if git apply --check --whitespace=nowarn "../$p.diff"; then
+            if git apply --check --whitespace=nowarn "../$p.diff" 2>/tmp/err; then
               echo "OK    $p.diff"
             else
-              echo "FAIL  $p.diff"
+              echo "FAIL  $p.diff"; head -5 /tmp/err
             fi
           done
