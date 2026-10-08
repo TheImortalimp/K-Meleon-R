@@ -84,3 +84,105 @@ function onSearchSubmit(aEvent)
 
     aEvent.preventDefault();
 }
+
+/* ---- K-Meleon-BrowseR speed dial ---- */
+const DIAL_PREF = "kmeleon.browser.speeddial";
+const DIAL_COLORS = ["#7a5cf0", "#e0457b", "#1f9d8b", "#d98324", "#3b82c4", "#8b5cf6"];
+const DIAL_DEFAULTS = [
+    { title: "Wikipedia", url: "https://www.wikipedia.org/" },
+    { title: "GitHub", url: "https://github.com/" },
+    { title: "YouTube", url: "https://www.youtube.com/" },
+    { title: "Reddit", url: "https://www.reddit.com/" },
+    { title: "Windows Security", url: "windowsdefender://" }
+];
+
+function loadDial() {
+    try {
+        let list = JSON.parse(Services.prefs.getCharPref(DIAL_PREF));
+        if (Array.isArray(list)) return list;
+    } catch (ex) {}
+    return DIAL_DEFAULTS.slice();
+}
+
+function saveDial(list) {
+    Services.prefs.setCharPref(DIAL_PREF, JSON.stringify(list));
+}
+
+function isAllowedDialUrl(url) {
+    return /^(https?:\/\/|windowsdefender:\/\/)/i.test(url);
+}
+
+function makeTile(cls, label, iconText, color) {
+    let tile = document.createElement("div");
+    tile.className = "tile " + cls;
+    let icon = document.createElement("span");
+    icon.className = "icon";
+    icon.textContent = iconText;
+    if (color) icon.style.backgroundColor = color;
+    let name = document.createElement("span");
+    name.className = "name";
+    name.textContent = label;
+    tile.appendChild(icon);
+    tile.appendChild(name);
+    return tile;
+}
+
+function renderDial() {
+    let root = document.getElementById("speedDial");
+    while (root.firstChild) root.removeChild(root.firstChild);
+    let list = loadDial();
+
+    list.forEach(function (entry, i) {
+        if (!entry || !isAllowedDialUrl(String(entry.url))) return;
+        let title = String(entry.title || entry.url);
+        let tile = makeTile("site", title, title.charAt(0).toUpperCase(),
+                            DIAL_COLORS[i % DIAL_COLORS.length]);
+        tile.title = entry.url;
+        tile.addEventListener("click", function () {
+            window.location.href = entry.url;
+        });
+        let remove = document.createElement("span");
+        remove.className = "remove";
+        remove.textContent = "\u00d7";
+        remove.title = "Remove";
+        remove.addEventListener("click", function (e) {
+            e.stopPropagation();
+            list.splice(i, 1);
+            saveDial(list);
+            renderDial();
+        });
+        tile.appendChild(remove);
+        root.appendChild(tile);
+    });
+
+    let add = makeTile("add", "Add site", "+", null);
+    add.addEventListener("click", function () {
+        document.getElementById("dialForm").className = "";
+        document.getElementById("dialTitle").focus();
+    });
+    root.appendChild(add);
+}
+
+function onDialSave(aEvent) {
+    aEvent.preventDefault();
+    let url = document.getElementById("dialUrl").value.trim();
+    if (!/^[a-z][a-z0-9+.-]*:/i.test(url)) url = "https://" + url;
+    if (!/^https?:\/\//i.test(url)) return;
+    let title = document.getElementById("dialTitle").value.trim() || url.replace(/^https?:\/\//i, "");
+    let list = loadDial();
+    list.push({ title: title, url: url });
+    saveDial(list);
+    onDialCancel();
+    renderDial();
+}
+
+function onDialCancel() {
+    document.getElementById("dialTitle").value = "";
+    document.getElementById("dialUrl").value = "";
+    document.getElementById("dialForm").className = "hidden";
+}
+
+window.addEventListener("load", function () {
+    document.getElementById("dialCancel").addEventListener("click", onDialCancel);
+    renderDial();
+});

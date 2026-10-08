@@ -19,9 +19,11 @@
         <script type="text/javascript;version=1.8" src="chrome://kmeleon/content/aboutHome/aboutHome.js"/>
 
     </head>
-    <body dir="&locale.dir;">    
+    <body dir="&locale.dir;">
         <div class="spacer"/>
         <div id="content">
+            <h1 id="wordmark">K-Meleon<span>-BrowseR</span></h1>
+
             <div id="searchContainer">
                 <form name="searchForm" id="searchForm" onsubmit="onSearchSubmit(event)">
                     <div id="searchLogoContainer"><img id="searchEngineLogo"/></div>
@@ -30,7 +32,16 @@
                     <input id="searchSubmit" type="submit" value="&abouthome.searchEngineButton.label;"/>
                 </form>
             </div>
-        </div>  
+
+            <div id="speedDial"></div>
+
+            <form id="dialForm" class="hidden" onsubmit="onDialSave(event)">
+                <input type="text" id="dialTitle" placeholder="Name" maxlength="40"/>
+                <input type="text" id="dialUrl" placeholder="https://example.com" maxlength="512"/>
+                <input type="submit" value="Save"/>
+                <input type="button" id="dialCancel" value="Cancel"/>
+            </form>
+        </div>
         <div class="spacer"/>
         <div id="footer">
             <div id="brandname"><a href="http://kmeleonbrowser.org"><img src="chrome://branding/content/logo.png" /></a></div>
