@@ -21,9 +21,9 @@ DEFINES['_UNICODE'] = True
 
 DISABLE_STL_WRAPPING = True
 
-OS_LIBS += [
-  CONFIG['XPCOM_GLUE_LDOPTS'],
-  CONFIG['MOZ_JS_LIBS']  
+USE_LIBS += [
+  'mozjs',
+  'xpcomglue_s',
 ]
 
 LOCAL_INCLUDES += [
