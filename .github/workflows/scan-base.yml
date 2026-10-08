@@ -1,0 +1,29 @@
+name: Scan classic history for patch base
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+      - name: Clone engine
+        shell: bash
+        run: git clone --no-checkout --filter=blob:none https://github.com/roytam1/palemoon27.git goanna
+      - name: Scan
+        shell: bash
+        working-directory: goanna
+        run: |
+          set +e +o pipefail
+          git rev-list --first-parent origin/classic --since=2023-01-01 | awk 'NR%40==1' | head -60 > ../cands.txt
+          wc -l ../cands.txt
+          while read sha; do
+            git checkout -q -f "$sha" 2>/dev/null || continue
+            d=$(git log -1 --format=%cs)
+            out=$(patch -p1 --dry-run -F3 -l < ../goanna-xulrunner-km-adapt.diff 2>&1)
+            f=$(echo "$out" | grep -c 'FAILED at')
+            echo "RESULT $d $sha failed=$f"
+          done < ../cands.txt
