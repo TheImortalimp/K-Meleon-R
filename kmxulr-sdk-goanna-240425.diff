@@ -1,0 +1,301 @@
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/FrameMetrics.h xulrunner-sdk/include/FrameMetrics.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/FrameMetrics.h	2024-04-19 09:59:03.403999000 +0800
++++ xulrunner-sdk/include/FrameMetrics.h	2024-04-25 22:19:25.881446600 +0800
+@@ -14,11 +14,12 @@
+ #include "mozilla/gfx/Rect.h"           // for RoundedIn
+ #include "mozilla/gfx/ScaleFactor.h"    // for ScaleFactor
+ #include "mozilla/gfx/Logging.h"        // for Log
+ #include "mozilla/StaticPtr.h"          // for StaticAutoPtr
+ #include "mozilla/TimeStamp.h"          // for TimeStamp
+-#include "nsString.h"
++//#include "nsString.h"
++#include <nsStringAPI.h>
+ #include "nsStyleCoord.h"               // for nsStyleCoord
+ 
+ namespace IPC {
+ template <typename T> struct ParamTraits;
+ } // namespace IPC
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/gfxFontFamilyList.h xulrunner-sdk/include/gfxFontFamilyList.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/gfxFontFamilyList.h	2024-01-11 15:14:47.059250000 +0800
++++ xulrunner-sdk/include/gfxFontFamilyList.h	2024-04-25 22:19:25.881446600 +0800
+@@ -6,11 +6,12 @@
+ #ifndef GFX_FONT_FAMILY_LIST_H
+ #define GFX_FONT_FAMILY_LIST_H
+ 
+ #include "nsDebug.h"
+ #include "nsISupportsImpl.h"
+-#include "nsString.h"
++//#include "nsString.h"
++#include <nsStringAPI.h>
+ #include "nsUnicharUtils.h"
+ #include "nsTArray.h"
+ #include "mozilla/MemoryReporting.h"
+ 
+ namespace mozilla {
+@@ -152,11 +153,11 @@
+         return FontFamilyName(genericType);
+     }
+ 
+     // memory reporting
+     size_t SizeOfExcludingThis(mozilla::MallocSizeOf aMallocSizeOf) const {
+-        return mName.SizeOfExcludingThisIfUnshared(aMallocSizeOf);
++        return mName.Length();
+     }
+ 
+     FontFamilyType mType;
+     nsString       mName; // empty if mType != eFamily_named
+ };
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/gfxFontFeatures.h xulrunner-sdk/include/gfxFontFeatures.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/gfxFontFeatures.h	2020-12-21 14:19:45.692946000 +0800
++++ xulrunner-sdk/include/gfxFontFeatures.h	2024-04-25 22:19:25.882446700 +0800
+@@ -7,11 +7,12 @@
+ #ifndef GFX_FONT_FEATURES_H
+ #define GFX_FONT_FEATURES_H
+ 
+ #include "nsTHashtable.h"
+ #include "nsTArray.h"
+-#include "nsString.h"
++//#include "nsString.h"
++#include <nsStringAPI.h>
+ 
+ // An OpenType feature tag and value pair
+ struct gfxFontFeature {
+     uint32_t mTag; // see http://www.microsoft.com/typography/otspec/featuretags.htm
+     uint32_t mValue; // 0 = off, 1 = on, larger values may be used as parameters
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/js/Debug.h xulrunner-sdk/include/js/Debug.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/js/Debug.h	2024-04-04 12:53:50.351654000 +0800
++++ xulrunner-sdk/include/js/Debug.h	2024-04-25 22:19:25.882446700 +0800
+@@ -128,11 +128,11 @@
+     js::Debugger* debugger;
+ 
+     // Check that |thing| is in the same compartment as our debuggerObject. Used
+     // for assertions when constructing BuiltThings. We can overload this as we
+     // add more instantiations of BuiltThing.
+-#if DEBUG
++#ifndef NDEBUG
+     void assertBuilt(JSObject* obj);
+ #else
+     void assertBuilt(JSObject* obj) { }
+ #endif
+ 
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/mozilla/a11y/Accessible.h xulrunner-sdk/include/mozilla/a11y/Accessible.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/mozilla/a11y/Accessible.h	2024-03-29 09:42:59.662769000 +0800
++++ xulrunner-sdk/include/mozilla/a11y/Accessible.h	2024-04-25 22:19:25.882446700 +0800
+@@ -10,11 +10,12 @@
+ #include "mozilla/a11y/RelationType.h"
+ #include "mozilla/a11y/Role.h"
+ #include "mozilla/a11y/States.h"
+ 
+ #include "nsIContent.h"
+-#include "nsString.h"
++//#include "nsString.h"
++#include <nsStringAPI.h>
+ #include "nsTArray.h"
+ #include "nsRefPtrHashtable.h"
+ #include "nsRect.h"
+ 
+ struct nsRoleMapEntry;
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/mozilla/BasicEvents.h xulrunner-sdk/include/mozilla/BasicEvents.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/mozilla/BasicEvents.h	2024-04-25 21:59:25.865809000 +0800
++++ xulrunner-sdk/include/mozilla/BasicEvents.h	2024-04-25 22:19:25.883446700 +0800
+@@ -13,11 +13,11 @@
+ #include "mozilla/TimeStamp.h"
+ #include "nsCOMPtr.h"
+ #include "nsIAtom.h"
+ #include "nsISupportsImpl.h"
+ #include "nsIWidget.h"
+-#include "nsString.h"
++#include <nsStringAPI.h>
+ #include "Units.h"
+ 
+ namespace IPC {
+ template<typename T>
+ struct ParamTraits;
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsCOMPtr.h xulrunner-sdk/include/nsCOMPtr.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsCOMPtr.h	2023-01-27 10:52:48.437255000 +0800
++++ xulrunner-sdk/include/nsCOMPtr.h	2024-04-25 22:19:25.883446700 +0800
+@@ -384,17 +384,17 @@
+ private:
+   T* MOZ_OWNING_REF mRawPtr;
+ #endif
+ 
+   void assert_validity()
+-  {
++  {/*
+     static_assert(1 < sizeof(TestForIID<T>(nullptr)), "nsCOMPtr only works "
+                   "for types with IIDs.  Either use RefPtr; add an IID to "
+                   "your type with NS_DECLARE_STATIC_IID_ACCESSOR/"
+                   "NS_DEFINE_STATIC_IID_ACCESSOR; or make the nsCOMPtr point "
+                   "to a base class with an IID.");
+-  }
++  */}
+ 
+ public:
+   typedef T element_type;
+ 
+ #ifndef NSCAP_FEATURE_USE_BASE
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsCoord.h xulrunner-sdk/include/nsCoord.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsCoord.h	2023-02-11 00:16:06.743709000 +0800
++++ xulrunner-sdk/include/nsCoord.h	2024-04-25 22:19:25.883446700 +0800
+@@ -178,11 +178,11 @@
+     // infinity + anything = anything + infinity = infinity
+     return nscoord_MAX;
+   } else {
+     // a + b = a + b
+     // Cap the result, just in case we're dealing with numbers near nscoord_MAX
+-    return std::min(nscoord_MAX, a + b);
++    return (std::min)(nscoord_MAX, a + b);
+   }
+ #endif
+ }
+ 
+ /**
+@@ -226,11 +226,11 @@
+       // case (c) for integers
+       return nscoord_MAX;
+     } else {
+       // case (d) for integers
+       // Cap the result, in case we're dealing with numbers near nscoord_MAX
+-      return std::min(nscoord_MAX, a - b);
++      return (std::min)(nscoord_MAX, a - b);
+     }
+ #endif
+   }
+ }
+ 
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsFont.h xulrunner-sdk/include/nsFont.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsFont.h	2024-04-25 21:59:25.458786000 +0800
++++ xulrunner-sdk/include/nsFont.h	2024-04-25 22:19:25.883446700 +0800
+@@ -10,12 +10,13 @@
+ #include <sys/types.h>                  // for int16_t
+ #include "gfxFontFamilyList.h"
+ #include "gfxFontFeatures.h"
+ #include "mozilla/RefPtr.h"             // for RefPtr
+ #include "nsCoord.h"                    // for nscoord
+-#include "nsStringFwd.h"                // for nsSubstring
+-#include "nsString.h"               // for nsString
++#include <nsStringAPI.h>
++//#include "nsStringFwd.h"                // for nsSubstring
++//#include "nsString.h"               // for nsString
+ #include "nsTArray.h"                   // for nsTArray
+ 
+ struct gfxFontStyle;
+ 
+ // XXX we need a method to enumerate all of the possible fonts on the
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsISupportsImpl.h xulrunner-sdk/include/nsISupportsImpl.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsISupportsImpl.h	2024-02-16 09:33:13.523942000 +0800
++++ xulrunner-sdk/include/nsISupportsImpl.h	2024-04-25 22:19:25.884446800 +0800
+@@ -18,11 +18,11 @@
+ #include "prthread.h" /* needed for thread-safety checks */
+ #endif // !XPCOM_GLUE_AVOID_NSPR
+ 
+ #include "nsDebug.h"
+ #include "nsXPCOM.h"
+-#ifndef XPCOM_GLUE
++#if 1//ndef XPCOM_GLUE
+ #include "mozilla/Atomics.h"
+ #endif
+ #include "mozilla/Attributes.h"
+ #include "mozilla/Assertions.h"
+ #include "mozilla/Compiler.h"
+@@ -338,11 +338,11 @@
+   nsrefcnt operator++(int) = delete;
+   nsrefcnt operator--(int) = delete;
+   nsrefcnt mValue;
+ };
+ 
+-#ifndef XPCOM_GLUE
++#if 1//ndef XPCOM_GLUE
+ namespace mozilla {
+ class ThreadSafeAutoRefCnt
+ {
+ public:
+   ThreadSafeAutoRefCnt() : mValue(0) {}
+diff -rU5 ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsRect.h xulrunner-sdk/include/nsRect.h
+--- ../KMXULRunner/obj-xulrunner-i686-pc-mingw32/dist/include/nsRect.h	2023-04-13 09:44:34.431394000 +0800
++++ xulrunner-sdk/include/nsRect.h	2024-04-25 22:19:25.884446800 +0800
+@@ -71,28 +71,28 @@
+   {
+ #ifdef NS_COORD_IS_FLOAT
+     return UnionEdges(aRect);
+ #else
+     nsRect result;
+-    result.x = std::min(aRect.x, x);
+-    int64_t w = std::max(int64_t(aRect.x) + aRect.width, int64_t(x) + width) - result.x;
++    result.x = (std::min)(aRect.x, x);
++    int64_t w = (std::max)(int64_t(aRect.x) + aRect.width, int64_t(x) + width) - result.x;
+     if (MOZ_UNLIKELY(w > nscoord_MAX)) {
+       // Clamp huge negative x to nscoord_MIN / 2 and try again.
+-      result.x = std::max(result.x, nscoord_MIN / 2);
+-      w = std::max(int64_t(aRect.x) + aRect.width, int64_t(x) + width) - result.x;
++      result.x = (std::max)(result.x, nscoord_MIN / 2);
++      w = (std::max)(int64_t(aRect.x) + aRect.width, int64_t(x) + width) - result.x;
+       if (MOZ_UNLIKELY(w > nscoord_MAX)) {
+         w = nscoord_MAX;
+       }
+     }
+     result.width = nscoord(w);
+ 
+-    result.y = std::min(aRect.y, y);
+-    int64_t h = std::max(int64_t(aRect.y) + aRect.height, int64_t(y) + height) - result.y;
++    result.y = (std::min)(aRect.y, y);
++    int64_t h = (std::max)(int64_t(aRect.y) + aRect.height, int64_t(y) + height) - result.y;
+     if (MOZ_UNLIKELY(h > nscoord_MAX)) {
+       // Clamp huge negative y to nscoord_MIN / 2 and try again.
+-      result.y = std::max(result.y, nscoord_MIN / 2);
+-      h = std::max(int64_t(aRect.y) + aRect.height, int64_t(y) + height) - result.y;
++      result.y = (std::max)(result.y, nscoord_MIN / 2);
++      h = (std::max)(int64_t(aRect.y) + aRect.height, int64_t(y) + height) - result.y;
+       if (MOZ_UNLIKELY(h > nscoord_MAX)) {
+         h = nscoord_MAX;
+       }
+     }
+     result.height = nscoord(h);
+@@ -222,13 +222,13 @@
+ {
+   mozilla::gfx::IntRect rect;
+   rect.x = NSToIntRoundUp(NSAppUnitsToDoublePixels(x, aAppUnitsPerPixel) * aXScale);
+   rect.y = NSToIntRoundUp(NSAppUnitsToDoublePixels(y, aAppUnitsPerPixel) * aYScale);
+   // Avoid negative widths and heights due to overflow
+-  rect.width  = std::max(0, NSToIntRoundUp(NSAppUnitsToDoublePixels(XMost(),
++  rect.width  = (std::max)(0, NSToIntRoundUp(NSAppUnitsToDoublePixels(XMost(),
+                                aAppUnitsPerPixel) * aXScale) - rect.x);
+-  rect.height = std::max(0, NSToIntRoundUp(NSAppUnitsToDoublePixels(YMost(),
++  rect.height = (std::max)(0, NSToIntRoundUp(NSAppUnitsToDoublePixels(YMost(),
+                                aAppUnitsPerPixel) * aYScale) - rect.y);
+   return rect;
+ }
+ 
+ // scale the rect but round to smallest containing rect
+@@ -238,13 +238,13 @@
+ {
+   mozilla::gfx::IntRect rect;
+   rect.x = NSToIntFloor(NSAppUnitsToFloatPixels(x, float(aAppUnitsPerPixel)) * aXScale);
+   rect.y = NSToIntFloor(NSAppUnitsToFloatPixels(y, float(aAppUnitsPerPixel)) * aYScale);
+   // Avoid negative widths and heights due to overflow
+-  rect.width  = std::max(0, NSToIntCeil(NSAppUnitsToFloatPixels(XMost(),
++  rect.width  = (std::max)(0, NSToIntCeil(NSAppUnitsToFloatPixels(XMost(),
+                             float(aAppUnitsPerPixel)) * aXScale) - rect.x);
+-  rect.height = std::max(0, NSToIntCeil(NSAppUnitsToFloatPixels(YMost(),
++  rect.height = (std::max)(0, NSToIntCeil(NSAppUnitsToFloatPixels(YMost(),
+                             float(aAppUnitsPerPixel)) * aYScale) - rect.y);
+   return rect;
+ }
+ 
+ // scale the rect but round to largest contained rect
+@@ -254,13 +254,13 @@
+ {
+   mozilla::gfx::IntRect rect;
+   rect.x = NSToIntCeil(NSAppUnitsToFloatPixels(x, float(aAppUnitsPerPixel)) * aXScale);
+   rect.y = NSToIntCeil(NSAppUnitsToFloatPixels(y, float(aAppUnitsPerPixel)) * aYScale);
+   // Avoid negative widths and heights due to overflow
+-  rect.width  = std::max(0, NSToIntFloor(NSAppUnitsToFloatPixels(XMost(),
++  rect.width  = (std::max)(0, NSToIntFloor(NSAppUnitsToFloatPixels(XMost(),
+                              float(aAppUnitsPerPixel)) * aXScale) - rect.x);
+-  rect.height = std::max(0, NSToIntFloor(NSAppUnitsToFloatPixels(YMost(),
++  rect.height = (std::max)(0, NSToIntFloor(NSAppUnitsToFloatPixels(YMost(),
+                              float(aAppUnitsPerPixel)) * aYScale) - rect.y);
+   return rect;
+ }
+ 
+ inline mozilla::gfx::IntRect
