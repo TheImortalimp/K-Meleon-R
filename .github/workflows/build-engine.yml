@@ -61,6 +61,14 @@ jobs:
           Get-ChildItem C:\mozilla-build -Name | Select-Object -First 40
           Get-ChildItem C:\mozilla-build\python* -Name -ErrorAction SilentlyContinue | Select-Object -First 5
 
+      - name: Install yasm
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force C:\yasm | Out-Null
+          curl.exe -sSL -o C:\yasm\yasm.exe https://github.com/yasm/yasm/releases/download/v1.3.0/yasm-1.3.0-win64.exe
+          if ((Get-Item C:\yasm\yasm.exe).Length -lt 100000) { curl.exe -sSL -o C:\yasm\yasm.exe http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe }
+          C:\yasm\yasm.exe --version
+
       - name: Write mozconfig
         shell: bash
         run: |
@@ -79,6 +87,7 @@ jobs:
           ac_add_options --disable-webrtc
           ac_add_options --disable-require-d3d-compilers
           mk_add_options MOZ_MAKE_FLAGS="-j4 -k"
+          export YASM=/c/yasm/yasm.exe
           export CFLAGS=-DNOMINMAX
           export CXXFLAGS=-DNOMINMAX
           EOF
@@ -95,13 +104,14 @@ jobs:
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.29
           set MOZCONFIG=%CD%\goanna\mozconfig
-          set PATH=C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
+          set PATH=C:\yasm;C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
           set MOZ_NO_RESET_PATH=1
           set MOZILLABUILD=C:\mozilla-build
           set MOZ_TOOLS=C:\mozilla-build\moztools-x64
           set PATH=C:\mozilla-build\moztools-x64\bin;%PATH%
           set STAGE=${{ inputs.stage }}
-          C:\mozilla-build\msys\bin\bash.exe -lc "cd \"$(cygpath -u \"%CD%\")/goanna\"; export PATH=\"$PATH:/c/mozilla-build/python:/c/mozilla-build/python27\"; python --version; if [ $STAGE = build ]; then python mach build; else python mach configure; fi" > build.log 2>&1
+          set RETRY_DIRS=netwerk/base js/ipc
+          C:\mozilla-build\msys\bin\bash.exe -l %GITHUB_WORKSPACE%\.github\scripts\engine-build.sh > build.log 2>&1
           set RC=%ERRORLEVEL%
           type build.log | more +0 > nul
           exit /b %RC%
