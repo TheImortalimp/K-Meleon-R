@@ -65,6 +65,7 @@ jobs:
         run: |
           grep -n stub xulrunner/moz.build || true
           sed -i "/'stub'/d" xulrunner/moz.build
+          printf "\nif CONFIG['OS_ARCH'] == 'WINNT':\n    LDFLAGS += ['-FORCE:MULTIPLE']\n" >> toolkit/library/moz.build
           grep -n stub xulrunner/moz.build || true
 
       - name: Relax MSVC STL wrapping check (VS2019 STL lacks the hooks)
@@ -128,7 +129,6 @@ jobs:
           export YASM=/c/mozilla-build/yasm/yasm.exe
           export CFLAGS=-DNOMINMAX
           export CXXFLAGS=-DNOMINMAX
-          export LDFLAGS="-link -FORCE:MULTIPLE"
           EOF
 
       - name: Restore object cache
