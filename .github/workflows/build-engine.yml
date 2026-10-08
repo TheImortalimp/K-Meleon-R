@@ -40,6 +40,13 @@ jobs:
           done
           find . -name '*.rej' -o -name '*.orig' | head
 
+      - name: Drop redundant PAC hunks (base already checks args)
+        shell: bash
+        working-directory: goanna
+        run: |
+          sed -i '/JS::JS_RequireArgsAtLeast/,+1d' netwerk/base/ProxyAutoConfig.cpp
+          grep -n 'RequireArgsAtLeast\|requireAtLeast' netwerk/base/ProxyAutoConfig.cpp
+
       - name: Relax MSVC STL wrapping check (VS2019 STL lacks the hooks)
         shell: bash
         working-directory: goanna
@@ -115,7 +122,8 @@ jobs:
           set MOZ_TOOLS=C:\mozilla-build\moztools-x64
           set PATH=C:\mozilla-build\moztools-x64\bin;%PATH%
           set STAGE=${{ inputs.stage }}
-          set RETRY_DIRS=netwerk/base js/ipc
+          set RETRY_DIRS=js/ipc
+          set INCLUDE_TRACE=js/ipc
           C:\mozilla-build\msys\bin\bash.exe -l %GITHUB_WORKSPACE%\.github\scripts\engine-build.sh > build.log 2>&1
           set RC=%ERRORLEVEL%
           type build.log | more +0 > nul

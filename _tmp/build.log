@@ -1,0 +1,116 @@
+MozillaBuild Install Directory: C:\mozilla-build
+Python 2.7.11
+ 0:00.73 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s
+ 0:06.13 
+ 0:06.13 The CLOBBER file has been updated, indicating that an incremental
+ 0:06.13 build since your last build will probably not work. A full/clobber
+ 0:06.13 build is required.
+ 0:06.13 
+ 0:06.13 The reason for the clobber is:
+ 0:06.13 
+ 0:06.13  Clobber required ICU 58.3 update
+ 0:06.13 
+ 0:06.13 Clobbering can be performed automatically. However, we didn't
+ 0:06.13 automatically clobber this time because:
+ 0:06.13 
+ 0:06.13   Automatic clobbering is not enabled
+ 0:06.13   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:06.13 
+ 0:06.13 The easiest and fastest way to clobber is to run:
+ 0:06.13 
+ 0:06.13  $ mach clobber
+ 0:06.13 
+ 0:06.13 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:06.13 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:06.13 running:
+ 0:06.13 
+ 0:06.13  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:06.13 
+ 0:06.13 gmake.EXE: *** [client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:06.13 gmake.EXE: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:06.13 
+ 0:06.13 The CLOBBER file has been updated, indicating that an incremental
+ 0:06.13 build since your last build will probably not work. A full/clobber
+ 0:06.13 build is required.
+ 0:06.13 
+ 0:06.13 The reason for the clobber is:
+ 0:06.13 
+ 0:06.13  Clobber required ICU 58.3 update
+ 0:06.13 
+ 0:06.13 Clobbering can be performed automatically. However, we didn't
+ 0:06.13 automatically clobber this time because:
+ 0:06.13 
+ 0:06.13   Automatic clobbering is not enabled
+ 0:06.13   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:06.13 
+ 0:06.13 The easiest and fastest way to clobber is to run:
+ 0:06.13 
+ 0:06.13  $ mach clobber
+ 0:06.13 
+ 0:06.13 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:06.13 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:06.13 running:
+ 0:06.13 
+ 0:06.13  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:06.13 
+ 0:06.13 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:06.13 gmake.EXE[1]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:06.13 Adding client.mk options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig:
+ 0:06.13     CONFIG_GUESS=x86_64-pc-mingw32
+ 0:06.13     MOZ_MAKE_FLAGS=-j4 -k
+ 0:06.13     MOZ_OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 0:06.13     OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 0:06.13     FOUND_MOZCONFIG=D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
+ 0:06.13 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
+ 0:06.13 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
+ 0:06.13 
+ 0:06.13 The CLOBBER file has been updated, indicating that an incremental
+ 0:06.13 build since your last build will probably not work. A full/clobber
+ 0:06.13 build is required.
+ 0:06.13 
+ 0:06.13 The reason for the clobber is:
+ 0:06.13 
+ 0:06.13  Clobber required ICU 58.3 update
+ 0:06.13 
+ 0:06.13 Clobbering can be performed automatically. However, we didn't
+ 0:06.13 automatically clobber this time because:
+ 0:06.13 
+ 0:06.13   Automatic clobbering is not enabled
+ 0:06.13   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:06.13 
+ 0:06.13 The easiest and fastest way to clobber is to run:
+ 0:06.13 
+ 0:06.13  $ mach clobber
+ 0:06.13 
+ 0:06.13 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:06.13 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:06.13 running:
+ 0:06.13 
+ 0:06.13  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:06.13 
+ 0:06.13 gmake.EXE[2]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:06.13 gmake.EXE[2]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:06.13 gmake.EXE[2]: Target 'configure' not remade because of errors.
+ 0:06.13 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:376: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/config.status] Error 2
+ 0:06.13 gmake.EXE[1]: Target 'realbuild' not remade because of errors.
+ 0:06.13 gmake.EXE: *** [client.mk:171: build] Error 2
+ 0:06.19 9 compiler warnings present.
+2
+=== BUILD FAILED, isolating errors with -j1 ===
+=== retry netwerk/base ===
+ 0:31.98 d:\a\K-Meleon-R\K-Meleon-R\goanna\netwerk\base\ProxyAutoConfig.cpp(471): error C2143: syntax error: missing ';' before 'if'
+ 0:31.98 d:\a\K-Meleon-R\K-Meleon-R\goanna\netwerk\base\ProxyAutoConfig.cpp(471): error C2059: syntax error: 'if'
+ 0:31.98 d:\a\K-Meleon-R\K-Meleon-R\goanna\netwerk\base\ProxyAutoConfig.cpp(474): error C2447: '{': missing function header (old-style formal list?)
+ 0:31.98 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:934: Unified_cpp_netwerk_base0.obj] Error 1
+ 0:31.98 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
+=== retry js/ipc ===
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1093): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1092): error C2146: syntax error: missing ';' before identifier 'HGLOBAL'
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1109): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1108): error C2146: syntax error: missing ';' before identifier 'HGLOBAL'
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1240): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1239): error C2146: syntax error: missing ';' before identifier 'HLOCAL'
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1250): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+ 0:02.46 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1249): error C2146: syntax error: missing ';' before identifier 'HLOCAL'
+ 0:02.46 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:934: Unified_cpp_js_ipc0.obj] Error 1
+ 0:02.46 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
