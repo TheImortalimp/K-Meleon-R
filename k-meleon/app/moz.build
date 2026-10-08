@@ -10,6 +10,7 @@ PROGRAM = CONFIG['MOZ_APP_NAME']
 PCHHDR = 'stdafx.h'
 PCHSRC = 'stdafx.cpp'
 SOURCES += [
+    '../shared/Utils.cpp',
     'AccelParser.cpp',
     'BrowserFrm.cpp',
     'BrowserFrmTab.cpp',
@@ -62,7 +63,6 @@ SOURCES += [
     'TooltipsProvider.cpp',
     'UnknownContentTypeHandler.cpp',
     'urlbar.cpp',
-    '../shared/Utils.cpp',
     'VisualStylesXP.cpp',
 ]
 

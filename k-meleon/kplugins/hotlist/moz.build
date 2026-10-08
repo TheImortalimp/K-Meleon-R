@@ -4,14 +4,14 @@
 SharedLibrary('hotlist')
 
 SOURCES += [
+  '../../shared/qsort.cpp',
+  '../../shared/stristr.cpp',
   '../../shared/Utils.cpp',
   '../rebar_menu/hot_tracking.cpp',
   'op_edit.cpp',
   'op_file.cpp',
   'op_plugin.cpp',
   'op_utils.cpp',
-  '../../shared/qsort.cpp',
-  '../../shared/stristr.cpp',
 ]
 
 DISABLE_STL_WRAPPING = True

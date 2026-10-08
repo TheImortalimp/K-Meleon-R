@@ -5,13 +5,13 @@ SharedLibrary('bookmarks')
 
 SOURCES += [
   '../../shared/DialogUtils.cpp',
+  '../../shared/qsort.cpp',
+  '../../shared/stristr.cpp',
   '../../shared/Utils.cpp',
   '../rebar_menu/hot_tracking.cpp',
   'ns_bookmarks.cpp',
   'ns_bookmarks_edit.cpp',
   'ns_bookmarks_utils.cpp',
-  '../../shared/qsort.cpp',
-  '../../shared/stristr.cpp',
 ]
 
 DEFINES['UNICODE'] = True

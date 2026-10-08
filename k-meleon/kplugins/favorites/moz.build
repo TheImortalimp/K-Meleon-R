@@ -4,12 +4,12 @@
 SharedLibrary('favorites')
 
 SOURCES += [
+  '../../shared/qsort.cpp',
   '../../shared/Utils.cpp',
   '../rebar_menu/hot_tracking.cpp',
   'ie_file.cpp',
   'ie_plugin.cpp',
   'ie_utils.cpp',
-  '../../shared/qsort.cpp'
 ]
 
 DEFINES['UNICODE'] = True
