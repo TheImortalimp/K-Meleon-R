@@ -1,0 +1,94 @@
+name: Build Goanna engine x64
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: 'configure or build'
+        default: 'configure'
+      mozbuild:
+        description: 'MozillaBuild version'
+        default: '2.2.0'
+
+env:
+  GOANNA_SHA: 3c1231618ac46f8172c7a5fcfd0ccbaba9690967
+
+jobs:
+  engine:
+    runs-on: windows-2022
+    timeout-minutes: 350
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v4
+
+      - name: Fetch engine source
+        shell: bash
+        run: |
+          mkdir goanna && cd goanna
+          git init -q
+          git remote add origin https://github.com/roytam1/palemoon27.git
+          git fetch -q --depth 1 origin $GOANNA_SHA
+          git checkout -q FETCH_HEAD
+          git log -1 --format=%H
+
+      - name: Apply K-Meleon patches
+        shell: bash
+        working-directory: goanna
+        run: |
+          for p in goanna-xulrunner-km-adapt goanna-gre-prefs nsResProtocolHandler-old-behaviour; do
+            echo "== $p"; patch -p1 -F3 -l < ../$p.diff
+          done
+          find . -name '*.rej' -o -name '*.orig' | head
+
+      - name: Install MozillaBuild
+        shell: pwsh
+        run: |
+          $v = '${{ inputs.mozbuild }}'
+          curl.exe -sSL -o mb.exe "https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-$v.exe"
+          Start-Process -Wait -FilePath .\mb.exe -ArgumentList '/S','/D=C:\mozilla-build'
+          Get-ChildItem C:\mozilla-build -Name | Select-Object -First 40
+          Get-ChildItem C:\mozilla-build\python* -Name -ErrorAction SilentlyContinue | Select-Object -First 5
+
+      - name: Write mozconfig
+        shell: bash
+        run: |
+          cat > goanna/mozconfig <<'EOF'
+          mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-x64
+          ac_add_options --enable-application=xulrunner
+          ac_add_options --target=x86_64-pc-mingw32
+          ac_add_options --host=x86_64-pc-mingw32
+          ac_add_options --enable-optimize
+          ac_add_options --disable-debug
+          ac_add_options --disable-tests
+          ac_add_options --disable-updater
+          ac_add_options --disable-crashreporter
+          ac_add_options --disable-maintenance-service
+          ac_add_options --disable-installer
+          ac_add_options --disable-webrtc
+          mk_add_options MOZ_MAKE_FLAGS=-j4
+          EOF
+
+      - name: Configure / build
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.29
+          set MOZCONFIG=%CD%\goanna\mozconfig
+          set PATH=C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
+          set MOZ_NO_RESET_PATH=1
+          set STAGE=${{ inputs.stage }}
+          C:\mozilla-build\msys\bin\bash.exe -lc "cd \"$(cygpath -u \"%CD%\")/goanna\"; export PATH=\"$PATH:/c/mozilla-build/python:/c/mozilla-build/python27\"; python --version; if [ $STAGE = build ]; then python mach build; else python mach configure; fi" > build.log 2>&1
+          set RC=%ERRORLEVEL%
+          type build.log | more +0 > nul
+          exit /b %RC%
+
+      - name: Log tail
+        if: always()
+        shell: bash
+        run: tail -n 80 build.log || true
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine-log
+          path: build.log
