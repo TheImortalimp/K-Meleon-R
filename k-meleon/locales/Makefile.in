@@ -39,8 +39,6 @@ RETRIEVE_WINDOWS_INSTALLER = 1
 
 MOZ_LANGPACK_EID=langpack-$(AB_CD)@firefox.mozilla.org
 
-PREF_JS_EXPORTS = $(call MERGE_FILE,firefox-l10n.js)
-
 ifeq (WINNT,$(OS_ARCH))
 UNINSTALLER_PACKAGE_HOOK = $(RM) -r $(STAGEDIST)/uninstall; \
     $(NSINSTALL) -D $(STAGEDIST)/uninstall; \
