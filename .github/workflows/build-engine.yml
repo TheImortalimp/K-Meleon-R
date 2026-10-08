@@ -31,6 +31,11 @@ jobs:
           git checkout -q FETCH_HEAD
           git log -1 --format=%H
 
+      - name: Backdate sources so cached objects stay valid
+        shell: bash
+        working-directory: goanna
+        run: find . -path ./.git -prune -o -type f -exec touch -d 2020-01-01 {} +
+
       - name: Apply K-Meleon patches
         shell: bash
         working-directory: goanna
@@ -117,6 +122,10 @@ jobs:
           path: goanna/obj-x64
           key: obj-none
           restore-keys: obj-
+
+      - name: Keep restored objdir from being clobbered
+        shell: bash
+        run: if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi; ls goanna/obj-x64 2>/dev/null | head -5
 
       - name: Configure / build
         shell: cmd

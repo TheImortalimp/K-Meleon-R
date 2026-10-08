@@ -1,171 +1,102 @@
 MozillaBuild Install Directory: C:\mozilla-build
 Python 2.7.11
- 0:01.06 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s
- 0:07.94 
- 0:07.94 The CLOBBER file has been updated, indicating that an incremental
- 0:07.94 build since your last build will probably not work. A full/clobber
- 0:07.94 build is required.
- 0:07.94 
- 0:07.94 The reason for the clobber is:
- 0:07.94 
- 0:07.94  Clobber required ICU 58.3 update
- 0:07.94 
- 0:07.94 Clobbering can be performed automatically. However, we didn't
- 0:07.94 automatically clobber this time because:
- 0:07.94 
- 0:07.94   Automatic clobbering is not enabled
- 0:07.94   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.94 
- 0:07.94 The easiest and fastest way to clobber is to run:
- 0:07.94 
- 0:07.94  $ mach clobber
- 0:07.94 
- 0:07.94 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.94 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.94 running:
- 0:07.94 
- 0:07.94  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.94 
- 0:07.94 gmake.EXE: *** [client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.94 gmake.EXE: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.94 
- 0:07.94 The CLOBBER file has been updated, indicating that an incremental
- 0:07.94 build since your last build will probably not work. A full/clobber
- 0:07.94 build is required.
- 0:07.94 
- 0:07.94 The reason for the clobber is:
- 0:07.94 
- 0:07.94  Clobber required ICU 58.3 update
- 0:07.94 
- 0:07.94 Clobbering can be performed automatically. However, we didn't
- 0:07.94 automatically clobber this time because:
- 0:07.94 
- 0:07.94   Automatic clobbering is not enabled
- 0:07.94   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.94 
- 0:07.94 The easiest and fastest way to clobber is to run:
- 0:07.94 
- 0:07.94  $ mach clobber
- 0:07.94 
- 0:07.94 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.94 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.94 running:
- 0:07.94 
- 0:07.94  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.94 
- 0:07.94 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.94 gmake.EXE[1]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.94 Adding client.mk options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig:
- 0:07.94     CONFIG_GUESS=x86_64-pc-mingw32
- 0:07.94     MOZ_MAKE_FLAGS=-j4 -k
- 0:07.94     MOZ_OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
- 0:07.94     OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
- 0:07.94     FOUND_MOZCONFIG=D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
- 0:07.94 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
- 0:07.94 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
- 0:07.94 
- 0:07.94 The CLOBBER file has been updated, indicating that an incremental
- 0:07.94 build since your last build will probably not work. A full/clobber
- 0:07.94 build is required.
- 0:07.94 
- 0:07.94 The reason for the clobber is:
- 0:07.94 
- 0:07.94  Clobber required ICU 58.3 update
- 0:07.94 
- 0:07.94 Clobbering can be performed automatically. However, we didn't
- 0:07.94 automatically clobber this time because:
- 0:07.94 
- 0:07.94   Automatic clobbering is not enabled
- 0:07.94   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
- 0:07.94 
- 0:07.94 The easiest and fastest way to clobber is to run:
- 0:07.94 
- 0:07.94  $ mach clobber
- 0:07.94 
- 0:07.94 If you know this clobber doesn't apply to you or you're feeling lucky
- 0:07.94 -- Well, are ya? -- you can ignore this clobber requirement by
- 0:07.94 running:
- 0:07.94 
- 0:07.94  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
- 0:07.94 
- 0:07.94 gmake.EXE[2]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
- 0:07.94 gmake.EXE[2]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
- 0:07.94 gmake.EXE[2]: Target 'configure' not remade because of errors.
- 0:07.94 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:376: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/config.status] Error 2
- 0:07.94 gmake.EXE[1]: Target 'realbuild' not remade because of errors.
- 0:07.94 gmake.EXE: *** [client.mk:171: build] Error 2
- 0:07.96 9 compiler warnings present.
+ 0:00.92 c:\Strawberry\c\bin\gmake.EXE -f client.mk -k MOZ_PARALLEL_BUILD=4 -s
+ 0:07.79 
+ 0:07.79 The CLOBBER file has been updated, indicating that an incremental
+ 0:07.79 build since your last build will probably not work. A full/clobber
+ 0:07.79 build is required.
+ 0:07.79 
+ 0:07.79 The reason for the clobber is:
+ 0:07.79 
+ 0:07.79  Clobber required ICU 58.3 update
+ 0:07.79 
+ 0:07.79 Clobbering can be performed automatically. However, we didn't
+ 0:07.79 automatically clobber this time because:
+ 0:07.79 
+ 0:07.79   Automatic clobbering is not enabled
+ 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:07.79 
+ 0:07.79 The easiest and fastest way to clobber is to run:
+ 0:07.79 
+ 0:07.79  $ mach clobber
+ 0:07.79 
+ 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:07.79 running:
+ 0:07.79 
+ 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:07.79 
+ 0:07.79 gmake.EXE: *** [client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:07.79 gmake.EXE: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:07.79 
+ 0:07.79 The CLOBBER file has been updated, indicating that an incremental
+ 0:07.79 build since your last build will probably not work. A full/clobber
+ 0:07.79 build is required.
+ 0:07.79 
+ 0:07.79 The reason for the clobber is:
+ 0:07.79 
+ 0:07.79  Clobber required ICU 58.3 update
+ 0:07.79 
+ 0:07.79 Clobbering can be performed automatically. However, we didn't
+ 0:07.79 automatically clobber this time because:
+ 0:07.79 
+ 0:07.79   Automatic clobbering is not enabled
+ 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:07.79 
+ 0:07.79 The easiest and fastest way to clobber is to run:
+ 0:07.79 
+ 0:07.79  $ mach clobber
+ 0:07.79 
+ 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:07.79 running:
+ 0:07.79 
+ 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:07.79 
+ 0:07.79 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:07.79 gmake.EXE[1]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:07.79 Adding client.mk options from D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig:
+ 0:07.79     CONFIG_GUESS=x86_64-pc-mingw32
+ 0:07.79     MOZ_MAKE_FLAGS=-j4 -k
+ 0:07.79     MOZ_OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 0:07.79     OBJDIR=d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64
+ 0:07.79     FOUND_MOZCONFIG=D:/a/K-Meleon-R/K-Meleon-R/goanna/mozconfig
+ 0:07.79 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/configure using autoconf
+ 0:07.79 Generating d:/a/K-Meleon-R/K-Meleon-R/goanna/js/src/configure using autoconf
+ 0:07.79 
+ 0:07.79 The CLOBBER file has been updated, indicating that an incremental
+ 0:07.79 build since your last build will probably not work. A full/clobber
+ 0:07.79 build is required.
+ 0:07.79 
+ 0:07.79 The reason for the clobber is:
+ 0:07.79 
+ 0:07.79  Clobber required ICU 58.3 update
+ 0:07.79 
+ 0:07.79 Clobbering can be performed automatically. However, we didn't
+ 0:07.79 automatically clobber this time because:
+ 0:07.79 
+ 0:07.79   Automatic clobbering is not enabled
+ 0:07.79   (add "mk_add_options AUTOCLOBBER=1" to your mozconfig).
+ 0:07.79 
+ 0:07.79 The easiest and fastest way to clobber is to run:
+ 0:07.79 
+ 0:07.79  $ mach clobber
+ 0:07.79 
+ 0:07.79 If you know this clobber doesn't apply to you or you're feeling lucky
+ 0:07.79 -- Well, are ya? -- you can ignore this clobber requirement by
+ 0:07.79 running:
+ 0:07.79 
+ 0:07.79  $ touch d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64\CLOBBER
+ 0:07.79 
+ 0:07.79 gmake.EXE[2]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:335: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/CLOBBER] Error 1
+ 0:07.79 gmake.EXE[2]: Failed to remake makefile 'd:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/.mozconfig.mk'.
+ 0:07.79 gmake.EXE[2]: Target 'configure' not remade because of errors.
+ 0:07.79 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/client.mk:376: d:/a/K-Meleon-R/K-Meleon-R/goanna/obj-x64/config.status] Error 2
+ 0:07.79 gmake.EXE[1]: Target 'realbuild' not remade because of errors.
+ 0:07.79 gmake.EXE: *** [client.mk:171: build] Error 2
+ 0:07.82 9 compiler warnings present.
 2
 === BUILD FAILED, isolating errors with -j1 ===
 === retry js/ipc ===
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1093): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1092): error C2146: syntax error: missing ';' before identifier 'HGLOBAL'
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1109): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1108): error C2146: syntax error: missing ';' before identifier 'HGLOBAL'
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1240): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1239): error C2146: syntax error: missing ';' before identifier 'HLOCAL'
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1250): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
- 0:12.93 C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1249): error C2146: syntax error: missing ';' before identifier 'HLOCAL'
- 0:12.93 gmake.EXE[1]: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:934: Unified_cpp_js_ipc0.obj] Error 1
- 0:12.93 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
-=== include trace for js/ipc ===
-Note: including file:              C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\sdv_driverspecs.h
-Note: including file:            C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winnt.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\kernelspecs.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\basetsd.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\guiddef.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack4.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack4.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack4.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack2.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack2.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack2.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack8.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack1.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\pshpack1.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\poppack.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\apiset.h
-Note: including file:             C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\ktmtypes.h
-Note: including file:          C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\shared\apisetcconv.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\minwinbase.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\apiquery2.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\processenv.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\fileapifromapp.h
-Note: including file:            C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\fileapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\debugapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\utilapiset.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\handleapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\errhandlingapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\fibersapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\namedpipeapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\profileapi.h
-Note: including file:           d:\a\K-Meleon-R\K-Meleon-R\goanna\js\public\heapapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\ioapiset.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\synchapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\interlockedapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\processthreadsapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\sysinfoapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\memoryapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\enclaveapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\threadpoollegacyapiset.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\threadpoolapiset.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\jobapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\jobapi2.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\wow64apiset.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\libloaderapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\securitybaseapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\namespaceapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\systemtopologyapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\processtopologyapi.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\securityappcontainer.h
-Note: including file:           C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\realtimeapiset.h
-C:\Program Files (x86)\Windows Kits\10\include\10.0.26100.0\um\winbase.h(1093): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+ 0:15.01 gmake.EXE[1]: *** No rule to make target '../../netwerk/base/netwerk_base.lib', needed by 'xul_s.lib.desc'.  Stop.
+ 0:15.01 gmake.EXE: *** [d:/a/K-Meleon-R/K-Meleon-R/goanna/config/rules.mk:537: default] Error 2
