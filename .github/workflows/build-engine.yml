@@ -132,7 +132,7 @@ jobs:
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat" -vcvars_ver=14.29
           set MOZCONFIG=%CD%\goanna\mozconfig
-          set PATH=C:\mozilla-build\yasm;C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
+          set PATH=C:\yasm;C:\mozilla-build\yasm;C:\mozilla-build\python;C:\mozilla-build\python27;%PATH%
           set MOZ_NO_RESET_PATH=1
           set MOZILLABUILD=C:\mozilla-build
           set MOZ_TOOLS=C:\mozilla-build\moztools-x64
