@@ -21,9 +21,12 @@ DEFINES['_UNICODE'] = True
 
 DISABLE_STL_WRAPPING = True
 
-USE_LIBS += [
-  'mozjs',
-  'xpcomglue_s',
+OS_LIBS += [
+  'mozjs.lib',
+  'nss3.lib',
+  'mozalloc.lib',
+  'xpcomglue_s.lib',
+  'xul.lib',
 ]
 
 LOCAL_INCLUDES += [

@@ -16,10 +16,13 @@ DEFINES['_UNICODE'] = True
 DISABLE_STL_WRAPPING = True
 
 OS_LIBS += [
+  'mozjs.lib',
+  'nss3.lib',
+  'mozalloc.lib',
   'shell32.lib',
+  'xpcomglue_s.lib',
+  'xul.lib',
 ]
-
-USE_LIBS += ['xpcomglue_s']
 
 LOCAL_INCLUDES += [
   '../../shared'
