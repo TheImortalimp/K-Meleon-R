@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html [
+  <!ENTITY % htmlDTD
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "DTD/xhtml1-strict.dtd">
+  %htmlDTD;
+]>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="km_PageBackground">
+    <head>
+        <title>K-Meleon-R</title>
+        <link rel="stylesheet" href="chrome://kmeleon/content/aboutHome/aboutHome.css" type="text/css" media="all" />
+        <script type="text/javascript;version=1.8" src="chrome://kmeleon/content/aboutHome/aboutHome.js"/>
+    </head>
+    <body dir="ltr">
+        <div class="spacer"/>
+        <input id="themeToggle" type="button" value="Theme: Dark" title="Click to switch Dark / Light / System"/>
+        <div id="content">
+            <h1 id="wordmark">K-Meleon<span>-R</span></h1>
+
+            <div id="searchContainer">
+                <form name="searchForm" id="searchForm" onsubmit="onSearchSubmit(event)">
+                    <div id="searchLogoContainer"><img id="searchEngineLogo"/></div>
+                    <input type="text" name="q" value="" id="searchText" maxlength="256"
+                           autofocus="autofocus"/>
+                    <input id="searchSubmit" type="submit" value="Search"/>
+                    <input id="searchProvider" type="button" value="Search: Bing" title="Click to switch the search engine between Bing, Google and Copilot"/>
+                    <input id="askCopilot" type="button" value="Ask Copilot" title="Ask Microsoft Copilot (Bing Copilot Search) using the text in the search box"/>
+                    <input id="askGemini" type="button" value="Ask Gemini" title="Opens Gemini; your typed text is copied to the clipboard, paste it there"/>
+                </form>
+            </div>
+
+            <form id="dialForm" class="hidden" onsubmit="onDialSave(event)">
+                <input type="text" id="dialTitle" placeholder="Name" maxlength="40"/>
+                <input type="text" id="dialUrl" placeholder="https://example.com" maxlength="512"/>
+                <input type="file" id="dialImage" accept="image/*" title="Optional thumbnail picture"/>
+                <span id="dialImageStatus"></span>
+                <input type="button" id="dialClearImage" class="hidden" value="Remove picture"/>
+                <input type="submit" value="Save"/>
+                <input type="button" id="dialCancel" value="Cancel"/>
+            </form>
+
+            <div id="speedDial"></div>
+        </div>
+        <div class="spacer"/>
+        <div id="footer">
+            <div class="spacer"/>
+            <ul>
+                <li><a href="about:preferences">Settings</a></li>
+            </ul>
+        </div>
+    </body>
+</html>
