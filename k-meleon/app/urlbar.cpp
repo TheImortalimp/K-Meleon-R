@@ -23,6 +23,7 @@
 #include "urlbar.h"
 #include "kmeleon_plugin.h"
 #include "AutoComplete.h"
+#include "BrowserFrm.h"
 
 #include <wininet.h>
 
@@ -310,18 +311,21 @@ void CACListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	// If this item is selected, set the background color 
 	// and the text color to appropriate values. Also, erase
 	// rect by filling it with the background color.
+	const bool dark = KmIsDarkTheme();
 	if ((lpDrawItemStruct->itemAction | ODA_SELECT) &&
 		(lpDrawItemStruct->itemState & ODS_SELECTED))
 	{
-		dc.SetTextColor(GetSysColor(COLOR_HIGHLIGHTTEXT));
-		dc.SetBkColor(GetSysColor(COLOR_HIGHLIGHT));
-		dc.FillSolidRect(&lpDrawItemStruct->rcItem, GetSysColor(COLOR_HIGHLIGHT));
+		COLORREF hi = dark ? RGB(0x4a, 0x1c, 0x2a) : GetSysColor(COLOR_HIGHLIGHT);
+		dc.SetTextColor(dark ? RGB(0xff, 0xff, 0xff) : GetSysColor(COLOR_HIGHLIGHTTEXT));
+		dc.SetBkColor(hi);
+		dc.FillSolidRect(&lpDrawItemStruct->rcItem, hi);
 	}
 	else
 	{
-		dc.SetTextColor(GetSysColor(COLOR_WINDOWTEXT));
-		dc.SetBkColor(GetSysColor(COLOR_MENU));
-		dc.FillSolidRect(&lpDrawItemStruct->rcItem, GetSysColor(COLOR_MENU));
+		COLORREF bg = dark ? RGB(0x2b, 0x2d, 0x31) : GetSysColor(COLOR_MENU);
+		dc.SetTextColor(dark ? RGB(0xe8, 0xe8, 0xf0) : GetSysColor(COLOR_WINDOWTEXT));
+		dc.SetBkColor(bg);
+		dc.FillSolidRect(&lpDrawItemStruct->rcItem, bg);
 	}
 
 	// Draw Icon
@@ -822,6 +826,12 @@ int CUrlBar::Create(DWORD style, RECT &rect, CWnd *parentWnd, UINT id)
 HBRUSH CUrlBar::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 {
 	//pDC->SetBkMode(TRANSPARENT);
+	if (m_HighlightType == 0 && KmIsDarkTheme()) {
+		static CBrush darkBrush(RGB(0x1c, 0x1d, 0x22));
+		pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+		pDC->SetBkColor(RGB(0x1c, 0x1d, 0x22));
+		return darkBrush;
+	}
 	pDC->SetTextColor(GetSysColor(COLOR_WINDOWTEXT));
 	pDC->SetBkColor(m_crBkclr[m_HighlightType]);
 	return m_brBkgnd[m_HighlightType];

@@ -7,6 +7,8 @@ kmeleon.jar:
 % override chrome://global/content/viewSource.xul chrome://kmeleon/content/viewSource.xul
 
     content/kmeleon/about.css                 (content/about.css)
+    content/kmeleon/pageTheme.css             (content/pageTheme.css)
+    content/kmeleon/pageTheme.js              (content/pageTheme.js)
     content/kmeleon/about.xhtml               (content/about.xhtml)       
     content/kmeleon/commands.xhtml            (content/commands.xhtml)       
     content/kmeleon/netError.xhtml            (content/netError.xhtml)       

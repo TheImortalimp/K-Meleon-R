@@ -371,6 +371,12 @@ HBRUSH CFindRebar::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	}
 
 	HBRUSH hbr = CReBar::OnCtlColor(pDC, pWnd, nCtlColor);
+	if (KmIsDarkTheme() && (nCtlColor == CTLCOLOR_EDIT || nCtlColor == CTLCOLOR_STATIC)) {
+		static CBrush darkBrush(RGB(0x2b, 0x2d, 0x31));
+		pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+		pDC->SetBkColor(RGB(0x2b, 0x2d, 0x31));
+		return darkBrush;
+	}
 	return hbr;
 }
 
