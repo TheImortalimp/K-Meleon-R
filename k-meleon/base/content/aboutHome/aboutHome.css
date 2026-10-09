@@ -175,6 +175,47 @@ a {
     display: block;
 }
 
+.tile .edit {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    display: none;
+    color: #b8bad2;
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+.tile:hover .edit {
+    display: block;
+}
+
+.tile .edit:hover {
+    color: #fa1e4e;
+}
+
+.tile .icon.custom {
+    background-size: contain;
+}
+
+.tile .icon.fav {
+    background-size: 56px 56px;
+}
+
+.tile .icon.letter {
+    background-image: none;
+    border-radius: 18px;
+    background-color: #fa1e4e;
+    color: #ffffff;
+    font-size: 52px;
+    line-height: 96px;
+    font-weight: bold;
+}
+
+#dialImageStatus {
+    font-size: .85em;
+    margin: 0 8px;
+}
+
 .tile .remove:hover {
     color: #fa1e4e;
 }

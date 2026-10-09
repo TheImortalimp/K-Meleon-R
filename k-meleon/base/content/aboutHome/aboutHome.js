@@ -99,15 +99,17 @@ function onSearchSubmit(aEvent)
 }
 
 /* ---- K-Meleon-R speed dial ---- */
-const DIAL_PREF = "kmeleon.browser.speeddial";
+const DIAL_PREF = "kmeleon.browser.speeddial2";
 const DIAL_DEFAULTS = [
-    { title: "Wikipedia", url: "https://www.wikipedia.org/" },
-    { title: "GitHub", url: "https://github.com/" },
+    { title: "MSN", url: "https://www.msn.com/en-gb" },
+    { title: "Google", url: "https://www.google.com/" },
     { title: "YouTube", url: "https://www.youtube.com/" },
-    { title: "Reddit", url: "https://www.reddit.com/" },
-    { title: "Gmail", url: "https://mail.google.com/mail/u/0/h/" },
-    { title: "Windows Security", url: "windowsdefender://" }
+    { title: "Bandcamp", url: "https://bandcamp.com/" },
+    { title: "Spotify", url: "https://open.spotify.com/" }
 ];
+const THUMB_SIZE = 128;
+let pendingImage = "";
+let editIndex = -1;
 
 function loadDial() {
     try {
@@ -136,6 +138,50 @@ function iconClass(url) {
     return "";
 }
 
+function isImageData(s) {
+    return typeof s == "string" && /^data:image\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+\/=]+$/.test(s);
+}
+
+// Shrinks a picked image file to a small PNG data URL so it fits in a pref.
+function readThumbnail(file, done) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        let img = new Image();
+        img.onload = function () {
+            let canvas = document.createElement("canvas");
+            canvas.width = canvas.height = THUMB_SIZE;
+            let ctx = canvas.getContext("2d");
+            let scale = Math.min(THUMB_SIZE / img.width, THUMB_SIZE / img.height);
+            let w = img.width * scale, h = img.height * scale;
+            ctx.drawImage(img, (THUMB_SIZE - w) / 2, (THUMB_SIZE - h) / 2, w, h);
+            done(canvas.toDataURL("image/png"));
+        };
+        img.onerror = function () { done(""); };
+        img.src = reader.result;
+    };
+    reader.onerror = function () { done(""); };
+    reader.readAsDataURL(file);
+}
+
+// Uses the site's own logo (favicon); falls back to a letter when unavailable.
+function applySiteLogo(icon, url, title) {
+    let origin = "";
+    try { origin = new URL(url).origin; } catch (ex) {}
+    let letter = function () {
+        icon.className += " letter";
+        icon.textContent = (title || "?").charAt(0).toUpperCase();
+    };
+    if (!/^https?:/i.test(origin)) { letter(); return; }
+    let probe = new Image();
+    probe.onload = function () {
+        if (probe.width < 2) { letter(); return; }
+        icon.className += " fav";
+        icon.style.backgroundImage = 'url("' + origin + '/favicon.ico")';
+    };
+    probe.onerror = letter;
+    probe.src = origin + "/favicon.ico";
+}
+
 function makeTile(cls, label, iconClassName) {
     let tile = document.createElement("div");
     tile.className = "tile " + cls;
@@ -157,8 +203,22 @@ function renderDial() {
     list.forEach(function (entry, i) {
         if (!entry || !isAllowedDialUrl(String(entry.url))) return;
         let title = String(entry.title || entry.url);
-        let tile = makeTile("site", title, iconClass(String(entry.url)));
+        let known = iconClass(String(entry.url));
+        let custom = isImageData(entry.img);
+        let tile = makeTile("site", title, custom ? "custom" : known);
+        let iconEl = tile.firstChild;
+        if (custom) iconEl.style.backgroundImage = 'url("' + entry.img + '")';
+        else if (!known) applySiteLogo(iconEl, String(entry.url), title);
         tile.title = entry.url;
+        let edit = document.createElement("span");
+        edit.className = "edit";
+        edit.textContent = "\u270e";
+        edit.title = "Change name, address or picture";
+        edit.addEventListener("click", function (e) {
+            e.stopPropagation();
+            openDialForm(i);
+        });
+        tile.appendChild(edit);
         tile.addEventListener("click", function () {
             window.location.href = entry.url;
         });
@@ -177,11 +237,21 @@ function renderDial() {
     });
 
     let add = makeTile("add", "Add site", "");
-    add.addEventListener("click", function () {
-        document.getElementById("dialForm").className = "";
-        document.getElementById("dialTitle").focus();
-    });
+    add.addEventListener("click", function () { openDialForm(-1); });
     root.appendChild(add);
+}
+
+function openDialForm(index) {
+    editIndex = index;
+    pendingImage = "";
+    let entry = index >= 0 ? loadDial()[index] : null;
+    document.getElementById("dialTitle").value = entry ? entry.title || "" : "";
+    document.getElementById("dialUrl").value = entry ? entry.url || "" : "";
+    document.getElementById("dialImage").value = "";
+    document.getElementById("dialImageStatus").textContent = entry && isImageData(entry.img) ? "Custom picture set" : "";
+    document.getElementById("dialClearImage").className = entry && isImageData(entry.img) ? "" : "hidden";
+    document.getElementById("dialForm").className = "";
+    document.getElementById("dialTitle").focus();
 }
 
 function onDialSave(aEvent) {
@@ -191,7 +261,15 @@ function onDialSave(aEvent) {
     if (!/^https?:\/\//i.test(url)) return;
     let title = document.getElementById("dialTitle").value.trim() || url.replace(/^https?:\/\//i, "");
     let list = loadDial();
-    list.push({ title: title, url: url });
+    let entry = { title: title, url: url };
+    if (editIndex >= 0 && list[editIndex]) {
+        if (isImageData(list[editIndex].img)) entry.img = list[editIndex].img;
+        list[editIndex] = entry;
+    } else {
+        list.push(entry);
+    }
+    if (pendingImage === null) delete entry.img;
+    else if (pendingImage) entry.img = pendingImage;
     saveDial(list);
     onDialCancel();
     renderDial();
@@ -200,11 +278,27 @@ function onDialSave(aEvent) {
 function onDialCancel() {
     document.getElementById("dialTitle").value = "";
     document.getElementById("dialUrl").value = "";
+    document.getElementById("dialImage").value = "";
+    document.getElementById("dialImageStatus").textContent = "";
     document.getElementById("dialForm").className = "hidden";
+    pendingImage = "";
+    editIndex = -1;
 }
 
 window.addEventListener("load", function () {
     document.getElementById("dialCancel").addEventListener("click", onDialCancel);
+    document.getElementById("dialImage").addEventListener("change", function () {
+        let file = this.files && this.files[0];
+        if (!file) return;
+        readThumbnail(file, function (data) {
+            pendingImage = data;
+            document.getElementById("dialImageStatus").textContent = data ? "Picture ready" : "Could not read that image";
+        });
+    });
+    document.getElementById("dialClearImage").addEventListener("click", function () {
+        pendingImage = null;
+        document.getElementById("dialImageStatus").textContent = "Picture will be removed";
+    });
     // Gemini has no documented URL for prefilling a prompt, so just open it.
     document.getElementById("askGemini").addEventListener("click", function () {
         window.location.href = "https://gemini.google.com/app";

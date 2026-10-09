@@ -38,6 +38,9 @@
             <form id="dialForm" class="hidden" onsubmit="onDialSave(event)">
                 <input type="text" id="dialTitle" placeholder="Name" maxlength="40"/>
                 <input type="text" id="dialUrl" placeholder="https://example.com" maxlength="512"/>
+                <input type="file" id="dialImage" accept="image/*" title="Optional thumbnail picture"/>
+                <span id="dialImageStatus"></span>
+                <input type="button" id="dialClearImage" class="hidden" value="Remove picture"/>
                 <input type="submit" value="Save"/>
                 <input type="button" id="dialCancel" value="Cancel"/>
             </form>
