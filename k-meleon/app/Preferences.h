@@ -419,7 +419,7 @@ public:
   CPreferencesDlg();
   ~CPreferencesDlg();
 
-  int DoModal();
+  INT_PTR DoModal();
 
   BOOL Create(CWnd *pParent);
 

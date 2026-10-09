@@ -103,7 +103,7 @@ public:
    int strict, verbose;
    CString title;
 
-   static BOOL CALLBACK MenuLogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK MenuLogProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if (uMsg == WM_INITDIALOG) {
          CString *log = &((CLog *)lParam)->log;
          SetDlgItemText(hwndDlg, IDC_ERRORS, *log);

@@ -373,7 +373,7 @@ nsresult GetCSSBackground(nsIDOMNode *node, nsString& aUrl)
 	if (type == nsIDOMCSSValue::CSS_VALUE_LIST) {
 		// gg
 		cssValue->GetCssText(bgUrl); 		
-		if (bgUrl.IsEmpty() || bgUrl.Compare(L"none") == 0)
+		if (bgUrl.IsEmpty() || bgUrl.Compare(u"none") == 0)
 			return NS_ERROR_FAILURE;
 		int32_t pos = bgUrl.Find("url(");
 		if ( pos != -1) {
@@ -593,7 +593,7 @@ CString GetSearchURL(LPCTSTR query)
 	if (!engine) return _T("");
 
 	nsCOMPtr<nsISearchSubmission> sub;
-	engine->GetSubmission(nsDependentString(query), nsDependentString(L""), nsDependentString(L""), getter_AddRefs(sub));
+	engine->GetSubmission(ToNsString(query), ToNsString(L""), ToNsString(L""), getter_AddRefs(sub));
 	if (!sub) return _T("");
 
 	nsCOMPtr<nsIURI> uri;
@@ -700,14 +700,14 @@ bool InjectJS(nsIDOMWindow* dom, const wchar_t* userScript, CString& result)
 		NS_ENSURE_SUCCESS(rv, FALSE);
 
 		nsCOMPtr<nsIDOMElement> scriptElement;
-		rv = document->CreateElement(nsDependentString(L"script"), getter_AddRefs(scriptElement));
+		rv = document->CreateElement(ToNsString(L"script"), getter_AddRefs(scriptElement));
 		NS_ENSURE_SUCCESS(rv, FALSE);
 
 		nsCOMPtr<nsIDOMHTMLScriptElement> scriptTag = do_QueryInterface(scriptElement);
 		NS_ENSURE_TRUE(scriptTag, FALSE);
 
-		scriptTag->SetText(nsDependentString(userScript));
-		scriptTag->SetType(nsDependentString(L"text/javascript"));
+		scriptTag->SetText(ToNsString(userScript));
+		scriptTag->SetType(ToNsString(L"text/javascript"));
 
 		nsCOMPtr<nsIDOMNode> notused, node = do_QueryInterface(scriptTag);
 		rv = body->AppendChild(node, getter_AddRefs(notused));
@@ -741,19 +741,19 @@ bool InjectJS(nsIDOMWindow* dom, const wchar_t* userScript, CString& result)
 	JSAutoNullableCompartment ac(cx, _globalJSObject);
 	JS::Rooted<JS::Value> asyncStack(cx, JS::NullValue());
 
-	docShell->NotifyJSRunToCompletionStart("InjectJS", L"InjectJS", L"InjectJS", 1, asyncStack, "");
+	docShell->NotifyJSRunToCompletionStart("InjectJS", u"InjectJS", u"InjectJS", 1, asyncStack);
 	
 	JS::Rooted<JSObject*> globalJSObject(cx, innerGlobal->GetGlobalJSObject());
 	JS::Rooted<JS::Value> v (cx, JS::UndefinedValue());
 	JS::CompileOptions opts(cx);
 	opts.setFileAndLine("kmeleon", 0);
 	opts.setNoScriptRval(false);
-	JS::Evaluate(cx, opts, userScript, wcslen(userScript), &v);
+	JS::Evaluate(cx, opts, reinterpret_cast<const char16_t*>(userScript), wcslen(userScript), &v);
 	::JS_ReportPendingException(cx);
 	if (v.isString() && !v.isObject()) {
 		JSString* str = v.toString();
 		size_t l = JS_GetStringLength(str);		
-		js::CopyStringChars(cx, result.GetBufferSetLength(l + 1), str, l);
+		js::CopyStringChars(cx, reinterpret_cast<char16_t*>(result.GetBufferSetLength(l + 1)), str, l);
 		result.SetAt(l, 0);
 	}
 	cs->Pop(nullptr);	

@@ -224,7 +224,7 @@ KmFileLocProvider::GetFile(const char *prop, bool *persistant, nsIFile **_retval
 	{
 		TCHAR path[_MAX_PATH+1];
 		::GetModuleFileName(0, path, _MAX_PATH);
-		rv = NS_NewLocalFile(nsDependentString(path), TRUE, getter_AddRefs(localFile));
+		rv = NS_NewLocalFile(ToNsString(path), TRUE, getter_AddRefs(localFile));
 	} 
 	else if (strcmp(prop, XRE_UPDATE_ROOT_DIR) == 0) 
 	{
@@ -264,7 +264,7 @@ KmFileLocProvider::GetFile(const char *prop, bool *persistant, nsIFile **_retval
 		for (int i = 0; i < kDirTotal; i++) {
 			if (strcmp(prop, kDirMap[i].nsProp) == 0) {
 				CString folder = theApp.GetFolder(kDirMap[i].kmProp);
-				rv = NS_NewLocalFile(nsDependentString(LPCTSTR(folder)), TRUE, getter_AddRefs(localFile));
+				rv = NS_NewLocalFile(ToNsString(LPCTSTR(folder)), TRUE, getter_AddRefs(localFile));
 				break;
 			}
 		}
@@ -288,7 +288,7 @@ NS_METHOD KmFileLocProvider::CloneMozBinDirectory(nsIFile **aLocalFile)
 		::GetModuleFileName(0, path.GetBuffer(_MAX_PATH), _MAX_PATH);
 		path.ReleaseBuffer(path.ReverseFind(_T('\\')));
 
-		NS_NewLocalFile(nsDependentString(path),true,getter_AddRefs(mMozBinDirectory));
+		NS_NewLocalFile(ToNsString(path),true,getter_AddRefs(mMozBinDirectory));
 		/*
 		// Get the mozilla bin directory
 		// 1. Check the directory service first for NS_XPCOM_CURRENT_PROCESS_DIR
@@ -368,7 +368,7 @@ NS_METHOD KmFileLocProvider::GetProductDirectory(nsIFile **aLocalFile, bool aLoc
 			UINT IsRelative = GetPrivateProfileInt(_T("Profile"),_T("isrelative"), 1, path.get());
 
 #ifdef UNICODE	
-			nsDependentString buffer(pszBuffer);
+			nsString buffer(reinterpret_cast<const char16_t*>(pszBuffer));
 #else
 			nsDependentCString buffer(pszBuffer);
 #endif

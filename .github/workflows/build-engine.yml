@@ -154,11 +154,14 @@ jobs:
         with:
           path: goanna/obj-x64
           key: obj-none
-          restore-keys: obj-none-
+          restore-keys: obj-
 
       - name: Keep restored objdir from being clobbered
         shell: bash
         run: if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi; ls goanna/obj-x64 2>/dev/null | head -5 || true
+      - name: Rebuild K-Meleon sources against cached engine
+        shell: bash
+        run: find goanna/kmeleon -type f \( -name '*.cpp' -o -name '*.h' -o -name 'moz.build' \) -exec touch {} +
 
       - name: Configure / build
         shell: cmd

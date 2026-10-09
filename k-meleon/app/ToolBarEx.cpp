@@ -416,7 +416,7 @@ void CToolBarEx::OnRButtonDblClk(UINT nFlags, CPoint point) {
 	CToolBar::OnRButtonDblClk(nFlags, point);
 }
 
-void CToolBarEx::OnTimer(UINT nIDEvent) {
+void CToolBarEx::OnTimer(UINT_PTR nIDEvent) {
 
 	// check that the timer is one of ours, it would be silly and inefficient
 	// to initialize mainFrame and count on other timer ewents

@@ -19,7 +19,6 @@
 */
 
 #include "nsIXULAppInfo.h"
-#include "nsIPlatformInfo.h"
 #include "nsIXULRuntime.h"
 #include "nsIAppStartup.h"
 
@@ -38,5 +37,4 @@ public:
 	NS_DECL_NSIAPPSTARTUP
 	//NS_DECL_NSIAPPSTARTUP2
 };
-
 

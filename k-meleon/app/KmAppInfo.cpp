@@ -27,7 +27,7 @@
 #include "nsXULAppAPI.h"
 #include "nsIPrefService.h"
 
-NS_IMPL_ISUPPORTS(KmAppInfo, nsIPlatformInfo, nsIXULAppInfo, nsIXULRuntime, nsIAppStartup, nsIAppStartup)
+NS_IMPL_ISUPPORTS(KmAppInfo, nsIPlatformInfo, nsIXULAppInfo, nsIXULRuntime, nsIAppStartup)
 
 const unsigned char mozilla_buildid[] =
 {
@@ -97,7 +97,7 @@ NS_IMETHODIMP KmAppInfo::GetAppBuildID(nsACString & aAppBuildID)
 
 NS_IMETHODIMP KmAppInfo::GetProcessID(uint32_t *aProcessID)
 {
-	aProcessID = 0;
+	*aProcessID = 0;
 	return NS_OK;
 }
 

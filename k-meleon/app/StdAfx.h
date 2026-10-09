@@ -77,7 +77,7 @@ using std::min; using std::max;
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>			// MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
-//#include <afxcontrolbars.h>     // prise en charge des MFC pour les rubans et les barres de contrôles
+//#include <afxcontrolbars.h>     // prise en charge des MFC pour les rubans et les barres de contrï¿½les
 #include <afxtempl.h>
 #include <afxole.h>
 #include <afxtoolbar.h>
@@ -102,6 +102,7 @@ using std::min; using std::max;
 #define INTERNAL_SITEICONS
 
 #include "js-config.h"
+#include "nsISupportsImpl.h"
 #include "nsCOMPtr.h"
 
 #include "nsIURI.h"
@@ -111,6 +112,7 @@ using std::min; using std::max;
 #include "nsEmbedCID.h"
 #include "nsIObserver.h"
 #include "nsEmbedString.h"
+#include "nsStringAPI.h"
 #include "nsWeakReference.h"
 #include "nsIWindowCreator.h"
 #include "nsIInterfaceRequestor.h"
@@ -118,6 +120,16 @@ using std::min; using std::max;
 #include "nsComponentManagerUtils.h"
 #include "nsIInterfaceRequestorUtils.h"
 #include "nsAppDirectoryServiceDefs.h"
+
+inline nsString ToNsString(const char16_t* value)
+{
+	return nsString(value);
+}
+
+inline nsString ToNsString(const wchar_t* value)
+{
+	return nsString(reinterpret_cast<const char16_t*>(value));
+}
 
 #if defined(THERECANBENODEBUG) 
 //#define DEBUG
@@ -155,4 +167,3 @@ using std::min; using std::max;
 #ifndef USE_PROFILES
 #pragma comment(lib, "profdirserviceprovidersa_s.lib")
 #endif
-

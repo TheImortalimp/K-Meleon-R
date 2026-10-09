@@ -28,7 +28,7 @@
 
 #include "stdafx.h"
 #include "TooltipsProvider.h"
-NS_IMETHODIMP CTooltipTextProvider::GetNodeText(nsIDOMNode *aNode, PRUnichar * *aText, PRUnichar * *aDirection, bool *_retval)
+NS_IMETHODIMP CTooltipTextProvider::GetNodeText(nsIDOMNode *aNode, char16_t **aText, char16_t **aDirection, bool *_retval)
 {
 
 /*

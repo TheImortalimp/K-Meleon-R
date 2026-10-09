@@ -22,7 +22,7 @@ public:
                        nsIPrintSettings* aPrintSettings,*/
                        CWnd* pParent = NULL);
 	virtual ~CPrintProgressDialog();
-  virtual int DoModal( );
+  virtual INT_PTR DoModal( );
 
   // Helper
   void SetURI(LPCTSTR aTitle);

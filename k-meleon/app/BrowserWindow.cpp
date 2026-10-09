@@ -413,7 +413,7 @@ BOOL CBrowserWrapper::LoadURL(LPCTSTR url, LPCTSTR referrer, BOOL allowFixup)
 	nsCOMPtr<nsIURI> referrerURI;
 	if (referrer)
 #ifdef _UNICODE
-		NewURI(getter_AddRefs(referrerURI), nsDependentString(referrer));
+		NewURI(getter_AddRefs(referrerURI), ToNsString(referrer));
 #else
 		NewURI(getter_AddRefs(referrerURI), nsDependentCString(referrer));
 #endif
@@ -912,11 +912,11 @@ BOOL CBrowserWrapper::_InjectCSS(nsIDOMWindow* dom, const wchar_t* userStyleShee
 	NS_ENSURE_SUCCESS(rv, FALSE);
 
 	nsCOMPtr<nsIDOMElement> styleElement;
-	rv = document->CreateElement(nsDependentString(L"style"), getter_AddRefs(styleElement));
+	rv = document->CreateElement(ToNsString(L"style"), getter_AddRefs(styleElement));
 	NS_ENSURE_SUCCESS(rv, FALSE);
 
 	nsCOMPtr<nsIDOMText> textStyle;
-	rv = document->CreateTextNode(nsDependentString(userStyleSheet), getter_AddRefs(textStyle));
+	rv = document->CreateTextNode(ToNsString(userStyleSheet), getter_AddRefs(textStyle));
 	NS_ENSURE_SUCCESS(rv, FALSE);
 
 	nsCOMPtr<nsIDOMNode> notused;
@@ -924,7 +924,7 @@ BOOL CBrowserWrapper::_InjectCSS(nsIDOMWindow* dom, const wchar_t* userStyleShee
 	NS_ENSURE_SUCCESS(rv, FALSE);
 
 	nsCOMPtr<nsIDOMNodeList> headList;
-	rv = document->GetElementsByTagName(nsDependentString(L"head"), getter_AddRefs(headList));
+	rv = document->GetElementsByTagName(ToNsString(L"head"), getter_AddRefs(headList));
 	if (headList)
 	{
 		nsCOMPtr<nsIDOMNode> headNode;
@@ -1705,7 +1705,7 @@ BOOL CBrowserWrapper::_Save(nsIURI* aURI,
 
 		nsCOMPtr<nsIFile> file;
 #ifdef _UNICODE
-		NS_NewLocalFile(nsDependentString(tempFile), TRUE, getter_AddRefs(file));
+		NS_NewLocalFile(ToNsString(tempFile), TRUE, getter_AddRefs(file));
 #else
 		NS_NewNativeLocalFile(nsDependentCString(tempFile), TRUE, getter_AddRefs(file));
 #endif
@@ -1883,7 +1883,7 @@ BOOL CBrowserWrapper::Find(const wchar_t* searchString,
 	if (!searchString || wcscmp(oldSearch.get(), searchString)==0)
 		mTypeAhead->FindAgain(backwards,false, &result);
 	else
-		mTypeAhead->Find(nsDependentString(searchString), false, &result);
+		mTypeAhead->Find(ToNsString(searchString), false, &result);
 	return !(result == nsITypeAheadFind::FIND_NOTFOUND);*/
 
 	nsCOMPtr<nsIWebBrowserFind> finder = do_GetInterface(mWebBrowser);
@@ -1985,7 +1985,7 @@ bool CBrowserWrapper::TypeAheadFind(nsIDOMKeyEvent* keyEvent)
 			}
 
 			wchar_t key[	2] = {c, 0};		
-			mSearchString.Append(nsDependentString(key));
+			mSearchString.Append(ToNsString(key));
 		}
 	}
 

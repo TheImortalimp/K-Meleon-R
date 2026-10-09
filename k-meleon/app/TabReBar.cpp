@@ -818,7 +818,7 @@ void CTabReBar::OnTbnEndDrag(NMHDR *pNMHDR, LRESULT *pResult)
 	mDragItem = -1;
 }
 
-void CTabReBar::OnTimer(UINT nIDEvent)
+void CTabReBar::OnTimer(UINT_PTR nIDEvent)
 {
 	CToolBar::OnTimer(nIDEvent);
 }

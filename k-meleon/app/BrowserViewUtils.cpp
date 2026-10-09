@@ -121,7 +121,7 @@ BOOL CBrowserView::OpenViewSourceWindow(BOOL frame)
 
 			nsCOMPtr<nsIFile> nfile;
 #ifdef _UNICODE
-			rv = NS_NewLocalFile(nsDependentString(tempfile.GetBuffer(0)), TRUE, getter_AddRefs(nfile));
+			rv = NS_NewLocalFile(ToNsString(tempfile.GetBuffer(0)), TRUE, getter_AddRefs(nfile));
 #else
 			rv = NS_NewNativeLocalFile(nsDependentCString(tempfile.GetBuffer(0)), TRUE, getter_AddRefs(nfile));
 #endif

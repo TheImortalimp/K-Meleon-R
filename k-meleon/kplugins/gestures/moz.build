@@ -11,6 +11,14 @@ DEFINES['UNICODE'] = True
 
 DEFINES['_UNICODE'] = True
 
+OS_LIBS += [
+  'mozjs',
+  'nss3',
+  'mozalloc',
+  'xpcomglue_s',
+  'xul',
+]
+
 DISABLE_STL_WRAPPING = True
 
 LOCAL_INCLUDES += [

@@ -151,7 +151,7 @@ void CFindRebar::OnEnChangeSearchStr()
 }
 #endif
 
-void CFindRebar::OnTimer(UINT nIDEvent)
+void CFindRebar::OnTimer(UINT_PTR nIDEvent)
 {
 	if (nIDEvent == 12345){
 		KillTimer(nIDEvent);

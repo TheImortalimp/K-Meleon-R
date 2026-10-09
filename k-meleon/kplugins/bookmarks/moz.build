@@ -23,10 +23,10 @@ DISABLE_STL_WRAPPING = True
 RCINCLUDE = 'ns_bookmarks.rc'
 
 OS_LIBS += [
-  'comctl32.lib',
-  'comdlg32.lib',
-  'shell32.lib',
-  'imm32.lib'
+  'comctl32',
+  'comdlg32',
+  'shell32',
+  'imm32'
 ]
 
 LOCAL_INCLUDES += [

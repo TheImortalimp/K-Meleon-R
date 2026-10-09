@@ -97,7 +97,7 @@ nsIDOMWindow *CBrowserView::FindDOMWindow(nsIDOMWindow *window, nsIDOMDocument *
   return NULL;
 }
 */
-void CBrowserView::OnTimer(UINT nIDEvent)
+void CBrowserView::OnTimer(UINT_PTR nIDEvent)
 {
    switch(nIDEvent){
    case 0x1:

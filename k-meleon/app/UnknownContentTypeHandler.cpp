@@ -313,7 +313,7 @@ NS_IMETHODIMP
 		NS_ENSURE_TRUE(file, NS_ERROR_FAILURE);
 
 #ifdef _UNICODE
-		nsresult rv = file->InitWithPath(nsDependentString(pathName));
+		nsresult rv = file->InitWithPath(ToNsString(pathName));
 #else
 		nsresult rv = file->InitWithNativePath(nsDependentCString(pathName));
 #endif
@@ -346,7 +346,7 @@ NS_IMETHODIMP
 
 		nsCOMPtr<nsIDOMWindowInternal> parent( do_GetInterface( aWindowContext ) );
 		filePicker->Init(parent, title, nsIFilePicker::modeSave);
-		filePicker->SetDefaultString(nsDependentString(aDefaultFile));
+		filePicker->SetDefaultString(ToNsString(aDefaultFile));
 		nsString wildCardExtension (NS_LITERAL_STRING("*").get());
 		if (aSuggestedFileExtension) {
 			wildCardExtension.Append(aSuggestedFileExtension);
@@ -996,7 +996,7 @@ NS_IMETHODIMP CProgressDialog::OnLocationChange(nsIWebProgress *aWebProgress, ns
 }
 
 /* void onStatusChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in nsresult aStatus, in wstring aMessage); */
-NS_IMETHODIMP CProgressDialog::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const PRUnichar *aMessage){
+NS_IMETHODIMP CProgressDialog::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const char16_t *aMessage){
 	USES_CONVERSION;
 	Cancel();
 	::AfxMessageBox(W2CT(aMessage),MB_OK|MB_ICONEXCLAMATION);	
@@ -1365,7 +1365,7 @@ return NS_OK;
 
 */
 
-// Boû‘e de dialogue COpenSaveDlg
+// Boï¿½ï¿½e de dialogue COpenSaveDlg
 
 //IMPLEMENT_DYNAMIC(COpenSaveDlg, CDialog)
 COpenSaveDlg::COpenSaveDlg(CWnd* pParent /*=NULL*/)
@@ -1489,7 +1489,7 @@ BOOL COpenSaveDlg::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 }
 
-void COpenSaveDlg::OnTimer(UINT nIDEvent)
+void COpenSaveDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	if (nIDEvent == 2)
 	{

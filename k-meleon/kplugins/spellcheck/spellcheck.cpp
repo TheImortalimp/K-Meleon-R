@@ -459,7 +459,7 @@ BOOL SetDictionariesDir()
 					wchar_t dir[MAX_PATH] = {0};
 					wcscpy(dir, localeDir);
 					wcscat_s(dir, ffd.cFileName);
-					NS_NewLocalFile(nsDependentString(dir), false, getter_AddRefs(mozDir));
+					NS_NewLocalFile(nsString(reinterpret_cast<const char16_t*>(dir)), false, getter_AddRefs(mozDir));
 					hunspell->AddDirectory(mozDir);
 			}
 		} while ( FindNextFile(hFind, &ffd) );
@@ -492,9 +492,16 @@ struct miniWords
 		return (i >= 0 && i < m_length) ? m_words[i] : 0;
 	}
 	void sort();
+	static int compare(const char16_t* a, const char16_t* b) {
+		while (*a && *a == *b) {
+			++a;
+			++b;
+		}
+		return *a < *b ? -1 : (*a > *b ? 1 : 0);
+	}
 private:
 	static bool comp(char16_t *a, char16_t *b) {
-		return nsDependentString(a).Compare(nsDependentString(b)) < 0;
+		return compare(a, b) < 0;
 	}
 	int m_length, m_size;
 	char16_t** m_words;
@@ -600,7 +607,7 @@ INT select_menu(HWND hwnd, miniWords& suggest, miniWords& dics, const char16_t* 
 	for (int i = 0, id = 0x1000; i < dics.length(); ++ i, ++ id) {
 		UINT flags = MF_STRING;
 		// lstrcmpW can't compare correctly.
-		flags |= nsDependentString(current).Equals(nsDependentString(dics[i])) ? MF_CHECKED | MF_GRAYED : MF_ENABLED;
+		flags |= miniWords::compare(current, dics[i]) == 0 ? MF_CHECKED | MF_GRAYED : MF_ENABLED;
 		if (! append_menu(hDics, flags, id, reinterpret_cast<const wchar_t*>(dics[i]))) {
 			return -1;
 		}
@@ -840,7 +847,7 @@ BOOL DoCommand(HWND hwnd, BOOL bHere)
 		// change dictionary
 		result &= 0xfff;
 		if (result < dics.length()) {
-			rv = spell->SetCurrentDictionary(nsDependentString(dics[result]));
+			rv = spell->SetCurrentDictionary(nsString(dics[result]));
 			NS_ENSURE_SUCCESS(rv, FALSE);
 			// re-check all
 			rv = ispell->SpellCheckRange(0);

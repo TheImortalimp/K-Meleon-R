@@ -41,10 +41,10 @@ static float GetFloatFromStr(const TCHAR * aStr, float aMaxVal = 5.0)
     }
 }
 
-static PRUnichar* GetUnicodeFromCString(const CString& aStr)
+static char16_t* GetUnicodeFromCString(const CString& aStr)
 {
 #ifdef _UNICODE
-    nsString str(aStr);
+    nsString str(reinterpret_cast<const char16_t*>(aStr.GetString()));
 #else
     nsString str;
     NS_CStringToUTF16(nsCString(aStr), NS_CSTRING_ENCODING_ASCII, str);
@@ -162,29 +162,29 @@ void CPrintSetupDialog::SetPrintSettings(nsIPrintSettings* aPrintSettings)
     aPrintSettings->GetPrintBGImages(&boolVal);
     m_PrintBGImages = boolVal == PR_TRUE;
 
-    PRUnichar* uStr;
+    char16_t* uStr;
     aPrintSettings->GetHeaderStrLeft(&uStr);
-		m_HeaderLeft = uStr;
+		m_HeaderLeft = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
     aPrintSettings->GetHeaderStrCenter(&uStr);
-		m_HeaderMiddle = uStr;
+		m_HeaderMiddle = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
     aPrintSettings->GetHeaderStrRight(&uStr);
-		m_HeaderRight = uStr;
+		m_HeaderRight = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
     aPrintSettings->GetFooterStrLeft(&uStr);
-		m_FooterLeft = uStr;
+		m_FooterLeft = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
     aPrintSettings->GetFooterStrCenter(&uStr);
-		m_FooterMiddle = uStr;
+		m_FooterMiddle = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
     aPrintSettings->GetFooterStrRight(&uStr);
-		m_FooterRight = uStr;
+		m_FooterRight = reinterpret_cast<const wchar_t*>(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);
 
   }
@@ -214,7 +214,7 @@ void CPrintSetupDialog::GetPrintSettings(nsIPrintSettings* aPrintSettings)
     aPrintSettings->SetMarginRight(GetFloatFromStr(m_RightMargin));
     aPrintSettings->SetMarginBottom(GetFloatFromStr(m_BottomMargin));
 
-    PRUnichar* uStr;
+    char16_t* uStr;
     uStr = GetUnicodeFromCString(m_HeaderLeft);
     aPrintSettings->SetHeaderStrLeft(uStr);
     if (uStr != nullptr) nsMemory::Free(uStr);

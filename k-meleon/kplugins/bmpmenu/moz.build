@@ -16,7 +16,7 @@ DEFINES['_AFXDLL'] = True
 
 DISABLE_STL_WRAPPING = True
 
-OS_LIBS += ['shell32.lib']
+OS_LIBS += ['shell32']
 
 LOCAL_INCLUDES += [
   '../../shared'

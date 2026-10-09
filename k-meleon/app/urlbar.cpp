@@ -400,7 +400,7 @@ void CUrlBarEdit::StopACSession()
 	}
 }
 
-void CUrlBarEdit::OnTimer(UINT nIDEvent)
+void CUrlBarEdit::OnTimer(UINT_PTR nIDEvent)
 {
 	if (!m_list)
 		return;

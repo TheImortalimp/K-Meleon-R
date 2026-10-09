@@ -93,8 +93,7 @@ protected:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnDestroy();
 };
-
 

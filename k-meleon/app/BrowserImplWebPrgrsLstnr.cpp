@@ -172,7 +172,7 @@ NS_IMETHODIMP
 CBrowserImpl::OnStatusChange(nsIWebProgress* aWebProgress,
                                  nsIRequest* aRequest,
                                  nsresult aStatus,
-                                 const PRUnichar* aMessage)
+                                 const char16_t* aMessage)
 {
   bool b;
   // Prevent showing status update for download.

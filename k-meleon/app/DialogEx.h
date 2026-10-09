@@ -26,7 +26,7 @@ public:
 		: CDialog(nIDTemplate, pParentWnd) {};
 	~CDialogEx2() {};
 	//int RunModalLoop(DWORD dwFlags = 0);
-	INT DoModal()
+	INT_PTR DoModal()
 	{  
 		//CMfcEmbedApp *pApp = (CMfcEmbedApp *)AfxGetApp();
 		//if (pApp->preferences.GetBool("kmeleon.display.dialogs.useUserDialogFont", true)) {
@@ -52,7 +52,7 @@ public:
 		m_lpDialogTemplate = NULL;
 		InitModalIndirect(pdata);
 
-		INT result = _DoModal();//CDialog::DoModal();
+		INT_PTR result = _DoModal();//CDialog::DoModal();
 
 		GlobalUnlock(m_dlt.m_hTemplate);
 

@@ -147,7 +147,7 @@ public:
 	//	afx_msg void OnTbnGetDispInfo(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTbnBeginDrag(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTbnEndDrag(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnDestroy();
@@ -156,6 +156,5 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS* lpncsp);
 };
-
 
 

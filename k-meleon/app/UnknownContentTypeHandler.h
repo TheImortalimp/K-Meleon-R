@@ -155,7 +155,7 @@ public:
 	CString m_csSource;
 	afx_msg void OnBnClickedOpen();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	CStatic m_cFileIcon;
 	afx_msg void OnDestroy();
 };

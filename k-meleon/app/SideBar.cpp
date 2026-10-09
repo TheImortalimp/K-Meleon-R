@@ -231,7 +231,7 @@ void CSideBar::OnCancelMode()
 
 void CSideBar::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	// TODO : ajoutez ici le code de votre gestionnaire de messages et/ou les paramètres par défaut des appels
+	// TODO : ajoutez ici le code de votre gestionnaire de messages et/ou les paramï¿½tres par dï¿½faut des appels
 
 	CWnd::OnKeyDown(nChar, nRepCnt, nFlags);
 }
@@ -397,7 +397,7 @@ void CSideBar::OnPaint()
 
 BOOL CSideBar::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO : ajoutez ici votre code spécialisEet/ou l'appel de la classe de base
+	// TODO : ajoutez ici votre code spï¿½cialisï¿½Eet/ou l'appel de la classe de base
 
 	if (!CWnd::PreCreateWindow(cs))
 		return FALSE;
@@ -443,9 +443,9 @@ void CSideBar::OnDestroy()
 	// TODO : ajoutez ici le code de votre gestionnaire de messages
 }
 
-void CSideBar::OnTimer(UINT nIDEvent)
+void CSideBar::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO : ajoutez ici le code de votre gestionnaire de messages et/ou les paramètres par défaut des appels
+	// TODO : ajoutez ici le code de votre gestionnaire de messages et/ou les paramï¿½tres par dï¿½faut des appels
 	KillTimer(nIDEvent);
 	GetParentFrame()->RecalcLayout();
 	m_bTimer = false;

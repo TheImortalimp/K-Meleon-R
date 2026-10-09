@@ -83,7 +83,7 @@ public:
 
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg UINT OnGetDlgCode();
 	afx_msg void OnKillFocus(CWnd* pNewWnd);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
@@ -269,4 +269,3 @@ public:
 	afx_msg void OnCbnEditchange();
 	afx_msg void OnCbnSelchange();
 };
-

@@ -82,7 +82,7 @@ CDlgPrintListener::OnLocationChange(nsIWebProgress *aWebProgress, nsIRequest *aR
 
 /* void onStatusChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in nsresult aStatus, in wstring aMessage); */
 NS_IMETHODIMP 
-CDlgPrintListener::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const PRUnichar *aMessage)
+CDlgPrintListener::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const char16_t *aMessage)
 {
     return NS_OK;
 }
@@ -186,7 +186,7 @@ BOOL CPrintProgressDialog::OnInitDialog()
 }
 
 
-int CPrintProgressDialog::DoModal( )
+INT_PTR CPrintProgressDialog::DoModal( )
 {
 	m_InModalMode = TRUE;
     return CDialog::DoModal();

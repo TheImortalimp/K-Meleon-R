@@ -94,8 +94,8 @@ CPreferencesDlg::OnInitDialog(){
 CPreferencesDlg::~CPreferencesDlg(){
 }
 
-int CPreferencesDlg::DoModal(){
-   int ret = CDialog::DoModal();
+INT_PTR CPreferencesDlg::DoModal(){
+   INT_PTR ret = CDialog::DoModal();
 
    if (page){
       delete page;
@@ -674,7 +674,7 @@ void CPreferencePageConfigs::SaveFile(const TCHAR *filename)
          if (NS_SUCCEEDED(rv)) {
             nsCOMPtr<nsILocalFile> prefFile(do_CreateInstance(NS_LOCAL_FILE_CONTRACTID));
 #if defined _UNICODE
-			rv = prefFile->InitWithPath(nsDependentString(filename));
+			rv = prefFile->InitWithPath(ToNsString(filename));
 #else
 			rv = prefFile->InitWithNativePath(nsDependentCString(filename));
 #endif

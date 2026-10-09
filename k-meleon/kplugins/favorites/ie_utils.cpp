@@ -27,10 +27,11 @@
 #endif
 
 #define KMELEON_PLUGIN_EXPORTS
-#include <shellapi.h>
 
 #include "ie_favorites.h"
 #include "kmeleon_plugin.h"
+#include <windows.h>
+#include <shellapi.h>
 #include "../rebar_menu/hot_tracking.h"
 #include "../../app/KMeleonConst.h"
 #include "LocalesUtils.h"

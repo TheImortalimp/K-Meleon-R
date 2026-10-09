@@ -48,7 +48,7 @@ NS_IMETHODIMP CGenKeyPairDialogs::DisplayGeneratingKeypairInfo (nsIInterfaceRequ
 	return NS_OK;
 }
 
-// Boîte de dialogue CGenKeyPairDialog
+// Boï¿½te de dialogue CGenKeyPairDialog
 
 //IMPLEMENT_DYNAMIC(CGenKeyPairDialog, CDialog)
 CGenKeyPairDialog::CGenKeyPairDialog(nsIKeygenThread* runnable, CWnd* pParent /*=NULL*/)
@@ -72,7 +72,7 @@ END_MESSAGE_MAP()
 
 NS_IMPL_ISUPPORTS(GenKeyPairObserver, nsIObserver);
 
-NS_IMETHODIMP GenKeyPairObserver::Observe(nsISupports *aSubject, const char *aTopic, const PRUnichar *aData)
+NS_IMETHODIMP GenKeyPairObserver::Observe(nsISupports *aSubject, const char *aTopic, const char16_t *aData)
 {
 	if (mWnd)
 		mWnd->PostMessage(WM_USER+100, 0, 0);
@@ -109,4 +109,3 @@ LRESULT CGenKeyPairDialog::OnGenDone(WPARAM, LPARAM)
 	OnOK(); 
 	return 0;
 }
-

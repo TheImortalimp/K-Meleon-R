@@ -45,6 +45,16 @@
 
 extern CWnd* CWndForDOMWindow(nsIDOMWindow *aWindow);
 
+static LPCTSTR ToMfcText(const char16_t* text)
+{
+	return reinterpret_cast<LPCTSTR>(text);
+}
+
+static const char16_t* ToGeckoText(LPCTSTR text)
+{
+	return reinterpret_cast<const char16_t*>(text);
+}
+
 //*****************************************************************************
 // CPromptService
 //*****************************************************************************
@@ -69,20 +79,21 @@ NS_IMETHODIMP CPromptService::GetPrompt(nsIDOMWindow *aParent, const nsIID & iid
 }
 
 /* boolean prompt (in wstring dialogTitle, in wstring text, in wstring passwordRealm, in uint32_t savePassword, in wstring defaultText, out wstring result); */
-NS_IMETHODIMP CPromptService::Prompt(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, const PRUnichar * defaultText, PRUnichar * *result, bool *_retval)
+NS_IMETHODIMP CPromptService::Prompt(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, const char16_t * defaultText, char16_t * *result, bool *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* boolean promptUsernameAndPassword (in wstring dialogTitle, in wstring text, in wstring passwordRealm, in uint32_t savePassword, inout wstring user, inout wstring pwd); */
-NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, PRUnichar * *user, PRUnichar * *pwd, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, char16_t * *user, char16_t * *pwd, bool *_retval)
 {
 	nsString realm, url;
 	url.Assign(passwordRealm);
-	const wchar_t *start = wcsrchr(passwordRealm, '('), *stop;
-	if (start && (stop = wcsrchr(start, ')')) && stop>start) {
-			realm.Append(start+1, stop-start-1);
-			url.Assign(passwordRealm, start-passwordRealm);
+	const wchar_t *wideRealm = ToMfcText(passwordRealm);
+	const wchar_t *start = wcsrchr(wideRealm, L'('), *stop;
+	if (start && (stop = wcsrchr(start, L')')) && stop > start) {
+			realm.Append(reinterpret_cast<const char16_t*>(start + 1), stop - start - 1);
+			url.Assign(passwordRealm, start - wideRealm);
 	}
 	realm.get();
 	url.get();
@@ -139,7 +150,7 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialog
 				nsCOMPtr<nsIStringBundle> bundle;
 				bundleService->CreateBundle("chrome://passwordmgr/locale/passwordmgr.properties", getter_AddRefs(bundle));
 				if (bundle) {
-					bundle->GetStringFromName(L"rememberPassword", getter_Copies(checkMsg));
+					bundle->GetStringFromName(u"rememberPassword", getter_Copies(checkMsg));
 				}
 			}			
 		}
@@ -154,7 +165,8 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialog
 		if (selectedLogin) {
 			selectedLogin->GetUsername(username);
 			selectedLogin->GetPassword(password);			
-			if (wcscmp(username.get(), *user) == 0 && wcscmp(password.get(), *pwd) == 0) {
+			if (ToNsString(username.get()).Equals(ToNsString(*user)) &&
+			    ToNsString(password.get()).Equals(ToNsString(*pwd))) {
 			} else {
 				selectedLogin->Clone(getter_AddRefs(newLogin));
 				loginManager->RemoveLogin(selectedLogin);
@@ -168,8 +180,8 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialog
 		}
 
 		if (newLogin) {
-			newLogin->SetPassword(nsDependentString(*pwd));
-			newLogin->SetUsername(nsDependentString(*user));		
+			newLogin->SetPassword(ToNsString(*pwd));
+			newLogin->SetUsername(ToNsString(*user));
 			loginManager->AddLogin(newLogin);
 		}
 	}
@@ -178,91 +190,91 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialog
 }
 
 /* boolean promptPassword (in wstring dialogTitle, in wstring text, in wstring passwordRealm, in uint32_t savePassword, inout wstring pwd); */
-NS_IMETHODIMP CPromptService::PromptPassword(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, PRUnichar * *pwd, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptPassword(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, char16_t * *pwd, bool *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 /* void alert (in wstring dialogTitle, in wstring text); */
-NS_IMETHODIMP CPromptService::Alert(const PRUnichar * dialogTitle, const PRUnichar * text)
+NS_IMETHODIMP CPromptService::Alert(const char16_t * dialogTitle, const char16_t * text)
 {
 	return Alert(mDomWindow, dialogTitle, text);
 }
 
 /* void alertCheck (in wstring dialogTitle, in wstring text, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::AlertCheck(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * checkMsg, bool *checkValue)
+NS_IMETHODIMP CPromptService::AlertCheck(const char16_t * dialogTitle, const char16_t * text, const char16_t * checkMsg, bool *checkValue)
 {
 	return AlertCheck(mDomWindow, dialogTitle, text, checkMsg, checkValue);
 }
 
 /* boolean confirm (in wstring dialogTitle, in wstring text); */
-NS_IMETHODIMP CPromptService::Confirm(const PRUnichar * dialogTitle, const PRUnichar * text, bool *_retval)
+NS_IMETHODIMP CPromptService::Confirm(const char16_t * dialogTitle, const char16_t * text, bool *_retval)
 {
     return Confirm(mDomWindow, dialogTitle, text, _retval);
 }
 
 /* boolean confirmCheck (in wstring dialogTitle, in wstring text, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::ConfirmCheck(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * checkMsg, bool *checkValue, bool *_retval)
+NS_IMETHODIMP CPromptService::ConfirmCheck(const char16_t * dialogTitle, const char16_t * text, const char16_t * checkMsg, bool *checkValue, bool *_retval)
 {
 	return ConfirmCheck(mDomWindow, dialogTitle, text, checkMsg, checkValue, _retval);
 }
 
 /* int32_t confirmEx (in wstring dialogTitle, in wstring text, in unsigned long buttonFlags, in wstring button0Title, in wstring button1Title, in wstring button2Title, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::ConfirmEx(const PRUnichar * dialogTitle, const PRUnichar * text, uint32_t buttonFlags, const PRUnichar * button0Title, const PRUnichar * button1Title, const PRUnichar * button2Title, const PRUnichar * checkMsg, bool *checkValue, int32_t *_retval)
+NS_IMETHODIMP CPromptService::ConfirmEx(const char16_t * dialogTitle, const char16_t * text, uint32_t buttonFlags, const char16_t * button0Title, const char16_t * button1Title, const char16_t * button2Title, const char16_t * checkMsg, bool *checkValue, int32_t *_retval)
 {
     return ConfirmEx(mDomWindow, dialogTitle, text, buttonFlags, button0Title, button1Title, button2Title, checkMsg, checkValue, _retval);
 }
 
 /* boolean prompt (in wstring dialogTitle, in wstring text, inout wstring value, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::Prompt(const PRUnichar * dialogTitle, const PRUnichar * text, PRUnichar * *value, const PRUnichar * checkMsg, bool *checkValue, bool *_retval)
+NS_IMETHODIMP CPromptService::Prompt(const char16_t * dialogTitle, const char16_t * text, char16_t * *value, const char16_t * checkMsg, bool *checkValue, bool *_retval)
 {
 	return Prompt(mDomWindow, dialogTitle, text, value, checkMsg, checkValue, _retval);
 }
 
 /* boolean promptPassword (in wstring dialogTitle, in wstring text, inout wstring password, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::PromptPassword(const PRUnichar * dialogTitle, const PRUnichar * text, PRUnichar * *password, const PRUnichar * checkMsg, bool *checkValue, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptPassword(const char16_t * dialogTitle, const char16_t * text, char16_t * *password, const char16_t * checkMsg, bool *checkValue, bool *_retval)
 {
     return PromptPassword(mDomWindow, dialogTitle, text, password, checkMsg, checkValue, _retval);
 }
 
 /* boolean promptUsernameAndPassword (in wstring dialogTitle, in wstring text, inout wstring username, inout wstring password, in wstring checkMsg, inout boolean checkValue); */
-NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialogTitle, const PRUnichar * text, PRUnichar * *username, PRUnichar * *password, const PRUnichar * checkMsg, bool *checkValue, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const char16_t * dialogTitle, const char16_t * text, char16_t * *username, char16_t * *password, const char16_t * checkMsg, bool *checkValue, bool *_retval)
 {
 	return PromptUsernameAndPassword(mDomWindow, dialogTitle, text, username, password, checkMsg, checkValue, _retval);
 }
 
 /* boolean select (in wstring dialogTitle, in wstring text, in uint32_t count, [array, size_is (count)] in wstring selectList, out long outSelection); */
-NS_IMETHODIMP CPromptService::Select(const PRUnichar * dialogTitle, const PRUnichar * text, uint32_t count, const PRUnichar * *selectList, int32_t *outSelection, bool *_retval)
+NS_IMETHODIMP CPromptService::Select(const char16_t * dialogTitle, const char16_t * text, uint32_t count, const char16_t * *selectList, int32_t *outSelection, bool *_retval)
 {
 	return Select(mDomWindow, dialogTitle, text, count, selectList, outSelection, _retval);
 }
 
 
-NS_IMETHODIMP CPromptService::Alert(nsIDOMWindow *parent, const PRUnichar *dialogTitle,
-                                    const PRUnichar *text)
+NS_IMETHODIMP CPromptService::Alert(nsIDOMWindow *parent, const char16_t *dialogTitle,
+                                    const char16_t *text)
 {
   USES_CONVERSION;
   CWnd *wnd = CWndForDOMWindow(parent);
   if (wnd)
-    wnd->MessageBox(W2CT(text), W2CT(dialogTitle), MB_OK | MB_ICONEXCLAMATION);
+    wnd->MessageBox(ToMfcText(text), ToMfcText(dialogTitle), MB_OK | MB_ICONEXCLAMATION);
   else
-    ::MessageBox(0, W2CT(text), W2CT(dialogTitle), MB_OK | MB_ICONEXCLAMATION);
+    ::MessageBox(0, ToMfcText(text), ToMfcText(dialogTitle), MB_OK | MB_ICONEXCLAMATION);
 
   return NS_OK;
 }
 
 NS_IMETHODIMP CPromptService::AlertCheck(nsIDOMWindow *parent,
-                                         const PRUnichar *dialogTitle,
-                                         const PRUnichar *text,
-                                         const PRUnichar *checkboxMsg,
+                                         const char16_t *dialogTitle,
+                                         const char16_t *text,
+                                         const char16_t *checkboxMsg,
                                          bool *checkValue)
 {
   USES_CONVERSION;
 
   CWnd *wnd = CWndForDOMWindow(parent);
   CGenericDlg dlg(wnd);
-  dlg.SetTitle(W2CT(dialogTitle));
-  dlg.SetMsg(W2CT(text));
+  dlg.SetTitle(ToMfcText(dialogTitle));
+  dlg.SetMsg(ToMfcText(text));
   dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
   dlg.AddButton(100, IDS_OK);
   dlg.SetDefaultButton(100);
@@ -271,7 +283,7 @@ NS_IMETHODIMP CPromptService::AlertCheck(nsIDOMWindow *parent,
   BOOL checkResult;
   if (checkboxMsg && checkValue) {
     checkResult = (*checkValue == true ? TRUE : FALSE);
-    dlg.AddCheckBox(&checkResult, W2CT(checkboxMsg));
+    dlg.AddCheckBox(&checkResult, ToMfcText(checkboxMsg));
   }
 
   dlg.DoModal();
@@ -283,8 +295,8 @@ NS_IMETHODIMP CPromptService::AlertCheck(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::Confirm(nsIDOMWindow *parent,
-                                      const PRUnichar *dialogTitle,
-                                      const PRUnichar *text,
+                                      const char16_t *dialogTitle,
+                                      const char16_t *text,
                                       bool *_retval)
 {
   USES_CONVERSION;
@@ -292,10 +304,10 @@ NS_IMETHODIMP CPromptService::Confirm(nsIDOMWindow *parent,
   int choice;
 
   if (wnd)
-    choice = wnd->MessageBox(W2CT(text), W2CT(dialogTitle),
+    choice = wnd->MessageBox(ToMfcText(text), ToMfcText(dialogTitle),
                       MB_OKCANCEL | MB_ICONEXCLAMATION);
   else
-    choice = ::MessageBox(0, W2CT(text), W2CT(dialogTitle),
+    choice = ::MessageBox(0, ToMfcText(text), ToMfcText(dialogTitle),
                       MB_OKCANCEL | MB_ICONEXCLAMATION);
 
   *_retval = choice == IDOK ? PR_TRUE : PR_FALSE;
@@ -304,9 +316,9 @@ NS_IMETHODIMP CPromptService::Confirm(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::ConfirmCheck(nsIDOMWindow *parent,
-                                           const PRUnichar *dialogTitle,
-                                           const PRUnichar *text,
-                                           const PRUnichar *checkboxMsg,
+                                           const char16_t *dialogTitle,
+                                           const char16_t *text,
+                                           const char16_t *checkboxMsg,
                                            bool *checkValue,
                                            bool *_retval)
 {
@@ -315,13 +327,13 @@ NS_IMETHODIMP CPromptService::ConfirmCheck(nsIDOMWindow *parent,
 	USES_CONVERSION;
     CWnd *wnd = CWndForDOMWindow(parent);
     CGenericDlg dlg(wnd);
-    dlg.SetTitle(W2CT(dialogTitle));
-    dlg.SetMsg(W2CT(text));
+    dlg.SetTitle(ToMfcText(dialogTitle));
+    dlg.SetMsg(ToMfcText(text));
 	 dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
     BOOL checkResult;
     if (checkboxMsg && checkValue) {
        checkResult = (*checkValue == PR_TRUE ? TRUE : FALSE);
-	   dlg.AddCheckBox(&checkResult, W2CT(checkboxMsg));
+	   dlg.AddCheckBox(&checkResult, ToMfcText(checkboxMsg));
     }
 
 	dlg.AddButton(COMMAND_OFFSET, IDS_YES);
@@ -338,10 +350,10 @@ NS_IMETHODIMP CPromptService::ConfirmCheck(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::Prompt(nsIDOMWindow *parent,
-                                     const PRUnichar *dialogTitle,
-                                     const PRUnichar *text,
-                                     PRUnichar **value,
-                                     const PRUnichar *checkboxMsg,
+                                     const char16_t *dialogTitle,
+                                     const char16_t *text,
+                                     char16_t **value,
+                                     const char16_t *checkboxMsg,
                                      bool *checkValue,
                                      bool *_retval)
 {
@@ -349,8 +361,8 @@ NS_IMETHODIMP CPromptService::Prompt(nsIDOMWindow *parent,
 
   CWnd *wnd = CWndForDOMWindow(parent);
   CGenericDlg dlg(wnd);
-  dlg.SetTitle(W2CT(dialogTitle));
-  dlg.SetMsg(W2CT(text));
+  dlg.SetTitle(ToMfcText(dialogTitle));
+  dlg.SetMsg(ToMfcText(text));
   dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
   dlg.AddButton(IDOK, IDS_OK);
   dlg.AddButton(IDCANCEL, IDS_CANCEL);
@@ -358,20 +370,20 @@ NS_IMETHODIMP CPromptService::Prompt(nsIDOMWindow *parent,
   dlg.SetCancelButton(IDCANCEL);
 
   CString csValue;
-  if (value && *value) csValue = W2CT(*value);
+  if (value && *value) csValue = ToMfcText(*value);
   dlg.AddEdit(&csValue, _T(""), FALSE);
   
   BOOL checkResult;
   if (checkboxMsg && checkValue) {
     checkResult = (*checkValue == true ? TRUE : FALSE);
-    dlg.AddCheckBox(&checkResult, W2CT(checkboxMsg));
+    dlg.AddCheckBox(&checkResult, ToMfcText(checkboxMsg));
   }
 
   if (dlg.DoModal() == IDOK) {
  	if (value) {
       if (*value) nsMemory::Free(*value);
       nsString nsPromptEditValue;
-      nsPromptEditValue.Assign(T2CW(csValue));
+      nsPromptEditValue.Assign(ToGeckoText(T2CW(csValue)));
       *value = NS_StringCloneData(nsPromptEditValue);
 	  if (checkboxMsg && checkValue) *checkValue = checkResult;
     }
@@ -384,11 +396,11 @@ NS_IMETHODIMP CPromptService::Prompt(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(nsIDOMWindow *parent,
-                                                        const PRUnichar *dialogTitle,
-                                                        const PRUnichar *text,
-                                                        PRUnichar **username,
-                                                        PRUnichar **password,
-                                                        const PRUnichar *checkboxMsg,
+                                                        const char16_t *dialogTitle,
+                                                        const char16_t *text,
+                                                        char16_t **username,
+                                                        char16_t **password,
+                                                        const char16_t *checkboxMsg,
                                                         bool *checkValue,
                                                         bool *_retval)
 {
@@ -398,8 +410,8 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(nsIDOMWindow *parent,
   USES_CONVERSION;
   CWnd *wnd = CWndForDOMWindow(parent);
   CGenericDlg dlg(wnd);
-  dlg.SetTitle(W2CT(dialogTitle));
-  dlg.SetMsg(W2CT(text));
+  dlg.SetTitle(ToMfcText(dialogTitle));
+  dlg.SetMsg(ToMfcText(text));
   dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
   dlg.AddButton(IDOK, IDS_OK);
   dlg.AddButton(IDCANCEL, IDS_CANCEL);
@@ -409,23 +421,23 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(nsIDOMWindow *parent,
   
     
   CString csUsername, csPassword;
-  if (username && *username) csUsername = W2CT(*username);
-  if (password && *password) csPassword = W2CT(*password);
+  if (username && *username) csUsername = ToMfcText(*username);
+  if (password && *password) csPassword = ToMfcText(*password);
   dlg.AddEdit(&csUsername, IDS_USERNAME, FALSE);
   dlg.AddEdit(&csPassword, IDS_PASSWORD, TRUE);
   
   BOOL checkResult = FALSE;
   if (checkboxMsg && checkValue) {
     checkResult = (*checkValue == true ? TRUE : FALSE);
-    dlg.AddCheckBox(&checkResult, W2CT(checkboxMsg));
+    dlg.AddCheckBox(&checkResult, ToMfcText(checkboxMsg));
   }
 
   if (dlg.DoModal() == IDOK) {
 	  if(*username) nsMemory::Free(*username);
-	  *username = NS_StringCloneData(nsString(T2CW(csUsername)));
+	  *username = NS_StringCloneData(nsString(ToGeckoText(T2CW(csUsername))));
 
 	  if (*password) nsMemory::Free(*password);
-	  *password = NS_StringCloneData(nsString(T2CW(csPassword)));
+	  *password = NS_StringCloneData(nsString(ToGeckoText(T2CW(csPassword))));
 
      if (checkValue)
         *checkValue = (checkResult == TRUE ? true : false);
@@ -439,10 +451,10 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::PromptPassword(nsIDOMWindow *parent,
-                                             const PRUnichar *dialogTitle,
-                                             const PRUnichar *text,
-                                             PRUnichar **password,
-                                             const PRUnichar *checkboxMsg,
+                                             const char16_t *dialogTitle,
+                                             const char16_t *text,
+                                             char16_t **password,
+                                             const char16_t *checkboxMsg,
                                              bool *checkValue,
                                              bool *_retval)
 {
@@ -451,8 +463,8 @@ NS_IMETHODIMP CPromptService::PromptPassword(nsIDOMWindow *parent,
 
   CWnd *wnd = CWndForDOMWindow(parent);
   CGenericDlg dlg(wnd);
-  dlg.SetTitle(W2CT(dialogTitle));
-  dlg.SetMsg(W2CT(text));
+  dlg.SetTitle(ToMfcText(dialogTitle));
+  dlg.SetMsg(ToMfcText(text));
   dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
   dlg.AddButton(IDOK, IDS_OK);
   dlg.AddButton(IDCANCEL, IDS_CANCEL);
@@ -460,18 +472,18 @@ NS_IMETHODIMP CPromptService::PromptPassword(nsIDOMWindow *parent,
   dlg.SetCancelButton(IDCANCEL);
 
   CString csValue;
-  if (*password) csValue = W2CT(*password);
+  if (*password) csValue = ToMfcText(*password);
   dlg.AddEdit(&csValue, _T(""), TRUE);
   
   BOOL checkResult;
   if (checkboxMsg && checkValue) {
     checkResult = (*checkValue == PR_TRUE ? TRUE : FALSE);
-    dlg.AddCheckBox(&checkResult, W2CT(checkboxMsg));
+    dlg.AddCheckBox(&checkResult, ToMfcText(checkboxMsg));
   }
 
   if (dlg.DoModal() == IDOK) {
      if (*password) nsMemory::Free(*password);
-	  *password = NS_StringCloneData(nsString(T2CW(csValue)));
+	  *password = NS_StringCloneData(nsString(ToGeckoText(T2CW(csValue))));
      *_retval = PR_TRUE;
   }
   else
@@ -481,18 +493,18 @@ NS_IMETHODIMP CPromptService::PromptPassword(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::Select(nsIDOMWindow *parent,
-                                     const PRUnichar *dialogTitle,
-                                     const PRUnichar *text, PRUint32 count,
-                                     const PRUnichar **selectList,
+                                     const char16_t *dialogTitle,
+                                     const char16_t *text, PRUint32 count,
+                                     const char16_t **selectList,
                                      PRInt32 *outSelection,
                                      bool *_retval)
 {
 	USES_CONVERSION;
 	CWnd *wnd = CWndForDOMWindow(parent);
-   CSelectDialog dlg(wnd, W2CT(dialogTitle), W2CT(text));
+   CSelectDialog dlg(wnd, ToMfcText(dialogTitle), ToMfcText(text));
 
 	for (PRUint32 i = 0; i<count; i++)
-		dlg.AddChoice(W2CT(selectList[i]));
+		dlg.AddChoice(ToMfcText(selectList[i]));
 
 	*_retval = dlg.DoModal() == IDOK ? PR_TRUE : PR_FALSE;
 	*outSelection = dlg.GetChoice();
@@ -501,13 +513,13 @@ NS_IMETHODIMP CPromptService::Select(nsIDOMWindow *parent,
 }
 
 NS_IMETHODIMP CPromptService::ConfirmEx(nsIDOMWindow *parent,
-                                        const PRUnichar *dialogTitle,
-                                        const PRUnichar *text,
+                                        const char16_t *dialogTitle,
+                                        const char16_t *text,
                                         PRUint32 buttonFlags,
-                                        const PRUnichar *button0Title,
-                                        const PRUnichar *button1Title,
-                                        const PRUnichar *button2Title,
-                                        const PRUnichar *checkMsg,
+                                        const char16_t *button0Title,
+                                        const char16_t *button1Title,
+                                        const char16_t *button2Title,
+                                        const char16_t *checkMsg,
                                         bool *checkValue,
                                         PRInt32 *buttonPressed)
 {
@@ -516,8 +528,8 @@ NS_IMETHODIMP CPromptService::ConfirmEx(nsIDOMWindow *parent,
 
 	CWnd *wnd = CWndForDOMWindow(parent);
 	CGenericDlg dlg(wnd);
-	dlg.SetTitle(W2CT(dialogTitle));
-	dlg.SetMsg(W2CT(text));
+	dlg.SetTitle(ToMfcText(dialogTitle));
+	dlg.SetMsg(ToMfcText(text));
 	dlg.SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
 
 	//https://bugzilla.mozilla.org/show_bug.cgi?id=329414
@@ -526,7 +538,7 @@ NS_IMETHODIMP CPromptService::ConfirmEx(nsIDOMWindow *parent,
 	dlg.SetCancelButton(COMMAND_OFFSET + 1);
 
 	// Determine the button titles based on buttonFlags
-    const PRUnichar* buttonStrings[] = { button0Title, button1Title, button2Title };
+    const char16_t* buttonStrings[] = { button0Title, button1Title, button2Title };
 
     for(int i=0; i<3; i++)
     {
@@ -553,7 +565,7 @@ NS_IMETHODIMP CPromptService::ConfirmEx(nsIDOMWindow *parent,
                 dlg.AddButton(COMMAND_OFFSET+i, IDS_REVERT);
                 break;
             case nsIPromptService::BUTTON_TITLE_IS_STRING:
-                dlg.AddButton(COMMAND_OFFSET+i, W2CT(buttonStrings[i]));
+                dlg.AddButton(COMMAND_OFFSET+i, ToMfcText(buttonStrings[i]));
                 break;
         }
    
@@ -563,7 +575,7 @@ NS_IMETHODIMP CPromptService::ConfirmEx(nsIDOMWindow *parent,
 	BOOL checkResult = false;
 	if (checkMsg && checkValue) {
 		checkResult = (*checkValue == true ? TRUE : FALSE);
-		dlg.AddCheckBox(&checkResult, W2CT(checkMsg));
+		dlg.AddCheckBox(&checkResult, ToMfcText(checkMsg));
 	}
 	
 	*buttonPressed = dlg.DoModal() - COMMAND_OFFSET;
@@ -615,19 +627,19 @@ NS_IMETHODIMP CPromptService::PromptAuth(nsIChannel *aChannel, uint32_t level, n
 	return NS_ERROR_NOT_IMPLEMENTED;
 }
 /*
-NS_IMETHODIMP CPromptService::Prompt(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, const PRUnichar * defaultText, PRUnichar * *result, bool *_retval)
+NS_IMETHODIMP CPromptService::Prompt(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, const char16_t * defaultText, char16_t * *result, bool *_retval)
 {
     return NS_ERROR_NOT_IMPLEMENTED;
 }
 
 // boolean promptUsernameAndPassword (in wstring dialogTitle, in wstring text, in wstring passwordRealm, in uint32_t savePassword, inout wstring user, inout wstring pwd); 
-NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, PRUnichar * *user, PRUnichar * *pwd, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, char16_t * *user, char16_t * *pwd, bool *_retval)
 {
     return PromptUsernameAndPassword(mDomWindow, dialogTitle, text, user, pwd, nullptr, nullptr, _retval);
 }
 
 // boolean promptPassword (in wstring dialogTitle, in wstring text, in wstring passwordRealm, in uint32_t savePassword, inout wstring pwd); 
-NS_IMETHODIMP CPromptService::PromptPassword(const PRUnichar * dialogTitle, const PRUnichar * text, const PRUnichar * passwordRealm, uint32_t savePassword, PRUnichar * *pwd, bool *_retval)
+NS_IMETHODIMP CPromptService::PromptPassword(const char16_t * dialogTitle, const char16_t * text, const char16_t * passwordRealm, uint32_t savePassword, char16_t * *pwd, bool *_retval)
 {
     return PromptPassword(mDomWindow, dialogTitle, text, pwd, nullptr, nullptr, _retval);
 }*/
@@ -642,16 +654,16 @@ NS_IMETHODIMP CPromptService::AsyncPromptAuth(nsIChannel *aChannel, nsIAuthPromp
  
 /*NS_IMETHODIMP
 CPromptService::ShowNonBlockingAlert(nsIDOMWindow *aParent,
-                                      const PRUnichar *aDialogTitle,
-                                      const PRUnichar *aText)
+                                      const char16_t *aDialogTitle,
+                                      const char16_t *aText)
 {
   BOOL result;
   CGenericDlg* dlg = new CGenericDlg();  
   CWnd *wnd = CWndForDOMWindow(aParent);
   
   USES_CONVERSION;
-  dlg->SetTitle(W2CT(aDialogTitle));
-  dlg->SetMsg(W2CT(aText));
+  dlg->SetTitle(ToMfcText(aDialogTitle));
+  dlg->SetMsg(ToMfcText(aText));
   dlg->SetDlgIcon(((CMfcEmbedApp*)AfxGetApp())->GetDefaultIcon(TRUE));
   dlg->SetMsgIcon(AfxGetApp()->LoadStandardIcon(IDI_EXCLAMATION));
   dlg->AddButton(100, IDS_OK);

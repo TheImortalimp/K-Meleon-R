@@ -886,7 +886,7 @@ void CBrowserView::OnDragURL( NMHDR * pNotifyStruct, LRESULT * result )
 }
 
 // this should probably go in BrowserViewUtils.cpp, but I don't want to add a function prototype :)
-BOOL CALLBACK SearchProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SearchProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
    static CString *search = NULL;
 

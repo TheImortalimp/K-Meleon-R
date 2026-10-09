@@ -396,7 +396,7 @@ NS_IMETHODIMP CSaveAsHandler::DownloadTo(nsString& aFilename, BOOL isHTML, int s
 				// Any images etc in the doc will be saved to a dir
 				// with the name c:\tmp\junk_files
 #ifdef _UNICODE
-				rv = NS_NewLocalFile(nsDependentString(strDataPath), TRUE, getter_AddRefs(dataFolder));
+				rv = NS_NewLocalFile(ToNsString(strDataPath), TRUE, getter_AddRefs(dataFolder));
 #else
 				rv = NS_NewNativeLocalFile(nsDependentCString(strDataPath), TRUE, getter_AddRefs(dataFolder));
 #endif
@@ -429,7 +429,7 @@ NS_IMETHODIMP CSaveAsHandler::OnLocationChange(nsIWebProgress *aWebProgress, nsI
 }
 
 /* void onStatusChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in nsresult aStatus, in wstring aMessage); */
-NS_IMETHODIMP CSaveAsHandler::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const PRUnichar *aMessage)
+NS_IMETHODIMP CSaveAsHandler::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const char16_t *aMessage)
 {
 	return NS_OK;
 }
@@ -438,5 +438,4 @@ NS_IMETHODIMP CSaveAsHandler::OnSecurityChange(nsIWebProgress *aWebProgress, nsI
 {
 	return NS_OK;
 }
-
 

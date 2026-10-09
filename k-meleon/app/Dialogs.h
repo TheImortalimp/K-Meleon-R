@@ -123,7 +123,7 @@ public:
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnWrapAround();
 	afx_msg void OnMatchCase();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnUpdateNothing(CCmdUI* pCmdUI) { pCmdUI->Enable(); };
 
 protected:
@@ -163,7 +163,7 @@ public:
 	inline int GetChoice() {return m_iChoice;}
 	void AddChoice(LPCTSTR);
 
-// Données de boû‘e de dialogue
+// Donnï¿½es de boï¿½ï¿½e de dialogue
 	enum { IDD = IDD_PROMPT_SELECT };
 
 protected:

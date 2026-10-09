@@ -491,16 +491,16 @@ BOOL CMfcEmbedApp::InitEmbedding(const char* profile)
 	// Set provider
 	CString strRes;
 	strRes.LoadString(IDS_PROFILES_FOLDER_NAME);
-	KmFileLocProvider *provider = new KmFileLocProvider(nsDependentString(T2W(strRes.GetBuffer(0))));
+	KmFileLocProvider *provider = new KmFileLocProvider(ToNsString(T2W(strRes.GetBuffer(0))));
 	if(!provider) return FALSE;
 
 	// Set app directory
 	nsCOMPtr<nsIFile> mreAppDir;
-	rv = NS_NewLocalFile(nsDependentString(theApp.GetFolder(RootFolder)), TRUE, getter_AddRefs(mreAppDir));
+	rv = NS_NewLocalFile(ToNsString(theApp.GetFolder(RootFolder)), TRUE, getter_AddRefs(mreAppDir));
 	NS_ASSERTION(NS_SUCCEEDED(rv), "failed to create mreAppDir file");
 
 	nsCOMPtr<nsIFile> appSubdir;
-	rv = NS_NewLocalFile(nsDependentString(theApp.GetFolder(AppFolder)), TRUE, getter_AddRefs(appSubdir));
+	rv = NS_NewLocalFile(ToNsString(theApp.GetFolder(AppFolder)), TRUE, getter_AddRefs(appSubdir));
 	NS_ASSERTION(NS_SUCCEEDED(rv), "failed to create appSubdir file");
 
 	// Set Profile

@@ -19,8 +19,8 @@ DISABLE_STL_WRAPPING = True
 RCINCLUDE = 'op_hotlist.rc'
 
 OS_LIBS += [
-  'comctl32.lib',
-  'comdlg32.lib',
+  'comctl32',
+  'comdlg32',
 ]
 
 LOCAL_INCLUDES += [

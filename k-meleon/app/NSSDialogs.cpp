@@ -177,7 +177,7 @@ NS_IMETHODIMP CNSSDialogs::ViewCert(nsIInterfaceRequestor *ctx, nsIX509Cert *cer
 	USES_CONVERSION;
 
 	PRUint32 verifyState, count;
-	PRUnichar ** usageList;
+	char16_t ** usageList;
 	CString state;
 	nsString value;
 

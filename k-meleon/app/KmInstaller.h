@@ -44,7 +44,7 @@ public:
 
 		CString dest = theApp.GetFolder(UserSkinsFolder);
 
-		NS_NewLocalFile(nsDependentString(dest), TRUE, getter_AddRefs(mFile));
+		NS_NewLocalFile(ToNsString(dest), TRUE, getter_AddRefs(mFile));
 		bool exists;
 		mFile->Exists(&exists);
 		if (!exists) mFile->Create(nsIFile::DIRECTORY_TYPE, 0);
@@ -85,7 +85,7 @@ class KmSkinInstaller: public KmInstaller
 
 		nsCOMPtr<nsIFile> folder;
 		CString dest = theApp.GetFolder(UserSkinsFolder);
-		NS_NewLocalFile(nsDependentString(dest), TRUE, getter_AddRefs(folder));
+		NS_NewLocalFile(ToNsString(dest), TRUE, getter_AddRefs(folder));
 		if (!folder) return false;
 
 		nsString filename;

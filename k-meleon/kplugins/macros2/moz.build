@@ -16,7 +16,7 @@ DISABLE_STL_WRAPPING = True
 
 RCINCLUDE = 'macros.rc'
 
-OS_LIBS += ['shell32.lib','comctl32.lib','comdlg32.lib','ole32.lib']
+OS_LIBS += ['shell32','comctl32','comdlg32','ole32']
 
 LOCAL_INCLUDES += [
   '../../shared'

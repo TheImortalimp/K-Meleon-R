@@ -272,7 +272,7 @@ BOOL LoadStyleSheet(LPCTSTR path, BOOL load)
 	nsresult rv;
 	nsCOMPtr<nsIFile> adfile;
 #ifdef _UNICODE
-	rv = NS_NewLocalFile(nsDependentString(path), TRUE, getter_AddRefs(adfile));
+	rv = NS_NewLocalFile(ToNsString(path), TRUE, getter_AddRefs(adfile));
 #else
 	rv = NS_NewNativeLocalFile(nsDependentCString(path), TRUE, getter_AddRefs(adfile));
 #endif
