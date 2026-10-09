@@ -1,0 +1,3 @@
+component {b1d0a0c5-6b7e-4f46-9d3e-3f6a2a7c9e11} kmJsCompat.js
+contract @kmeleon/jscompat;1 {b1d0a0c5-6b7e-4f46-9d3e-3f6a2a7c9e11}
+category app-startup kmJsCompat @kmeleon/jscompat;1

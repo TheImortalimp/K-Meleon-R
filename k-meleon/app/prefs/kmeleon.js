@@ -266,4 +266,4 @@ pref("browser.eme.ui.enabled", true);
 
 // Others
 pref("security.csp.speccompliant", true);
-pref("places.favicons.optimizeToDimension", 32);
+pref("places.favicons.optimizeToDimension", 32);pref("kmeleon.jscompat.enabled", true);

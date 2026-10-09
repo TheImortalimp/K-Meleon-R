@@ -14,6 +14,7 @@ DIRS += [
     'flashblock',
     'kmprefs',
     'history',
+    'jscompat',
 #    'places',
     'preferences',
 #    'privatebrowsing',
