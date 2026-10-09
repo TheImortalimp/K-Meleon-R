@@ -18,7 +18,7 @@ cat > kmeleon/app/application.ini <<'EOF'
 [App]
 Vendor=@MOZ_APP_VENDOR@
 Name=@MOZ_APP_BASENAME@
-RemotingName=@MOZ_APP_NAME@
+RemotingName=k-meleon
 Version=@MOZ_APP_VERSION@
 BuildID=@MOZ_BUILDID@
 ID=@MOZ_APP_ID@
