@@ -871,6 +871,11 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 	switch(pNMCD->nmcd.dwDrawStage)
 	{
 	case CDDS_PREPAINT:
+		if (KmIsDarkTheme()) {
+			CRect client;
+			GetClientRect(&client);
+			::FillRect(pNMCD->nmcd.hdc, &client, CBrush(RGB(0x2b, 0x2d, 0x31)));
+		}
 		break;
 
 	case CDDS_POSTPAINT:
@@ -881,6 +886,52 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 		break;
 
 	case CDDS_ITEMPREPAINT: {
+		if (KmIsDarkTheme()) {
+			CDC *pDC = CDC::FromHandle(pNMCD->nmcd.hdc);
+			int index = CommandToIndex(pNMCD->nmcd.dwItemSpec);
+			UINT state = pNMCD->nmcd.uItemState;
+			COLORREF bg = RGB(0x2b, 0x2d, 0x31);
+			if (state & CDIS_CHECKED) bg = RGB(0x44, 0x47, 0x50);
+			else if (state & CDIS_HOT) bg = RGB(0x36, 0x38, 0x40);
+			CRect rc(pNMCD->nmcd.rc);
+			pDC->FillSolidRect(&rc, bg);
+			if (state & CDIS_CHECKED)
+				pDC->FillSolidRect(rc.left, rc.bottom - 2, rc.Width(), 2, RGB(0xfa, 0x1e, 0x4e));
+
+			int btMargin = 2, btClose = 16, iconPadding = 4;
+			CRect contentRect(rc);
+			CImageList* imageList = GetToolBarCtrl().GetImageList();
+			if (imageList) {
+				int image = GetItemImage(pNMCD->nmcd.dwItemSpec);
+				IMAGEINFO ii;
+				imageList->GetImageInfo(image, &ii);
+				if (ii.hbmMask) DeleteObject(ii.hbmMask);
+				if (ii.hbmImage) DeleteObject(ii.hbmImage);
+				CPoint pt(btMargin + contentRect.left,
+					contentRect.top + (contentRect.Height() - (ii.rcImage.bottom - ii.rcImage.top)) / 2);
+				imageList->Draw(pDC, image, pt, ILD_TRANSPARENT);
+				contentRect.left += iconPadding + ii.rcImage.right - ii.rcImage.left;
+			}
+			contentRect.left += btMargin;
+			contentRect.right -= 2 * btMargin + btClose + 2;
+
+			pDC->SetBkMode(TRANSPARENT);
+			CFont* oldFont = pDC->SelectObject(GetFont());
+			pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+			CString text = GetButtonText(index);
+			pDC->DrawText(text, -1, &contentRect, DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_HIDEPREFIX | DT_WORD_ELLIPSIS);
+			pDC->SelectObject(oldFont);
+
+			if (theApp.preferences.GetInt("browser.tabs.closeButtons", 2) == 1) {
+				CRect cr(contentRect.right + btMargin, 0, contentRect.right + btMargin + btClose, 0);
+				cr.top = (rc.top + rc.bottom - btClose) / 2;
+				cr.bottom = cr.top + btClose;
+				pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+				pDC->DrawText(_T("\u00d7"), -1, &cr, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
+			}
+			*pResult = CDRF_SKIPDEFAULT;
+			return;
+		}
 		HTHEME hTheme = NULL;
 		if (g_xpStyle.IsThemeActive() && g_xpStyle.IsAppThemed())// && (SendMessage(0x0129, 0, 0) & 0x4))
 			hTheme = g_xpStyle.OpenThemeData (m_hWnd, L"TOOLBAR");
@@ -1020,6 +1071,6 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 	}
 
 	int closePref = theApp.preferences.GetInt("browser.tabs.closeButtons", 2);
-	if (closePref == 1) 
+	if (closePref == 1 || KmIsDarkTheme()) 
 		*pResult |= CDRF_NOTIFYITEMDRAW;
 }
