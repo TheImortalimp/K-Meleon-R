@@ -20,7 +20,7 @@ jobs:
           dotnet publish kmr-shell/kmr-shell.csproj -c Release -r win-x64 --self-contained true `
             -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true `
             -p:DebugType=None -o publish
-          git show origin/copilot/kmeleon-r-browser-build:NOTICE-K-Meleon-R.md | Set-Content publish/NOTICE-K-Meleon-R.md
+          Copy-Item kmr-shell/NOTICE-K-Meleon-R.md publish/; Remove-Item publish/*.xml
           Copy-Item kmr-shell/README.md publish/README.md
           Get-ChildItem publish | Select Name, Length
       - name: Installer
