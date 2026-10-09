@@ -46,7 +46,8 @@ index 4d961816f..074fe2c12 100644
 +NS_IMETHODIMP
 +nsXPConnect::Push(JSContext* aJSContext)
 +{
-+  // UXP has no JSContext stack; K-Meleon only needs the interface to exist\n  return NS_OK;
++  // UXP has no JSContext stack; K-Meleon only needs the interface to exist
++  return NS_OK;
 +}
 +
 +NS_IMETHODIMP
