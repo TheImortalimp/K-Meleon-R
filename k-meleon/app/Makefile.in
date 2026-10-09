@@ -61,7 +61,6 @@ PROFILE_FILES = \
 	prefs.js \
 	menus.cfg \
 	accel.cfg \
-	macros \
 	$(NULL)
 
 libs:: $(addprefix $(srcdir)/profile/,$(PROFILE_FILES))
@@ -97,8 +96,10 @@ libs:: $(srcdir)/settings/commands.html
 
 libs:: $(srcdir)/blocklist.xml
 	$(INSTALL) $(IFLAGS1) $^ $(FINAL_TARGET)
+ifneq ($(wildcard $(srcdir)/readme.html),)
 libs:: $(srcdir)/readme.html
 	$(INSTALL) $(IFLAGS1) $^ $(FINAL_TARGET)
+endif
 
 ifeq (cocoa,$(MOZ_WIDGET_TOOLKIT))
 
