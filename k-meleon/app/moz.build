@@ -9,7 +9,10 @@ RCFILE = 'MfcEmbed.rc'
 
 USE_LIBS += [
     'js',
+    'mozalloc',
     'nspr',
+    'xul',
+    'xpcomglue',
     'xpcomglue_s',
 ]
 
