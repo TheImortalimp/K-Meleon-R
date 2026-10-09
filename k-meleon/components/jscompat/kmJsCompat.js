@@ -24,7 +24,10 @@ const BABEL_PLUGINS = [
   "proposal-optional-chaining", "proposal-nullish-coalescing-operator",
   "proposal-object-rest-spread", "proposal-logical-assignment-operators",
   "proposal-optional-catch-binding", "proposal-numeric-separator",
-  "proposal-async-generator-functions", "transform-async-to-generator"
+  "proposal-async-generator-functions", "transform-async-to-generator",
+  "transform-classes", "transform-block-scoping", "transform-new-target",
+  "transform-unicode-regex", "transform-exponentiation-operator", "transform-object-super",
+  "transform-parameters", "transform-destructuring"
 ];
 
 // Minimal System.register loader that runs in the page. It executes ES
@@ -196,6 +199,12 @@ function writeCache(key, text) {
   } catch (e) { log("cache write failed: " + e); }
 }
 
+function wrapDbg(out, label) {
+  if (!debugProbe() || /^\(function loaderMain/.test(out)) return out;
+  return "try{\n" + out + "\n}catch(e){try{new Image().src=\"http://localhost:8765/b?\"+encodeURIComponent(\"BUNDLE \"+" +
+         JSON.stringify(label.slice(-80)) + "+\" \"+(e&&e.stack||e))}catch(x){}throw e}";
+}
+
 // Returns the original source when it already parses or cannot be converted.
 function compat(src, label) {
   if (src.length > MAX_SIZE) return src;
@@ -207,7 +216,7 @@ function compat(src, label) {
 
   let key = sha1Hex(src);
   let cached = readCache(key);
-  if (cached) return cached;
+  if (cached) return wrapDbg(cached, label);
 
   let t0 = Date.now();
   try {
@@ -226,7 +235,7 @@ function compat(src, label) {
     }
     log("converted " + label + " " + src.length + " -> " + out.length + " in " + (Date.now() - t0) + "ms");
     writeCache(key, out);
-    return out;
+    return wrapDbg(out, label);
   } catch (e) {
     log("convert failed " + label + ": " + String(e).slice(0, 200));
     return src;
@@ -275,7 +284,39 @@ function compatHtml(html, label) {
     let h = HEAD_OPEN.exec(out);
     out = h ? out.slice(0, h.index + h[0].length) + tag + out.slice(h.index + h[0].length) : tag + out;
   }
+  if (debugProbe()) {
+    out = out.replace(/<script\b(?![^>]*crossorigin)([^>]*\bsrc=)/gi, '<script crossorigin="anonymous"$1');
+    let nn = nonce || (/\bnonce\s*=\s*["']([^"']+)/i.exec(out) || [])[1];
+    let tag = "<script" + (nn ? ' nonce="' + nn + '"' : "") + ">(" + probeMain.toString() + ")();</script>";
+    let h = HEAD_OPEN.exec(out);
+    out = h ? out.slice(0, h.index + h[0].length) + tag + out.slice(h.index + h[0].length) : tag + out;
+  }
   return out;
+}
+
+// Test-only: reports page errors to a local server when kmeleon.jscompat.probe is set.
+function debugProbe() {
+  try { return Services.prefs.getBoolPref("kmeleon.jscompat.probe"); } catch (e) { return false; }
+}
+function probeMain() {
+  function s(m) {
+    try { new Image().src = "http://localhost:8765/b?" + encodeURIComponent(location.host + " " + m).slice(0, 1500); } catch (e) {}
+  }
+  s("PROBE start");
+  window.addEventListener("error", function (e) { s("ERR " + e.message + " @" + e.filename + ":" + e.lineno); }, true);
+  window.addEventListener("unhandledrejection", function (e) {
+    s("REJ " + (e.reason && (e.reason.stack || e.reason.message) || e.reason));
+  });
+  ["error", "warn"].forEach(function (k) {
+    var o = console[k];
+    console[k] = function () {
+      s("C." + k + " " + [].slice.call(arguments).join(" ").slice(0, 300));
+      try { return o.apply(console, arguments); } catch (e) {}
+    };
+  });
+  setTimeout(function () {
+    s("DOM kids=" + document.body.children.length + " len=" + document.body.innerHTML.length);
+  }, 15000);
 }
 
 function TeeListener(orig, kind, label) {
@@ -373,6 +414,8 @@ kmJsCompat.prototype = {
       if (/(java|ecma)script/i.test(type)) kind = "js";
       else if (/text\/html/i.test(type)) kind = "html";
       if (!kind) return;
+      if (debugProbe()) ch.setResponseHeader("Access-Control-Allow-Origin", "*", false);
+      if (debugProbe()) ch.setResponseHeader("Access-Control-Allow-Origin", "*", false);
       let enc = /charset=([^;\s]+)/i.exec(type);
       if (enc && !/^utf-?8$/i.test(enc[1])) return;
       let tc = ch.QueryInterface(Ci.nsITraceableChannel);
