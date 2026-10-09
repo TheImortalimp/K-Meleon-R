@@ -10,6 +10,7 @@ cp -f /c/yasm/yasm.exe /c/mozilla-build/bin/yasm.exe; cp -f /c/yasm/yasm.exe /c/
 cp -f /c/yasm/yasm.exe /c/Windows/yasm.exe; cp -f /c/yasm/yasm.exe /c/Windows/System32/yasm.exe
 sed -i "s|^yasm = check_prog('YASM'.*|@depends('--help')\ndef yasm(_):\n    return 'C:/mozilla-build/yasm/yasm.exe'\nadd_old_configure_assignment('YASM', yasm)\nset_config('YASM', yasm)|" build/moz.configure/toolchain.configure
 grep -n -B1 -A3 "^def yasm(_)" build/moz.configure/toolchain.configure
+sed -i -e "/^GENERATED_INCLUDES += \[/,/^\]/{s/GENERATED_INCLUDES/LOCAL_INCLUDES/;s|'/build'|'!/build'|}" kmeleon/app/moz.build
 which yasm; yasm --version | head -1
 which python python2 python2.7; python --version
 if [ "$STAGE" = build ]; then
