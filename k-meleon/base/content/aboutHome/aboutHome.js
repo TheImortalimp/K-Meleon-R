@@ -39,6 +39,7 @@ const SEARCH_FALLBACK = "https://www.bing.com/search?q=";
 // Search providers for the start page: Google (default) or Microsoft Copilot.
 const PROVIDER_PREF = "kmeleon.search.provider";
 const PROVIDERS = {
+    bing: { label: "Bing", url: "https://www.bing.com/search?q=_searchTerms_" },
     google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_" },
     copilot: { label: "Copilot", url: "https://copilot.microsoft.com/?q=_searchTerms_" }
 };
@@ -49,8 +50,10 @@ function getProvider() {
         let p = Services.prefs.getCharPref(PROVIDER_PREF);
         if (PROVIDERS[p]) return p;
     } catch (ex) {}
-    return "google";
+    return "bing";
 }
+
+const PROVIDER_ORDER = ["bing", "google", "copilot"];
 
 function applyProvider() {
     let p = PROVIDERS[getProvider()];
@@ -326,7 +329,7 @@ window.addEventListener("load", function () {
         document.getElementById("dialImageStatus").textContent = "Picture will be removed";
     });
     document.getElementById("searchProvider").addEventListener("click", function () {
-        Services.prefs.setCharPref(PROVIDER_PREF, getProvider() == "google" ? "copilot" : "google");
+        Services.prefs.setCharPref(PROVIDER_PREF, PROVIDER_ORDER[(PROVIDER_ORDER.indexOf(getProvider()) + 1) % PROVIDER_ORDER.length]);
         applyProvider();
     });
     document.getElementById("askCopilot").addEventListener("click", function () {
@@ -336,6 +339,13 @@ window.addEventListener("load", function () {
     applyProvider();
     // Gemini has no documented URL for prefilling a prompt, so just open it.
     document.getElementById("askGemini").addEventListener("click", function () {
+        let q = document.getElementById("searchText").value.trim();
+        if (q) {
+            try {
+                Components.classes["@mozilla.org/widget/clipboardhelper;1"]
+                    .getService(Components.interfaces.nsIClipboardHelper).copyString(q);
+            } catch (ex) {}
+        }
         window.location.href = "https://gemini.google.com/app";
     });
     renderDial();
