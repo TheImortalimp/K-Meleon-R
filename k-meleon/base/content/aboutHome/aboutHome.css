@@ -101,7 +101,9 @@ a {
     background: #ff4b72;
 }
 
-#askGemini {
+#askGemini,
+#askCopilot,
+#searchProvider {
     margin-left: 8px;
     padding: 0 16px;
     color: #fff;
@@ -111,7 +113,9 @@ a {
     cursor: pointer;
 }
 
-#askGemini:hover {
+#askGemini:hover,
+#askCopilot:hover,
+#searchProvider:hover {
     border-color: #fa1e4e;
     box-shadow: 0 0 10px rgba(250,30,78,.5);
 }
@@ -262,6 +266,8 @@ html[data-theme="light"] a { color: #d4163f; }
 html[data-theme="light"] #wordmark span { text-shadow: none; }
 html[data-theme="light"] #searchText { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
 html[data-theme="light"] #askGemini,
+html[data-theme="light"] #askCopilot,
+html[data-theme="light"] #searchProvider,
 html[data-theme="light"] #themeToggle { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
 html[data-theme="light"] .tile {
     color: #0b0c10;

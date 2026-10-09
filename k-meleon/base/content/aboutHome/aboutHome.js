@@ -36,7 +36,33 @@ window.addEventListener('beforeunload', function () {
 	
 const SEARCH_FALLBACK = "https://www.bing.com/search?q=";
 
+// Search providers for the start page: Google (default) or Microsoft Copilot.
+const PROVIDER_PREF = "kmeleon.search.provider";
+const PROVIDERS = {
+    google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_" },
+    copilot: { label: "Copilot", url: "https://copilot.microsoft.com/?q=_searchTerms_" }
+};
+const COPILOT_HOME = "https://copilot.microsoft.com/";
+
+function getProvider() {
+    try {
+        let p = Services.prefs.getCharPref(PROVIDER_PREF);
+        if (PROVIDERS[p]) return p;
+    } catch (ex) {}
+    return "google";
+}
+
+function applyProvider() {
+    let p = PROVIDERS[getProvider()];
+    document.getElementById("searchText").placeholder = p.label;
+    document.getElementById("searchProvider").value = "Search: " + p.label;
+}
+
 function getSearchURL() {
+    return PROVIDERS[getProvider()].url;
+}
+
+function getLegacySearchURL() {
     // The search service may be missing in this build, so fall back to the prefs.
     try {
         let submission = Services.search.defaultEngine.getSubmission("_searchTerms_", null, "homepage");
@@ -299,6 +325,15 @@ window.addEventListener("load", function () {
         pendingImage = null;
         document.getElementById("dialImageStatus").textContent = "Picture will be removed";
     });
+    document.getElementById("searchProvider").addEventListener("click", function () {
+        Services.prefs.setCharPref(PROVIDER_PREF, getProvider() == "google" ? "copilot" : "google");
+        applyProvider();
+    });
+    document.getElementById("askCopilot").addEventListener("click", function () {
+        let q = document.getElementById("searchText").value.trim();
+        window.location.href = q ? PROVIDERS.copilot.url.replace("_searchTerms_", encodeURIComponent(q)) : COPILOT_HOME;
+    });
+    applyProvider();
     // Gemini has no documented URL for prefilling a prompt, so just open it.
     document.getElementById("askGemini").addEventListener("click", function () {
         window.location.href = "https://gemini.google.com/app";
