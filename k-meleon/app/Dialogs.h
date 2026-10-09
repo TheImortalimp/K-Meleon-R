@@ -121,7 +121,8 @@ public:
 #endif
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg void OnWrapAround();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	virtual BOOL OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 	afx_msg void OnMatchCase();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnUpdateNothing(CCmdUI* pCmdUI) { pCmdUI->Enable(); };

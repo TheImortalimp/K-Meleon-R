@@ -88,6 +88,7 @@ BEGIN_MESSAGE_MAP(CFindRebar, CReBar)
 	ON_COMMAND(ID_CLOSE_FINDBAR, Close)
 	ON_WM_SETFOCUS()
 	ON_WM_CTLCOLOR()
+	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
@@ -360,6 +361,40 @@ BOOL CFindRebar::PreTranslateMessage(MSG* pMsg)
 	}
 
 	return CReBar::PreTranslateMessage(pMsg);
+}
+
+BOOL CFindRebar::OnEraseBkgnd(CDC* pDC)
+{
+	if (!KmIsDarkTheme())
+		return CReBar::OnEraseBkgnd(pDC);
+	CRect rc;
+	pDC->GetClipBox(&rc);
+	pDC->FillSolidRect(&rc, RGB(0x2b, 0x2d, 0x31));
+	return TRUE;
+}
+
+BOOL CFindRebar::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	NMHDR* hdr = (NMHDR*)lParam;
+	if (hdr && hdr->code == NM_CUSTOMDRAW && KmIsDarkTheme()) {
+		wchar_t cls[32] = L"";
+		::GetClassNameW(hdr->hwndFrom, cls, 32);
+		if (_wcsicmp(cls, L"ToolbarWindow32") == 0) {
+			NMTBCUSTOMDRAW* cd = (NMTBCUSTOMDRAW*)lParam;
+			if (cd->nmcd.dwDrawStage == CDDS_PREPAINT) {
+				*pResult = CDRF_NOTIFYITEMDRAW;
+				return TRUE;
+			}
+			if (cd->nmcd.dwDrawStage == CDDS_ITEMPREPAINT) {
+				cd->clrText = RGB(0xe8, 0xe8, 0xf0);
+				cd->clrBtnFace = RGB(0x2b, 0x2d, 0x31);
+				cd->clrBtnHighlight = RGB(0x44, 0x47, 0x50);
+				*pResult = TBCDRF_USECDCOLORS;
+				return TRUE;
+			}
+		}
+	}
+	return CReBar::OnNotify(wParam, lParam, pResult);
 }
 
 HBRUSH CFindRebar::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)

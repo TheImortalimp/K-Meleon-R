@@ -22,8 +22,50 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <title>About &km;</title>
     <link rel="stylesheet" href="chrome://kmeleon/content/about.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="chrome://kmeleon/content/pageTheme.css" type="text/css" media="all" />
-    <script type="application/javascript" src="chrome://kmeleon/content/pageTheme.js"></script>
+    <style type="text/css"><![CDATA[
+/* Dark overrides for internal pages; light keeps the stock look. */
+html:not([data-theme="light"]),
+html:not([data-theme="light"]) body {
+    background-color: #1c1d22;
+    background-image: none;
+    color: #e8e8f0;
+}
+
+html:not([data-theme="light"]) a,
+html:not([data-theme="light"]) a:visited { color: #ff5c7c; }
+
+html:not([data-theme="light"]) #errorPageContainer,
+html:not([data-theme="light"]) #errorTitle,
+html:not([data-theme="light"]) #errorLongContent,
+html:not([data-theme="light"]) #errorShortDesc,
+html:not([data-theme="light"]) #errorLongDesc,
+html:not([data-theme="light"]) .container {
+    background-color: transparent;
+    color: #e8e8f0;
+    border-color: #3a3c4c;
+}
+
+html:not([data-theme="light"]) button,
+html:not([data-theme="light"]) input {
+    color: #e8e8f0;
+    background: #2b2d31;
+    border: 1px solid #3a3c4c;
+}
+
+html:not([data-theme="light"]) button:hover { border-color: #fa1e4e; }
+html:not([data-theme="light"]) pre,
+html:not([data-theme="light"]) code { background: #24252f; color: #e8e8f0; }
+]]></style>
+    <script type="application/javascript"><![CDATA[
+(function () {
+  try {
+    Components.utils.import("resource://gre/modules/Services.jsm");
+    let m = Services.prefs.getCharPref("kmeleon.display.theme");
+    if (m == "system") m = Services.prefs.getCharPref("kmeleon.theme.effective");
+    document.documentElement.setAttribute("data-theme", m == "light" ? "light" : "dark");
+  } catch (e) {}
+})();
+    ]]></script>
     <style type="text/css">
 	#head > a	 { text-decoration: none; font-size: 110%; }
 	h2,
