@@ -27,7 +27,9 @@ jobs:
       - name: Add K-Meleon application sources
         shell: bash
         working-directory: goanna
-        run: cp -a ../k-meleon ./kmeleon
+        run: |
+          cp -a ../k-meleon ./kmeleon
+          printf "include('../toolkit/moz.configure')\n" > kmeleon/moz.configure
 
       - name: Install MozillaBuild
         shell: pwsh
