@@ -1808,7 +1808,7 @@ BOOL CBrowserWrapper::IsInputOrObject(nsIDOMElement* element)
 
 	nsString attr;
 	element->GetAttribute(NS_LITERAL_STRING("contenteditable"), attr);
-	if (wcscmp(reinterpret_cast<const wchar_t*>(attr.get()), L"true") == 0)
+	if (wcscmp(ToWideString(attr), L"true") == 0)
 		return TRUE;
 
 	return FALSE;			

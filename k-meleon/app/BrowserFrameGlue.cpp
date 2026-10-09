@@ -67,16 +67,16 @@ extern nsresult NewURI(nsIURI **result, const nsACString &spec);
 /////////////////////////////////////////////////////////////////////////////
 // IBrowserFrameGlue implementation
 
-void CBrowserFrame::BrowserFrameGlueObj::UpdateStatusBarText(const PRUnichar *aMessage)
+void CBrowserFrame::BrowserFrameGlueObj::UpdateStatusBarText(const char16_t *aMessage)
 {
 #ifndef _UNICODE
-   if (aMessage && (wcslen(aMessage) > 1024)) return;
+   if (aMessage && (wcslen(reinterpret_cast<const wchar_t*>(aMessage)) > 1024)) return;
 #endif
    METHOD_PROLOGUE(CBrowserFrame, BrowserFrameGlueObj)
    USES_CONVERSION;
    CString str;
-   if (aMessage && wcslen(aMessage) > 0)
-	 str = W2CT(aMessage);
+   if (aMessage && wcslen(reinterpret_cast<const wchar_t*>(aMessage)) > 0)
+	 str = W2CT(reinterpret_cast<LPCWSTR>(aMessage));
    else
 	 str.LoadString(AFX_IDS_IDLEMESSAGE);
 
@@ -166,7 +166,7 @@ void CBrowserFrame::BrowserFrameGlueObj::UpdateCurrentURI(nsIURI *aLocation)
 		// Prevent to move the caret in the urlbar
 		CString currentURL;
 		pThis->m_wndUrlBar.GetEnteredURL(currentURL);
-		if (currentURL.Compare(reinterpret_cast<LPCWSTR>(uriString2.get())) == 0)
+		if (currentURL.Compare(ToWideString(uriString2)) == 0)
 			return;
 
 		// XXX Since Mozilla 1.8.0.2 about:blank is always passed here
@@ -175,7 +175,7 @@ void CBrowserFrame::BrowserFrameGlueObj::UpdateCurrentURI(nsIURI *aLocation)
 			currentURL.GetLength())
 			return;
 
-        pThis->m_wndUrlBar.SetCurrentURL(reinterpret_cast<LPCWSTR>(uriString2.get()));
+        pThis->m_wndUrlBar.SetCurrentURL(ToWideString(uriString2));
 
 		// Add a MRU entry. Note that I'm only only allowing
 		// http or https uri
@@ -206,7 +206,7 @@ void CBrowserFrame::BrowserFrameGlueObj::UpdateCurrentURI(nsIURI *aLocation)
     }
 }
 
-void CBrowserFrame::BrowserFrameGlueObj::GetBrowserFrameTitle(PRUnichar **aTitle)
+void CBrowserFrame::BrowserFrameGlueObj::GetBrowserFrameTitle(char16_t **aTitle)
 {
     METHOD_PROLOGUE(CBrowserFrame, BrowserFrameGlueObj)
 
@@ -225,15 +225,15 @@ void CBrowserFrame::BrowserFrameGlueObj::GetBrowserFrameTitle(PRUnichar **aTitle
     {
         USES_CONVERSION;
         nsEmbedString nsTitle;
-        nsTitle.Assign(T2CW(title));
+        nsTitle.Assign(reinterpret_cast<const char16_t*>(T2CW(title)));
         *aTitle = NS_StringCloneData(nsTitle);
     }
 }
 
-void CBrowserFrame::BrowserFrameGlueObj::SetBrowserFrameTitle(const PRUnichar *aTitle)
+void CBrowserFrame::BrowserFrameGlueObj::SetBrowserFrameTitle(const char16_t *aTitle)
 {
 #ifndef _UNICODE
-    if (wcslen(aTitle) > 1024) return;
+    if (wcslen(reinterpret_cast<const wchar_t*>(aTitle)) > 1024) return;
 #endif
 	
     METHOD_PROLOGUE(CBrowserFrame, BrowserFrameGlueObj)
@@ -246,7 +246,7 @@ void CBrowserFrame::BrowserFrameGlueObj::SetBrowserFrameTitle(const PRUnichar *a
 	
     CString title;
     USES_CONVERSION;
-    title = W2CT(aTitle);
+    title = W2CT(reinterpret_cast<LPCWSTR>(aTitle));
 
     if (title.IsEmpty()){
         pThis->m_wndUrlBar.GetEnteredURL(title);

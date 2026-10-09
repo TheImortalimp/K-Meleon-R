@@ -181,7 +181,7 @@ NS_IMETHODIMP CSaveAsHandler::Save(const char* contentType, const char* disposit
 	CString description;
 
 	USES_CONVERSION;
-	const WCHAR* pExtension = wcsrchr(reinterpret_cast<const WCHAR*>(fileName.get()), L'.');
+	const WCHAR* pExtension = wcsrchr(ToWideString(fileName), L'.');
 
 #ifdef MOZILLA_MIMETYPE_SUCKS
 	GetFromTypeAndExtension(A2CT(contentType), W2CT(pExtension), extension, description);

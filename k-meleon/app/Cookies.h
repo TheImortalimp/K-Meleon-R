@@ -49,7 +49,7 @@ public:
 			cookie->GetHost(m_host);
 			nsString _str;
 			NS_CStringToUTF16(m_host, NS_CSTRING_ENCODING_UTF8, _str);
-			m_csHost = reinterpret_cast<LPCWSTR>(_str.get());
+			m_csHost = ToWideString(_str);
 
 			cookie->GetPath(m_path);
 			m_csPath = A2CT(m_path.get());

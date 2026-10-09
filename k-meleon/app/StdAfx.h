@@ -136,6 +136,11 @@ inline nsString ToNsString(const CString& value)
 	return ToNsString(value.GetString());
 }
 
+inline const wchar_t* ToWideString(const nsAString& value)
+{
+	return reinterpret_cast<const wchar_t*>(value.BeginReading());
+}
+
 #if defined(THERECANBENODEBUG) 
 //#define DEBUG
 #endif

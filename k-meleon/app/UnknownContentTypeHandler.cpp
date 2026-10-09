@@ -428,7 +428,7 @@ CString CUnknownContentTypeHandler::GetTypeName()
 		rv = mimeInfo->GetDescription(mimeDesc);
 		if(NS_SUCCEEDED(rv)) {
 			if (!mimeDesc.IsEmpty())
-				return CString(W2CA(reinterpret_cast<LPCWSTR>(mimeDesc.get())));
+				return CString(W2CA(ToWideString(mimeDesc)));
 			if (*mimeType.get())	
 				return CString(A2CT(mimeType.get()));
 		}
@@ -437,7 +437,7 @@ CString CUnknownContentTypeHandler::GetTypeName()
 	nsString filename;
 	mAppLauncher->GetSuggestedFileName(filename);
 	SHFILEINFO shfi = {0};
-	if (SHGetFileInfo(W2CT(reinterpret_cast<LPCWSTR>(filename.get())), 0, &shfi, sizeof(SHFILEINFO),SHGFI_USEFILEATTRIBUTES|SHGFI_TYPENAME))
+	if (SHGetFileInfo(W2CT(ToWideString(filename)), 0, &shfi, sizeof(SHFILEINFO),SHGFI_USEFILEATTRIBUTES|SHGFI_TYPENAME))
 		return CString(shfi.szTypeName);
 	return CString();
 }

@@ -55,10 +55,10 @@ nsCString CStringToNSUTF8String(LPCTSTR aStr)
 CString NSStringToCString(const nsString& aStr)
 {
 #ifdef _UNICODE
-	return CString(reinterpret_cast<LPCWSTR>(aStr.get()));
+	return CString(ToWideString(aStr));
 #else
 	USES_CONVERSION;
-	return CString(W2CA(reinterpret_cast<LPCWSTR>(aStr.get())));
+	return CString(W2CA(ToWideString(aStr)));
 #endif
 }
 
@@ -71,7 +71,7 @@ CString NSUTF8StringToCString(const nsCString& aStr)
 	return NSStringToCString(aUStr);
 #else
 	USES_CONVERSION;
-	return CString(W2CA(reinterpret_cast<LPCWSTR>(aUStr.get())));
+	return CString(W2CA(ToWideString(aUStr)));
 #endif
 }
 
@@ -334,7 +334,7 @@ BOOL IsContentEditable(nsIDOMNode* node)
 			element->HasAttribute(NS_LITERAL_STRING("contenteditable"), &_retval);
 			element->GetAttribute(NS_LITERAL_STRING("contenteditable"), attr);
 			if (_retval && (attr.Length() == 0 ||
-				wcscmp(reinterpret_cast<const wchar_t*>(attr.get()), L"true") == 0))
+				wcscmp(ToWideString(attr), L"true") == 0))
 				return TRUE;
 		}
 

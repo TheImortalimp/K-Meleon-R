@@ -22,7 +22,6 @@ DEFINES['_UNICODE'] = True
 DISABLE_STL_WRAPPING = True
 
 OS_LIBS += [
-  'nss3',
   'mozalloc',
   'xpcomglue_s',
   'xul',

@@ -455,7 +455,7 @@ int CPreferences::GetString(const char *preference, wchar_t *retVal, const wchar
 		NS_CStringToUTF16(string, NS_CSTRING_ENCODING_UTF8, unicode);
 	
 	if (retVal)
-      wcscpy(retVal, reinterpret_cast<const wchar_t*>(unicode.get()));
+      wcscpy(retVal, ToWideString(unicode));
    return unicode.Length();
 /*
    nsString string;

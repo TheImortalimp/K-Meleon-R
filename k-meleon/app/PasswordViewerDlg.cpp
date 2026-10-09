@@ -174,8 +174,7 @@ int CALLBACK CPasswordViewerDlg::SortPasswordsList(LPARAM lParam1, LPARAM lParam
 	nsString host1, host2;
 	password1->GetHostname(host1);
 	password2->GetHostname(host2);
-	return wcscmp(reinterpret_cast<const wchar_t*>(host1.get()),
-		reinterpret_cast<const wchar_t*>(host2.get()));
+	return wcscmp(ToWideString(host1), ToWideString(host2));
 }
 
 void CPasswordViewerDlg::OnBnClickedRadio1()

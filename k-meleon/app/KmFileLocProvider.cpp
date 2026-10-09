@@ -420,7 +420,7 @@ NS_METHOD KmFileLocProvider::GetProductDirectory(nsIFile **aLocalFile, bool aLoc
 			CString path;
 			SHGetFolderPath(NULL, clsid, NULL, 0, path.GetBuffer(MAX_PATH));
 			path.ReleaseBuffer();
-			rv = NS_NewLocalFile(nsString(path), true, getter_AddRefs(localDir));
+			rv = NS_NewLocalFile(ToNsString(path), true, getter_AddRefs(localDir));
 			if (NS_SUCCEEDED(rv))
 				rv = localDir->Exists(&exists);
 

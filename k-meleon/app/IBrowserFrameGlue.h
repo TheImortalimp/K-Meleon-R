@@ -117,7 +117,7 @@ typedef IBrowserGlue *PBROWSERGLUE;
 
 struct IBrowserFrameGlue {
     // Progress Related Methods
-    virtual void UpdateStatusBarText(const PRUnichar *aMessage) = 0;
+    virtual void UpdateStatusBarText(const char16_t *aMessage) = 0;
     virtual void UpdateProgress(PRInt32 aCurrent, PRInt32 aMax) = 0;
     virtual void UpdateBusyState(PRBool aBusy) = 0;
     virtual void UpdateCurrentURI(nsIURI *aLocation) = 0;
@@ -129,8 +129,8 @@ struct IBrowserFrameGlue {
                             PRInt32 cx, PRInt32 cy,
                             nsIWebBrowser ** aWebBrowser) = 0;
     virtual void DestroyBrowserFrame() = 0;
-    virtual void GetBrowserFrameTitle(PRUnichar **aTitle) = 0;
-    virtual void SetBrowserFrameTitle(const PRUnichar *aTitle) = 0;
+    virtual void GetBrowserFrameTitle(char16_t **aTitle) = 0;
+    virtual void SetBrowserFrameTitle(const char16_t *aTitle) = 0;
     virtual void SetBrowserSize(PRInt32 aCX, PRInt32 aCY) = 0;
 	/*virtual void GetBrowserFramePosition(PRInt32 *aX, PRInt32 *aY) = 0;
     virtual void SetBrowserFramePosition(PRInt32 aX, PRInt32 aY) = 0;
@@ -163,7 +163,7 @@ struct IBrowserFrameGlue {
 
 #define NS_DECL_BROWSERFRAMEGLUE    \
     public: \
-        virtual void UpdateStatusBarText(const PRUnichar *aMessage);    \
+        virtual void UpdateStatusBarText(const char16_t *aMessage);    \
         virtual void UpdateProgress(PRInt32 aCurrent, PRInt32 aMax);    \
         virtual void UpdateBusyState(PRBool aBusy);                     \
         virtual void UpdateCurrentURI(nsIURI *aLocation);               \
@@ -171,8 +171,8 @@ struct IBrowserFrameGlue {
         virtual PRBool CreateNewBrowserFrame(PRUint32 chromeMask, PRInt32 x, PRInt32 y, PRInt32 cx, PRInt32 cy, nsIWebBrowser** aWebBrowser);   \
         virtual void DestroyBrowserFrame();                         \
 		virtual void SetBrowserSize(PRInt32 aCX, PRInt32 aCY);  \
-		virtual void GetBrowserFrameTitle(PRUnichar **aTitle);  \
-        virtual void SetBrowserFrameTitle(const PRUnichar *aTitle); \
+		virtual void GetBrowserFrameTitle(char16_t **aTitle);  \
+        virtual void SetBrowserFrameTitle(const char16_t *aTitle); \
         /*virtual void GetBrowserFramePosition(PRInt32 *aX, PRInt32 *aY); \
         virtual void SetBrowserFramePosition(PRInt32 aX, PRInt32 aY);   \
         virtual void GetBrowserFrameSize(PRInt32 *aCX, PRInt32 *aCY);   \

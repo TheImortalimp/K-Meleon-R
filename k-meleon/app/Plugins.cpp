@@ -82,7 +82,7 @@ wchar_t *WDecodeUTF8(const char *str)
 {
   nsString _str;
   NS_CStringToUTF16(nsCString(str), NS_CSTRING_ENCODING_UTF8, _str);
-  wchar_t *pszStr = _wcsdup(reinterpret_cast<const wchar_t*>(_str.get()));
+  wchar_t *pszStr = _wcsdup(ToWideString(_str));
   return pszStr;
 }
 
@@ -97,7 +97,7 @@ char *DecodeUTF8(const char *str)
   USES_CONVERSION;
   nsString _str;
   NS_CStringToUTF16(nsCString(str), NS_CSTRING_ENCODING_UTF8, _str);
-  char *pszStr = safe_strdup(W2CA(reinterpret_cast<LPCWSTR>(_str.get())));
+  char *pszStr = safe_strdup(W2CA(ToWideString(_str)));
   return pszStr;
 }
 
@@ -627,7 +627,7 @@ int GetMozillaSessionHistory (HWND hWnd, char ***titles, char ***urls, int *coun
    pHistory = new char *[SessionSize];
    
    nsCOMPtr<nsISHEntry> he;
-   PRUnichar *title;
+   char16_t *title;
    
    if (pHistUrl)
       delete [] pHistUrl;
@@ -658,9 +658,9 @@ int GetMozillaSessionHistory (HWND hWnd, char ***titles, char ***urls, int *coun
       
       // The title is in 16-bit unicode, this converts it to 8bit (UTF)
       int len;
-      len = WideCharToMultiByte(CP_UTF8, 0, title, -1, 0, 0, NULL, NULL);
+      len = WideCharToMultiByte(CP_UTF8, 0, reinterpret_cast<const wchar_t*>(title), -1, 0, 0, NULL, NULL);
       char *s = new char[len+1];
-      len = WideCharToMultiByte(CP_UTF8, 0, title, -1, s, len, NULL, NULL);
+      len = WideCharToMultiByte(CP_UTF8, 0, reinterpret_cast<const wchar_t*>(title), -1, s, len, NULL, NULL);
       s[len] = 0;
       pHistory[i] = s;
      nsMemory::Free(title);
@@ -958,7 +958,7 @@ UINT GetWindowVar(HWND hWnd, WindowVarType type, void* ret)
 			nsString sel;  
 			browser->GetUSelection(sel);
 			retLen = sel.Length() + 1;
-			if (ret) wcscpy((wchar_t*)ret, reinterpret_cast<const wchar_t*>(sel.get()));
+			if (ret) wcscpy((wchar_t*)ret, ToWideString(sel));
 			break;
 		}
 
@@ -1364,7 +1364,7 @@ USES_CONVERSION;
 		nsString sel;  
 		browser->GetUSelection(sel);
 		retLen = sel.Length();
-		 if (ret) wcscpy((wchar_t*)ret, reinterpret_cast<const wchar_t*>(sel.get()));
+		 if (ret) wcscpy((wchar_t*)ret, ToWideString(sel));
 	  }
 	  break;
    case PREF_STRING:

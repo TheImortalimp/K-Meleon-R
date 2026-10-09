@@ -238,7 +238,7 @@ NS_IMETHODIMP CBrowserImpl::SetStatus(PRUint32 aType, const PRUnichar* aStatus)
 		return NS_OK;
 #endif
 
-	m_pBrowserFrameGlue->UpdateStatusBarText(PRUnicharToCString(aStatus));
+	m_pBrowserFrameGlue->UpdateStatusBarText(reinterpret_cast<const char16_t*>(aStatus));
 
 	return NS_OK;
 }
@@ -365,7 +365,7 @@ CBrowserImpl::GetPersistence(PRBool* aPersistX, PRBool* aPersistY,
 // CBrowserImpl::nsIWebBrowserChromeFocus
 //*****************************************************************************
 
-NS_IMETHODIMP CBrowserImpl::FocusNextElement(bool aForDocumentNavigation)
+NS_IMETHODIMP CBrowserImpl::FocusNextElement()
 {
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
@@ -374,7 +374,7 @@ NS_IMETHODIMP CBrowserImpl::FocusNextElement(bool aForDocumentNavigation)
     return NS_OK;
 }
 
-NS_IMETHODIMP CBrowserImpl::FocusPrevElement(bool aForDocumentNavigation)
+NS_IMETHODIMP CBrowserImpl::FocusPrevElement()
 {
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
@@ -507,8 +507,7 @@ NS_IMETHODIMP CBrowserImpl::GetTitle(PRUnichar** aTitle)
 	CString title;
 	m_pBrowserFrameGlue->GetBrowserTitle(title);
 
-    nsString nsTitle;
-    *aTitle = NS_StringCloneData(CStringToNSString(title));
+    *aTitle = reinterpret_cast<PRUnichar*>(NS_StringCloneData(CStringToNSString(title)));
 	
 	return NS_OK;
 }
@@ -523,7 +522,7 @@ NS_IMETHODIMP CBrowserImpl::SetTitle(const PRUnichar* aTitle)
 		return NS_OK;
 #endif
 
-	m_pBrowserFrameGlue->SetBrowserTitle(PRUnicharToCString(aTitle));
+	m_pBrowserFrameGlue->SetBrowserTitle(NSStringToCString(nsString(reinterpret_cast<const char16_t*>(aTitle))));
 	
 	return NS_OK;
 }
@@ -564,12 +563,13 @@ NS_IMETHODIMP CBrowserImpl::Blur()
 //*****************************************************************************
 
 /* void onShowTooltip (in long aXCoords, in long aYCoords, in wstring aTipText); */
-NS_IMETHODIMP CBrowserImpl::OnShowTooltip(PRInt32 aXCoords, PRInt32 aYCoords, const PRUnichar *aTipText, const PRUnichar *aTipDir)
+NS_IMETHODIMP CBrowserImpl::OnShowTooltip(PRInt32 aXCoords, PRInt32 aYCoords, const PRUnichar *aTipText)
 {
 	NS_ENSURE_ARG_POINTER(aTipText);
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
-    m_pBrowserFrameGlue->ShowTooltip(aXCoords, aYCoords, PRUnicharToCString(aTipText));
+    m_pBrowserFrameGlue->ShowTooltip(aXCoords, aYCoords,
+        NSStringToCString(nsString(reinterpret_cast<const char16_t*>(aTipText))));
 
     return NS_OK;
 }
@@ -687,7 +687,7 @@ NS_IMETHODIMP CBrowserImpl::HandleEvent(nsIDOMEvent *aEvent)
 		node = do_QueryInterface(target);
 		nsString name;
 		node->GetNodeName(name);
-		if (name.Compare(L"xul:thumb") == 0 || name.Compare(L"xul:scrollbarbutton") == 0 || name.Compare(L"xul:slider") == 0) {
+		if (name.Compare(u"xul:thumb") == 0 || name.Compare(u"xul:scrollbarbutton") == 0 || name.Compare(u"xul:slider") == 0) {
 			view->m_contextNode = nullptr;
 		}
 		else
@@ -772,7 +772,7 @@ NS_IMETHODIMP CBrowserImpl::HandleEvent(nsIDOMEvent *aEvent)
 			return NS_OK;
 
 		bool defPrevented;
-		keyEvent->AsEvent()->GetDefaultPrevented(&defPrevented);
+		aEvent->GetDefaultPrevented(&defPrevented);
 		if (defPrevented) return NS_OK;
 
 		bool altKey, shiftKey, ctrlKey;
@@ -791,7 +791,7 @@ NS_IMETHODIMP CBrowserImpl::HandleEvent(nsIDOMEvent *aEvent)
 			return NS_OK;
 
 		nsCOMPtr<nsIDOMEventTarget> targetNode;
-		keyEvent->AsEvent()->GetTarget(getter_AddRefs(targetNode));
+		aEvent->GetTarget(getter_AddRefs(targetNode));
 		NS_ENSURE_TRUE(targetNode, NS_ERROR_NULL_POINTER);
 		nsCOMPtr<nsIDOMNode> node = do_QueryInterface(targetNode);
 		if (!node) return NS_OK;		

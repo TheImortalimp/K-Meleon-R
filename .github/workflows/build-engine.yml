@@ -156,6 +156,20 @@ jobs:
           key: obj-none
           restore-keys: obj-
 
+      - name: Include the refcount declaration required by gfxVR
+        shell: bash
+        working-directory: goanna
+        run: |
+          for header in gfx/thebes/gfxVR.h obj-x64/dist/include/gfxVR.h; do
+            if [ -f "$header" ]; then
+              if ! grep -q '^#include "nsISupportsImpl.h"$' "$header"; then
+                grep -q '#include "nsCOMPtr.h"' "$header" || { echo "Expected include anchor missing in $header"; exit 1; }
+                sed -i '/#include "nsCOMPtr.h"/a #include "nsISupportsImpl.h"' "$header"
+              fi
+              grep -q '^#include "nsISupportsImpl.h"$' "$header" || { echo "Failed to patch $header"; exit 1; }
+            fi
+          done
+
       - name: Keep restored objdir from being clobbered
         shell: bash
         run: if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi; ls goanna/obj-x64 2>/dev/null | head -5 || true

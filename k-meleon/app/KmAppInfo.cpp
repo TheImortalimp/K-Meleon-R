@@ -195,17 +195,6 @@ NS_IMETHODIMP KmAppInfo::GetProcessType(uint32_t *aProcessType)
 	return NS_OK;
 }
 
-/* readonly attribute boolean is64Bit; */
-NS_IMETHODIMP KmAppInfo::GetIs64Bit(bool* aResult)
-{
-#ifdef _WIN64
-	*aResult = true;
-#else
-	*aResult = false;
-#endif
-	return NS_OK;
-}
-
 #include "nsINIParser.h"
 #define NS_LINEBREAK "\015\012"
 #define FILE_COMPATIBILITY_INFO NS_LITERAL_CSTRING("compatibility.ini")
@@ -256,12 +245,6 @@ NS_IMETHODIMP KmAppInfo::EnsureContentProcess()
 
 /* readonly attribute PRTime replacedLockTime; */
 NS_IMETHODIMP KmAppInfo::GetReplacedLockTime(PRTime *aReplacedLockTime)
-{
-	return NS_ERROR_NOT_IMPLEMENTED;
-}
-
-/* readonly attribute DOMString lastRunCrashID; */
-NS_IMETHODIMP KmAppInfo::GetLastRunCrashID(nsAString & aLastRunCrashID)
 {
 	return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -436,12 +419,6 @@ NS_IMETHODIMP KmAppInfo::SetInterrupted(bool aInterrupted)
 {
 	mInterrupted = aInterrupted;
 	return NS_OK;    
-}
-
-NS_IMETHODIMP KmAppInfo::GetMultiprocessBlockPolicy(uint32_t* aResult)
-{
-	*aResult = 7; // kE10sDisabledForAddons = 7
-	return NS_OK;
 }
 
 /*
