@@ -41,9 +41,9 @@ const PROVIDER_PREF = "kmeleon.search.provider";
 const PROVIDERS = {
     bing: { label: "Bing", url: "https://www.bing.com/search?q=_searchTerms_" },
     google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_" },
-    copilot: { label: "Copilot", url: "https://copilot.microsoft.com/?q=_searchTerms_" }
+    copilot: { label: "Copilot", url: "https://www.bing.com/copilotsearch?q=_searchTerms_" }
 };
-const COPILOT_HOME = "https://copilot.microsoft.com/";
+const COPILOT_HOME = "https://www.bing.com/copilotsearch";
 
 function getProvider() {
     try {
