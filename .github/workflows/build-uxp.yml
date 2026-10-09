@@ -81,6 +81,15 @@ jobs:
           key: uxp-obj-none
           restore-keys: uxp-obj-
 
+      - name: Reset or keep restored objdir
+        shell: bash
+        run: |
+          if [ "$(cat uxp/stage.txt)" = build ]; then
+            if [ -f goanna/obj-x64/CLOBBER ]; then touch goanna/obj-x64/CLOBBER; fi
+          else
+            rm -rf goanna/obj-x64
+          fi
+
       - name: Configure / build
         shell: cmd
         run: |
