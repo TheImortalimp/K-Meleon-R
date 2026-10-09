@@ -6,12 +6,13 @@ SharedLibrary('bmpmenu')
 SOURCES += [
   '../../shared/Utils.cpp',
   'bmp_menu.cpp',
-  'stdafx.cpp',  
+  'StdAfx.cpp',
 ]
 
 DEFINES['UNICODE'] = True
 
 DEFINES['_UNICODE'] = True
+DEFINES['_AFXDLL'] = True
 
 DISABLE_STL_WRAPPING = True
 

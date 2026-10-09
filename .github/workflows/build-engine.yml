@@ -195,6 +195,17 @@ jobs:
         shell: pwsh
         run: |
           $bin = 'goanna\obj-x64\dist\bin'
+          $redistRoot = Get-ChildItem 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC' -Directory |
+            Where-Object { $_.Name -like '14.29*' } |
+            Sort-Object Name -Descending |
+            Select-Object -First 1
+          if (-not $redistRoot) { throw 'The v142 runtime redistributables were not found' }
+          foreach ($component in 'Microsoft.VC142.CRT', 'Microsoft.VC142.MFC') {
+            $runtimePath = Join-Path $redistRoot.FullName "x64\$component"
+            $runtimeDlls = Get-ChildItem $runtimePath -File -Filter '*.dll'
+            if (-not $runtimeDlls) { throw "No runtime DLLs found in $runtimePath" }
+            Copy-Item $runtimeDlls.FullName $bin -Force
+          }
           $app = Get-ChildItem $bin -File -Filter '*meleon*.exe' | Select-Object -First 1
           if (-not $app) { throw "K-Meleon executable was not produced in $bin" }
           foreach ($file in 'xul.dll', 'mozglue.dll') {

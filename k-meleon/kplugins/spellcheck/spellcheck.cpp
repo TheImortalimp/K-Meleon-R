@@ -478,30 +478,30 @@ struct miniWords
 	/* construct with alloc */
 	miniWords(int size);
 	/* construct by pointer */
-	miniWords(PRUnichar** p, int size)
+	miniWords(char16_t** p, int size)
 		: m_length(size), m_size(size), m_words(p) {}
 	~miniWords() { clear(); }
 	int length() { return m_length; }
 	int size() { return m_size; }
-	void push(PRUnichar* p) {
+	void push(char16_t* p) {
 		if (m_length < m_size) 
 			m_words[m_length ++] = p;
 	}
 	void clear();
-	PRUnichar* operator[] (const int i) {
+	char16_t* operator[] (const int i) {
 		return (i >= 0 && i < m_length) ? m_words[i] : 0;
 	}
 	void sort();
 private:
-	static bool comp(PRUnichar *a, PRUnichar *b) {
-		return wcscmp(a, b) < 0;
+	static bool comp(char16_t *a, char16_t *b) {
+		return nsDependentString(a).Compare(nsDependentString(b)) < 0;
 	}
 	int m_length, m_size;
-	PRUnichar** m_words;
+	char16_t** m_words;
 };
 
 miniWords::miniWords(int size) : m_length(0), m_size(0), m_words(0) {
-	m_words = (PRUnichar**) nsMemory::Alloc(sizeof(PRUnichar*) * size);
+	m_words = (char16_t**) nsMemory::Alloc(sizeof(char16_t*) * size);
 	if (m_words) {
 		m_size = size;
 	}
@@ -580,7 +580,7 @@ private:
    0x1000 - 0x1fff : dictionaries
    0x2000 - 0x2fff : suggested words
  */
-INT select_menu(HWND hwnd, miniWords& suggest, miniWords& dics, const wchar_t* current, int x, int y)
+INT select_menu(HWND hwnd, miniWords& suggest, miniWords& dics, const char16_t* current, int x, int y)
 {
 	miniHMenu hDics, hMenu;
 	BOOL (*append_menu)(HMENU, UINT, UINT, const wchar_t*);
@@ -600,8 +600,8 @@ INT select_menu(HWND hwnd, miniWords& suggest, miniWords& dics, const wchar_t* c
 	for (int i = 0, id = 0x1000; i < dics.length(); ++ i, ++ id) {
 		UINT flags = MF_STRING;
 		// lstrcmpW can't compare correctly.
-		flags |= wcscmp(current, dics[i]) ? MF_ENABLED : MF_CHECKED | MF_GRAYED;
-		if (! append_menu(hDics, flags, id, dics[i])) {
+		flags |= nsDependentString(current).Equals(nsDependentString(dics[i])) ? MF_CHECKED | MF_GRAYED : MF_ENABLED;
+		if (! append_menu(hDics, flags, id, reinterpret_cast<const wchar_t*>(dics[i]))) {
 			return -1;
 		}
 	}
@@ -614,7 +614,8 @@ INT select_menu(HWND hwnd, miniWords& suggest, miniWords& dics, const wchar_t* c
 	if (hMenu == NULL) return -1;
 	// append suggested word
 	for (int i = 0, id = 0x2000; i < suggest.length(); ++ i, ++ id) {
-		if (! append_menu(hMenu, MF_ENABLED | MF_STRING, id, suggest[i])) {
+		if (! append_menu(hMenu, MF_ENABLED | MF_STRING, id,
+		                  reinterpret_cast<const wchar_t*>(suggest[i]))) {
 			return -1;
 		}
 	}
@@ -786,7 +787,7 @@ BOOL DoCommand(HWND hwnd, BOOL bHere)
 	miniWords suggests(max_suggests);
 	if (is_mis) {
 		for (int i = 0; i < max_suggests; ++ i) {
-			PRUnichar *w;
+			char16_t *w;
 			rv = spell->GetSuggestedWord(&w);
 			NS_ENSURE_SUCCESS(rv, FALSE);
 			if (! w) break;
@@ -800,7 +801,7 @@ BOOL DoCommand(HWND hwnd, BOOL bHere)
 	SortSuggestionList(suggests);
 	
 	// get dictionaries list
-	PRUnichar** d;
+	char16_t** d;
 	PRUint32 c;
 	rv = spell->GetDictionaryList(&d, &c);
 	NS_ENSURE_SUCCESS(rv, FALSE);
