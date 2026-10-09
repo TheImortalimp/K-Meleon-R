@@ -1480,7 +1480,7 @@ NS_IMPL_THREADSAFE_ISUPPORTS(CMfcEmbedApp, nsIObserver, nsIWindowCreator, nsISup
 
 // Mainly needed to support "on the fly" profile switching
 
-NS_IMETHODIMP CMfcEmbedApp::Observe(nsISupports *aSubject, const char *aTopic, const PRUnichar *someData)
+NS_IMETHODIMP CMfcEmbedApp::Observe(nsISupports *aSubject, const char *aTopic, const char16_t *someData)
 {
    nsresult rv = NS_OK;
    
@@ -1770,17 +1770,17 @@ void CMfcEmbedApp::CheckProfileVersion()
 										nsCOMPtr<nsIRDFResource> resource2;
 										rdfSvc->GetResource(NS_LITERAL_CSTRING("NC:value"), getter_AddRefs(resource2));
 										nsCOMPtr<nsIRDFLiteral> _literal;
-										rdfSvc->GetLiteral(L"application/k-skin", getter_AddRefs(_literal));
+										rdfSvc->GetLiteral(u"application/k-skin", getter_AddRefs(_literal));
 										dataSource->Assert(resource, resource2, _literal, true);
 
 										//rdfSvc->GetResource(NS_LITERAL_CSTRING("urn:mimetype:application/k-skin"), getter_AddRefs(resource));
 										rdfSvc->GetResource(NS_LITERAL_CSTRING("NC:fileExtensions"), getter_AddRefs(resource2));
-										rdfSvc->GetLiteral(L"kms", getter_AddRefs(_literal));
+										rdfSvc->GetLiteral(u"kms", getter_AddRefs(_literal));
 										dataSource->Assert(resource, resource2, _literal, true);
 
 										//rdfSvc->GetResource(NS_LITERAL_CSTRING("urn:mimetype:application/k-skin"), getter_AddRefs(resource));
 										rdfSvc->GetResource(NS_LITERAL_CSTRING("NC:description"), getter_AddRefs(resource2));
-										rdfSvc->GetLiteral(L"K-Meleon Skin", getter_AddRefs(_literal));
+										rdfSvc->GetLiteral(u"K-Meleon Skin", getter_AddRefs(_literal));
 										dataSource->Assert(resource, resource2, _literal, true);				
 
 										nsCOMPtr<nsIRDFRemoteDataSource> rds = do_QueryInterface(dataSource);

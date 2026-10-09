@@ -97,7 +97,7 @@ void CACListener::AutoCompleteStop()
 	nsCOMPtr<nsIAutoCompleteSearch> autoComplete = do_GetService("@mozilla.org/autocomplete/search;1?name=history", &rv);
 	NS_ENSURE_TRUE(autoComplete, );
 	autoComplete->StopSearch();
-	previousSearch = L"";
+	previousSearch.Truncate();
 }
 
 void CACListener::AutoComplete(const CString& aSearchString, AutoCompleteCallback callback, void* data)
@@ -114,6 +114,5 @@ void CACListener::AutoComplete(const CString& aSearchString, AutoCompleteCallbac
 		autoComplete->StartSearch(searchString, EmptyString(), nullptr/*m_oldResult*/, listener);
 	}
 }
-
 
 

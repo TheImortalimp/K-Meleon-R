@@ -1125,7 +1125,7 @@ void CBrowserView::Highlight(const wchar_t* string, BOOL matchCase)
 	if (string && string[0])
 	{
 		m_pWindow->Highlight(L"Yellow", string, matchCase);
-		m_lastHighlightWord = string;
+		m_lastHighlightWord.Assign(reinterpret_cast<const char16_t*>(string));
 	}
 	else
 	{

@@ -165,8 +165,8 @@ NS_IMETHODIMP CPromptService::PromptUsernameAndPassword(const char16_t * dialogT
 		if (selectedLogin) {
 			selectedLogin->GetUsername(username);
 			selectedLogin->GetPassword(password);			
-			if (ToNsString(username.get()).Equals(ToNsString(*user)) &&
-			    ToNsString(password.get()).Equals(ToNsString(*pwd))) {
+			if (username.Equals(nsString(*user)) &&
+			    password.Equals(nsString(*pwd))) {
 			} else {
 				selectedLogin->Clone(getter_AddRefs(newLogin));
 				loginManager->RemoveLogin(selectedLogin);

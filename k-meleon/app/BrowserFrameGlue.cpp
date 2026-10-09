@@ -166,7 +166,7 @@ void CBrowserFrame::BrowserFrameGlueObj::UpdateCurrentURI(nsIURI *aLocation)
 		// Prevent to move the caret in the urlbar
 		CString currentURL;
 		pThis->m_wndUrlBar.GetEnteredURL(currentURL);
-		if (currentURL.Compare(W2CT(uriString2.get())) == 0)
+		if (currentURL.Compare(reinterpret_cast<LPCWSTR>(uriString2.get())) == 0)
 			return;
 
 		// XXX Since Mozilla 1.8.0.2 about:blank is always passed here
@@ -175,7 +175,7 @@ void CBrowserFrame::BrowserFrameGlueObj::UpdateCurrentURI(nsIURI *aLocation)
 			currentURL.GetLength())
 			return;
 
-        pThis->m_wndUrlBar.SetCurrentURL(W2CT(uriString2.get()));
+        pThis->m_wndUrlBar.SetCurrentURL(reinterpret_cast<LPCWSTR>(uriString2.get()));
 
 		// Add a MRU entry. Note that I'm only only allowing
 		// http or https uri

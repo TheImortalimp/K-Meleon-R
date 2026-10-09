@@ -181,7 +181,7 @@ PRBool CACListener::AddEltToList(nsISupports* aElement)
 
 	PRUnichar* comment;
 	acItem->GetComment(&comment);
-	NS_UTF16ToCString(nsDependentString(comment),NS_CSTRING_ENCODING_NATIVE_FILESYSTEM,nsCStr);
+	NS_UTF16ToCString(nsString(reinterpret_cast<const char16_t*>(comment)),NS_CSTRING_ENCODING_NATIVE_FILESYSTEM,nsCStr);
 	m_ACIt->comment = strdup(nsCStr.get());
 	nsMemory::Free(comment);
 
@@ -228,5 +228,4 @@ int AutoComplete(char* aSearchString, AutoCompleteResult** results)
 	if (results) *results = gACResults;
 	return gACCountResults;
 }
-
 

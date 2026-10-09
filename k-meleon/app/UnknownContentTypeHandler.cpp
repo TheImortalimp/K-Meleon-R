@@ -115,7 +115,7 @@ NS_IMETHODIMP
 			// Set the filename
 			nsString filename;
 			mAppLauncher->GetSuggestedFileName(filename);
-			dlg.m_csFilename = W2CT(filename.get());
+			dlg.m_csFilename = NSStringToCString(filename);
 
 			// Set the mime type
 
@@ -211,7 +211,7 @@ NS_IMETHODIMP
 	return NS_OK;
 }
 
-NS_IMETHODIMP CUnknownContentTypeHandler::PromptForSaveToFileAsync(nsIHelperAppLauncher *aLauncher, nsISupports *aWindowContext, const PRUnichar * aDefaultFileName, const PRUnichar * aSuggestedFileExtension, bool aForcePrompt)
+NS_IMETHODIMP CUnknownContentTypeHandler::PromptForSaveToFileAsync(nsIHelperAppLauncher *aLauncher, nsISupports *aWindowContext, const char16_t * aDefaultFileName, const char16_t * aSuggestedFileExtension, bool aForcePrompt)
 {
 	return NS_ERROR_NOT_IMPLEMENTED;
 }
@@ -254,13 +254,13 @@ NS_IMETHODIMP
 				filter = fileType;
 			else {
 				filter = _T("*");
-				filter += W2CT(aSuggestedFileExtension);
+				filter += W2CT(reinterpret_cast<LPCWSTR>(aSuggestedFileExtension));
 			}
 			filter += _T("|*");
-			filter += W2CT(aSuggestedFileExtension);
+			filter += W2CT(reinterpret_cast<LPCWSTR>(aSuggestedFileExtension));
 			filter += _T("|");
 
-			ext = W2CT(aSuggestedFileExtension+1);
+			ext = W2CT(reinterpret_cast<LPCWSTR>(aSuggestedFileExtension + 1));
 		}
 
 		filter += _T("All Files|*.*||");
@@ -294,7 +294,7 @@ NS_IMETHODIMP
 			// never show up
 			if (CommDlgExtendedError() == FNERR_INVALIDFILENAME)
 			{
-				_tcscpy(szFileName, W2CT(aDefaultFile));
+				_tcscpy(szFileName, W2CT(reinterpret_cast<LPCWSTR>(aDefaultFile)));
 				theApp.preferences.lastDownloadDir = _T("");
 				bGetFile = ::GetSaveFileName(&ofn);
 			}
@@ -427,8 +427,8 @@ CString CUnknownContentTypeHandler::GetTypeName()
 		nsString mimeDesc;
 		rv = mimeInfo->GetDescription(mimeDesc);
 		if(NS_SUCCEEDED(rv)) {
-			if (*mimeDesc.get())
-				return CString(W2CA(mimeDesc.get()));
+			if (!mimeDesc.IsEmpty())
+				return CString(W2CA(reinterpret_cast<LPCWSTR>(mimeDesc.get())));
 			if (*mimeType.get())	
 				return CString(A2CT(mimeType.get()));
 		}
@@ -437,7 +437,7 @@ CString CUnknownContentTypeHandler::GetTypeName()
 	nsString filename;
 	mAppLauncher->GetSuggestedFileName(filename);
 	SHFILEINFO shfi = {0};
-	if (SHGetFileInfo(W2CT(filename.get()), 0, &shfi, sizeof(SHFILEINFO),SHGFI_USEFILEATTRIBUTES|SHGFI_TYPENAME)) 
+	if (SHGetFileInfo(W2CT(reinterpret_cast<LPCWSTR>(filename.get())), 0, &shfi, sizeof(SHFILEINFO),SHGFI_USEFILEATTRIBUTES|SHGFI_TYPENAME))
 		return CString(shfi.szTypeName);
 	return CString();
 }
@@ -999,7 +999,7 @@ NS_IMETHODIMP CProgressDialog::OnLocationChange(nsIWebProgress *aWebProgress, ns
 NS_IMETHODIMP CProgressDialog::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const char16_t *aMessage){
 	USES_CONVERSION;
 	Cancel();
-	::AfxMessageBox(W2CT(aMessage),MB_OK|MB_ICONEXCLAMATION);	
+	::AfxMessageBox(W2CT(reinterpret_cast<LPCWSTR>(aMessage)),MB_OK|MB_ICONEXCLAMATION);
 	if (m_bWindow) 
 		Close();
 	/*MessageBox(W2CA(aMessage), "", MB_OK|MB_ICONERROR);

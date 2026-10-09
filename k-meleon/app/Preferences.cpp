@@ -105,7 +105,7 @@ public:
 };
 
 	NS_IMETHODIMP CPrefObserver::Observe(
-		nsISupports* aSubject, const char* aTopic, const PRUnichar* aSomeData)
+		nsISupports* aSubject, const char* aTopic, const char16_t* aSomeData)
 	{
 		if (strcmp(aTopic, "nsPref:changed") != 0)
 			return NS_OK;  
@@ -450,19 +450,19 @@ int CPreferences::GetString(const char *preference, wchar_t *retVal, const wchar
 	nsCString string;
 	nsString unicode;
     if (!m_prefs || !NS_SUCCEEDED(m_prefs->GetCharPref(preference, getter_Copies(string))))
-		unicode = defaultVal;
+		unicode.Assign(reinterpret_cast<const char16_t*>(defaultVal));
 	else
 		NS_CStringToUTF16(string, NS_CSTRING_ENCODING_UTF8, unicode);
 	
 	if (retVal)
-      wcscpy(retVal, unicode.get());
+      wcscpy(retVal, reinterpret_cast<const wchar_t*>(unicode.get()));
    return unicode.Length();
 /*
    nsString string;
    if (!m_prefs || !NS_SUCCEEDED(m_prefs->CopyUnicharPref(preference, getter_Copies(string))))
       string = defaultVal;	
    if (retVal)
-      wcscpy(retVal, string.get());
+      wcscpy(retVal, reinterpret_cast<const wchar_t*>(string.get()));
    return string.Length();*/
 }
 
@@ -586,7 +586,7 @@ void CPreferences::_GetString(const char *preference, CString& var, LPCTSTR defa
    nsresult rv = m_prefs->CopyUnicharPref(preference, getter_Copies(string));
    if (NS_SUCCEEDED(rv) && defaultVal) {
 		USES_CONVERSION;
-      var = W2CT(string.get());	
+      var = NSStringToCString(string);
 	}
    else if (defaultVal)
       var = defaultVal;

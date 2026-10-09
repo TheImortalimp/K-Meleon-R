@@ -6,7 +6,6 @@
 
 Program(CONFIG['MOZ_APP_NAME'])
 OS_LIBS += [
-    'mozjs',
     'xpcomglue_s',
 ]
 

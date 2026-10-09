@@ -131,6 +131,11 @@ inline nsString ToNsString(const wchar_t* value)
 	return nsString(reinterpret_cast<const char16_t*>(value));
 }
 
+inline nsString ToNsString(const CString& value)
+{
+	return ToNsString(value.GetString());
+}
+
 #if defined(THERECANBENODEBUG) 
 //#define DEBUG
 #endif

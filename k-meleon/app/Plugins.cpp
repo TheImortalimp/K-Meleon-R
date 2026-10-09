@@ -82,7 +82,7 @@ wchar_t *WDecodeUTF8(const char *str)
 {
   nsString _str;
   NS_CStringToUTF16(nsCString(str), NS_CSTRING_ENCODING_UTF8, _str);
-  wchar_t *pszStr = _wcsdup(_str.get());
+  wchar_t *pszStr = _wcsdup(reinterpret_cast<const wchar_t*>(_str.get()));
   return pszStr;
 }
 
@@ -97,7 +97,7 @@ char *DecodeUTF8(const char *str)
   USES_CONVERSION;
   nsString _str;
   NS_CStringToUTF16(nsCString(str), NS_CSTRING_ENCODING_UTF8, _str);
-  char *pszStr = safe_strdup(W2CA(_str.get()));
+  char *pszStr = safe_strdup(W2CA(reinterpret_cast<LPCWSTR>(_str.get())));
   return pszStr;
 }
 
@@ -958,7 +958,7 @@ UINT GetWindowVar(HWND hWnd, WindowVarType type, void* ret)
 			nsString sel;  
 			browser->GetUSelection(sel);
 			retLen = sel.Length() + 1;
-			if (ret) wcscpy((wchar_t*)ret, sel.get());
+			if (ret) wcscpy((wchar_t*)ret, reinterpret_cast<const wchar_t*>(sel.get()));
 			break;
 		}
 
@@ -1364,7 +1364,7 @@ USES_CONVERSION;
 		nsString sel;  
 		browser->GetUSelection(sel);
 		retLen = sel.Length();
-		 if (ret) wcscpy((wchar_t*)ret, sel.get());
+		 if (ret) wcscpy((wchar_t*)ret, reinterpret_cast<const wchar_t*>(sel.get()));
 	  }
 	  break;
    case PREF_STRING:

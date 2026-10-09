@@ -62,12 +62,11 @@ NS_IMETHODIMP CNSSDialogs::ConfirmDownloadCACert(nsIInterfaceRequestor *ctx, nsI
 	// chrome://pippki/content/downloadcert.xul
 
 	CString msg2;
-	LPCTSTR sCName;
-	USES_CONVERSION;
+	CString sCName;
 
 	nsString commonName;
 	cert->GetCommonName (commonName);
-	sCName = W2CT(commonName.get());
+	sCName = NSStringToCString(commonName);
 
 	msg2.Format(IDS_newCAMessage1, sCName);
 
@@ -227,43 +226,43 @@ NS_IMETHODIMP CNSSDialogs::ViewCert(nsIInterfaceRequestor *ctx, nsIX509Cert *cer
 
 	if (count>0)
 		for (UINT i=0; i<count; i++)
-			viewCertGeneral.m_csUsage += W2CT(usageList[i]) + CString(_T("\r\n"));
+			viewCertGeneral.m_csUsage += NSStringToCString(nsString(usageList[i])) + CString(_T("\r\n"));
 	
 	cert->GetCommonName(value);
-	viewCertGeneral.m_csCN = W2CT(value.get());
+	viewCertGeneral.m_csCN = NSStringToCString(value);
 
 	cert->GetOrganization(value);
-	viewCertGeneral.m_csO = W2CT(value.get());
+	viewCertGeneral.m_csO = NSStringToCString(value);
 
 	cert->GetOrganizationalUnit(value);
-	viewCertGeneral.m_csOU = W2CT(value.get());
+	viewCertGeneral.m_csOU = NSStringToCString(value);
 
 	cert->GetSerialNumber(value);
-	viewCertGeneral.m_csSN = W2CT(value.get());
+	viewCertGeneral.m_csSN = NSStringToCString(value);
 
 	cert->GetIssuerCommonName(value);
-	viewCertGeneral.m_csCN2 = W2CT(value.get());
+	viewCertGeneral.m_csCN2 = NSStringToCString(value);
 
 	cert->GetIssuerOrganization(value);
-	viewCertGeneral.m_csCN2 = W2CT(value.get());
+	viewCertGeneral.m_csCN2 = NSStringToCString(value);
 
 	cert->GetIssuerOrganizationUnit(value);
-	viewCertGeneral.m_csOU2 = W2CT(value.get());
+	viewCertGeneral.m_csOU2 = NSStringToCString(value);
 
 	nsCOMPtr<nsIX509CertValidity> validity;
 	cert->GetValidity(getter_AddRefs(validity));
 		
 	validity->GetNotBeforeLocalDay (value);
-	viewCertGeneral.m_csIssuedDate = W2CT(value.get());
+	viewCertGeneral.m_csIssuedDate = NSStringToCString(value);
 
 	validity->GetNotAfterLocalDay(value);
-	viewCertGeneral.m_csExpiresDate = W2CT(value.get());
+	viewCertGeneral.m_csExpiresDate = NSStringToCString(value);
 		
 	cert->GetSha1Fingerprint (value);
-	viewCertGeneral.m_csSHA1 = W2CT(value.get());
+	viewCertGeneral.m_csSHA1 = NSStringToCString(value);
 
 	cert->GetSha256Fingerprint (value);
-	viewCertGeneral.m_csMD5 = W2CT(value.get());
+	viewCertGeneral.m_csMD5 = NSStringToCString(value);
 	
 	viewCert.m_psh.dwFlags |= PSH_NOAPPLYNOW;
 	viewCert.AddPage(&viewCertGeneral);
@@ -283,12 +282,11 @@ NS_IMETHODIMP CNSSDialogs::ConfirmUnknownIssuer(nsIInterfaceRequestor *socketInf
 {
 	// chrome://pippki/content/newserver.xul
 	CString csIntro,csQuestion,csReason3;
-	LPCTSTR sCName;
-	USES_CONVERSION;
+	CString sCName;
 
 	nsString commonName;
 	cert->GetCommonName (commonName);
-	sCName = W2CT(commonName.get());
+	sCName = NSStringToCString(commonName);
 
 	csIntro.Format(IDS_NEWSERVER_INTRO, sCName);
 	csQuestion.Format(IDS_NEWSERVER_QUESTION, sCName);
@@ -371,7 +369,7 @@ NS_IMETHODIMP CNSSDialogs::ConfirmCertExpired(nsIInterfaceRequestor *socketInfo,
   cert->GetCommonName (commonName);
 
   USES_CONVERSION;
-  CString cName(W2CT(commonName.get()));
+  CString cName = NSStringToCString(commonName);
 
   if (LL_CMP(now, >, notAfter)) {
     msg.LoadString(IDS_CERTEXPIREDTITLE); 
@@ -402,14 +400,14 @@ NS_IMETHODIMP CNSSDialogs::NotifyCrlNextupdate(nsIInterfaceRequestor *socketInfo
 {
 	// chrome://pippki/content/serverCrlNextupdate.xul
 	CString msg1,msg2;
-	LPCTSTR sCName;
+	CString sCName;
 	CString sTUrl =  NSUTF8StringToCString(nsCString(targetURL));
 	nsString commonName;
 
 	USES_CONVERSION;
 	
 	cert->GetCommonName (commonName);
-	sCName = W2CT(commonName.get());
+	sCName = NSStringToCString(commonName);
 
 	msg1.Format(IDS_crlNextUpdateMsg1, sTUrl);
 	msg2.Format(IDS_crlNextUpdateMsg2, sCName);
@@ -828,7 +826,8 @@ BOOL CViewCertDetailsPage::OnInitDialog()
 		
 		nsIX509Cert *pCert = cert;
 		
-		current = treeH->InsertItem(TVIF_TEXT|TVIF_PARAM, W2CT(displayVal.get()), 
+		CString displayText = NSStringToCString(displayVal);
+		current = treeH->InsertItem(TVIF_TEXT|TVIF_PARAM, displayText,
 			0, 0, 0, 0, (LPARAM)(void*)pCert, current, TVI_LAST );
 	}
 
@@ -846,7 +845,8 @@ void CViewCertDetailsPage::loadASN1Structure(CTreeCtrl* tree, nsIASN1Object* asn
 	asn1Object->GetDisplayName(displayVal);
 		
 	USES_CONVERSION;
-	HTREEITEM current = tree->InsertItem(TVIF_TEXT|TVIF_PARAM, W2CT(displayVal.get()), 
+	CString displayText = NSStringToCString(displayVal);
+	HTREEITEM current = tree->InsertItem(TVIF_TEXT|TVIF_PARAM, displayText,
 		0, 0, 0, 0, (LPARAM)(void*)asn1Object, parent, TVI_LAST );
 	NS_ADDREF(asn1Object);
 	m_objects.AddHead(asn1Object);
@@ -904,7 +904,7 @@ void CViewCertDetailsPage::OnTvnSelchangedCertFields(NMHDR *pNMHDR, LRESULT *pRe
 		asn1Object->GetDisplayValue(displayVal);
 			
 		// Have replace \n by \r\n for proper line break in the edit box
-		CString csVal(W2CT(displayVal.get()));
+		CString csVal = NSStringToCString(displayVal);
 		csVal.Replace(_T("\n"),_T("\r\n"));
 			
 		SetDlgItemText(IDC_FIELD_VALUE, csVal);

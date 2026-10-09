@@ -94,7 +94,7 @@ void doSearch(const wchar_t* query)
 	if (!engine) return;
 
 	nsCOMPtr<nsISearchSubmission> sub;
-	engine->GetSubmission(nsDependentString(query), nsDependentString(L""), nsDependentString(L""), getter_AddRefs(sub));
+	engine->GetSubmission(nsString(reinterpret_cast<const char16_t*>(query)), nsString(u""), nsString(u""), getter_AddRefs(sub));
 	if (!sub) return;
 
 	nsCOMPtr<nsIURI> uri;

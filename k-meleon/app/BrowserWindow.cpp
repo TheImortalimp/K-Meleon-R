@@ -418,7 +418,7 @@ BOOL CBrowserWrapper::LoadURL(LPCTSTR url, LPCTSTR referrer, BOOL allowFixup)
 		NewURI(getter_AddRefs(referrerURI), nsDependentCString(referrer));
 #endif
 
-	nsresult rv = mWebNav->LoadURI(CStringToPRUnichar(url), 
+	nsresult rv = mWebNav->LoadURI(ToNsString(url).get(),
 		allowFixup ?            
 			nsIWebNavigation::LOAD_FLAGS_ALLOW_THIRD_PARTY_FIXUP : 
 			nsIWebNavigation::LOAD_FLAGS_NONE, 
@@ -438,7 +438,7 @@ BOOL CBrowserWrapper::LoadURL(LPCTSTR url, BOOL currentForRef, BOOL allowFixup)
 	nsCOMPtr<nsIURI> referrerURI;
 	if (currentForRef) mWebNav->GetCurrentURI(getter_AddRefs(referrerURI));
 
-	nsresult rv = mWebNav->LoadURI(CStringToPRUnichar(url), 
+	nsresult rv = mWebNav->LoadURI(ToNsString(url).get(),
 		allowFixup ?            
 		nsIWebNavigation::LOAD_FLAGS_ALLOW_THIRD_PARTY_FIXUP : 
 	nsIWebNavigation::LOAD_FLAGS_NONE, 
@@ -451,12 +451,12 @@ BOOL CBrowserWrapper::LoadURL(LPCTSTR url, BOOL currentForRef, BOOL allowFixup)
 CString CBrowserWrapper::GetTitle()
 {
 	NS_ENSURE_TRUE(mBaseWindow, _T(""));
-	PRUnichar *idlStrTitle = nullptr;
+	char16_t *idlStrTitle = nullptr;
 
 	mBaseWindow->GetTitle(&idlStrTitle);
 	NS_ENSURE_TRUE(idlStrTitle, _T(""));
 
-	CString title = PRUnicharToCString(idlStrTitle);
+	CString title = NSStringToCString(nsString(idlStrTitle));
 	nsMemory::Free(idlStrTitle);
 	return title;
 }
@@ -628,7 +628,7 @@ BOOL CBrowserWrapper::ChangeFullZoom(int change)
 
 	CString status;
 	status.Format(IDS_FULL_ZOOM, textzoom*10);
-	mpBrowserImpl->SetStatus(0, CStringToPRUnichar(status));
+	mpBrowserImpl->SetStatus(0, ToNsString(status).get());
 	return TRUE;
 }
 
@@ -671,7 +671,7 @@ BOOL CBrowserWrapper::ChangeTextSize(int change)
 
 	CString status;
 	status.Format(IDS_TEXT_ZOOM, textzoom*10);
-	mpBrowserImpl->SetStatus(0, CStringToPRUnichar(status));
+	mpBrowserImpl->SetStatus(0, ToNsString(status).get());
 	return TRUE;
 }
 
@@ -764,12 +764,12 @@ BOOL CBrowserWrapper::GetSHistoryInfoAt(PRInt32 index, CString& title, CString& 
 
 	nsresult rv;
 	nsCString nsUrl;
-	PRUnichar* nsTitle;
+	char16_t* nsTitle;
 
 	rv = he->GetTitle(&nsTitle);
 	NS_ENSURE_TRUE(NS_SUCCEEDED(rv) && title, FALSE);
 
-	title = PRUnicharToCString(nsTitle);
+	title = NSStringToCString(nsString(nsTitle));
 	nsMemory::Free(nsTitle);
 
 	nsCOMPtr<nsIURI> uri;
@@ -1367,7 +1367,7 @@ BOOL CBrowserWrapper::_Highlight(nsIDOMWindow* dom, const PRUnichar* backcolor, 
 		while (1)
 		{
 			nsCOMPtr<nsIDOMRange> retRange;
-			rv = find->Find(word, searchRange, startPt, endPt, getter_AddRefs(retRange));
+			rv = find->Find(reinterpret_cast<const char16_t*>(word), searchRange, startPt, endPt, getter_AddRefs(retRange));
 			if (NS_FAILED(rv) || !retRange)	break;
 
 			nsCOMPtr<nsIDOMNode> startContainer;
@@ -1448,7 +1448,7 @@ BOOL CBrowserWrapper::_Highlight(nsIDOMWindow* dom, const PRUnichar* backcolor, 
 	while (1)
 	{
 		nsCOMPtr<nsIDOMRange> retRange;
-		rv = find->Find(word, searchRange, startPt, endPt, getter_AddRefs(retRange));
+		rv = find->Find(reinterpret_cast<const char16_t*>(word), searchRange, startPt, endPt, getter_AddRefs(retRange));
 		if (NS_FAILED(rv) || !retRange)	break;
 
 		nsCOMPtr<nsIDOMNode> tNode;
@@ -1808,7 +1808,7 @@ BOOL CBrowserWrapper::IsInputOrObject(nsIDOMElement* element)
 
 	nsString attr;
 	element->GetAttribute(NS_LITERAL_STRING("contenteditable"), attr);
-	if (wcscmp(attr.get(), L"true") == 0)
+	if (wcscmp(reinterpret_cast<const wchar_t*>(attr.get()), L"true") == 0)
 		return TRUE;
 
 	return FALSE;			
@@ -1892,7 +1892,7 @@ BOOL CBrowserWrapper::Find(const wchar_t* searchString,
 	// Not setting the search parameter when no searchString so that
 	// if a typeahead search is active, it will be used.
 	if (searchString) {
-		finder->SetSearchString(searchString);
+		finder->SetSearchString(reinterpret_cast<const char16_t*>(searchString));
 		finder->SetWrapFind(wrapAround);
 		finder->SetMatchCase(matchCase);
 	}
@@ -2077,6 +2077,6 @@ wchar_t* CBrowserWrapper::GetSearchString()
 	NS_ENSURE_TRUE(mFinder, NULL);
 	nsString stringBuf;
 	mFinder->GetSearchString(getter_Copies(stringBuf));
-	return wcsdup(stringBuf.get());
+	return wcsdup(reinterpret_cast<const wchar_t*>(stringBuf.get()));
 }
 */

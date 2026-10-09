@@ -124,7 +124,7 @@ public:
 
 		nsresult rv;
 #ifdef _UNICODE
-		rv = NS_NewLocalFile(nsString(str), TRUE, getter_AddRefs(localFile));
+		rv = NS_NewLocalFile(ToNsString(str), TRUE, getter_AddRefs(localFile));
 #else
 		rv = NS_NewNativeLocalFile(nsCString(str), TRUE, getter_AddRefs(localFile));
 #endif

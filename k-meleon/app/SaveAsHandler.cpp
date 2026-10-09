@@ -175,13 +175,13 @@ NS_IMETHODIMP CSaveAsHandler::Save(const char* contentType, const char* disposit
 	}
 
 	if (!fileName.Length())
-		fileName = L"Untitled";
+		fileName = u"Untitled";
 
 	CString extension; 
 	CString description;
 
 	USES_CONVERSION;
-	const WCHAR* pExtension = wcsrchr(fileName.get(), L'.');
+	const WCHAR* pExtension = wcsrchr(reinterpret_cast<const WCHAR*>(fileName.get()), L'.');
 
 #ifdef MOZILLA_MIMETYPE_SUCKS
 	GetFromTypeAndExtension(A2CT(contentType), W2CT(pExtension), extension, description);
@@ -231,11 +231,11 @@ NS_IMETHODIMP CSaveAsHandler::Save(const char* contentType, const char* disposit
 
 				nsString nsExt;
 				NS_CStringToUTF16(nsCExt, NS_CSTRING_ENCODING_UTF8, nsExt);
-				extension = W2CT(nsExt.get());
+				extension = NSStringToCString(nsExt);
 
 				nsString nsDesc;
 				mimeInfo->GetDescription(nsDesc);
-				description = W2CT(nsDesc.get());
+				description = NSStringToCString(nsDesc);
 				//}
 			}
 		}
@@ -246,7 +246,7 @@ NS_IMETHODIMP CSaveAsHandler::Save(const char* contentType, const char* disposit
 #endif
 
 	TCHAR* szFileName = new TCHAR[MAX_PATH+1];
-	_tcsncpy(szFileName, W2CT(fileName.get()), MAX_PATH-20);
+	_tcsncpy(szFileName, NSStringToCString(fileName), MAX_PATH-20);
 	szFileName[MAX_PATH-20] = 0;
 	MakeFilename(szFileName);
 
@@ -383,7 +383,7 @@ NS_IMETHODIMP CSaveAsHandler::DownloadTo(nsString& aFilename, BOOL isHTML, int s
 				// all frames, images, scripts, stylesheets etc.
 
 				USES_CONVERSION;
-				CString strDataPath = W2CT(aFilename.get()), suffix;
+				CString strDataPath = NSStringToCString(aFilename), suffix;
 				suffix.LoadString(IDS_SAVEPAGE_SUFFIX);
 
 				int idxPeriod = strDataPath.ReverseFind(_T('.'));
@@ -438,4 +438,3 @@ NS_IMETHODIMP CSaveAsHandler::OnSecurityChange(nsIWebProgress *aWebProgress, nsI
 {
 	return NS_OK;
 }
-

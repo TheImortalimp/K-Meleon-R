@@ -4,6 +4,7 @@
 SharedLibrary('sessions')
 
 SOURCES += [
+  '../../shared/Utils.cpp',
   'sessions.cpp',
   'sessionstore.cpp',
   'stdafx.cpp'

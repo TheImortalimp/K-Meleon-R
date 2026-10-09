@@ -25,7 +25,7 @@
 
 
 
-// Boû‘e de dialogue CPasswordViewerDlg
+// Boï¿½ï¿½e de dialogue CPasswordViewerDlg
 
 //IMPLEMENT_DYNAMIC(CPasswordViewerDlg, CDialog)
 CPasswordViewerDlg::CPasswordViewerDlg(CWnd* pParent /*=NULL*/)
@@ -113,7 +113,7 @@ void CPasswordViewerDlg::FillHosts(char16_t** logins, uint32_t count)
 		int index = m_cPasswordsList.InsertItem(&lvItem);
 
 		if (index==-1) continue;
-		m_cPasswordsList.SetItemText(index, 0, host);
+		m_cPasswordsList.SetItemText(index, 0, reinterpret_cast<LPCTSTR>(host));
 	}
 	m_cPasswordsList.SortItems(SortHostsList, (LPARAM) &m_PasswordsList);
 }
@@ -161,7 +161,7 @@ int CALLBACK CPasswordViewerDlg::SortHostsList(LPARAM lParam1, LPARAM lParam2, L
 
 	char16_t* host1 = pHostList->GetAt((POSITION)lParam1);
 	char16_t* host2 = pHostList->GetAt((POSITION)lParam2);
-	return wcscmp(host1, host2);
+	return wcscmp(reinterpret_cast<const wchar_t*>(host1), reinterpret_cast<const wchar_t*>(host2));
 }
 
 int CALLBACK CPasswordViewerDlg::SortPasswordsList(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
@@ -173,8 +173,9 @@ int CALLBACK CPasswordViewerDlg::SortPasswordsList(LPARAM lParam1, LPARAM lParam
 
 	nsString host1, host2;
 	password1->GetHostname(host1);
-	password1->GetHostname(host2);
-	return wcscmp(host1.get(), host2.get());
+	password2->GetHostname(host2);
+	return wcscmp(reinterpret_cast<const wchar_t*>(host1.get()),
+		reinterpret_cast<const wchar_t*>(host2.get()));
 }
 
 void CPasswordViewerDlg::OnBnClickedRadio1()

@@ -12,7 +12,6 @@ DEFINES['UNICODE'] = True
 DEFINES['_UNICODE'] = True
 
 OS_LIBS += [
-  'mozjs',
   'nss3',
   'mozalloc',
   'xpcomglue_s',

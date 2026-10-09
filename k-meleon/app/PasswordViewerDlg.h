@@ -45,7 +45,7 @@ public:
 };
 
 typedef CList<nsILoginInfo*, nsILoginInfo*> CPasswordList;
-typedef CList<PRUnichar*, PRUnichar*> CHostList;
+typedef CList<char16_t*, char16_t*> CHostList;
 
 class CPasswordViewerDlg : public CDialog
 {
@@ -69,7 +69,7 @@ protected:
 	BOOL m_reject;
 
 	void FillPasswords(nsILoginInfo** logins, uint32_t count);
-	void FillHosts(PRUnichar** logins, uint32_t count);
+	void FillHosts(char16_t** logins, uint32_t count);
 	void EmptyList();
 	void ResizeColumns();
 	virtual void DoDataExchange(CDataExchange* pDX);    // Prise en charge DDX/DDV

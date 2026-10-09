@@ -73,8 +73,6 @@
 #include "BrowserWindow.h"
 #include "MozUtils.h"
 
-#include "mozilla/dom/Event.h"
-
 #include "nsIDOMEvent.h"
 #include "nsIDOMMouseEvent.h"
 #include "nsIDOMKeyEvent.h"

@@ -36,7 +36,7 @@
 nsString CStringToNSString(LPCTSTR aStr)
 {
 	USES_CONVERSION;
-	return nsString(T2CW(aStr));
+	return nsString(reinterpret_cast<const char16_t*>(T2CW(aStr)));
 }
 
 nsCString CStringToNSCString(LPCTSTR aStr)
@@ -47,16 +47,19 @@ nsCString CStringToNSCString(LPCTSTR aStr)
 
 nsCString CStringToNSUTF8String(LPCTSTR aStr)
 {
-	USES_CONVERSION;
 	nsCString aCStr;
-	NS_UTF16ToCString(nsString(T2CW(aStr)), NS_CSTRING_ENCODING_UTF8, aCStr);
+	NS_UTF16ToCString(CStringToNSString(aStr), NS_CSTRING_ENCODING_UTF8, aCStr);
 	return aCStr;
 }
 
 CString NSStringToCString(const nsString& aStr)
 {
+#ifdef _UNICODE
+	return CString(reinterpret_cast<LPCWSTR>(aStr.get()));
+#else
 	USES_CONVERSION;
-	return CString(W2CT(aStr.get()));
+	return CString(W2CA(reinterpret_cast<LPCWSTR>(aStr.get())));
+#endif
 }
 
 CString NSUTF8StringToCString(const nsCString& aStr)
@@ -64,7 +67,12 @@ CString NSUTF8StringToCString(const nsCString& aStr)
 	USES_CONVERSION;
 	nsString aUStr;
 	NS_CStringToUTF16(aStr, NS_CSTRING_ENCODING_UTF8, aUStr);
-	return CString(W2CT(aUStr.get()));
+#ifdef _UNICODE
+	return NSStringToCString(aUStr);
+#else
+	USES_CONVERSION;
+	return CString(W2CA(reinterpret_cast<LPCWSTR>(aUStr.get())));
+#endif
 }
 
 CString NSCStringToCString(const nsCString& aStr)
@@ -75,8 +83,12 @@ CString NSCStringToCString(const nsCString& aStr)
 
 CString PRUnicharToCString(const PRUnichar* str)
 {
+#ifdef _UNICODE
+	return CString(reinterpret_cast<LPCWSTR>(str));
+#else
 	USES_CONVERSION;
-	return CString(W2CT(str));
+	return CString(W2CA(reinterpret_cast<LPCWSTR>(str)));
+#endif
 }
 
 nsresult NewURI(nsIURI **result, const nsACString &spec)
@@ -321,7 +333,8 @@ BOOL IsContentEditable(nsIDOMNode* node)
 			if (!element) break;
 			element->HasAttribute(NS_LITERAL_STRING("contenteditable"), &_retval);
 			element->GetAttribute(NS_LITERAL_STRING("contenteditable"), attr);
-			if (_retval && (attr.Length() == 0 || wcscmp(attr.get(), L"true") == 0))
+			if (_retval && (attr.Length() == 0 ||
+				wcscmp(reinterpret_cast<const wchar_t*>(attr.get()), L"true") == 0))
 				return TRUE;
 		}
 
@@ -739,9 +752,7 @@ bool InjectJS(nsIDOMWindow* dom, const wchar_t* userScript, CString& result)
 	NS_ENSURE_SUCCESS(cs->Push(cx), FALSE);
 	JSAutoRequest ar(cx);
 	JSAutoNullableCompartment ac(cx, _globalJSObject);
-	JS::Rooted<JS::Value> asyncStack(cx, JS::NullValue());
-
-	docShell->NotifyJSRunToCompletionStart("InjectJS", u"InjectJS", u"InjectJS", 1, asyncStack);
+	docShell->NotifyJSRunToCompletionStart();
 	
 	JS::Rooted<JSObject*> globalJSObject(cx, innerGlobal->GetGlobalJSObject());
 	JS::Rooted<JS::Value> v (cx, JS::UndefinedValue());

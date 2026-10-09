@@ -675,7 +675,7 @@ NS_IMETHODIMP Policy::ShouldProcess(nsContentPolicyType aContentType, nsIURI *aC
 
 
 
-NS_IMETHODIMP Policy::Observe(nsISupports *aSubject, const char * aTopic, const PRUnichar * aData)
+NS_IMETHODIMP Policy::Observe(nsISupports *aSubject, const char * aTopic, const char16_t * aData)
 {
 	static bool popup = false;
 	static vector<nsIDOMWindow*> domPopup;
@@ -961,7 +961,7 @@ NS_IMETHODIMP Subscriptions::OnLocationChange(nsIWebProgress *aWebProgress, nsIR
 }
 
 /* void onStatusChange (in nsIWebProgress aWebProgress, in nsIRequest aRequest, in nsresult aStatus, in wstring aMessage); */
-NS_IMETHODIMP Subscriptions::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const PRUnichar * aMessage)
+NS_IMETHODIMP Subscriptions::OnStatusChange(nsIWebProgress *aWebProgress, nsIRequest *aRequest, nsresult aStatus, const char16_t * aMessage)
 {
     return NS_OK;
 }
@@ -1034,7 +1034,7 @@ bool Subscriptions::_Download()
 	nsCOMPtr<nsIURI> uri;
 	ios->NewURI(nsEmbedCString((*dwnIt).c_str()), nullptr, nullptr, getter_AddRefs(uri));
 	nsCOMPtr<nsIFile> file;
-	NS_NewLocalFile(nsDependentString(tmpFile.c_str()), TRUE, getter_AddRefs(file));
+	NS_NewLocalFile(nsString(reinterpret_cast<const char16_t*>(tmpFile.c_str())), TRUE, getter_AddRefs(file));
 	
 	LOG(("Downloading: " + (*dwnIt)).c_str());
 	dwnIt++;
