@@ -83,29 +83,11 @@ NS_IMETHODIMP CNSSDialogs::ConfirmDownloadCACert(nsIInterfaceRequestor *ctx, nsI
     return NS_OK;
 }
 
-/* void notifyCACertExists (in nsIInterfaceRequestor ctx); */
-#if 0
-NS_IMETHODIMP CNSSDialogs::NotifyCACertExists(nsIInterfaceRequestor *ctx)
+NS_IMETHODIMP CNSSDialogs::NotifyCACertExists(nsIInterfaceRequestor *)
 {
-	// chrome://pippki/content/cacertexists.xul
-/*
-	nsCOMPtr<nsIDOMWindow> parent = do_GetInterface (ctx);
-	CString msg;
-
-	
-	msg.LoadString(IDS_CERTEXISTS);
-	CWnd* wnd = CWndForDOMWindow(parent);
-	
-	if (wnd)
-		wnd->MessageBox(msg, "", MB_OK | MB_ICONEXCLAMATION);
-	else
-		::MessageBox(NULL, msg, "", MB_OK | MB_ICONEXCLAMATION);
-	*/
-
 	AfxMessageBox(IDS_CERTEXISTS, MB_OK | MB_ICONEXCLAMATION, 0);
     return NS_OK;
 }
-#endif
 
 /* boolean setPKCS12FilePassword (in nsIInterfaceRequestor ctx, out AString password); */
 NS_IMETHODIMP CNSSDialogs::SetPKCS12FilePassword(nsIInterfaceRequestor *ctx, nsAString & password, bool *_retval)

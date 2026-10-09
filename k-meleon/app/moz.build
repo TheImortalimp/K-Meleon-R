@@ -12,7 +12,6 @@ USE_LIBS += [
     'mozalloc',
     'nspr',
     'xpcomglue',
-    'xpcomglue_s',
     'xul',
 ]
 

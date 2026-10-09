@@ -262,6 +262,18 @@ NS_IMETHODIMP KmAppInfo::GetAccessibilityEnabled(bool *aAccessibilityEnabled)
     return NS_OK;
 }
 
+NS_IMETHODIMP KmAppInfo::GetKeyboardMayHaveIME(bool *aKeyboardMayHaveIME)
+{
+	*aKeyboardMayHaveIME = false;
+	return NS_OK;
+}
+
+NS_IMETHODIMP KmAppInfo::GetAccessibilityIsUIA(bool *aAccessibilityIsUIA)
+{
+	*aAccessibilityIsUIA = false;
+	return NS_OK;
+}
+
 NS_IMETHODIMP KmAppInfo::GetDefaultUpdateChannel(nsACString & aDefaultUpdateChannel)
 {
 	return NS_ERROR_NOT_IMPLEMENTED;
