@@ -48,8 +48,8 @@
     locale/kmeleon/aboutHome.dtd               (%chrome/kmeleon/aboutHome.dtd)
     locale/kmeleon/privilege.dtd               (%chrome/kmeleon/privilege.dtd)
     locale/kmeleon/kmhelper.properties         (%chrome/kmeleon/kmhelper.properties)
-% override chrome://global/locale/netError.dtd chrome://browser/locale/netError.dtd
-% override chrome://global/locale/netErrorApp.dtd chrome://browser/locale/netErrorApp.dtd
+% override chrome://global/locale/netError.dtd chrome://kmeleon/locale/netError.dtd
+% override chrome://global/locale/netErrorApp.dtd chrome://kmeleon/locale/netErrorApp.dtd
     locale/console2/console2.dtd               (%chrome/console2/console2.dtd)
     locale/console2/console2.properties        (%chrome/console2/console2.properties)
     locale/console2/domainlist.dtd             (%chrome/console2/domainlist.dtd)    
