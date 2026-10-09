@@ -21,6 +21,8 @@ kmeleon.jar:
     content/kmeleon/aboutHome/img/gx-glow.png       (content/aboutHome/img/gx-glow.png)
     content/kmeleon/aboutHome/img/gx-tile.png       (content/aboutHome/img/gx-tile.png)
     content/kmeleon/aboutHome/img/gx-tile-hover.png (content/aboutHome/img/gx-tile-hover.png)
+    content/kmeleon/aboutHome/img/gx-tile-light.png       (content/aboutHome/img/gx-tile-light.png)
+    content/kmeleon/aboutHome/img/gx-tile-hover-light.png (content/aboutHome/img/gx-tile-hover-light.png)
     content/kmeleon/aboutHome/img/icon-add.png       (content/aboutHome/img/icon-add.png)
     content/kmeleon/aboutHome/img/icon-generic.png   (content/aboutHome/img/icon-generic.png)
     content/kmeleon/aboutHome/img/icon-github.png    (content/aboutHome/img/icon-github.png)

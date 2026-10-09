@@ -95,6 +95,7 @@ BEGIN_MESSAGE_MAP(CBrowserFrame, CFrameWnd)
     ON_WM_MOVE()
     ON_WM_CLOSE()
     ON_WM_ACTIVATE()
+    ON_WM_SETTINGCHANGE()
     ON_WM_SYSCOLORCHANGE()
 	ON_WM_SYSCOMMAND()
 	ON_WM_INITMENUPOPUP()
@@ -327,23 +328,89 @@ void CBrowserFrame::OnDestroy()
 }
 
 
-// Dark anthracite frame (Windows 10 20H1+ / 11). Loaded dynamically so older systems ignore it.
-// The colours are re-applied on activation because the frame resets them while the window is being shown.
-static void ApplyDarkFrame(HWND hwnd)
+// Dark / light frame (Windows 10 20H1+ / 11). Libraries are loaded dynamically so older systems ignore it.
+// The theme is re-applied on activation because the frame resets the caption colours while the window is being shown.
+static bool SystemUsesDarkApps()
 {
+	DWORD light = 1, size = sizeof(light);
+	if (::RegGetValue(HKEY_CURRENT_USER,
+		_T("Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"),
+		_T("AppsUseLightTheme"), RRF_RT_REG_DWORD, NULL, &light, &size) != ERROR_SUCCESS)
+		return false;
+	return light == 0;
+}
+
+// Resolves kmeleon.display.theme ("dark" (default), "light" or "system") and publishes the
+// result in kmeleon.theme.effective, which the internal pages (about:home) follow.
+bool KmIsDarkTheme()
+{
+	CString mode = theApp.preferences.GetString("kmeleon.display.theme", _T("dark"));
+	bool dark = mode == _T("system") ? SystemUsesDarkApps() : mode != _T("light");
+	CString effective = theApp.preferences.GetString("kmeleon.theme.effective", _T(""));
+	LPCTSTR want = dark ? _T("dark") : _T("light");
+	if (effective != want)
+		theApp.preferences.SetString("kmeleon.theme.effective", want);
+	return dark;
+}
+
+void KmApplyFrameTheme(HWND hwnd)
+{
+	bool dark = KmIsDarkTheme();
 	if (HMODULE hDwm = ::LoadLibrary(_T("dwmapi.dll"))) {
 		typedef HRESULT (WINAPI *DwmSetAttr)(HWND, DWORD, LPCVOID, DWORD);
 		if (DwmSetAttr set = (DwmSetAttr)::GetProcAddress(hDwm, "DwmSetWindowAttribute")) {
-			BOOL dark = TRUE;
-			set(hwnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
+			BOOL useDark = dark;
+			set(hwnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &useDark, sizeof(useDark));
+			const COLORREF colorDefault = 0xFFFFFFFF; // DWMWA_COLOR_DEFAULT
 			COLORREF anthracite = RGB(0x2b, 0x2d, 0x31); // COLORREF is 0x00BBGGRR
 			COLORREF captionText = RGB(0xe8, 0xe8, 0xf0);
-			set(hwnd, 34 /* DWMWA_BORDER_COLOR */, &anthracite, sizeof(anthracite));
-			set(hwnd, 35 /* DWMWA_CAPTION_COLOR */, &anthracite, sizeof(anthracite));
-			set(hwnd, 36 /* DWMWA_TEXT_COLOR */, &captionText, sizeof(captionText));
+			COLORREF border = dark ? anthracite : colorDefault;
+			COLORREF caption = dark ? anthracite : colorDefault;
+			COLORREF text = dark ? captionText : colorDefault;
+			set(hwnd, 34 /* DWMWA_BORDER_COLOR */, &border, sizeof(border));
+			set(hwnd, 35 /* DWMWA_CAPTION_COLOR */, &caption, sizeof(caption));
+			set(hwnd, 36 /* DWMWA_TEXT_COLOR */, &text, sizeof(text));
 		}
 		::FreeLibrary(hDwm);
 	}
+
+	// Dark scrollbars, toolbars, edit boxes and status bar where the OS supports it.
+	if (HMODULE hUx = ::LoadLibrary(_T("uxtheme.dll"))) {
+		typedef HRESULT (WINAPI *SetWinTheme)(HWND, LPCWSTR, LPCWSTR);
+		if (SetWinTheme setTheme = (SetWinTheme)::GetProcAddress(hUx, "SetWindowTheme")) {
+			struct Ctx { SetWinTheme fn; bool dark; };
+			static thread_local Ctx ctx;
+			ctx.fn = setTheme; ctx.dark = dark;
+			::EnumChildWindows(hwnd, [](HWND child, LPARAM) -> BOOL {
+				wchar_t cls[64] = L"";
+				::GetClassNameW(child, cls, 64);
+				if (wcscmp(cls, L"MozillaWindowClass") == 0 || wcsncmp(cls, L"Mozilla", 7) == 0)
+					return TRUE;
+				ctx.fn(child, ctx.dark ? L"DarkMode_Explorer" : NULL, NULL);
+				return TRUE;
+			}, 0);
+		}
+		::FreeLibrary(hUx);
+	}
+	::RedrawWindow(hwnd, NULL, NULL, RDW_INVALIDATE | RDW_FRAME | RDW_ALLCHILDREN);
+}
+
+void KmApplyThemeToAllFrames()
+{
+	POSITION pos = theApp.m_FrameWndLst.GetHeadPosition();
+	while (pos != NULL) {
+		CBrowserFrame* frame = (CBrowserFrame*)theApp.m_FrameWndLst.GetNext(pos);
+		if (frame && ::IsWindow(frame->m_hWnd))
+			KmApplyFrameTheme(frame->m_hWnd);
+	}
+}
+
+void CBrowserFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
+{
+	CFrameWnd::OnSettingChange(uFlags, lpszSection);
+	// Windows personalisation changed (dark / light apps)
+	if (lpszSection && _tcscmp(lpszSection, _T("ImmersiveColorSet")) == 0)
+		KmApplyThemeToAllFrames();
 }
 
 // This is where the UrlBar, ToolBar, StatusBar, ProgressBar
@@ -354,7 +421,7 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
         return -1;
 
-	ApplyDarkFrame(m_hWnd);
+	KmApplyFrameTheme(m_hWnd);
 
 	// Will be deleted in CBrowserView::PostNcDestroy()
 	m_wndBrowserView = new CBrowserView();
@@ -801,7 +868,7 @@ void CBrowserFrame::Dump(CDumpContext& dc) const
 void CBrowserFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) 
 {
 	if (nState != WA_INACTIVE)
-		ApplyDarkFrame(m_hWnd);
+		KmApplyFrameTheme(m_hWnd);
 
 	if (nState != WA_INACTIVE && theApp.m_pMostRecentBrowserFrame != this) {
         theApp.m_pMostRecentBrowserFrame = this;

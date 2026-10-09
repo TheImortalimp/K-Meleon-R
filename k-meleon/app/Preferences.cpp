@@ -318,6 +318,11 @@ void CPreferences::MenuChanged()
 	theApp.menus.RebuildAll();
 }
 
+void CPreferences::ThemeChanged()
+{
+	KmApplyThemeToAllFrames();
+}
+
 void CPreferences::Release() {
 	m_prefservice = nullptr;
 	m_prefs = nullptr;
@@ -354,6 +359,7 @@ void CPreferences::Load() {
    new CPrefObserver("kmeleon.display.backgroundImageEnabled", &CPreferences::BackgroundChanged);
    new CPrefObserver("kmeleon.display.backgroundImage", &CPreferences::BackgroundChanged);
    new CPrefObserver("kmeleon.display.bitmapInMenus", &CPreferences::MenuChanged);
+   new CPrefObserver("kmeleon.display.theme", &CPreferences::ThemeChanged);
 
    // -- Folders XXX have to put this somewhere else
    

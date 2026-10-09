@@ -193,6 +193,11 @@ private:
 
 
 
+// Theme helpers (dark / light / follow Windows), see kmeleon.display.theme
+bool KmIsDarkTheme();
+void KmApplyFrameTheme(HWND hwnd);
+void KmApplyThemeToAllFrames();
+
 class CBrowserFrame : public CFrameWnd
 {   
 protected:
@@ -312,6 +317,7 @@ protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	// afx_msg void OnMove(int x, int y);
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnSettingChange(UINT uFlags, LPCTSTR lpszSection);
 	afx_msg void OnSysColorChange();
 
 	afx_msg void OnSelectUrl();

@@ -322,6 +322,7 @@ public:
    void SkinChanged();
    void BackgroundChanged();
    void MenuChanged();
+   void ThemeChanged();
 
 protected:
    nsCOMPtr<nsIPrefBranch> m_prefs;

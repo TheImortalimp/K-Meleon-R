@@ -210,3 +210,52 @@ window.addEventListener("load", function () {
     });
     renderDial();
 });
+
+
+// ---- Theme toggle: dark (default) / light / system ----
+var THEME_PREF = "kmeleon.display.theme";
+var THEME_EFFECTIVE = "kmeleon.theme.effective";
+var themeObserver = {
+    observe: function () { applyTheme(); }
+};
+
+function getThemeMode() {
+    try {
+        let m = Services.prefs.getCharPref(THEME_PREF);
+        if (m == "light" || m == "system") return m;
+    } catch (e) {}
+    return "dark";
+}
+
+function applyTheme() {
+    let mode = getThemeMode();
+    let eff = mode;
+    if (mode == "system") {
+        try { eff = Services.prefs.getCharPref(THEME_EFFECTIVE); } catch (e) { eff = "dark"; }
+    }
+    document.documentElement.setAttribute("data-theme", eff == "light" ? "light" : "dark");
+    let btn = document.getElementById("themeToggle");
+    if (btn) {
+        btn.value = "Theme: " + (mode == "system" ? "System" : mode == "light" ? "Light" : "Dark");
+    }
+}
+
+window.addEventListener("load", function () {
+    applyTheme();
+    try {
+        Services.prefs.addObserver(THEME_PREF, themeObserver, false);
+        Services.prefs.addObserver(THEME_EFFECTIVE, themeObserver, false);
+    } catch (e) {}
+    document.getElementById("themeToggle").addEventListener("click", function () {
+        let next = { dark: "light", light: "system", system: "dark" }[getThemeMode()];
+        Services.prefs.setCharPref(THEME_PREF, next);
+        applyTheme();
+    });
+});
+
+window.addEventListener("beforeunload", function () {
+    try {
+        Services.prefs.removeObserver(THEME_PREF, themeObserver);
+        Services.prefs.removeObserver(THEME_EFFECTIVE, themeObserver);
+    } catch (e) {}
+});

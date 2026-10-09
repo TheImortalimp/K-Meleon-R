@@ -189,6 +189,50 @@ a {
 .icon-reddit { background-image: url("chrome://kmeleon/content/aboutHome/img/icon-reddit.png") !important; }
 .icon-shield { background-image: url("chrome://kmeleon/content/aboutHome/img/icon-shield.png") !important; }
 
+/* Theme toggle */
+#themeToggle {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    z-index: 10;
+    padding: 6px 14px;
+    color: #e8e8f0;
+    background: #24252f;
+    border: 1px solid #3a3c4c;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#themeToggle:hover {
+    border-color: #fa1e4e;
+    box-shadow: 0 0 10px rgba(250,30,78,.5);
+}
+
+/* Light theme (data-theme is set by aboutHome.js from kmeleon.display.theme) */
+html[data-theme="light"] {
+    background-color: #f2f3f7;
+    background-image: -moz-linear-gradient(top, rgba(250,30,78,.14), rgba(250,30,78,0) 340px);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #1c1d26;
+}
+
+html[data-theme="light"] a { color: #d4163f; }
+html[data-theme="light"] #wordmark span { text-shadow: none; }
+html[data-theme="light"] #searchText { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] #askGemini,
+html[data-theme="light"] #themeToggle { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] .tile {
+    color: #1c1d26;
+    background-image: url("chrome://kmeleon/content/aboutHome/img/gx-tile-light.png");
+}
+html[data-theme="light"] .tile:hover {
+    background-image: url("chrome://kmeleon/content/aboutHome/img/gx-tile-hover-light.png");
+}
+html[data-theme="light"] #dialForm input { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] #footer li a { color: #5b5d73; }
+html[data-theme="light"] #footer li a:hover { color: #1c1d26; background: #e4e6ee; }
+
 /* Add-site form */
 #dialForm {
     margin: 0 auto 14px;
