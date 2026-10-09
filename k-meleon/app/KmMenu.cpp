@@ -500,6 +500,16 @@ void KmMenuService::DrawItem(LPDRAWITEMSTRUCT dis)
 		rc.left     = dis->rcItem.left;
 		rc.right    = dis->rcItem.right;
 		rc.top      = dis->rcItem.top + ((rc.bottom-dis->rcItem.top)>>1); // vertical center
+		if (KmIsDarkTheme()) {
+			HBRUSH bg = CreateSolidBrush(RGB(0x2b, 0x2d, 0x31));
+			FillRect(dis->hDC, &dis->rcItem, bg);
+			DeleteObject(bg);
+			HBRUSH line = CreateSolidBrush(RGB(0x55, 0x58, 0x63));
+			RECT l = { rc.left + 2, rc.top, rc.right - 2, rc.top + 1 };
+			FillRect(dis->hDC, &l, line);
+			DeleteObject(line);
+			return;
+		}
 		DrawEdge(dis->hDC, &rc, EDGE_ETCHED, BF_TOP);   // draw separator line
 		return;
 	}
@@ -532,22 +542,32 @@ void KmMenuService::DrawItem(LPDRAWITEMSTRUCT dis)
 	
 	// Draw the highlight rectangle
 	SetBkMode(dis->hDC, TRANSPARENT);
+	const bool dark = KmIsDarkTheme();
+	const COLORREF menuBg = dark ? RGB(0x2b, 0x2d, 0x31) : GetSysColor(COLOR_MENU);
+	const COLORREF menuText = dark ? RGB(0xe8, 0xe8, 0xf0) : GetSysColor(COLOR_MENUTEXT);
+	const COLORREF hiBg = dark ? RGB(0x4a, 0x1c, 0x2a) : GetSysColor(COLOR_HIGHLIGHT);
+	const COLORREF hiText = dark ? RGB(0xff, 0xff, 0xff) : GetSysColor(COLOR_HIGHLIGHTTEXT);
+	const COLORREF grayText = dark ? RGB(0x80, 0x82, 0x8c) : GetSysColor(COLOR_GRAYTEXT);
 	if (dis->itemState & ODS_SELECTED) {
-		FillRect(dis->hDC, &dis->rcItem, GetSysColorBrush(COLOR_HIGHLIGHT));
-		SetTextColor(dis->hDC, GetSysColor(COLOR_HIGHLIGHTTEXT));
-		SetBkColor(dis->hDC, GetSysColor(COLOR_HIGHLIGHT));
+		HBRUSH br = CreateSolidBrush(hiBg);
+		FillRect(dis->hDC, &dis->rcItem, br);
+		DeleteObject(br);
+		SetTextColor(dis->hDC, hiText);
+		SetBkColor(dis->hDC, hiBg);
 	}
 	else {
-		FillRect(dis->hDC, &dis->rcItem, GetSysColorBrush(COLOR_MENU));
-		SetTextColor(dis->hDC, GetSysColor(COLOR_MENUTEXT));
-		SetBkColor(dis->hDC, GetSysColor(COLOR_MENU));
+		HBRUSH br = CreateSolidBrush(menuBg);
+		FillRect(dis->hDC, &dis->rcItem, br);
+		DeleteObject(br);
+		SetTextColor(dis->hDC, menuText);
+		SetBkColor(dis->hDC, menuBg);
 	}
 
 	if (dis->itemState & ODS_GRAYED)
 		if (dis->itemState & ODS_SELECTED)
-			SetTextColor(dis->hDC, GetSysColor(COLOR_MENU));
+			SetTextColor(dis->hDC, dark ? grayText : GetSysColor(COLOR_MENU));
 		else
-			SetTextColor(dis->hDC, GetSysColor(COLOR_GRAYTEXT));
+			SetTextColor(dis->hDC, grayText);
 	
 	int cEdge = ::GetSystemMetrics(SM_CXEDGE);
 	cEdge--;

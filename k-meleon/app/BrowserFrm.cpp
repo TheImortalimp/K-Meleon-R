@@ -374,6 +374,17 @@ void KmApplyFrameTheme(HWND hwnd)
 		::FreeLibrary(hDwm);
 	}
 
+	// Dark native popup menu frames / borders (undocumented uxtheme ordinals 135 and 136).
+	if (HMODULE hUx2 = ::LoadLibrary(_T("uxtheme.dll"))) {
+		typedef int (WINAPI *SetPreferredAppModeFn)(int);
+		typedef void (WINAPI *FlushMenuThemesFn)();
+		SetPreferredAppModeFn setMode = (SetPreferredAppModeFn)::GetProcAddress(hUx2, MAKEINTRESOURCEA(135));
+		FlushMenuThemesFn flush = (FlushMenuThemesFn)::GetProcAddress(hUx2, MAKEINTRESOURCEA(136));
+		if (setMode) setMode(dark ? 2 /* ForceDark */ : 3 /* ForceLight */);
+		if (flush) flush();
+		::FreeLibrary(hUx2);
+	}
+
 	// Dark scrollbars, toolbars, edit boxes and status bar where the OS supports it.
 	if (HMODULE hUx = ::LoadLibrary(_T("uxtheme.dll"))) {
 		typedef HRESULT (WINAPI *SetWinTheme)(HWND, LPCWSTR, LPCWSTR);
