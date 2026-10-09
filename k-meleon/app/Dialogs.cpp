@@ -369,7 +369,7 @@ BOOL CFindRebar::OnEraseBkgnd(CDC* pDC)
 		return CReBar::OnEraseBkgnd(pDC);
 	CRect rc;
 	pDC->GetClipBox(&rc);
-	pDC->FillSolidRect(&rc, RGB(0x2b, 0x2d, 0x31));
+	pDC->FillSolidRect(&rc, RGB(0x20, 0x22, 0x26));
 	return TRUE;
 }
 
@@ -386,8 +386,8 @@ BOOL CFindRebar::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 				return TRUE;
 			}
 			if (cd->nmcd.dwDrawStage == CDDS_ITEMPREPAINT) {
-				cd->clrText = RGB(0xe8, 0xe8, 0xf0);
-				cd->clrBtnFace = RGB(0x2b, 0x2d, 0x31);
+				cd->clrText = RGB(0xff, 0xff, 0xff);
+				cd->clrBtnFace = RGB(0x20, 0x22, 0x26);
 				cd->clrBtnHighlight = RGB(0x44, 0x47, 0x50);
 				*pResult = 0x00020000; /* TBCDRF_USECDCOLORS */
 				return TRUE;
@@ -407,9 +407,9 @@ HBRUSH CFindRebar::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	HBRUSH hbr = CReBar::OnCtlColor(pDC, pWnd, nCtlColor);
 	if (KmIsDarkTheme() && (nCtlColor == CTLCOLOR_EDIT || nCtlColor == CTLCOLOR_STATIC)) {
-		static CBrush darkBrush(RGB(0x2b, 0x2d, 0x31));
-		pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
-		pDC->SetBkColor(RGB(0x2b, 0x2d, 0x31));
+		static CBrush darkBrush(RGB(0x20, 0x22, 0x26));
+		pDC->SetTextColor(RGB(0xff, 0xff, 0xff));
+		pDC->SetBkColor(RGB(0x20, 0x22, 0x26));
 		return darkBrush;
 	}
 	return hbr;

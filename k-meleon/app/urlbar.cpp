@@ -322,8 +322,8 @@ void CACListBox::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	}
 	else
 	{
-		COLORREF bg = dark ? RGB(0x2b, 0x2d, 0x31) : GetSysColor(COLOR_MENU);
-		dc.SetTextColor(dark ? RGB(0xe8, 0xe8, 0xf0) : GetSysColor(COLOR_WINDOWTEXT));
+		COLORREF bg = dark ? RGB(0x20, 0x22, 0x26) : GetSysColor(COLOR_MENU);
+		dc.SetTextColor(dark ? RGB(0xff, 0xff, 0xff) : GetSysColor(COLOR_WINDOWTEXT));
 		dc.SetBkColor(bg);
 		dc.FillSolidRect(&lpDrawItemStruct->rcItem, bg);
 	}
@@ -828,7 +828,7 @@ HBRUSH CUrlBar::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	//pDC->SetBkMode(TRANSPARENT);
 	if (m_HighlightType == 0 && KmIsDarkTheme()) {
 		static CBrush darkBrush(RGB(0x1c, 0x1d, 0x22));
-		pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+		pDC->SetTextColor(RGB(0xff, 0xff, 0xff));
 		pDC->SetBkColor(RGB(0x1c, 0x1d, 0x22));
 		return darkBrush;
 	}

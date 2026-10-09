@@ -105,6 +105,7 @@ const DIAL_DEFAULTS = [
     { title: "GitHub", url: "https://github.com/" },
     { title: "YouTube", url: "https://www.youtube.com/" },
     { title: "Reddit", url: "https://www.reddit.com/" },
+    { title: "Gmail", url: "https://mail.google.com/mail/u/0/h/" },
     { title: "Windows Security", url: "windowsdefender://" }
 ];
 

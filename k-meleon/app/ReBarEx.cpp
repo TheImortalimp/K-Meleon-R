@@ -76,7 +76,7 @@ BOOL CReBarEx::OnEraseBkgnd(CDC* pDC)
 		return CReBar::OnEraseBkgnd(pDC);
 	CRect rc;
 	pDC->GetClipBox(&rc);
-	pDC->FillSolidRect(&rc, RGB(0x2b, 0x2d, 0x31));
+	pDC->FillSolidRect(&rc, RGB(0x20, 0x22, 0x26));
 	return TRUE;
 }
 

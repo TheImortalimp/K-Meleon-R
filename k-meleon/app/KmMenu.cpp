@@ -501,7 +501,7 @@ void KmMenuService::DrawItem(LPDRAWITEMSTRUCT dis)
 		rc.right    = dis->rcItem.right;
 		rc.top      = dis->rcItem.top + ((rc.bottom-dis->rcItem.top)>>1); // vertical center
 		if (KmIsDarkTheme()) {
-			HBRUSH bg = CreateSolidBrush(RGB(0x2b, 0x2d, 0x31));
+			HBRUSH bg = CreateSolidBrush(RGB(0x20, 0x22, 0x26));
 			FillRect(dis->hDC, &dis->rcItem, bg);
 			DeleteObject(bg);
 			HBRUSH line = CreateSolidBrush(RGB(0x55, 0x58, 0x63));
@@ -543,8 +543,8 @@ void KmMenuService::DrawItem(LPDRAWITEMSTRUCT dis)
 	// Draw the highlight rectangle
 	SetBkMode(dis->hDC, TRANSPARENT);
 	const bool dark = KmIsDarkTheme();
-	const COLORREF menuBg = dark ? RGB(0x2b, 0x2d, 0x31) : GetSysColor(COLOR_MENU);
-	const COLORREF menuText = dark ? RGB(0xe8, 0xe8, 0xf0) : GetSysColor(COLOR_MENUTEXT);
+	const COLORREF menuBg = dark ? RGB(0x20, 0x22, 0x26) : GetSysColor(COLOR_MENU);
+	const COLORREF menuText = dark ? RGB(0xff, 0xff, 0xff) : GetSysColor(COLOR_MENUTEXT);
 	const COLORREF hiBg = dark ? RGB(0x4a, 0x1c, 0x2a) : GetSysColor(COLOR_HIGHLIGHT);
 	const COLORREF hiText = dark ? RGB(0xff, 0xff, 0xff) : GetSysColor(COLOR_HIGHLIGHTTEXT);
 	const COLORREF grayText = dark ? RGB(0x80, 0x82, 0x8c) : GetSysColor(COLOR_GRAYTEXT);

@@ -105,7 +105,7 @@ void CToolBarEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 
 		if (dark) {
 			UINT st = pNMCD->nmcd.uItemState;
-			COLORREF bg = RGB(0x2b, 0x2d, 0x31);
+			COLORREF bg = RGB(0x20, 0x22, 0x26);
 			if (st & (CDIS_SELECTED | CDIS_CHECKED)) bg = RGB(0x44, 0x47, 0x50);
 			else if (st & CDIS_HOT) bg = RGB(0x36, 0x38, 0x40);
 			pDC->FillSolidRect(&pNMCD->nmcd.rc, bg);
@@ -235,7 +235,7 @@ void CToolBarEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 					T2CW(text), text.GetLength(), textFlag, 0, &contentRect);
 			}
 			else {
-				pDC->SetTextColor(dark ? RGB(0xe8, 0xe8, 0xf0) : ::GetSysColor(COLOR_BTNTEXT));
+				pDC->SetTextColor(dark ? RGB(0xff, 0xff, 0xff) : ::GetSysColor(COLOR_BTNTEXT));
 				pDC->SetBkColor(::GetSysColor(COLOR_BTNFACE));
 				pDC->DrawText(text, -1, &contentRect, textFlag);
 			}

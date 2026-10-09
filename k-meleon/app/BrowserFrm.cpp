@@ -362,8 +362,8 @@ void KmApplyFrameTheme(HWND hwnd)
 			BOOL useDark = dark;
 			set(hwnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &useDark, sizeof(useDark));
 			const COLORREF colorDefault = 0xFFFFFFFF; // DWMWA_COLOR_DEFAULT
-			COLORREF anthracite = RGB(0x2b, 0x2d, 0x31); // COLORREF is 0x00BBGGRR
-			COLORREF captionText = RGB(0xe8, 0xe8, 0xf0);
+			COLORREF anthracite = RGB(0x20, 0x22, 0x26); // COLORREF is 0x00BBGGRR
+			COLORREF captionText = RGB(0xff, 0xff, 0xff);
 			COLORREF border = dark ? anthracite : colorDefault;
 			COLORREF caption = dark ? anthracite : colorDefault;
 			COLORREF text = dark ? captionText : colorDefault;
@@ -1121,11 +1121,11 @@ void CMyStatusBar::OnPaint()
 	CPaintDC dc(this);
 	CRect client;
 	GetClientRect(&client);
-	dc.FillSolidRect(&client, RGB(0x2b, 0x2d, 0x31));
+	dc.FillSolidRect(&client, RGB(0x20, 0x22, 0x26));
 	dc.FillSolidRect(client.left, client.top, client.Width(), 1, RGB(0x55, 0x58, 0x63));
 
 	dc.SetBkMode(TRANSPARENT);
-	dc.SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+	dc.SetTextColor(RGB(0xff, 0xff, 0xff));
 	CFont* oldFont = dc.SelectObject(GetFont());
 
 	int count = GetCount();

@@ -7,7 +7,7 @@ html {
     background-repeat: no-repeat, repeat;
     background-position: 50% 0, 0 0;
     background-size: 100% auto, auto;
-    color: #e8e8f0;
+    color: #ffffff;
     height: 100%;
 }
 
@@ -132,7 +132,7 @@ a {
     margin: 8px;
     padding: 0;
     box-sizing: border-box;
-    color: #e8e8f0;
+    color: #ffffff;
     background: url("chrome://kmeleon/content/aboutHome/img/gx-tile.png") no-repeat 0 0;
     cursor: pointer;
     transition: transform 150ms;
@@ -166,7 +166,7 @@ a {
     top: 6px;
     right: 8px;
     display: none;
-    color: #8a8ca8;
+    color: #b8bad2;
     font-size: 1.1em;
     line-height: 1;
 }
@@ -196,7 +196,7 @@ a {
     right: 16px;
     z-index: 10;
     padding: 6px 14px;
-    color: #e8e8f0;
+    color: #ffffff;
     background: #24252f;
     border: 1px solid #3a3c4c;
     border-radius: 16px;
@@ -214,24 +214,24 @@ html[data-theme="light"] {
     background-image: -moz-linear-gradient(top, rgba(250,30,78,.14), rgba(250,30,78,0) 340px);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    color: #1c1d26;
+    color: #0b0c10;
 }
 
 html[data-theme="light"] a { color: #d4163f; }
 html[data-theme="light"] #wordmark span { text-shadow: none; }
-html[data-theme="light"] #searchText { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] #searchText { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
 html[data-theme="light"] #askGemini,
-html[data-theme="light"] #themeToggle { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] #themeToggle { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
 html[data-theme="light"] .tile {
-    color: #1c1d26;
+    color: #0b0c10;
     background-image: url("chrome://kmeleon/content/aboutHome/img/gx-tile-light.png");
 }
 html[data-theme="light"] .tile:hover {
     background-image: url("chrome://kmeleon/content/aboutHome/img/gx-tile-hover-light.png");
 }
-html[data-theme="light"] #dialForm input { color: #1c1d26; background: #fff; border-color: #c9cbd8; }
-html[data-theme="light"] #footer li a { color: #5b5d73; }
-html[data-theme="light"] #footer li a:hover { color: #1c1d26; background: #e4e6ee; }
+html[data-theme="light"] #dialForm input { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"] #footer li a { color: #34364a; }
+html[data-theme="light"] #footer li a:hover { color: #0b0c10; background: #e4e6ee; }
 
 /* Add-site form */
 #dialForm {
@@ -282,7 +282,7 @@ html[data-theme="light"] #footer li a:hover { color: #1c1d26; background: #e4e6e
 
 #footer li a {
     display: inline-block;
-    color: #8a8ca8;
+    color: #b8bad2;
     transition: all 0.2s ease;
     border-radius: 5px;
     padding: 8px 10px;

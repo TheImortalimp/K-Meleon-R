@@ -377,7 +377,7 @@ void CSideBar::OnPaint()
 	if (KmIsDarkTheme()) {
 		CRect all;
 		GetClientRect(all);
-		dc.FillSolidRect(all, RGB(0x2b, 0x2d, 0x31));
+		dc.FillSolidRect(all, RGB(0x20, 0x22, 0x26));
 		CRect bar(all);
 		bar.left = bar.right - m_wSplitter;
 		dc.FillSolidRect(bar, RGB(0x1c, 0x1d, 0x22));

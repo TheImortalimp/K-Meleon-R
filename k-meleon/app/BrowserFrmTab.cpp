@@ -575,7 +575,7 @@ BOOL CBrowserFrmTab::CloseTab(CBrowserTab* tab)
 	//delete m_Tabs[index];
 
 	// If we're closing the active tab
-	CBrowserTab* newActiveTab;
+	CBrowserTab* newActiveTab = NULL;
 	if (tab==m_wndCBrowserTab)
 	{
 		m_wndCBrowserTab = NULL;
@@ -590,13 +590,13 @@ BOOL CBrowserFrmTab::CloseTab(CBrowserTab* tab)
 
 		case 0: // Next
 			newTabIndex = IDTOTABINDEX(m_wndTabs->GetNextItem(TABINDEXTOID(index),false));
-			newActiveTab = m_Tabs[newTabIndex];
+			newActiveTab = (newTabIndex >= 0 && newTabIndex < MAX_TABS_NUMBER) ? m_Tabs[newTabIndex] : NULL;
 			break;
 
 		default:
 		case 1: // Previous 
 			newTabIndex = IDTOTABINDEX(m_wndTabs->GetPreviousItem(TABINDEXTOID(index),false));
-			newActiveTab = m_Tabs[newTabIndex];
+			newActiveTab = (newTabIndex >= 0 && newTabIndex < MAX_TABS_NUMBER) ? m_Tabs[newTabIndex] : NULL;
 			break;
 
 		}
@@ -618,6 +618,8 @@ BOOL CBrowserFrmTab::CloseTab(CBrowserTab* tab)
 	{
 		m_iCBrowserView = -1;
 		m_wndCBrowserTab = NULL;
+		if (!newActiveTab && m_iBrowserCount > 0)
+			newActiveTab = m_Tabs[index < m_iBrowserCount ? index : m_iBrowserCount - 1];
 		SetActiveBrowser(newActiveTab);
 	}
 	else if (index<m_iCBrowserView)
@@ -656,7 +658,7 @@ void CBrowserFrmTab::OnPrevTab()
 
 void CBrowserFrmTab::OnLastTab()
 {
-	SetActiveBrowser(m_pPreviousSelectedTab);
+	SafeSetActiveBrowser(m_pPreviousSelectedTab);
 }
 
 LRESULT CBrowserFrmTab::OnGetFavIcon(WPARAM wParam, LPARAM lParam)

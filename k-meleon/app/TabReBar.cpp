@@ -874,7 +874,7 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 		if (KmIsDarkTheme()) {
 			CRect client;
 			GetClientRect(&client);
-			::FillRect(pNMCD->nmcd.hdc, &client, CBrush(RGB(0x2b, 0x2d, 0x31)));
+			::FillRect(pNMCD->nmcd.hdc, &client, CBrush(RGB(0x20, 0x22, 0x26)));
 		}
 		break;
 
@@ -890,7 +890,7 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 			CDC *pDC = CDC::FromHandle(pNMCD->nmcd.hdc);
 			int index = CommandToIndex(pNMCD->nmcd.dwItemSpec);
 			UINT state = pNMCD->nmcd.uItemState;
-			COLORREF bg = RGB(0x2b, 0x2d, 0x31);
+			COLORREF bg = RGB(0x20, 0x22, 0x26);
 			if (state & CDIS_CHECKED) bg = RGB(0x44, 0x47, 0x50);
 			else if (state & CDIS_HOT) bg = RGB(0x36, 0x38, 0x40);
 			CRect rc(pNMCD->nmcd.rc);
@@ -917,7 +917,7 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 
 			pDC->SetBkMode(TRANSPARENT);
 			CFont* oldFont = pDC->SelectObject(GetFont());
-			pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+			pDC->SetTextColor(RGB(0xff, 0xff, 0xff));
 			CString text = GetButtonText(index);
 			pDC->DrawText(text, -1, &contentRect, DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_HIDEPREFIX | DT_WORD_ELLIPSIS);
 			pDC->SelectObject(oldFont);
@@ -926,7 +926,7 @@ void CTabReBar::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 				CRect cr(contentRect.right + btMargin, 0, contentRect.right + btMargin + btClose, 0);
 				cr.top = (rc.top + rc.bottom - btClose) / 2;
 				cr.bottom = cr.top + btClose;
-				pDC->SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+				pDC->SetTextColor(RGB(0xff, 0xff, 0xff));
 				pDC->DrawText(_T("\u00d7"), -1, &cr, DT_CENTER | DT_SINGLELINE | DT_VCENTER);
 			}
 			*pResult = CDRF_SKIPDEFAULT;
