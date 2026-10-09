@@ -22,8 +22,8 @@ DEFINES['_UNICODE'] = True
 DISABLE_STL_WRAPPING = True
 
 USE_LIBS += [
-  'mozalloc',
   'js',
+  'mozalloc',
   'nspr',
   'xpcomglue_s',
   'xul',
