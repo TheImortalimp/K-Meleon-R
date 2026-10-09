@@ -425,21 +425,6 @@ BOOL CBrowserWrapper::LoadURL(LPCTSTR url, LPCTSTR referrer, BOOL allowFixup)
 		referrerURI,                 
 		nullptr,                 
 		nullptr);        
-	if (NS_FAILED(rv)) {
-		// Temporary diagnostic for the "Invalid Address" investigation
-		TCHAR dbg[1024];
-		_sntprintf_s(dbg, _countof(dbg), _TRUNCATE, _T("LoadURI failed rv=0x%08X url=%s"), (unsigned)rv, url);
-		OutputDebugString(dbg);
-		FILE* f = nullptr;
-		TCHAR tmp[MAX_PATH];
-		if (GetTempPath(MAX_PATH, tmp)) {
-			_tcscat_s(tmp, _T("kmeleon-loaduri.log"));
-			if (_tfopen_s(&f, tmp, _T("a, ccs=UTF-8")) == 0 && f) {
-				_ftprintf(f, _T("%s\n"), dbg);
-				fclose(f);
-			}
-		}
-	}
 	return NS_SUCCEEDED(rv);
 }
 

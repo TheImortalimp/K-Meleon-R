@@ -34,13 +34,28 @@ window.addEventListener('beforeunload', function () {
     Services.prefs.removeObserver("kmeleon.general.searchEngineName", setEngine);
 });
 	
+const SEARCH_FALLBACK = "https://www.bing.com/search?q=";
+
+function getSearchURL() {
+    // The search service may be missing in this build, so fall back to the prefs.
+    try {
+        let submission = Services.search.defaultEngine.getSubmission("_searchTerms_", null, "homepage");
+        if (submission && submission.uri) return submission.uri.spec;
+    } catch (ex) {}
+    try {
+        return Services.prefs.getComplexValue("kmeleon.general.searchEngine", Ci.nsIPrefLocalizedString).data + "_searchTerms_";
+    } catch (ex) {}
+    try {
+        return Services.prefs.getCharPref("kmeleon.general.searchEngine") + "_searchTerms_";
+    } catch (ex) {}
+    return SEARCH_FALLBACK + "_searchTerms_";
+}
+
 function onSearchSubmit(aEvent)
 {
-    var engine = Services.search.defaultEngine;
-    var submission = engine.getSubmission("_searchTerms_", null, "homepage");
-    var searchURL = submission && submission.uri ? submission.uri.spec : "";//Services.prefs.getComplexValue("kmeleon.general.searchEngine", Ci.nsIPrefLocalizedString);
+    aEvent.preventDefault();
+    var searchURL = getSearchURL();
     var searchTerms = document.getElementById("searchText").value;
-    //var searchURL = document.getElementById("searchText").getAttribute("data-url");
    
     if (searchURL && searchTerms.length > 0) {
 
@@ -81,11 +96,9 @@ function onSearchSubmit(aEvent)
             window.location.href = searchURL;
         }
     }
-
-    aEvent.preventDefault();
 }
 
-/* ---- K-Meleon-BrowseR speed dial ---- */
+/* ---- K-Meleon-R speed dial ---- */
 const DIAL_PREF = "kmeleon.browser.speeddial";
 const DIAL_DEFAULTS = [
     { title: "Wikipedia", url: "https://www.wikipedia.org/" },

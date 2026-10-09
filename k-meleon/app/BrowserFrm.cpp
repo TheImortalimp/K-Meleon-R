@@ -327,6 +327,25 @@ void CBrowserFrame::OnDestroy()
 }
 
 
+// Dark anthracite frame (Windows 10 20H1+ / 11). Loaded dynamically so older systems ignore it.
+// The colours are re-applied on activation because the frame resets them while the window is being shown.
+static void ApplyDarkFrame(HWND hwnd)
+{
+	if (HMODULE hDwm = ::LoadLibrary(_T("dwmapi.dll"))) {
+		typedef HRESULT (WINAPI *DwmSetAttr)(HWND, DWORD, LPCVOID, DWORD);
+		if (DwmSetAttr set = (DwmSetAttr)::GetProcAddress(hDwm, "DwmSetWindowAttribute")) {
+			BOOL dark = TRUE;
+			set(hwnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
+			COLORREF anthracite = RGB(0x2b, 0x2d, 0x31); // COLORREF is 0x00BBGGRR
+			COLORREF captionText = RGB(0xe8, 0xe8, 0xf0);
+			set(hwnd, 34 /* DWMWA_BORDER_COLOR */, &anthracite, sizeof(anthracite));
+			set(hwnd, 35 /* DWMWA_CAPTION_COLOR */, &anthracite, sizeof(anthracite));
+			set(hwnd, 36 /* DWMWA_TEXT_COLOR */, &captionText, sizeof(captionText));
+		}
+		::FreeLibrary(hDwm);
+	}
+}
+
 // This is where the UrlBar, ToolBar, StatusBar, ProgressBar
 // get created
 // 
@@ -335,21 +354,7 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
         return -1;
 
-	// Dark title bar (Windows 10 20H1+ / 11). Loaded dynamically so older systems just ignore it.
-	if (HMODULE hDwm = ::LoadLibrary(_T("dwmapi.dll"))) {
-		typedef HRESULT (WINAPI *DwmSetAttr)(HWND, DWORD, LPCVOID, DWORD);
-		if (DwmSetAttr set = (DwmSetAttr)::GetProcAddress(hDwm, "DwmSetWindowAttribute")) {
-			BOOL dark = TRUE;
-			set(m_hWnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
-			// Anthracite caption and border (Windows 11+; ignored elsewhere). COLORREF is 0x00BBGGRR.
-			COLORREF anthracite = RGB(0x2b, 0x2d, 0x31);
-			COLORREF captionText = RGB(0xe8, 0xe8, 0xf0);
-			set(m_hWnd, 34 /* DWMWA_BORDER_COLOR */, &anthracite, sizeof(anthracite));
-			set(m_hWnd, 35 /* DWMWA_CAPTION_COLOR */, &anthracite, sizeof(anthracite));
-			set(m_hWnd, 36 /* DWMWA_TEXT_COLOR */, &captionText, sizeof(captionText));
-		}
-		::FreeLibrary(hDwm);
-	}
+	ApplyDarkFrame(m_hWnd);
 
 	// Will be deleted in CBrowserView::PostNcDestroy()
 	m_wndBrowserView = new CBrowserView();
@@ -795,6 +800,9 @@ void CBrowserFrame::Dump(CDumpContext& dc) const
 
 void CBrowserFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) 
 {
+	if (nState != WA_INACTIVE)
+		ApplyDarkFrame(m_hWnd);
+
 	if (nState != WA_INACTIVE && theApp.m_pMostRecentBrowserFrame != this) {
         theApp.m_pMostRecentBrowserFrame = this;
 		

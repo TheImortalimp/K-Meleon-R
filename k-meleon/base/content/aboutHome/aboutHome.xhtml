@@ -22,7 +22,7 @@
     <body dir="&locale.dir;">
         <div class="spacer"/>
         <div id="content">
-            <h1 id="wordmark">K-Meleon<span>-BrowseR</span></h1>
+            <h1 id="wordmark">K-Meleon<span>-R</span></h1>
 
             <div id="searchContainer">
                 <form name="searchForm" id="searchForm" onsubmit="onSearchSubmit(event)">
@@ -34,14 +34,14 @@
                 </form>
             </div>
 
-            <div id="speedDial"></div>
-
             <form id="dialForm" class="hidden" onsubmit="onDialSave(event)">
                 <input type="text" id="dialTitle" placeholder="Name" maxlength="40"/>
                 <input type="text" id="dialUrl" placeholder="https://example.com" maxlength="512"/>
                 <input type="submit" value="Save"/>
                 <input type="button" id="dialCancel" value="Cancel"/>
             </form>
+
+            <div id="speedDial"></div>
         </div>
         <div class="spacer"/>
         <div id="footer">

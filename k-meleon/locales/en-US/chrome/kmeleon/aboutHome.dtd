@@ -3,7 +3,7 @@
 
 <!-- These strings are used in the about:home page -->
 
-<!ENTITY abouthome.pageTitle "K-Meleon-BrowseR">
+<!ENTITY abouthome.pageTitle "K-Meleon-R">
 <!ENTITY abouthome.searchEngineButton.label "Search">
 
 <!ENTITY abouthome.bookmarksButton.label "Bookmarks">

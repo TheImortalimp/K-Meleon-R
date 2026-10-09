@@ -191,7 +191,7 @@ a {
 
 /* Add-site form */
 #dialForm {
-    margin: 14px auto 0;
+    margin: 0 auto 14px;
 }
 
 #dialForm input {
@@ -215,6 +215,13 @@ a {
     -moz-box-align: center;
     width: 100%;
     border-top: #fa1e4e 1px solid;
+}
+
+#brandname img {
+    display: block;
+    height: 32px;
+    width: auto;
+    border-radius: 4px;
 }
 
 #footer ul {
