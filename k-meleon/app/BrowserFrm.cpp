@@ -341,6 +341,12 @@ int CBrowserFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		if (DwmSetAttr set = (DwmSetAttr)::GetProcAddress(hDwm, "DwmSetWindowAttribute")) {
 			BOOL dark = TRUE;
 			set(m_hWnd, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
+			// Anthracite caption and border (Windows 11+; ignored elsewhere). COLORREF is 0x00BBGGRR.
+			COLORREF anthracite = RGB(0x2b, 0x2d, 0x31);
+			COLORREF captionText = RGB(0xe8, 0xe8, 0xf0);
+			set(m_hWnd, 34 /* DWMWA_BORDER_COLOR */, &anthracite, sizeof(anthracite));
+			set(m_hWnd, 35 /* DWMWA_CAPTION_COLOR */, &anthracite, sizeof(anthracite));
+			set(m_hWnd, 36 /* DWMWA_TEXT_COLOR */, &captionText, sizeof(captionText));
 		}
 		::FreeLibrary(hDwm);
 	}

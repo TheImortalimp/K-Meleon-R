@@ -1198,23 +1198,23 @@ STRINGTABLE
 BEGIN
     IDS_CERTEXPIREDTITLE    "Accept expired security information?"
     IDS_CERTNOTVALIDTITLE   "Accept not yet valid security information?"
-    IDS_CERTEXPIREDMSG      "«%s» is a site that uses a security certificate to encrypt data during transmission, but its certificate expired on %s."
-    IDS_CERTNOTVALIDMSG     "«%s» is a site that uses a security certificate to encrypt data during transmission, but its certificate will not be valid until %s."
+    IDS_CERTEXPIREDMSG      "ï¿½%sï¿½ is a site that uses a security certificate to encrypt data during transmission, but its certificate expired on %s."
+    IDS_CERTNOTVALIDMSG     "ï¿½%sï¿½ is a site that uses a security certificate to encrypt data during transmission, but its certificate will not be valid until %s."
 END
 
 STRINGTABLE
 BEGIN
     IDS_CORRECT_COMPUTER_TIME 
                             "You should check to make sure your computer's time (currently set to %s) is correct."
-    IDS_NEWSERVER_INTRO     "Unable to verify the identity of «%s» as a trusted site."
-    IDS_NEWSERVER_REASON3   "  - You are connected to a site pretending to be «%s», possibly to obtain your confidential information."
-    IDS_NEWSERVER_QUESTION  "Before accepting this certificate, you should examine this site's certificate carefully. Are you willing to to accept this certificate for the purpose of identifying the Web site «%s»?"
-    IDS_mismatchDomainMsg1  "You have attempted to establish a connection with «%s».  However, the security certificate presented belongs to «%s».  It is possible, though unlikely, that someone may be trying to intercept your communication with this web site."
-    IDS_mismatchDomainMsg2  "If you suspect the certificate shown does not belong to «%s», please cancel the connection and notify the site administrator."
-    IDS_crlNextUpdateMsg1   "K-Meleon cannot establish an encrypted connection with «%s»."
-    IDS_crlNextUpdateMsg2   "The certificate revocation list (CRL) from «%s» needs to be updated."
+    IDS_NEWSERVER_INTRO     "Unable to verify the identity of ï¿½%sï¿½ as a trusted site."
+    IDS_NEWSERVER_REASON3   "  - You are connected to a site pretending to be ï¿½%sï¿½, possibly to obtain your confidential information."
+    IDS_NEWSERVER_QUESTION  "Before accepting this certificate, you should examine this site's certificate carefully. Are you willing to to accept this certificate for the purpose of identifying the Web site ï¿½%sï¿½?"
+    IDS_mismatchDomainMsg1  "You have attempted to establish a connection with ï¿½%sï¿½.  However, the security certificate presented belongs to ï¿½%sï¿½.  It is possible, though unlikely, that someone may be trying to intercept your communication with this web site."
+    IDS_mismatchDomainMsg2  "If you suspect the certificate shown does not belong to ï¿½%sï¿½, please cancel the connection and notify the site administrator."
+    IDS_crlNextUpdateMsg1   "K-Meleon cannot establish an encrypted connection with ï¿½%sï¿½."
+    IDS_crlNextUpdateMsg2   "The certificate revocation list (CRL) from ï¿½%sï¿½ needs to be updated."
     IDS_crlNextUpdateMsg3   "Please ask your system administrator for assistance."
-    IDS_newCAMessage1       "Do you want to trust «%s» for the following purposes?"
+    IDS_newCAMessage1       "Do you want to trust ï¿½%sï¿½ for the following purposes?"
     IDS_CERTEXISTS          "The Certificate already exists."
     IDS_CERT_VERIFIED_OK    "This certificate has been verified for the following uses:"
     IDS_CERT_REVOKED        "Could not verify this certificate because it has been revoked."
@@ -1259,7 +1259,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "K-Meleon"
+    IDR_MAINFRAME           "K-Meleon-R"
     IDS_PROFILES_FOLDER_NAME "K-Meleon"
     IDS_PROFILES_NONSHARED_NAME "Browser"
     IDS_SRCH_STR_NOT_FOUND  "Not found."
@@ -1267,7 +1267,7 @@ END
 
 STRINGTABLE
 BEGIN
-    AFX_IDS_APP_TITLE       "K-Meleon"
+    AFX_IDS_APP_TITLE       "K-Meleon-R"
     AFX_IDS_IDLEMESSAGE     "Ready"
 END
 

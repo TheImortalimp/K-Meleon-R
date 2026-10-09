@@ -88,7 +88,7 @@ pref("kmeleon.plugins.privacy.clearSignOn", 0);
 /********************************************************************************************************/
 // Appearance
 
-pref("kmeleon.display.title", "K-Meleon");	
+pref("kmeleon.display.title", "K-Meleon-R");	
 pref("kmeleon.display.NewWindowHasUrlFocus", false);
 pref("kmeleon.display.backgroundImage", "");
 pref("kmeleon.display.backgroundImageEnabled", false);
