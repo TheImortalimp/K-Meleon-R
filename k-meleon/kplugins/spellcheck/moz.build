@@ -15,9 +15,12 @@ DEFINES['_UNICODE'] = True
 DISABLE_STL_WRAPPING = True
 
 OS_LIBS += [
-  'mozalloc',
   'xpcomglue_s',
   'xul',
+]
+
+USE_LIBS += [
+  'mozalloc',
 ]
 
 LOCAL_INCLUDES += [

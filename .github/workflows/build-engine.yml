@@ -156,17 +156,35 @@ jobs:
           key: obj-none
           restore-keys: obj-
 
-      - name: Include the refcount declaration required by gfxVR
+      - name: Use glue-compatible refcount declarations
         shell: bash
         working-directory: goanna
         run: |
           for header in gfx/thebes/gfxVR.h obj-x64/dist/include/gfxVR.h; do
             if [ -f "$header" ]; then
-              if ! grep -q '^#include "nsISupportsImpl.h"$' "$header"; then
-                grep -q '#include "nsCOMPtr.h"' "$header" || { echo "Expected include anchor missing in $header"; exit 1; }
-                sed -i '/#include "nsCOMPtr.h"/a #include "nsISupportsImpl.h"' "$header"
+              sed -i '/^#include "nsISupportsImpl.h"$/d' "$header"
+              if ! grep -q 'NS_INLINE_DECL_REFCOUNTING(VRHMDInfo)' "$header" && grep -q 'NS_INLINE_DECL_THREADSAFE_REFCOUNTING(VRHMDInfo)' "$header"; then
+                sed -i '/NS_INLINE_DECL_THREADSAFE_REFCOUNTING(VRHMDInfo)/c\
+          #ifdef XPCOM_GLUE\
+            NS_INLINE_DECL_REFCOUNTING(VRHMDInfo)\
+          #else\
+            NS_INLINE_DECL_THREADSAFE_REFCOUNTING(VRHMDInfo)\
+          #endif' "$header"
               fi
-              grep -q '^#include "nsISupportsImpl.h"$' "$header" || { echo "Failed to patch $header"; exit 1; }
+              grep -q 'NS_INLINE_DECL_REFCOUNTING(VRHMDInfo)' "$header" || { echo "Failed to patch refcount declaration in $header"; exit 1; }
+            fi
+          done
+          for header in xpcom/components/ModuleUtils.h obj-x64/dist/include/mozilla/ModuleUtils.h; do
+            if [ -f "$header" ]; then
+              if ! grep -q 'NS_DECL_ISUPPORTS' "$header" && grep -q '^[[:space:]]*NS_DECL_THREADSAFE_ISUPPORTS[[:space:]]*$' "$header"; then
+                sed -i '/^[[:space:]]*NS_DECL_THREADSAFE_ISUPPORTS[[:space:]]*$/c\
+          #ifdef XPCOM_GLUE\
+            NS_DECL_ISUPPORTS\
+          #else\
+            NS_DECL_THREADSAFE_ISUPPORTS\
+          #endif' "$header"
+              fi
+              grep -q 'NS_DECL_ISUPPORTS' "$header" || { echo "Failed to patch module refcount declaration in $header"; exit 1; }
             fi
           done
 

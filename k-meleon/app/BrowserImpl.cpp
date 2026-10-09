@@ -229,16 +229,16 @@ NS_IMETHODIMP CBrowserImpl::GetInterface(const nsIID &aIID, void** aInstancePtr)
 
 //Gets called when you mouseover links etc. in a web page
 //
-NS_IMETHODIMP CBrowserImpl::SetStatus(PRUint32 aType, const PRUnichar* aStatus)
+NS_IMETHODIMP CBrowserImpl::SetStatus(PRUint32 aType, const char16_t* aStatus)
 {
    NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
 #ifndef _UNICODE
-	if (wcslen(aStatus) > 1024)
+	if (wcslen(reinterpret_cast<const wchar_t*>(aStatus)) > 1024)
 		return NS_OK;
 #endif
 
-	m_pBrowserFrameGlue->UpdateStatusBarText(reinterpret_cast<const char16_t*>(aStatus));
+	m_pBrowserFrameGlue->UpdateStatusBarText(aStatus);
 
 	return NS_OK;
 }
@@ -499,7 +499,7 @@ NS_IMETHODIMP CBrowserImpl::SetFocus()
 	return rv;
 }
 
-NS_IMETHODIMP CBrowserImpl::GetTitle(PRUnichar** aTitle)
+NS_IMETHODIMP CBrowserImpl::GetTitle(char16_t** aTitle)
 {
 	NS_ENSURE_ARG_POINTER(aTitle);
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
@@ -507,22 +507,22 @@ NS_IMETHODIMP CBrowserImpl::GetTitle(PRUnichar** aTitle)
 	CString title;
 	m_pBrowserFrameGlue->GetBrowserTitle(title);
 
-    *aTitle = reinterpret_cast<PRUnichar*>(NS_StringCloneData(CStringToNSString(title)));
+    *aTitle = NS_StringCloneData(CStringToNSString(title));
 	
 	return NS_OK;
 }
 
-NS_IMETHODIMP CBrowserImpl::SetTitle(const PRUnichar* aTitle)
+NS_IMETHODIMP CBrowserImpl::SetTitle(const char16_t* aTitle)
 {
 	NS_ENSURE_ARG_POINTER(aTitle);
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
 #ifndef _UNICODE
-	if (wcslen(aTitle)>1024)
+	if (wcslen(reinterpret_cast<const wchar_t*>(aTitle))>1024)
 		return NS_OK;
 #endif
 
-	m_pBrowserFrameGlue->SetBrowserTitle(NSStringToCString(nsString(reinterpret_cast<const char16_t*>(aTitle))));
+	m_pBrowserFrameGlue->SetBrowserTitle(NSStringToCString(nsString(aTitle)));
 	
 	return NS_OK;
 }
@@ -563,13 +563,12 @@ NS_IMETHODIMP CBrowserImpl::Blur()
 //*****************************************************************************
 
 /* void onShowTooltip (in long aXCoords, in long aYCoords, in wstring aTipText); */
-NS_IMETHODIMP CBrowserImpl::OnShowTooltip(PRInt32 aXCoords, PRInt32 aYCoords, const PRUnichar *aTipText)
+NS_IMETHODIMP CBrowserImpl::OnShowTooltip(PRInt32 aXCoords, PRInt32 aYCoords, const char16_t *aTipText)
 {
 	NS_ENSURE_ARG_POINTER(aTipText);
 	NS_ENSURE_TRUE(m_pBrowserFrameGlue, NS_ERROR_FAILURE);
 
-    m_pBrowserFrameGlue->ShowTooltip(aXCoords, aYCoords,
-        NSStringToCString(nsString(reinterpret_cast<const char16_t*>(aTipText))));
+    m_pBrowserFrameGlue->ShowTooltip(aXCoords, aYCoords, NSStringToCString(nsString(aTipText)));
 
     return NS_OK;
 }

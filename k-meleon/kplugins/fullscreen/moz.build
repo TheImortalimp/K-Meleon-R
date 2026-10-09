@@ -16,10 +16,13 @@ DEFINES['_UNICODE'] = True
 DISABLE_STL_WRAPPING = True
 
 OS_LIBS += [
-  'mozalloc',
   'shell32',
   'xpcomglue_s',
   'xul',
+]
+
+USE_LIBS += [
+  'mozalloc',
 ]
 
 LOCAL_INCLUDES += [
