@@ -11,13 +11,10 @@ DEFINES['UNICODE'] = True
 
 DEFINES['_UNICODE'] = True
 
-OS_LIBS += [
-  'xpcomglue_s',
-  'xul',
-]
-
 USE_LIBS += [
   'mozalloc',
+  'xpcomglue_s',
+  'xul',
 ]
 
 DISABLE_STL_WRAPPING = True

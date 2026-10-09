@@ -238,7 +238,7 @@ NS_IMETHODIMP CBrowserImpl::SetStatus(PRUint32 aType, const char16_t* aStatus)
 		return NS_OK;
 #endif
 
-	m_pBrowserFrameGlue->UpdateStatusBarText(aStatus);
+	m_pBrowserFrameGlue->UpdateStatusBarText(NSStringToCString(nsString(aStatus)));
 
 	return NS_OK;
 }
