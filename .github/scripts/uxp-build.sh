@@ -5,7 +5,7 @@ export PATH="$PATH:/c/mozilla-build/python:/c/mozilla-build/python2"
 export PATH="$(echo "$PATH" | tr ':' '\n' | grep -vi strawberry | paste -sd:)"
 sed -i -e 's/^MOZ_EXTENSIONS_DEFAULT=.*/MOZ_EXTENSIONS_DEFAULT=""/' kmeleon/confvars.sh
 export PATH="/c/yasm:/c/mozilla-build/yasm:$PATH"
-export YASM=/c/yasm/yasm.exe
+export YASM='c:/mozilla-build/yasm/yasm.exe'
 cp -f /c/yasm/yasm.exe /c/mozilla-build/bin/yasm.exe; cp -f /c/yasm/yasm.exe /c/mozilla-build/msys/bin/yasm.exe
 which yasm; yasm --version | head -1
 which python python2 python2.7; python --version
