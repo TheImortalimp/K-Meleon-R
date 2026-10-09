@@ -12,6 +12,23 @@ sed -i "s|^yasm = check_prog('YASM'.*|@depends('--help')\ndef yasm(_):\n    retu
 grep -n -B1 -A3 "^def yasm(_)" build/moz.configure/toolchain.configure
 sed -i -e "/^GENERATED_INCLUDES += \[/,/^\]/{s/GENERATED_INCLUDES/LOCAL_INCLUDES/;s|'/build'|'!/build'|}" kmeleon/app/moz.build
 find kmeleon -name moz.build -exec sed -i -e "/^[[:space:]]*'mozalloc',[[:space:]]*$/d" {} +
+cat > kmeleon/app/application.ini <<'EOF'
+#filter substitution
+[App]
+Vendor=@MOZ_APP_VENDOR@
+Name=@MOZ_APP_BASENAME@
+RemotingName=@MOZ_APP_NAME@
+Version=@MOZ_APP_VERSION@
+BuildID=@MOZ_BUILDID@
+ID=@MOZ_APP_ID@
+
+[Gecko]
+MinVersion=@GRE_MILESTONE@
+MaxVersion=@GRE_MILESTONE@
+
+[XRE]
+EnableProfileMigrator=1
+EOF
 which yasm; yasm --version | head -1
 which python python2 python2.7; python --version
 if [ "$STAGE" = build ]; then
