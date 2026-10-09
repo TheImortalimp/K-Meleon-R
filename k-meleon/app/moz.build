@@ -11,9 +11,9 @@ USE_LIBS += [
     'js',
     'mozalloc',
     'nspr',
-    'xul',
     'xpcomglue',
     'xpcomglue_s',
+    'xul',
 ]
 
 JS_PREFERENCE_FILES += [
