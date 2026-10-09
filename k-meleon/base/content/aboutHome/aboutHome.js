@@ -87,7 +87,6 @@ function onSearchSubmit(aEvent)
 
 /* ---- K-Meleon-BrowseR speed dial ---- */
 const DIAL_PREF = "kmeleon.browser.speeddial";
-const DIAL_COLORS = ["#7a5cf0", "#e0457b", "#1f9d8b", "#d98324", "#3b82c4", "#8b5cf6"];
 const DIAL_DEFAULTS = [
     { title: "Wikipedia", url: "https://www.wikipedia.org/" },
     { title: "GitHub", url: "https://github.com/" },
@@ -112,13 +111,22 @@ function isAllowedDialUrl(url) {
     return /^(https?:\/\/|windowsdefender:\/\/)/i.test(url);
 }
 
-function makeTile(cls, label, iconText, color) {
+function iconClass(url) {
+    let host = "";
+    try { host = new URL(url).hostname; } catch (ex) {}
+    if (/wikipedia\.org$/i.test(host)) return "icon-wikipedia";
+    if (/github\.com$/i.test(host)) return "icon-github";
+    if (/(youtube\.com|youtu\.be)$/i.test(host)) return "icon-youtube";
+    if (/reddit\.com$/i.test(host)) return "icon-reddit";
+    if (/^windowsdefender:/i.test(url)) return "icon-shield";
+    return "";
+}
+
+function makeTile(cls, label, iconClassName) {
     let tile = document.createElement("div");
     tile.className = "tile " + cls;
     let icon = document.createElement("span");
-    icon.className = "icon";
-    icon.textContent = iconText;
-    if (color) icon.style.backgroundColor = color;
+    icon.className = "icon " + (iconClassName || "");
     let name = document.createElement("span");
     name.className = "name";
     name.textContent = label;
@@ -135,8 +143,7 @@ function renderDial() {
     list.forEach(function (entry, i) {
         if (!entry || !isAllowedDialUrl(String(entry.url))) return;
         let title = String(entry.title || entry.url);
-        let tile = makeTile("site", title, title.charAt(0).toUpperCase(),
-                            DIAL_COLORS[i % DIAL_COLORS.length]);
+        let tile = makeTile("site", title, iconClass(String(entry.url)));
         tile.title = entry.url;
         tile.addEventListener("click", function () {
             window.location.href = entry.url;
@@ -155,7 +162,7 @@ function renderDial() {
         root.appendChild(tile);
     });
 
-    let add = makeTile("add", "Add site", "+", null);
+    let add = makeTile("add", "Add site", "");
     add.addEventListener("click", function () {
         document.getElementById("dialForm").className = "";
         document.getElementById("dialTitle").focus();

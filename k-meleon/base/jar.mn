@@ -17,6 +17,17 @@ kmeleon.jar:
     content/kmeleon/aboutHome/aboutHome.css   (content/aboutHome/aboutHome.css)       
     content/kmeleon/aboutHome/aboutHome.js    (content/aboutHome/aboutHome.js)       
     content/kmeleon/aboutHome/aboutHome.xhtml (content/aboutHome/aboutHome.xhtml)       
+    content/kmeleon/aboutHome/img/gx-bg.png         (content/aboutHome/img/gx-bg.png)
+    content/kmeleon/aboutHome/img/gx-glow.png       (content/aboutHome/img/gx-glow.png)
+    content/kmeleon/aboutHome/img/gx-tile.png       (content/aboutHome/img/gx-tile.png)
+    content/kmeleon/aboutHome/img/gx-tile-hover.png (content/aboutHome/img/gx-tile-hover.png)
+    content/kmeleon/aboutHome/img/icon-add.png       (content/aboutHome/img/icon-add.png)
+    content/kmeleon/aboutHome/img/icon-generic.png   (content/aboutHome/img/icon-generic.png)
+    content/kmeleon/aboutHome/img/icon-github.png    (content/aboutHome/img/icon-github.png)
+    content/kmeleon/aboutHome/img/icon-reddit.png    (content/aboutHome/img/icon-reddit.png)
+    content/kmeleon/aboutHome/img/icon-shield.png    (content/aboutHome/img/icon-shield.png)
+    content/kmeleon/aboutHome/img/icon-wikipedia.png (content/aboutHome/img/icon-wikipedia.png)
+    content/kmeleon/aboutHome/img/icon-youtube.png   (content/aboutHome/img/icon-youtube.png)
 
 % content branding %content/branding/ contentaccessible=yes
     content/branding/about.png (branding/about.png)
