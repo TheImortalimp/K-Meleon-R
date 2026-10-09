@@ -1,17 +1,9 @@
 name: Build K-Meleon-R on UXP engine (experimental)
 
 on:
-  workflow_dispatch:
-    inputs:
-      stage:
-        description: 'configure or build'
-        default: 'configure'
-      mozbuild:
-        description: 'MozillaBuild version'
-        default: '3.4'
-      uxp_ref:
-        description: 'roytam1/UXP branch or commit'
-        default: 'custom'
+  push:
+    branches: [engine-uxp]
+    paths: ['uxp/**', 'k-meleon/**', '.github/workflows/build-uxp.yml', '.github/scripts/uxp-build.sh']
 
 jobs:
   engine:
@@ -24,7 +16,7 @@ jobs:
       - name: Fetch UXP engine source
         shell: bash
         run: |
-          git clone -q --depth 1 -b '${{ inputs.uxp_ref }}' https://github.com/roytam1/UXP.git goanna
+          git clone -q --depth 1 -b 'custom' https://github.com/roytam1/UXP.git goanna
           cd goanna && git log -1 --format='%H %cd'
 
       - name: Apply K-Meleon engine patch
@@ -40,7 +32,7 @@ jobs:
       - name: Install MozillaBuild
         shell: pwsh
         run: |
-          $v = '${{ inputs.mozbuild }}'
+          $v = '3.4'
           curl.exe -sSL -o mb.exe "https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-$v.exe"
           Start-Process -Wait -FilePath .\mb.exe -ArgumentList '/S','/D=C:\mozilla-build'
           Get-ChildItem C:\mozilla-build -Name | Select-Object -First 40
@@ -95,7 +87,7 @@ jobs:
           set PATH=C:\yasm;C:\mozilla-build\yasm;%PATH%
           set MOZ_NO_RESET_PATH=1
           set MOZILLABUILD=C:\mozilla-build
-          set STAGE=${{ inputs.stage }}
+          set /p STAGE=<uxp\stage.txt
           C:\mozilla-build\msys\bin\bash.exe -l %GITHUB_WORKSPACE%\.github\scripts\uxp-build.sh > build.log 2>&1
           set RC=%ERRORLEVEL%
           exit /b %RC%
@@ -113,7 +105,7 @@ jobs:
         run: tail -n 120 build.log || true
 
       - name: Upload test browser
-        if: success() && inputs.stage == 'build'
+        if: success() && hashFiles('uxp/build.flag') != ''
         uses: actions/upload-artifact@v4
         with:
           name: K-Meleon-R-UXP-x64-browser
