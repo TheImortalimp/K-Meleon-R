@@ -1,0 +1,122 @@
+diff --git a/js/xpconnect/idl/moz.build b/js/xpconnect/idl/moz.build
+index 119b7eba2..0139f4a2b 100644
+--- a/js/xpconnect/idl/moz.build
++++ b/js/xpconnect/idl/moz.build
+@@ -6,6 +6,7 @@
+ XPIDL_SOURCES += [
+     'mozIJSSubScriptLoader.idl',
+     'nsIAddonInterposition.idl',
++    'nsIJSContextStack.idl',
+     'nsIXPConnect.idl',
+     'nsIXPCScriptable.idl',
+     'xpccomponents.idl',
+diff --git a/js/xpconnect/idl/nsIJSContextStack.idl b/js/xpconnect/idl/nsIJSContextStack.idl
+new file mode 100644
+index 000000000..9da2fb979
+--- /dev/null
++++ b/js/xpconnect/idl/nsIJSContextStack.idl
+@@ -0,0 +1,10 @@
++#include "nsISupports.idl"
++
++[ptr] native JSContext(JSContext);
++
++[uuid(c67d8270-3189-11d3-9885-006008962422)]
++interface nsIJSContextStack : nsISupports
++{
++    JSContext                   pop();
++    void                        push(in JSContext cx);
++};
+diff --git a/js/xpconnect/src/nsXPConnect.cpp b/js/xpconnect/src/nsXPConnect.cpp
+index 4d961816f..074fe2c12 100644
+--- a/js/xpconnect/src/nsXPConnect.cpp
++++ b/js/xpconnect/src/nsXPConnect.cpp
+@@ -42,7 +42,7 @@ using namespace mozilla::dom;
+ using namespace xpc;
+ using namespace JS;
+ 
+-NS_IMPL_ISUPPORTS(nsXPConnect, nsIXPConnect)
++NS_IMPL_ISUPPORTS(nsXPConnect, nsIXPConnect, nsIJSContextStack)
+ 
+ nsXPConnect* nsXPConnect::gSelf = nullptr;
+ bool         nsXPConnect::gOnceAliveNowDead = false;
+@@ -1014,6 +1014,19 @@ nsXPConnect::DebugPrintJSStack(bool showArgs,
+     return nullptr;
+ }
+ 
++NS_IMETHODIMP
++nsXPConnect::Push(JSContext* aJSContext)
++{
++  // UXP has no JSContext stack; K-Meleon only needs the interface to exist\n  return NS_OK;
++}
++
++NS_IMETHODIMP
++nsXPConnect::Pop(JSContext** aJSContext)
++{
++  if (aJSContext) *aJSContext = nullptr;
++  return NS_OK;
++}
++
+ NS_IMETHODIMP
+ nsXPConnect::VariantToJS(JSContext* ctx, JSObject* scopeArg, nsIVariant* value,
+                          MutableHandleValue _retval)
+diff --git a/js/xpconnect/src/xpcprivate.h b/js/xpconnect/src/xpcprivate.h
+index fc9a254a5..9969c8a24 100644
+--- a/js/xpconnect/src/xpcprivate.h
++++ b/js/xpconnect/src/xpcprivate.h
+@@ -112,6 +112,7 @@
+ #include "nsCOMPtr.h"
+ #include "nsXPTCUtils.h"
+ #include "xptinfo.h"
++#include "nsIJSContextStack.h"
+ #include "XPCForwards.h"
+ #include "XPCLog.h"
+ #include "xpccomponents.h"
+@@ -224,12 +225,14 @@ static inline bool IS_WN_REFLECTOR(JSObject* obj)
+ // returned as function call result values they are not addref'd. Exceptions
+ // to this rule are noted explicitly.
+ 
+-class nsXPConnect final : public nsIXPConnect
++class nsXPConnect final : public nsIXPConnect,
++                          public nsIJSContextStack
+ {
+ public:
+     // all the interface method declarations...
+     NS_DECL_ISUPPORTS
+     NS_DECL_NSIXPCONNECT
++    NS_DECL_NSIJSCONTEXTSTACK
+ 
+     // non-interface implementation
+ public:
+diff --git a/netwerk/protocol/res/nsResProtocolHandler.cpp b/netwerk/protocol/res/nsResProtocolHandler.cpp
+index 265bab9ec..b6a8cca7d 100644
+--- a/netwerk/protocol/res/nsResProtocolHandler.cpp
++++ b/netwerk/protocol/res/nsResProtocolHandler.cpp
+@@ -10,6 +10,7 @@
+ #include "nsResProtocolHandler.h"
+ #include "nsIIOService.h"
+ #include "nsIFile.h"
++#include "nsDirectoryServiceDefs.h"
+ #include "nsNetCID.h"
+ #include "nsNetUtil.h"
+ #include "nsURLHelper.h"
+@@ -42,6 +43,20 @@ nsResProtocolHandler::Init()
+       mAppURI = mGREURI;
+     }
+ 
++    // K-Meleon: resource:/// points at the parent of the application directory
++    nsCOMPtr<nsIFile> file;
++    rv = NS_GetSpecialDirectory(NS_OS_CURRENT_PROCESS_DIR, getter_AddRefs(file));
++    NS_ENSURE_SUCCESS(rv, rv);
++    nsCOMPtr<nsIFile> parent;
++    file->GetParent(getter_AddRefs(parent));
++    if (parent) {
++      nsCOMPtr<nsIURI> uri;
++      rv = NS_NewFileURI(getter_AddRefs(uri), parent);
++      NS_ENSURE_SUCCESS(rv, rv);
++      rv = SetSubstitution(EmptyCString(), uri);
++      NS_ENSURE_SUCCESS(rv, rv);
++    }
++
+     //XXXbsmedberg Neil wants a resource://pchrome/ for the profile chrome dir...
+     // but once I finish multiple chrome registration I'm not sure that it is needed
+ 
