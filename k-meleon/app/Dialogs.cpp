@@ -389,7 +389,7 @@ BOOL CFindRebar::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 				cd->clrText = RGB(0xe8, 0xe8, 0xf0);
 				cd->clrBtnFace = RGB(0x2b, 0x2d, 0x31);
 				cd->clrBtnHighlight = RGB(0x44, 0x47, 0x50);
-				*pResult = TBCDRF_USECDCOLORS;
+				*pResult = 0x00020000; /* TBCDRF_USECDCOLORS */
 				return TRUE;
 			}
 		}
