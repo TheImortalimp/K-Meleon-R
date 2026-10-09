@@ -70,7 +70,7 @@ jobs:
           ac_add_options --disable-tests
           ac_add_options --disable-updater
           ac_add_options --disable-crashreporter
-          mk_add_options MOZ_MAKE_FLAGS="-j4"
+          mk_add_options MOZ_MAKE_FLAGS="-j4 -k"
           export CXXFLAGS="-std:c++17"
           export YASM=/c/mozilla-build/yasm/yasm.exe
           EOF
