@@ -386,6 +386,10 @@ void KmApplyFrameTheme(HWND hwnd)
 				::GetClassNameW(child, cls, 64);
 				if (wcscmp(cls, L"MozillaWindowClass") == 0 || wcsncmp(cls, L"Mozilla", 7) == 0)
 					return TRUE;
+				// Leave text inputs alone: the dark theme darkens their background but not their text colour.
+				if (_wcsicmp(cls, L"Edit") == 0 || _wcsicmp(cls, L"ComboBox") == 0 ||
+					_wcsicmp(cls, L"ComboBoxEx32") == 0 || _wcsicmp(cls, L"ComboLBox") == 0)
+					return TRUE;
 				ctx.fn(child, ctx.dark ? L"DarkMode_Explorer" : NULL, NULL);
 				return TRUE;
 			}, 0);
