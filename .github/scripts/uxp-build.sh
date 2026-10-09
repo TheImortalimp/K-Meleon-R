@@ -16,16 +16,16 @@ grep -q '^MOZ_APP_NAME=' kmeleon/confvars.sh || echo 'MOZ_APP_NAME=k-meleon' >> 
 cat > kmeleon/app/application.ini <<'EOF'
 #filter substitution
 [App]
-Vendor=@MOZ_APP_VENDOR@
-Name=@MOZ_APP_BASENAME@
+Vendor=K-Meleon
+Name=K-Meleon-R
 RemotingName=k-meleon
-Version=@MOZ_APP_VERSION@
-BuildID=@MOZ_BUILDID@
-ID=@MOZ_APP_ID@
+Version=76.5.5
+BuildID=20261009000000
+ID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 
 [Gecko]
-MinVersion=@GRE_MILESTONE@
-MaxVersion=@GRE_MILESTONE@
+MinVersion=4.8.7
+MaxVersion=4.8.*
 
 [XRE]
 EnableProfileMigrator=1
