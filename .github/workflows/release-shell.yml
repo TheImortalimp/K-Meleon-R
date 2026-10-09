@@ -27,17 +27,17 @@ jobs:
         shell: pwsh
         run: |
           choco install nsis -y --no-progress | Out-Null
-          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" /DVERSION=r7 /DSRC="$PWD\publish" kmr-shell/setup.nsi
+          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" /DVERSION=r8 /DSRC="$PWD\publish" kmr-shell/setup.nsi
           if ($LASTEXITCODE) { exit 1 }
       - name: Zip
         shell: pwsh
         run: |
-          Compress-Archive publish/* K-Meleon-R-r7-x64-portable.zip
-          $s = Get-ChildItem -Recurse -Filter K-Meleon-R-r7-x64-setup.exe | Select -First 1
+          Compress-Archive publish/* K-Meleon-R-r8-x64-portable.zip
+          $s = Get-ChildItem -Recurse -Filter K-Meleon-R-r8-x64-setup.exe | Select -First 1
           if ($s.DirectoryName -ne $PWD.Path) { Move-Item $s.FullName . -Force }
       - uses: actions/upload-artifact@v4
         with:
-          name: r7
+          name: r8
           path: |
-            K-Meleon-R-r7-x64-portable.zip
-            K-Meleon-R-r7-x64-setup.exe
+            K-Meleon-R-r8-x64-portable.zip
+            K-Meleon-R-r8-x64-setup.exe

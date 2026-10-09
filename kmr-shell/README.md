@@ -1,4 +1,4 @@
-# K-Meleon-R r7
+# K-Meleon-R r8
 
 A small, fast, standalone K-Meleon-R browser: Opera GX-style speed dial, tabs,
 Dark / Light / System theme, and Bing, Google, Copilot and Gemini hooks. It

@@ -57,23 +57,36 @@ a {
 
 /* Search */
 #searchForm {
-    width: 600px;
+    width: 760px;
+    max-width: 92%;
     margin: 0 auto;
-    display: -moz-box;
+    display: block;
 }
 
 #searchText {
-    -moz-box-flex: 1;
-    padding: 10px 14px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px 22px;
+    font-size: 1.1em;
     color: #fff;
     background: #17181f;
     border: 1px solid #3a3c4c;
-    border-radius: 20px 0 0 20px;
+    border-radius: 26px;
     outline: none;
 }
 
-#searchText:-moz-dir(rtl) {
-    border-radius: 0 20px 20px 0;
+#searchButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+#searchButtons input {
+    height: 36px;
+    margin: 0;
+    white-space: nowrap;
 }
 
 #searchText:focus,
@@ -88,13 +101,9 @@ a {
     color: #fff;
     background: #fa1e4e;
     border: 1px solid #fa1e4e;
-    border-radius: 0 20px 20px 0;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 150ms;
-}
-
-#searchSubmit:-moz-dir(rtl) {
-    border-radius: 20px 0 0 20px;
 }
 
 #searchSubmit:hover {
@@ -104,7 +113,6 @@ a {
 #askGemini,
 #askCopilot,
 #searchProvider {
-    margin-left: 8px;
     padding: 0 16px;
     color: #fff;
     background: #24252f;
@@ -341,3 +349,5 @@ html[data-theme="light"] #footer li a:hover { color: #0b0c10; background: #e4e6e
     cursor: pointer;
     background: #1b1c2a;
 }
+
+html, body { overflow-x: hidden; }
