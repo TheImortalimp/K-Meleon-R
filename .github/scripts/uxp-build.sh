@@ -12,6 +12,7 @@ sed -i "s|^yasm = check_prog('YASM'.*|@depends('--help')\ndef yasm(_):\n    retu
 grep -n -B1 -A3 "^def yasm(_)" build/moz.configure/toolchain.configure
 sed -i -e "/^GENERATED_INCLUDES += \[/,/^\]/{s/GENERATED_INCLUDES/LOCAL_INCLUDES/;s|'/build'|'!/build'|}" kmeleon/app/moz.build
 find kmeleon -name moz.build -exec sed -i -e "/^[[:space:]]*'mozalloc',[[:space:]]*$/d" {} +
+grep -q '^MOZ_APP_NAME=' kmeleon/confvars.sh || echo 'MOZ_APP_NAME=k-meleon' >> kmeleon/confvars.sh
 cat > kmeleon/app/application.ini <<'EOF'
 #filter substitution
 [App]
