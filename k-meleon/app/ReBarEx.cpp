@@ -19,6 +19,7 @@
 #include "StdAfx.h"
 #include "ReBarEx.h"
 #include "mfcembed.h"
+#include "BrowserFrm.h"
 #include "../kplugins/rebar_menu/hot_tracking.h"
 #include "VisualStylesXP.h"
 
@@ -27,6 +28,7 @@ BEGIN_MESSAGE_MAP(CReBarEx, CReBar)
 	//ON_NOTIFY_REFLECT(NM_CUSTOMDRAW, OnNMCustomdraw)
 	ON_WM_NCCALCSIZE()
 	ON_WM_NCPAINT()
+	ON_WM_ERASEBKGND()
 	//ON_MESSAGE(WM_SIZEPARENT, OnSizeParent)
 #if _MSC_VER >= 1300 
 	ON_NOTIFY_REFLECT( RBN_CHEVRONPUSHED, OnChevronPushed )	
@@ -68,6 +70,16 @@ LRESULT CReBarEx::OnSizeParent(WPARAM wParam, LPARAM lParam)
 	return res;
 }
 
+BOOL CReBarEx::OnEraseBkgnd(CDC* pDC)
+{
+	if (!KmIsDarkTheme())
+		return CReBar::OnEraseBkgnd(pDC);
+	CRect rc;
+	pDC->GetClipBox(&rc);
+	pDC->FillSolidRect(&rc, RGB(0x2b, 0x2d, 0x31));
+	return TRUE;
+}
+
 void CReBarEx::OnNcPaint()
 {
 	// get window DC that is clipped to the non-client area
@@ -84,7 +96,18 @@ void CReBarEx::OnNcPaint()
 	rectWindow.OffsetRect(-rectWindow.left, -rectWindow.top);
 
 	if (mNeedSeparator) {
-		if (m_dwStyle & CBRS_ALIGN_TOP) {
+		if (KmIsDarkTheme()) {
+			CRect line(rectWindow);
+			if (m_dwStyle & CBRS_ALIGN_TOP) {
+				line.top = line.bottom - 2;
+				rectWindow.bottom -= 2;
+			} else if (m_dwStyle & CBRS_ALIGN_BOTTOM) {
+				line.bottom = line.top + 2;
+				rectWindow.top += 2;
+			}
+			dc.FillSolidRect(&line, RGB(0x55, 0x58, 0x63));
+		}
+		else if (m_dwStyle & CBRS_ALIGN_TOP) {
 			dc.DrawEdge(&rectWindow, BDR_RAISEDINNER|BDR_RAISEDOUTER, BF_BOTTOM | BF_ADJUST);
 		}
 		else if (m_dwStyle & CBRS_ALIGN_BOTTOM) {

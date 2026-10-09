@@ -27,6 +27,7 @@
 #include "ToolBarEx.h"
 #include "KmToolbar.h"
 #include "MfcEmbed.h" 
+#include "BrowserFrm.h"
 #include "VisualStylesXP.h"
 
 #ifdef _DEBUG
@@ -89,7 +90,8 @@ void CToolBarEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 
 	case CDDS_ITEMPREPAINT: {
 		HTHEME hTheme = NULL;
-		if (g_xpStyle.IsThemeActive() && g_xpStyle.IsAppThemed())// && (SendMessage(0x0129, 0, 0) & 0x4))
+		const bool dark = KmIsDarkTheme();
+		if (!dark && g_xpStyle.IsThemeActive() && g_xpStyle.IsAppThemed())// && (SendMessage(0x0129, 0, 0) & 0x4))
 			hTheme = g_xpStyle.OpenThemeData (m_hWnd, L"TOOLBAR");
 
 		CDC *pDC = CDC::FromHandle(pNMCD->nmcd.hdc);
@@ -101,7 +103,14 @@ void CToolBarEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 		CRect contentRect(pNMCD->nmcd.rc); 
 		int stateId = TS_NORMAL;
 
-		if (hTheme) {
+		if (dark) {
+			UINT st = pNMCD->nmcd.uItemState;
+			COLORREF bg = RGB(0x2b, 0x2d, 0x31);
+			if (st & (CDIS_SELECTED | CDIS_CHECKED)) bg = RGB(0x44, 0x47, 0x50);
+			else if (st & CDIS_HOT) bg = RGB(0x36, 0x38, 0x40);
+			pDC->FillSolidRect(&pNMCD->nmcd.rc, bg);
+		}
+		else if (hTheme) {
 
 			if (pNMCD->nmcd.uItemState & CDIS_DISABLED)
 				stateId = TS_DISABLED;
@@ -226,7 +235,7 @@ void CToolBarEx::OnNMCustomdraw(NMHDR *pNMHDR, LRESULT *pResult)
 					T2CW(text), text.GetLength(), textFlag, 0, &contentRect);
 			}
 			else {
-				pDC->SetTextColor(::GetSysColor(COLOR_BTNTEXT));
+				pDC->SetTextColor(dark ? RGB(0xe8, 0xe8, 0xf0) : ::GetSysColor(COLOR_BTNTEXT));
 				pDC->SetBkColor(::GetSysColor(COLOR_BTNFACE));
 				pDC->DrawText(text, -1, &contentRect, textFlag);
 			}

@@ -1098,9 +1098,53 @@ BEGIN_MESSAGE_MAP(CMyStatusBar, CStatusBar)
    ON_WM_RBUTTONDOWN()
    //}}AFX_MSG_MAP
    ON_WM_LBUTTONUP()
+   ON_WM_PAINT()
+   ON_WM_ERASEBKGND()
    ON_WM_RBUTTONUP()
    ON_WM_MBUTTONUP()
 END_MESSAGE_MAP()
+
+BOOL CMyStatusBar::OnEraseBkgnd(CDC* pDC)
+{
+	if (!KmIsDarkTheme())
+		return CStatusBar::OnEraseBkgnd(pDC);
+	return TRUE;
+}
+
+void CMyStatusBar::OnPaint()
+{
+	if (!KmIsDarkTheme()) {
+		Default();
+		return;
+	}
+
+	CPaintDC dc(this);
+	CRect client;
+	GetClientRect(&client);
+	dc.FillSolidRect(&client, RGB(0x2b, 0x2d, 0x31));
+	dc.FillSolidRect(client.left, client.top, client.Width(), 1, RGB(0x55, 0x58, 0x63));
+
+	dc.SetBkMode(TRANSPARENT);
+	dc.SetTextColor(RGB(0xe8, 0xe8, 0xf0));
+	CFont* oldFont = dc.SelectObject(GetFont());
+
+	int count = GetCount();
+	for (int i = 0; i < count; i++) {
+		if (i == 1) continue; // progress bar is its own child window
+		CRect r;
+		GetItemRect(i, &r);
+		if (i == 0) {
+			r.left += 4;
+			dc.DrawText(GetPaneText(0), -1, &r, DT_LEFT | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS | DT_NOPREFIX);
+		}
+		else if (i - 2 < arrIcons.GetSize() && arrIcons[i - 2].hIcon) {
+			int w = 16, h = 16;
+			::DrawIconEx(dc.m_hDC, r.left + (r.Width() - w) / 2, r.top + (r.Height() - h) / 2,
+				arrIcons[i - 2].hIcon, w, h, 0, NULL, DI_NORMAL);
+		}
+	}
+	dc.SelectObject(oldFont);
+}
 
 void CMyStatusBar::GetItemRect(UINT idx, LPRECT r)
 {

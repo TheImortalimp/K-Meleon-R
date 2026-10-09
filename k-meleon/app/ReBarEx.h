@@ -68,6 +68,7 @@ protected:
 	afx_msg void OnNcCalcSize(BOOL bCalcValidRects, NCCALCSIZE_PARAMS* lpncsp);
 	afx_msg LRESULT OnSizeParent(WPARAM, LPARAM);
 	afx_msg void OnNcPaint();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	void EraseNonClient();
 	DECLARE_MESSAGE_MAP()
 };

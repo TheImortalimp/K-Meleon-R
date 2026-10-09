@@ -374,6 +374,20 @@ void CSideBar::OnPaint()
 	CRect rect;
 	GetClientRect(rect);
 
+	if (KmIsDarkTheme()) {
+		CRect all;
+		GetClientRect(all);
+		dc.FillSolidRect(all, RGB(0x2b, 0x2d, 0x31));
+		CRect bar(all);
+		bar.left = bar.right - m_wSplitter;
+		dc.FillSolidRect(bar, RGB(0x1c, 0x1d, 0x22));
+		if (m_wBorder) {
+			all.right -= m_wSplitter;
+			dc.Draw3dRect(all, RGB(0x55, 0x58, 0x63), RGB(0x55, 0x58, 0x63));
+		}
+		return;
+	}
+
 	// Draw an possible border
 	if (m_wBorder)
 	{
