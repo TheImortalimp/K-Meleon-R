@@ -39,7 +39,7 @@ index 4d961816f..074fe2c12 100644
  
  nsXPConnect* nsXPConnect::gSelf = nullptr;
  bool         nsXPConnect::gOnceAliveNowDead = false;
-@@ -1014,6 +1014,19 @@ nsXPConnect::DebugPrintJSStack(bool showArgs,
+@@ -1014,6 +1014,20 @@ nsXPConnect::DebugPrintJSStack(bool showArgs,
      return nullptr;
  }
  
