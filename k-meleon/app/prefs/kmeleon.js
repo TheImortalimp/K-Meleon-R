@@ -33,18 +33,18 @@ pref("browser.sessionstore.restore_on_demand", true);
 // Plugins
 
 pref("kmeleon.plugins.bmpmenu.load", true);
-pref("kmeleon.plugins.fullscreen.load", true);
+pref("kmeleon.plugins.fullscreen.load", false);
 pref("kmeleon.plugins.history.load", false);
 pref("kmeleon.plugins.jsbridge.load", true);
 pref("kmeleon.plugins.rebarmenu.load", true);
-pref("kmeleon.plugins.sessions.load", true);
+pref("kmeleon.plugins.sessions.load", false);
 pref("kmeleon.plugins.toolbars.load", true);
 pref("kmeleon.plugins.update.load", true);
 pref("kmeleon.plugins.crashrpt.load", true);
 pref("kmeleon.plugins.login.load", true);
 pref("kmeleon.plugins.spellcheck.load", true);
 
-pref("kmeleon.plugins.bookmarks.load", true);
+pref("kmeleon.plugins.bookmarks.load", false);
 pref("kmeleon.plugins.bookmarks.chevron", true);
 pref("kmeleon.plugins.bookmarks.menuAutoDetect", true);
 pref("kmeleon.plugins.bookmarks.openurl", "ID_OPEN_LINK");
@@ -74,11 +74,11 @@ pref("kmeleon.plugins.gestures.SDText", "ID_NAV_SEARCH");
 
 pref("kmeleon.plugins.layers.load", false);
 
-pref("kmeleon.plugins.macros.load", true);
+pref("kmeleon.plugins.macros.load", false);
 pref("kmeleon.plugins.macros.search.locked", true);
 pref("kmeleon.plugins.macros.selected.openurl", "ID_OPEN_LINK");
 
-pref("kmeleon.plugins.privacy.load", true);
+pref("kmeleon.plugins.privacy.load", false);
 pref("kmeleon.plugins.privacy.clearCache", 0);
 pref("kmeleon.plugins.privacy.clearCookies", 0);
 pref("kmeleon.plugins.privacy.clearHistory", 0);

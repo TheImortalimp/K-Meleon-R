@@ -821,7 +821,7 @@ void LoadBM(const TCHAR *file)
    if (bmFile){
       long bmFileSize = FileSize(bmFile);
       if (bmFileSize) {
-         char *bmFileBuffer = new char[bmFileSize];
+         char *bmFileBuffer = new char[bmFileSize + 1];
          if (bmFileBuffer){
             size_t s = fread(bmFileBuffer, sizeof(char), bmFileSize, bmFile);
             bmFileBuffer[s] = 0;
