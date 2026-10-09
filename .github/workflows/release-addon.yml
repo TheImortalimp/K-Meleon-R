@@ -1,5 +1,8 @@
 name: release-addon
 on:
+  push:
+    branches: [palemoon-addon]
+    paths: ['.github/workflows/release-addon.yml']
   workflow_dispatch:
     inputs:
       tag:
@@ -40,4 +43,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload "${{ inputs.tag }}" pm-addon/installer/K-Meleon-R-r6-PaleMoon-setup.exe K-Meleon-R-r6-PaleMoon-addon.zip --clobber
+          gh release upload "v76.5.5-r6" pm-addon/installer/K-Meleon-R-r6-PaleMoon-setup.exe K-Meleon-R-r6-PaleMoon-addon.zip --clobber
