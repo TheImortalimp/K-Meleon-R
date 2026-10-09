@@ -27,6 +27,70 @@ const BABEL_PLUGINS = [
   "proposal-async-generator-functions", "transform-async-to-generator"
 ];
 
+// Minimal System.register loader that runs in the page. It executes ES
+// modules after they were converted to System.register format.
+function loaderMain(g) {
+  if (g.System) return;
+  var reg = {}, pending = null;
+  function resolve(s, base) {
+    try { return new URL(s, base || document.baseURI).href; } catch (e) { return s; }
+  }
+  function instantiate(url, r, p) {
+    var deps = p[0], mod;
+    function exp(n, v) {
+      if (typeof n == "object") { for (var k in n) r.ns[k] = n[k]; }
+      else r.ns[n] = v;
+      for (var i = 0; i < r.importers.length; i++) r.importers[i](r.ns);
+      return v;
+    }
+    mod = p[1](exp, {
+      id: url,
+      meta: { url: url },
+      "import": function (s) { return load(resolve(s, url)); }
+    });
+    return Promise.all(deps.map(function (d, i) {
+      var du = resolve(d, url);
+      return load(du).then(function () {
+        var dr = reg[du];
+        dr.importers.push(mod.setters[i]);
+        mod.setters[i](dr.ns);
+      });
+    })).then(function () {
+      return mod.execute && mod.execute();
+    }).then(function () { return r.ns; });
+  }
+  function load(url) {
+    var r = reg[url];
+    if (r) return r.p;
+    r = reg[url] = { ns: {}, importers: [], p: null };
+    r.p = new Promise(function (ok, fail) {
+      var sc = document.createElement("script");
+      sc.async = true;
+      if (g.__kmNonce) sc.setAttribute("nonce", g.__kmNonce);
+      sc.onload = function () {
+        var p = pending; pending = null;
+        if (!p) { ok(r.ns); return; }
+        instantiate(url, r, p).then(ok, function (e) { setTimeout(function () { throw e; }); fail(e); });
+      };
+      sc.onerror = function () { fail(new Error("Failed to load module " + url)); };
+      sc.src = url;
+      (document.head || document.documentElement).appendChild(sc);
+    });
+    return r.p;
+  }
+  g.System = {
+    register: function (d, f) { pending = [d, f]; },
+    "import": function (s, base) { return load(resolve(s, base)); },
+    runInline: function (id) {
+      var p = pending; pending = null;
+      var r = reg[id] = { ns: {}, importers: [], p: null };
+      r.p = instantiate(id, r, p);
+      return r.p;
+    }
+  };
+}
+const LOADER = "(" + loaderMain.toString() + ")(window);";
+
 let gSandbox = null;
 let gSandboxFailed = false;
 let gCacheDir = null;
@@ -74,9 +138,10 @@ function getBabelSandbox() {
     Services.scriptloader.loadSubScript(Services.io.newFileURI(file).spec, sb, "UTF-8");
     Cu.evalInSandbox(
       "var __kmPlugins = " + JSON.stringify(BABEL_PLUGINS) + ";" +
-      "function __kmTransform(src) {" +
-      "  return Babel.transform(src, {plugins: __kmPlugins, compact: false, comments: false," +
-      "    sourceType: 'script', parserOpts: {allowReturnOutsideFunction: true}}).code;" +
+      "function __kmTransform(src, mod) {" +
+      "  return Babel.transform(src, {plugins: mod ? __kmPlugins.concat(['transform-modules-systemjs']) : __kmPlugins," +
+      "    compact: false, comments: false," +
+      "    sourceType: mod ? 'module' : 'script', parserOpts: {allowReturnOutsideFunction: !mod}}).code;" +
       "}" +
       "function __kmParses(src) { try { new Function(src); return true; } catch (e) { return false; } }",
       sb);
@@ -146,7 +211,19 @@ function compat(src, label) {
 
   let t0 = Date.now();
   try {
-    let out = sb.__kmTransform(src);
+    let out;
+    try {
+      out = sb.__kmTransform(src, false);
+    } catch (e) {
+      if (!/import|export|sourceType/.test(String(e))) throw e;
+      out = LOADER + sb.__kmTransform(src, true);
+    }
+    if (/\bimport\s*\(/.test(out) && !/^\(function loaderMain/.test(out)) {
+      let fn = "__kmI" + key.slice(0, 8);
+      let base = /#inline$/.test(label) ? "document.baseURI" : JSON.stringify(label.replace(/#inline$/, ""));
+      out = LOADER + "var " + fn + "=function(s){return System.import(s," + base + ")};" +
+            out.replace(/\bimport\s*\(/g, fn + "(");
+    }
     log("converted " + label + " " + src.length + " -> " + out.length + " in " + (Date.now() - t0) + "ms");
     writeCache(key, out);
     return out;
@@ -157,15 +234,48 @@ function compat(src, label) {
 }
 
 const INLINE_SCRIPT = /(<script\b)([^>]*)(>)([\s\S]*?)(<\/script\s*>)/gi;
+const HEAD_OPEN = /<head\b[^>]*>/i;
 
 function compatHtml(html, label) {
-  return html.replace(INLINE_SCRIPT, function (m, open, attrs, gt, body, close) {
-    if (/\bsrc\s*=/i.test(attrs) || !body.trim()) return m;
+  let useModules = !/<script\b[^>]*\bnomodule\b/i.test(html);
+  let nonce = null, needLoader = false;
+  let out = html.replace(INLINE_SCRIPT, function (m, open, attrs, gt, body, close) {
     let t = /\btype\s*=\s*["']?([^"'\s>]*)/i.exec(attrs);
-    if (t && !/^(text|application)\/(x-)?(java|ecma)script$|^$/i.test(t[1])) return m;
-    let out = compat(body, label + "#inline");
-    return out === body ? m : open + attrs + gt + out + close;
+    let type = t ? t[1] : "";
+    let n = /\bnonce\s*=\s*["']?([^"'\s>]*)/i.exec(attrs);
+    if (/^module$/i.test(type)) {
+      if (!useModules) return m;
+      if (n && !nonce) nonce = n[1];
+      let s = /\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i.exec(attrs);
+      let nattr = n ? ' nonce="' + n[1] + '"' : "";
+      needLoader = true;
+      if (s) {
+        let url = (s[1] || s[2] || s[3]).replace(/&amp;/g, "&");
+        return "<script" + nattr + ">System.import(" + JSON.stringify(url) + ").catch(function(e){setTimeout(function(){throw e})});" + close;
+      }
+      if (!body.trim()) return m;
+      let sb = getBabelSandbox();
+      if (!sb) return m;
+      try {
+        return "<script" + nattr + ">" + sb.__kmTransform(body, true) + "\nSystem.runInline(document.baseURI+\"#m" +
+               sha1Hex(body).slice(0, 8) + "\");" + close;
+      } catch (e) {
+        log("inline module failed " + label + ": " + String(e).slice(0, 200));
+        return m;
+      }
+    }
+    if (/\bsrc\s*=/i.test(attrs) || !body.trim()) return m;
+    if (!/^(text|application)\/(x-)?(java|ecma)script$|^$/i.test(type)) return m;
+    let res = compat(body, label + "#inline");
+    return res === body ? m : open + attrs + gt + res + close;
   });
+  if (needLoader) {
+    let tag = "<script" + (nonce ? ' nonce="' + nonce + '"' : "") + ">" +
+              (nonce ? "window.__kmNonce=" + JSON.stringify(nonce) + ";" : "") + LOADER + "</script>";
+    let h = HEAD_OPEN.exec(out);
+    out = h ? out.slice(0, h.index + h[0].length) + tag + out.slice(h.index + h[0].length) : tag + out;
+  }
+  return out;
 }
 
 function TeeListener(orig, kind, label) {
@@ -266,7 +376,7 @@ kmJsCompat.prototype = {
       let enc = /charset=([^;\s]+)/i.exec(type);
       if (enc && !/^utf-?8$/i.test(enc[1])) return;
       let tc = ch.QueryInterface(Ci.nsITraceableChannel);
-      let tee = new TeeListener(null, kind, ch.URI.spec.slice(0, 120));
+      let tee = new TeeListener(null, kind, ch.URI.spec);
       tee.orig = tc.setNewListener(tee);
     } catch (e) {
       log("hook error: " + e);
