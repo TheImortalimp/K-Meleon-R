@@ -244,6 +244,9 @@ jobs:
           }
           $app = Get-ChildItem $bin -File -Filter '*meleon*.exe' | Select-Object -First 1
           if (-not $app) { throw "K-Meleon executable was not produced in $bin" }
+          $appIni = Get-Content (Join-Path $bin 'application.ini') -Raw
+          if ($appIni -notmatch '(?m)^Version=76\.5\.5\s*$') { throw 'application.ini has an invalid K-Meleon version' }
+          if ($app.VersionInfo.ProductMajorPart -eq 0 -and $app.VersionInfo.ProductMinorPart -eq 0 -and $app.VersionInfo.ProductBuildPart -eq 0) { throw 'K-Meleon executable has an invalid product version' }
           foreach ($file in 'xul.dll', 'mozglue.dll', 'mozjs.dll') {
             if (-not (Test-Path (Join-Path $bin $file))) { throw "Missing runtime file: $file" }
           }

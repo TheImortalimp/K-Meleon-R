@@ -116,6 +116,7 @@ protected:
 		aWebBrowser->GetContentDOMWindow(getter_AddRefs(domWin));
 		NS_ENSURE_TRUE (domWin, NS_ERROR_FAILURE);
 		nsCOMPtr<nsPIDOMWindow> pidomWin = do_QueryInterface(domWin);
+		NS_ENSURE_TRUE(pidomWin, NS_ERROR_FAILURE);
 
 		return pidomWin->GetWindowRoot(aTarget);
 	}
