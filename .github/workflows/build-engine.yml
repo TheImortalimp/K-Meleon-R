@@ -131,6 +131,7 @@ jobs:
           cat > goanna/mozconfig <<'EOF'
           mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-x64
           ac_add_options --enable-application=kmeleon
+          ac_add_options --enable-shared-js
           ac_add_options --target=x86_64-pc-mingw32
           ac_add_options --host=x86_64-pc-mingw32
           ac_add_options --enable-optimize
@@ -243,7 +244,7 @@ jobs:
           }
           $app = Get-ChildItem $bin -File -Filter '*meleon*.exe' | Select-Object -First 1
           if (-not $app) { throw "K-Meleon executable was not produced in $bin" }
-          foreach ($file in 'xul.dll', 'mozglue.dll') {
+          foreach ($file in 'xul.dll', 'mozglue.dll', 'mozjs.dll') {
             if (-not (Test-Path (Join-Path $bin $file))) { throw "Missing runtime file: $file" }
           }
           Write-Output "Verified $($app.FullName)"

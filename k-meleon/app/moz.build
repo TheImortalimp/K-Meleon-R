@@ -6,6 +6,8 @@
 
 Program(CONFIG['MOZ_APP_NAME'])
 USE_LIBS += [
+    'js',
+    'nspr',
     'xpcomglue_s',
 ]
 

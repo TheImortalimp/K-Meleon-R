@@ -95,6 +95,21 @@ NS_IMETHODIMP nsGenericFactory::GetInterfaces(PRUint32 *countp,
     return NS_OK;
 }
 
+NS_IMETHODIMP nsGenericFactory::GetHelperForLanguage(PRUint32 aLanguage,
+                                                      nsISupports **aHelper)
+{
+    NS_ENSURE_ARG_POINTER(aHelper);
+    *aHelper = nullptr;
+    return NS_OK;
+}
+
+NS_IMETHODIMP nsGenericFactory::GetImplementationLanguage(PRUint32 *aLanguage)
+{
+    NS_ENSURE_ARG_POINTER(aLanguage);
+    *aLanguage = nsIProgrammingLanguage::CPLUSPLUS;
+    return NS_OK;
+}
+
 NS_IMETHODIMP nsGenericFactory::GetContractID(char **aContractID)
 {
     if (mInfo->mContractID) {

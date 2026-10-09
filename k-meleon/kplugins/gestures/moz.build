@@ -13,6 +13,7 @@ DEFINES['_UNICODE'] = True
 
 USE_LIBS += [
   'mozalloc',
+  'nspr',
   'xpcomglue_s',
   'xul',
 ]

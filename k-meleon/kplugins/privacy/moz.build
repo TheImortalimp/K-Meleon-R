@@ -4,6 +4,7 @@
 SharedLibrary('privacy')
 
 SOURCES += [
+  '../../shared/Utils.cpp',
   'privacy.cpp',
 ]
 
@@ -15,6 +16,7 @@ DISABLE_STL_WRAPPING = True
 
 USE_LIBS += [
   'mozalloc',
+  'nspr',
   'xpcomglue_s',
   'xul',
 ]

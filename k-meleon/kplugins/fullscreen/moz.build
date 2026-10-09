@@ -21,6 +21,7 @@ OS_LIBS += [
 
 USE_LIBS += [
   'mozalloc',
+  'nspr',
   'xpcomglue_s',
   'xul',
 ]

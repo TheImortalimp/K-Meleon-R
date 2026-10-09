@@ -23,6 +23,8 @@ DISABLE_STL_WRAPPING = True
 
 USE_LIBS += [
   'mozalloc',
+  'js',
+  'nspr',
   'xpcomglue_s',
   'xul',
 ]
