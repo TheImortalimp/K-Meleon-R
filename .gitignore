@@ -2,3 +2,6 @@
 
 
 *.xpi
+
+kmr-shell/bin/
+kmr-shell/obj/

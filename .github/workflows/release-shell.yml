@@ -1,0 +1,43 @@
+name: release-shell
+on:
+  push:
+    branches: [palemoon-addon]
+    paths: ['kmr-shell/**', '.github/workflows/release-shell.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Publish
+        shell: pwsh
+        run: |
+          dotnet publish kmr-shell/kmr-shell.csproj -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true `
+            -p:DebugType=None -o publish
+          git show origin/copilot/kmeleon-r-browser-build:NOTICE-K-Meleon-R.md | Set-Content publish/NOTICE-K-Meleon-R.md
+          Copy-Item kmr-shell/README.md publish/README.md
+          Get-ChildItem publish | Select Name, Length
+      - name: Installer
+        shell: pwsh
+        run: |
+          choco install nsis -y --no-progress | Out-Null
+          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" /DVERSION=r7 /DSRC="$PWD\publish" kmr-shell/setup.nsi
+          if ($LASTEXITCODE) { exit 1 }
+      - name: Zip
+        shell: pwsh
+        run: |
+          Compress-Archive publish/* K-Meleon-R-r7-x64-portable.zip
+          $s = Get-ChildItem -Recurse -Filter K-Meleon-R-r7-x64-setup.exe | Select -First 1
+          if ($s.DirectoryName -ne $PWD.Path) { Move-Item $s.FullName . -Force }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7
+          path: |
+            K-Meleon-R-r7-x64-portable.zip
+            K-Meleon-R-r7-x64-setup.exe
