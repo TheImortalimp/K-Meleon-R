@@ -1,7 +1,7 @@
 name: release-shell
 on:
   push:
-    branches: [palemoon-addon]
+    branches: [kmeleon-r]
     paths: ['kmr-shell/**', '.github/workflows/release-shell.yml']
   workflow_dispatch:
 permissions:
