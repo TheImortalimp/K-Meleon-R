@@ -1,6 +1,7 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Win32;
+using System.Text.RegularExpressions;
 
 namespace KMeleonR;
 
@@ -83,6 +84,8 @@ internal static class CursorGuard
             using var policy = Registry.CurrentUser.OpenSubKey(@"Software\Policies\Microsoft\Windows\Personalization", true);
             if (policy != null && !Equals(policy.GetValue("NoChangingMousePointers"), 1))
                 policy.SetValue("NoChangingMousePointers", 1, RegistryValueKind.DWord);
+            if (policy != null && !Equals(policy.GetValue("NoChangingSoundScheme"), 1))
+                policy.SetValue("NoChangingSoundScheme", 1, RegistryValueKind.DWord);
         }
         catch { }
         return changed;
@@ -139,6 +142,51 @@ internal static class CursorGuard
     }
 
     public static Task<string> AttachAsync(CoreWebView2 core) => core.AddScriptToExecuteOnDocumentCreatedAsync(PageScript);
+
+    // Theme/pointer packages are the delivery vehicle for a themed-cursor takeover, so they are never downloaded or opened.
+    private static readonly Regex ThemeFile = new(@"\.(theme|themepack|deskthemepack|cur|ani)(?=$|[\s""';])", RegexOptions.IgnoreCase);
+
+    public static bool IsBlockedThemeFile(string name) =>
+        !string.IsNullOrEmpty(name) && ThemeFile.IsMatch(name.TrimEnd(' ', '.'));   // Windows ignores trailing dots and spaces
+
+    public static bool IsBlockedThemeUri(string uri)
+    {
+        try { return IsBlockedThemeFile(Uri.UnescapeDataString(new Uri(uri).AbsolutePath)); }
+        catch { return false; }
+    }
+
+    // Only web links may leave the app; this stops theme files, ms-settings: and other shell handlers being launched.
+    public static bool IsSafeExternalUri(string uri)
+    {
+        try
+        {
+            var u = new Uri(uri);
+            return (u.Scheme == Uri.UriSchemeHttp || u.Scheme == Uri.UriSchemeHttps) && !IsBlockedThemeUri(uri);
+        }
+        catch { return false; }
+    }
+
+    public static void HardenBrowser(CoreWebView2 core)
+    {
+        core.DownloadStarting += (_, e) =>
+        {
+            var op = e.DownloadOperation;
+            if (IsBlockedThemeFile(e.ResultFilePath) || IsBlockedThemeUri(op.Uri) || IsBlockedThemeFile(op.ContentDisposition))
+            {
+                e.Cancel = true;
+                e.Handled = true;
+                Log("blocked theme/pointer download: " + op.Uri);
+            }
+        };
+        core.NavigationStarting += (_, e) =>
+        {
+            if (IsBlockedThemeUri(e.Uri) || e.Uri.StartsWith("ms-settings:", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Cancel = true;
+                Log("blocked navigation: " + e.Uri);
+            }
+        };
+    }
 
     private const string PageScript = """
 (()=>{

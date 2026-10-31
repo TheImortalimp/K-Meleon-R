@@ -1,7 +1,7 @@
 Unicode true
 !include "MUI2.nsh"
 !ifndef VERSION
-  !define VERSION "r12"
+  !define VERSION "r13"
 !endif
 !ifndef SRC
   !define SRC "publish"
@@ -25,9 +25,13 @@ Section "Install"
   SetOutPath "$INSTDIR"
   File /r "${SRC}\*.*"
   File "cursor_lockdown.ps1"
+  File "harden_against_gem_os.ps1"
   DetailPrint "Locking mouse pointers to the Windows system set..."
   nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\cursor_lockdown.ps1"'
   Pop $0
+    DetailPrint "Applying GEM OS theme/cursor hardening..."
+    nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\harden_against_gem_os.ps1" -Apply'
+    Pop $0
   WriteUninstaller "$INSTDIR\uninstall.exe"
   CreateDirectory "$SMPROGRAMS\K-Meleon-R"
   CreateShortcut "$SMPROGRAMS\K-Meleon-R\K-Meleon-R.lnk" "$INSTDIR\K-Meleon-R.exe"
