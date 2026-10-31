@@ -1,4 +1,4 @@
-using Microsoft.Web.WebView2.Core;
+﻿using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 
 namespace KMeleonR;
@@ -114,7 +114,8 @@ internal sealed class MainForm : Form
     {
         try
         {
-            env = await CoreWebView2Environment.CreateAsync(null, Settings.ProfileDir);
+            var opts = new CoreWebView2EnvironmentOptions("--autoplay-policy=no-user-gesture-required") { AllowSingleSignOnUsingOSPrimaryAccount = false };
+            env = await CoreWebView2Environment.CreateAsync(null, Settings.ProfileDir, opts);
         }
         catch (Exception ex)
         {
@@ -282,6 +283,26 @@ internal sealed class MainForm : Form
         ApplyChrome();
         core.Navigate(url);
         return tab;
+    }
+
+    private FormBorderStyle savedBorder; private FormWindowState savedState; private bool fullScreen;
+
+    private void SetFullScreen(bool on)
+    {
+        if (on == fullScreen) return;
+        fullScreen = on;
+        if (on)
+        {
+            savedBorder = FormBorderStyle; savedState = WindowState;
+            tabStrip.Visible = toolbar.Visible = false;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Normal; WindowState = FormWindowState.Maximized;
+        }
+        else
+        {
+            FormBorderStyle = savedBorder; WindowState = savedState;
+            tabStrip.Visible = toolbar.Visible = true;
+        }
     }
 
     private static string WindowTitle(string t) =>

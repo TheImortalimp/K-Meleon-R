@@ -1,4 +1,4 @@
-# K-Meleon-R r9
+﻿# K-Meleon-R r10
 
 A small, fast, standalone K-Meleon-R browser: Opera GX-style speed dial, tabs,
 Dark theme plus three light themes (Light, Sand, Sky) and System, and Bing, Google, Copilot and Gemini hooks. It
@@ -22,6 +22,9 @@ Credits: River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 
 ## Changelog
 
+### r10 (8.2.0)
+- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), Basic tracking prevention, true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
+- NOTICE now carries the licence wording published at imortalimp.nl.
 ### r9 (8.1.0)
 - New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).
 - Light mode reworked into three themes: Light, Sand and Sky, plus System. The Theme button cycles them.
