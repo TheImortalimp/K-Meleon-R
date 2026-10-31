@@ -1,50 +1,105 @@
-# K-Meleon-R
+# K-Meleon-R r13 (8.5.0)
 
-A small, fast, standalone Windows browser in the spirit of K-Meleon, with an
-Opera GX-style speed-dial start page, tabs, a Dark / Light / Sand / Sky / System theme, Opera and Opera GX quick dials, and
-Bing, Google, Copilot and Gemini hooks. It renders with the Microsoft Edge
-WebView2 runtime that ships with Windows 10/11.
+**A small standalone Windows browser with a GX-style start page, tabs,
+five synchronized themes and Microsoft Edge WebView2 rendering.**
 
-Download the installer or portable zip from the
-[Releases](https://github.com/TheImortalimp/K-Meleon-R/releases) page (latest: r12).
-The code is in [kmr-shell/](kmr-shell). See [kmr-shell/README.md](kmr-shell/README.md)
-for features and shortcuts, and [NOTICE-K-Meleon-R.md](NOTICE-K-Meleon-R.md) for credits.
+## Download and install
 
-The older Gecko-based builds (r1 to r5) and the original K-Meleon sources are kept
-in this repository for reference.
+[Download the r13 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.5.0-r13/K-Meleon-R-r13-x64-setup.exe)
+| [Release notes](RELEASE_NOTES_r13.md)
+| [About](ABOUT.md)
+
+- Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
+- The installer defaults to `%LOCALAPPDATA%\Programs\K-Meleon-R`.
+- **Approve UAC elevation:** installation applies Windows pointer/theme/sound
+  policy hardening, including local profiles. Review [protection boundaries](ABOUT.md#protection-boundaries).
+- The installer is unsigned and may trigger SmartScreen. Verify its hash and
+  source before deciding whether to run it; a hash is not a safety certificate.
+- r13 currently provides an installer only; earlier releases may have portable
+  archives. Do not assume an older portable download contains r13 fixes.
+
+Installer SHA-256:
+
+```text
+5CD14BA6F6D297B9E2D492DF69D04477699A8A46F581FE5AD188DA8F5EFE9EFB
+```
+
+## What's new in r13
+
+- Blocks theme/pointer package downloads and navigation for `.theme`,
+  `.themepack`, `.deskthemepack`, `.cur` and `.ani`, including trailing-dot/space
+  variants; blocks `ms-settings:` navigation.
+- Adds `NoChangingSoundScheme` alongside `NoChangingMousePointers`.
+- Ships and runs `harden_against_gem_os.ps1 -Apply`; quarantine remains opt-in.
+- Retains r12 system-pointer guards and process hardening, plus the r11
+  native-host bridge fix used by embedded-player web apps.
+
+These are targeted defenses against theme/cursor takeover, not general
+anti-malware protection. Administrators can undo policies. The machine-policy
+apply path was not validated end-to-end on a real machine.
+
+## Browser features
+
+- GX-style speed dial: MSN, Google, YouTube, Bandcamp, Spotify, Opera and
+  Opera GX, plus editable custom tiles and thumbnails.
+- Dark, Light, Sand, Sky and System themes, synchronized across start page,
+  tabs, toolbar and WebView2 background.
+- Address/search bar with Bing, Google and Copilot Search providers.
+- **Ask Copilot** opens Copilot Search; **Ask Gemini** copies the text to the
+  clipboard and opens Gemini for pasting. These are external web services.
+- Tabs, video fullscreen, browser zoom, autofill, password saving, developer
+  tools and renderer-crash/unresponsive reload handling.
+- Ordinary web pages do not receive the native host bridge; the local start
+  page retains it for theme synchronization.
+
+Website availability, sign-in, codecs and runtime behavior can change.
+Compatibility is not guaranteed for every site.
+
+## Shortcuts and settings
+
+| Shortcut | Action |
+|----------|--------|
+| Ctrl+T / Ctrl+W | New tab / close tab |
+| Ctrl+Tab / Ctrl+Shift+Tab | Next / previous tab |
+| Ctrl+L / F6 | Focus address bar |
+| F5 | Reload |
+| Alt+Home | Start page |
+| F12 | WebView2 developer tools |
+
+Settings and browser profile live under `%LOCALAPPDATA%\K-Meleon-R`.
+The cursor runtime log is `cursor-guard.log` in that folder.
+Optional `KMR_DEBUG_PORT` enables local Chromium remote debugging; leave it
+unset for normal use.
+
+Tracking prevention and reputation checking are disabled in the current host.
+This favors embedded-player compatibility but is not a privacy-hardened
+configuration. Clipboard-read requests are automatically allowed.
+See [About](ABOUT.md) for these boundaries.
+
+## Source and build
+
+The current implementation is [kmr-shell/](kmr-shell/), a .NET 8
+WinForms/WebView2 shell; it is not the old Gecko/Goanna C++ browser.
+See [shell documentation](kmr-shell/README.md) for build commands and policy logs.
+The older r1-r5 builds and original K-Meleon sources remain for reference.
+
+This update refreshes r13 documentation and GitHub About only. It does not
+replace the existing r13 installer or claim new runtime testing.
+
+## Version history
+
+| Release | Changes |
+|---------|---------|
+| r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
+| r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |
+| r11 / 8.3.0 | Hide native host bridge from ordinary pages; embedded-player compatibility; optional debug port |
+| r10 / 8.2.0 | WebView2 autoplay/fullscreen, renderer recovery, browser settings and updated attribution |
+| r9 / 8.1.0 | Opera/GX dials and synchronized Dark/Light/Sand/Sky/System themes |
+| r8 | Final release of the previous line |
+
+## Credits and license
 
 River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
-
-## Changelog
-
-### r12 (8.4.0)
-- System-cursor-only. Web pages can no longer replace the mouse pointer (CSS `cursor:url()`, inline styles, shadow DOM, JS style APIs); the Windows system pointers are always shown.
-- Launch guard: every pointer slot in `HKCU\Control Panel\Cursors` must be empty (built-in default) or a `.cur`/`.ani` under `%WINDIR%\Cursors`. Rogue theme cursors (e.g. a GEM-style set) are reset at launch and again on every change. Paths are normalised first (8.3 short names, `..`, UNC/device paths, alternate streams, symlinks and junctions are rejected).
-- Process hardening: legacy extension points (AppInit/global hook DLLs, legacy IMEs) and remote or low-integrity image loads are disabled.
-- Installer now runs elevated (a standard UAC prompt) and runs `cursor_lockdown.ps1` to lock theme and Settings pointer changes for all local profiles. Previous values are backed up under `%ProgramData%`.
-- Log: `%LOCALAPPDATA%\K-Meleon-R\cursor-guard.log`.
-### r11 (8.3.0)
-- Fixed web apps that detect a native WebView2 host: the AI WARP web edition could not play YouTube in K-Meleon-R. The host bridge is now hidden from ordinary web pages; only the start page keeps it for theme syncing. Verified: the YouTube player reports playing.
-- Tracking prevention is off so CDN scripts and embedded players can use storage.
-- Optional KMR_DEBUG_PORT environment variable enables remote debugging.
-
-### r10 (8.2.0)
-- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
-- NOTICE now carries the licence wording published at imortalimp.nl.
-### r9 (8.1.0)
-- New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).
-- Light mode reworked into three themes: Light, Sand and Sky, plus System. The Theme button cycles them.
-- Toolbar, tabs and start page now share one theme (synced both ways); the WebView2 background and colour scheme follow it.
-- Original SVG icons for the Opera tiles (not official logos).
-
-### r8
-Final release of the previous line.
-
-## Install note
-The installer is unsigned, so Windows SmartScreen may warn. Choose More info, then Run anyway. SHA-256 hashes are in each release's notes.
-
-## r13 hardening
-- **Theme/pointer package blocking:** the embedded WebView2 now cancels downloads and navigations of .theme, .themepack, .deskthemepack, .cur and .ani files (trailing dot/space tricks included) and refuses ms-settings: navigation. External links open only for http/https.
-- **Runtime policy:** the guard also sets NoChangingSoundScheme alongside NoChangingMousePointers.
-- **Installer:** ships and runs harden_against_gem_os.ps1 -Apply (see the GEM-OS repo). Quarantine of user files stays opt-in.
-- **Limits:** an administrator can undo the policies; installers are unsigned so SmartScreen warns (code signing is the real fix); a clean scan is not proof of safety. -Apply was not run end to end on a real machine.
+See [NOTICE-K-Meleon-R.md](NOTICE-K-Meleon-R.md) for attribution and the published
+license wording. K-Meleon, Goanna/Pale Moon, Babel and other third-party
+components retain their own licenses; the shell does not override them.
