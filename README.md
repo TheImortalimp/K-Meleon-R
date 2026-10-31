@@ -14,3 +14,17 @@ The older Gecko-based builds (r1 to r5) and the original K-Meleon sources are ke
 in this repository for reference.
 
 River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
+
+## Changelog
+
+### r9 (8.1.0)
+- New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).
+- Light mode reworked into three themes: Light, Sand and Sky, plus System. The Theme button cycles them.
+- Toolbar, tabs and start page now share one theme (synced both ways); the WebView2 background and colour scheme follow it.
+- Original SVG icons for the Opera tiles (not official logos).
+
+### r8
+Final release of the previous line.
+
+## Install note
+The installer is unsigned, so Windows SmartScreen may warn. Choose More info, then Run anyway. SHA-256 hashes are in each release's notes.
