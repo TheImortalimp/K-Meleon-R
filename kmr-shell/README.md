@@ -1,4 +1,4 @@
-﻿# K-Meleon-R r10
+﻿# K-Meleon-R r11
 
 A small, fast, standalone K-Meleon-R browser: Opera GX-style speed dial, tabs,
 Dark theme plus three light themes (Light, Sand, Sky) and System, and Bing, Google, Copilot and Gemini hooks. It
@@ -22,9 +22,13 @@ Credits: River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 
 ## Changelog
 
+### r11 (8.3.0)
+- Fixed web apps that detect a native WebView2 host: the AI WARP web edition could not play YouTube in K-Meleon-R. The host bridge is now hidden from ordinary web pages; only the start page keeps it for theme syncing. Verified: the YouTube player reports playing.
+- Tracking prevention is off so CDN scripts and embedded players can use storage.
+- Optional KMR_DEBUG_PORT environment variable enables remote debugging.
+
 ### r10 (8.2.0)
-- Fixed web apps that detect a native WebView2 host (the AI WARP web edition could not play YouTube in K-Meleon-R): the host bridge is now hidden from ordinary web pages.
-- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), tracking prevention off for embedded players, true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
+- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
 - NOTICE now carries the licence wording published at imortalimp.nl.
 ### r9 (8.1.0)
 - New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).

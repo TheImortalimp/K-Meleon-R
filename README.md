@@ -6,7 +6,7 @@ Bing, Google, Copilot and Gemini hooks. It renders with the Microsoft Edge
 WebView2 runtime that ships with Windows 10/11.
 
 Download the installer or portable zip from the
-[Releases](https://github.com/TheImortalimp/K-Meleon-R/releases) page (latest: r10).
+[Releases](https://github.com/TheImortalimp/K-Meleon-R/releases) page (latest: r11).
 The code is in [kmr-shell/](kmr-shell). See [kmr-shell/README.md](kmr-shell/README.md)
 for features and shortcuts, and [NOTICE-K-Meleon-R.md](NOTICE-K-Meleon-R.md) for credits.
 
@@ -17,9 +17,13 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 
 ## Changelog
 
+### r11 (8.3.0)
+- Fixed web apps that detect a native WebView2 host: the AI WARP web edition could not play YouTube in K-Meleon-R. The host bridge is now hidden from ordinary web pages; only the start page keeps it for theme syncing. Verified: the YouTube player reports playing.
+- Tracking prevention is off so CDN scripts and embedded players can use storage.
+- Optional KMR_DEBUG_PORT environment variable enables remote debugging.
+
 ### r10 (8.2.0)
-- Fixed web apps that detect a native WebView2 host (the AI WARP web edition could not play YouTube in K-Meleon-R): the host bridge is now hidden from ordinary web pages.
-- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), tracking prevention off for embedded players, true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
+- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
 - NOTICE now carries the licence wording published at imortalimp.nl.
 ### r9 (8.1.0)
 - New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).
