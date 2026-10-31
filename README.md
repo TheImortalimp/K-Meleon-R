@@ -1,4 +1,4 @@
-﻿# K-Meleon-R
+# K-Meleon-R
 
 A small, fast, standalone Windows browser in the spirit of K-Meleon, with an
 Opera GX-style speed-dial start page, tabs, a Dark / Light / Sand / Sky / System theme, Opera and Opera GX quick dials, and
@@ -6,7 +6,7 @@ Bing, Google, Copilot and Gemini hooks. It renders with the Microsoft Edge
 WebView2 runtime that ships with Windows 10/11.
 
 Download the installer or portable zip from the
-[Releases](https://github.com/TheImortalimp/K-Meleon-R/releases) page (latest: r11).
+[Releases](https://github.com/TheImortalimp/K-Meleon-R/releases) page (latest: r12).
 The code is in [kmr-shell/](kmr-shell). See [kmr-shell/README.md](kmr-shell/README.md)
 for features and shortcuts, and [NOTICE-K-Meleon-R.md](NOTICE-K-Meleon-R.md) for credits.
 
@@ -17,6 +17,12 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 
 ## Changelog
 
+### r12 (8.4.0)
+- System-cursor-only. Web pages can no longer replace the mouse pointer (CSS `cursor:url()`, inline styles, shadow DOM, JS style APIs); the Windows system pointers are always shown.
+- Launch guard: every pointer slot in `HKCU\Control Panel\Cursors` must be empty (built-in default) or a `.cur`/`.ani` under `%WINDIR%\Cursors`. Rogue theme cursors (e.g. a GEM-style set) are reset at launch and again on every change. Paths are normalised first (8.3 short names, `..`, UNC/device paths, alternate streams, symlinks and junctions are rejected).
+- Process hardening: legacy extension points (AppInit/global hook DLLs, legacy IMEs) and remote or low-integrity image loads are disabled.
+- Installer now runs elevated (a standard UAC prompt) and runs `cursor_lockdown.ps1` to lock theme and Settings pointer changes for all local profiles. Previous values are backed up under `%ProgramData%`.
+- Log: `%LOCALAPPDATA%\K-Meleon-R\cursor-guard.log`.
 ### r11 (8.3.0)
 - Fixed web apps that detect a native WebView2 host: the AI WARP web edition could not play YouTube in K-Meleon-R. The host bridge is now hidden from ordinary web pages; only the start page keeps it for theme syncing. Verified: the YouTube player reports playing.
 - Tracking prevention is off so CDN scripts and embedded players can use storage.

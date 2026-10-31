@@ -1,4 +1,4 @@
-﻿# K-Meleon-R r11
+# K-Meleon-R r11
 
 A small, fast, standalone K-Meleon-R browser: Opera GX-style speed dial, tabs,
 Dark theme plus three light themes (Light, Sand, Sky) and System, and Bing, Google, Copilot and Gemini hooks. It
@@ -41,3 +41,6 @@ Final release of the previous line.
 
 ## Install note
 The installer is unsigned, so Windows SmartScreen may warn. Choose More info, then Run anyway. SHA-256 hashes are in each release's notes.
+
+## System cursor only
+Web pages cannot change the mouse pointer. On launch and on every change, any pointer not empty or under %WINDIR%\Cursors is reset (see CursorGuard.cs). The installer runs elevated and applies cursor_lockdown.ps1 for all local profiles.

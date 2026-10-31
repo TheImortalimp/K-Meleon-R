@@ -1,14 +1,14 @@
 Unicode true
 !include "MUI2.nsh"
 !ifndef VERSION
-  !define VERSION "r7"
+  !define VERSION "r12"
 !endif
 !ifndef SRC
   !define SRC "publish"
 !endif
 Name "K-Meleon-R"
 OutFile "K-Meleon-R-${VERSION}-x64-setup.exe"
-RequestExecutionLevel user
+RequestExecutionLevel admin
 InstallDir "$LOCALAPPDATA\Programs\K-Meleon-R"
 InstallDirRegKey HKCU "Software\K-Meleon-R" "InstallDir"
 
@@ -24,6 +24,10 @@ InstallDirRegKey HKCU "Software\K-Meleon-R" "InstallDir"
 Section "Install"
   SetOutPath "$INSTDIR"
   File /r "${SRC}\*.*"
+  File "cursor_lockdown.ps1"
+  DetailPrint "Locking mouse pointers to the Windows system set..."
+  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\cursor_lockdown.ps1"'
+  Pop $0
   WriteUninstaller "$INSTDIR\uninstall.exe"
   CreateDirectory "$SMPROGRAMS\K-Meleon-R"
   CreateShortcut "$SMPROGRAMS\K-Meleon-R\K-Meleon-R.lnk" "$INSTDIR\K-Meleon-R.exe"

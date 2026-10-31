@@ -255,6 +255,7 @@ internal sealed class MainForm : Form
 
         await view.EnsureCoreWebView2Async(env);
         var core = view.CoreWebView2;
+        await CursorGuard.AttachAsync(core);
         core.SetVirtualHostNameToFolderMapping("kmr.start", Path.Combine(AppContext.BaseDirectory, "start"),
             CoreWebView2HostResourceAccessKind.Allow);
         core.Settings.AreDefaultContextMenusEnabled = true;

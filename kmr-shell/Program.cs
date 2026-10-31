@@ -7,7 +7,9 @@ internal static class Program
     [STAThread]
     private static void Main(string[] args)
     {
+        CursorGuard.HardenProcess();
         ApplicationConfiguration.Initialize();
+        CursorGuard.Start("K-Meleon-R");
         Application.Run(new MainForm(args.Length > 0 ? args[0] : null));
     }
 }
