@@ -129,12 +129,15 @@ function onSearchSubmit(aEvent)
 
 /* ---- K-Meleon-R speed dial ---- */
 const DIAL_PREF = "kmeleon.browser.speeddial2";
+const DIAL_OPERA_PREF = "kmeleon.browser.speeddial.opera";
 const DIAL_DEFAULTS = [
     { title: "MSN", url: "https://www.msn.com/en-gb" },
     { title: "Google", url: "https://www.google.com/" },
     { title: "YouTube", url: "https://www.youtube.com/" },
     { title: "Bandcamp", url: "https://bandcamp.com/" },
-    { title: "Spotify", url: "https://open.spotify.com/" }
+    { title: "Spotify", url: "https://open.spotify.com/" },
+    { title: "Opera", url: "https://www.opera.com/" },
+    { title: "Opera GX", url: "https://www.opera.com/gx" }
 ];
 const THUMB_SIZE = 128;
 let pendingImage = "";
@@ -143,9 +146,25 @@ let editIndex = -1;
 function loadDial() {
     try {
         let list = JSON.parse(Services.prefs.getCharPref(DIAL_PREF));
-        if (Array.isArray(list)) return list;
+        if (Array.isArray(list)) return migrateDial(list);
     } catch (ex) {}
+    try { Services.prefs.setCharPref(DIAL_OPERA_PREF, "1"); } catch (ex) {}
     return DIAL_DEFAULTS.slice();
+}
+
+// Existing speed dials get the Opera and Opera GX tiles once, after their own tiles.
+// Removing them afterwards sticks, because the flag is stored.
+function migrateDial(list) {
+    let done = false;
+    try { done = Services.prefs.getCharPref(DIAL_OPERA_PREF) == "1"; } catch (ex) {}
+    if (done) return list;
+    DIAL_DEFAULTS.slice(-2).forEach(function (entry) {
+        let have = list.some(function (e) { return e && String(e.url).replace(/\/$/, "") == entry.url.replace(/\/$/, ""); });
+        if (!have) list.push({ title: entry.title, url: entry.url });
+    });
+    saveDial(list);
+    try { Services.prefs.setCharPref(DIAL_OPERA_PREF, "1"); } catch (ex) {}
+    return list;
 }
 
 function saveDial(list) {
@@ -157,8 +176,9 @@ function isAllowedDialUrl(url) {
 }
 
 function iconClass(url) {
-    let host = "";
-    try { host = new URL(url).hostname; } catch (ex) {}
+    let host = "", path = "";
+    try { let u = new URL(url); host = u.hostname; path = u.pathname; } catch (ex) {}
+    if (/(^|\.)opera\.com$/i.test(host)) return /^\/gx(\/|$)/i.test(path) ? "icon-operagx" : "icon-opera";
     if (/wikipedia\.org$/i.test(host)) return "icon-wikipedia";
     if (/github\.com$/i.test(host)) return "icon-github";
     if (/(youtube\.com|youtu\.be)$/i.test(host)) return "icon-youtube";
@@ -352,9 +372,11 @@ window.addEventListener("load", function () {
 });
 
 
-// ---- Theme toggle: dark (default) / light / system ----
+// ---- Theme toggle: dark (default) / light / sand / sky / system ----
 var THEME_PREF = "kmeleon.display.theme";
 var THEME_EFFECTIVE = "kmeleon.theme.effective";
+var THEME_MODES = ["dark", "light", "sand", "sky", "system"];
+var THEME_LABELS = { dark: "Dark", light: "Light", sand: "Sand", sky: "Sky", system: "System" };
 var themeObserver = {
     observe: function () { applyTheme(); }
 };
@@ -362,7 +384,7 @@ var themeObserver = {
 function getThemeMode() {
     try {
         let m = Services.prefs.getCharPref(THEME_PREF);
-        if (m == "light" || m == "system") return m;
+        if (THEME_MODES.indexOf(m) >= 0) return m;
     } catch (e) {}
     return "dark";
 }
@@ -373,12 +395,17 @@ function applyTheme() {
     if (mode == "system") {
         try { eff = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; } catch (e) { eff = "dark"; }
     }
-    document.documentElement.setAttribute("data-theme", eff == "light" ? "light" : "dark");
+    document.documentElement.setAttribute("data-theme", eff);
     let btn = document.getElementById("themeToggle");
-    if (btn) {
-        btn.value = "Theme: " + (mode == "system" ? "System" : mode == "light" ? "Light" : "Dark");
-    }
+    if (btn) btn.value = "Theme: " + THEME_LABELS[mode];
 }
+
+// Called by the native shell so the page follows the toolbar's Theme button.
+window.kmrSetTheme = function (mode) {
+    if (THEME_MODES.indexOf(mode) < 0) return;
+    Services.prefs.setCharPref(THEME_PREF, mode);
+    applyTheme();
+};
 
 window.addEventListener("load", function () {
     applyTheme();
@@ -386,10 +413,13 @@ window.addEventListener("load", function () {
         Services.prefs.addObserver(THEME_PREF, themeObserver, false);
         Services.prefs.addObserver(THEME_EFFECTIVE, themeObserver, false);
     } catch (e) {}
+    try {
+        window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", applyTheme);
+    } catch (e) {}
     document.getElementById("themeToggle").addEventListener("click", function () {
-        let next = { dark: "light", light: "system", system: "dark" }[getThemeMode()];
-        Services.prefs.setCharPref(THEME_PREF, next);
-        applyTheme();
+        let next = THEME_MODES[(THEME_MODES.indexOf(getThemeMode()) + 1) % THEME_MODES.length];
+        window.kmrSetTheme(next);
+        try { window.chrome.webview.postMessage("theme:" + next); } catch (e) {}
     });
 });
 

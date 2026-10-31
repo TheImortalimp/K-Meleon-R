@@ -92,12 +92,7 @@ internal sealed class MainForm : Form
         };
         askCopilot.Click += async (_, _) => await AskCopilot();
         askGemini.Click += async (_, _) => await AskGemini();
-        theme.Click += (_, _) =>
-        {
-            themeMode = themeMode switch { "dark" => "light", "light" => "system", _ => "dark" };
-            Settings.Set("theme", themeMode);
-            ApplyChrome();
-        };
+        theme.Click += (_, _) => CycleTheme();
 
         ApplyChrome();
         Shown += async (_, _) => await Start();
@@ -134,7 +129,31 @@ internal sealed class MainForm : Form
         await AddTab(string.IsNullOrWhiteSpace(initialUrl) ? StartUrl : Normalize(initialUrl));
     }
 
-    private bool IsLight => themeMode == "light" || (themeMode == "system" && SystemIsLight());
+    private static readonly string[] ThemeModes = { "dark", "light", "sand", "sky", "system" };
+
+    private sealed record Palette(Color Bg, Color Panel, Color Field, Color Button, Color ButtonHover, Color TabActive, Color Fg, Color Accent);
+
+    // The style actually drawn: "system" resolves to dark or the neutral light style.
+    private string EffectiveStyle => themeMode == "system" ? (SystemIsLight() ? "light" : "dark") : themeMode;
+
+    private bool IsLight => EffectiveStyle != "dark";
+
+    private Palette CurrentPalette() => EffectiveStyle switch
+    {
+        "light" => new Palette(Color.FromArgb(244, 245, 249), Color.FromArgb(226, 229, 238), Color.White,
+            Color.FromArgb(222, 226, 236), Color.FromArgb(205, 211, 226), Color.White, Color.FromArgb(22, 24, 34), Color.FromArgb(212, 22, 63)),
+        "sand" => new Palette(Color.FromArgb(250, 245, 236), Color.FromArgb(236, 226, 208), Color.FromArgb(255, 252, 246),
+            Color.FromArgb(234, 222, 200), Color.FromArgb(222, 207, 180), Color.FromArgb(255, 252, 246), Color.FromArgb(50, 38, 26), Color.FromArgb(200, 74, 40)),
+        "sky" => new Palette(Color.FromArgb(238, 245, 252), Color.FromArgb(214, 228, 244), Color.White,
+            Color.FromArgb(206, 222, 241), Color.FromArgb(184, 207, 234), Color.White, Color.FromArgb(18, 34, 56), Color.FromArgb(0, 102, 204)),
+        _ => new Palette(Color.FromArgb(24, 24, 32), Color.FromArgb(18, 18, 24), Color.FromArgb(40, 40, 52),
+            Color.FromArgb(44, 44, 58), Color.FromArgb(62, 62, 80), Color.FromArgb(40, 40, 52), Color.FromArgb(235, 235, 240), Color.FromArgb(250, 30, 78)),
+    };
+
+    private static string ThemeLabel(string mode) => mode switch
+    {
+        "system" => "System", "light" => "Light", "sand" => "Sand", "sky" => "Sky", _ => "Dark",
+    };
 
     private static bool SystemIsLight()
     {
@@ -149,44 +168,67 @@ internal sealed class MainForm : Form
 
     private void ApplyChrome()
     {
-        bool light = IsLight;
-        var bg = light ? Color.FromArgb(236, 238, 242) : Color.FromArgb(24, 24, 32);
-        var panel = light ? Color.FromArgb(222, 225, 232) : Color.FromArgb(18, 18, 24);
-        var fg = light ? Color.FromArgb(25, 25, 30) : Color.FromArgb(235, 235, 240);
-        var accent = Color.FromArgb(250, 30, 78);
+        var p = CurrentPalette();
 
-        BackColor = bg;
-        tabStrip.BackColor = panel;
-        tabFlow.BackColor = panel;
-        toolbar.BackColor = bg;
-        foreach (Control c in toolbar.Controls) c.BackColor = bg;
-        omnibox.BackColor = light ? Color.White : Color.FromArgb(40, 40, 52);
-        omnibox.ForeColor = fg;
+        BackColor = p.Bg;
+        tabStrip.BackColor = p.Panel;
+        tabFlow.BackColor = p.Panel;
+        toolbar.BackColor = p.Bg;
+        foreach (Control c in toolbar.Controls) c.BackColor = p.Bg;
+        omnibox.BackColor = p.Field;
+        omnibox.ForeColor = p.Fg;
         foreach (var b in new[] { back, fwd, reload, home, provider, askCopilot, askGemini, theme, newTabButton })
         {
-            b.BackColor = light ? Color.FromArgb(208, 212, 222) : Color.FromArgb(44, 44, 58);
-            b.ForeColor = fg;
+            b.BackColor = p.Button;
+            b.ForeColor = p.Fg;
             b.FlatAppearance.BorderSize = 0;
+            b.FlatAppearance.MouseOverBackColor = p.ButtonHover;
         }
         askCopilot.BackColor = Color.FromArgb(0, 120, 212);
         askCopilot.ForeColor = Color.White;
+        askCopilot.FlatAppearance.MouseOverBackColor = Color.FromArgb(24, 140, 232);
         askGemini.BackColor = Color.FromArgb(66, 103, 214);
         askGemini.ForeColor = Color.White;
+        askGemini.FlatAppearance.MouseOverBackColor = Color.FromArgb(88, 124, 232);
         provider.Text = "Search: " + Providers[providerIndex].Name;
-        theme.Text = "Theme: " + (themeMode == "system" ? "System" : themeMode == "light" ? "Light" : "Dark");
-        foreach (var t in tabs) StyleHeader(t, panel, fg, accent);
+        theme.Text = "Theme: " + ThemeLabel(themeMode);
+        foreach (var t in tabs) StyleHeader(t, p);
 
-        var scheme = themeMode == "light" ? CoreWebView2PreferredColorScheme.Light
-            : themeMode == "system" ? CoreWebView2PreferredColorScheme.Auto : CoreWebView2PreferredColorScheme.Dark;
+        var scheme = !IsLight ? CoreWebView2PreferredColorScheme.Dark : CoreWebView2PreferredColorScheme.Light;
         foreach (var t in tabs)
+        {
+            t.View.DefaultBackgroundColor = p.Bg;
             if (t.View.CoreWebView2 != null) t.View.CoreWebView2.Profile.PreferredColorScheme = scheme;
+        }
+        PushThemeToStartPage();
     }
 
-    private void StyleHeader(BrowserTab t, Color panel, Color fg, Color accent)
+    // Keeps the start page (kmr.start) in step with the native chrome.
+    private void PushThemeToStartPage()
+    {
+        foreach (var t in tabs)
+        {
+            var core = t.View.CoreWebView2;
+            if (core?.Source != null && core.Source.StartsWith(StartUrl, StringComparison.OrdinalIgnoreCase))
+                _ = core.ExecuteScriptAsync($"window.kmrSetTheme&&kmrSetTheme('{themeMode}')");
+        }
+    }
+
+    private void StyleHeader(BrowserTab t, Palette p)
     {
         t.Header.FlatAppearance.BorderSize = 0;
-        t.Header.ForeColor = fg;
-        t.Header.BackColor = t == current ? (IsLight ? Color.White : Color.FromArgb(40, 40, 52)) : panel;
+        t.Header.FlatAppearance.MouseOverBackColor = p.ButtonHover;
+        t.Header.ForeColor = p.Fg;
+        t.Header.BackColor = t == current ? p.TabActive : p.Panel;
+    }
+
+    private void CycleTheme(string requested = null)
+    {
+        themeMode = requested != null && Array.IndexOf(ThemeModes, requested) >= 0
+            ? requested
+            : ThemeModes[(Math.Max(0, Array.IndexOf(ThemeModes, themeMode)) + 1) % ThemeModes.Length];
+        Settings.Set("theme", themeMode);
+        ApplyChrome();
     }
 
     private async Task<BrowserTab> AddTab(string url)
@@ -221,7 +263,20 @@ internal sealed class MainForm : Form
         };
         core.SourceChanged += (_, _) => { if (tab == current) ShowUrl(core.Source); };
         core.DocumentTitleChanged += (_, _) => { tab.Title = Shorten(core.DocumentTitle); tab.Header.Text = tab.Title + "  "; if (tab == current) Text = WindowTitle(tab.Title == "New Tab" ? core.DocumentTitle : core.DocumentTitle); };
-        core.NavigationCompleted += (_, _) => UpdateNav();
+        core.NavigationCompleted += (_, _) => { UpdateNav(); PushThemeToStartPage(); };
+        // The start page tells the shell when its own Theme button is used.
+        core.WebMessageReceived += (_, e) =>
+        {
+            try
+            {
+                if (core.Source != null && core.Source.StartsWith(StartUrl, StringComparison.OrdinalIgnoreCase))
+                {
+                    var msg = e.TryGetWebMessageAsString();
+                    if (msg != null && msg.StartsWith("theme:")) CycleTheme(msg[6..]);
+                }
+            }
+            catch { }
+        };
         core.WindowCloseRequested += (_, _) => CloseTab(tab);
         view.KeyDown += (_, e) => HandleShortcut(e);
         ApplyChrome();

@@ -241,6 +241,8 @@ a {
 .icon-youtube { background-image: url("img/icon-youtube.png") !important; }
 .icon-reddit { background-image: url("img/icon-reddit.png") !important; }
 .icon-shield { background-image: url("img/icon-shield.png") !important; }
+.icon-opera { background-image: url("img/icon-opera.svg") !important; }
+.icon-operagx { background-image: url("img/icon-operagx.svg") !important; }
 
 /* Theme toggle */
 #themeToggle {
@@ -261,33 +263,171 @@ a {
     box-shadow: 0 0 10px rgba(250,30,78,.5);
 }
 
-/* Light theme (data-theme is set by aboutHome.js from kmeleon.display.theme) */
+/* Light themes: Light, Sand and Sky share one set of rules; each only supplies a palette.
+   data-theme is set by aboutHome.js (kmeleon.display.theme, kept in step with the shell). */
 html[data-theme="light"] {
-    background-color: #f2f3f7;
-    background-image: -moz-linear-gradient(top, rgba(250,30,78,.14), rgba(250,30,78,0) 340px);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color: #0b0c10;
+    --bg: #f4f5f9; --bg2: #e9ebf3; --glow: rgba(250,30,78,.13);
+    --fg: #14161f; --muted: #50536a; --accent: #d4163f; --accent-hover: #ee2b57;
+    --field: #ffffff; --line: #c9cbd8; --btn: #ffffff; --btn-hover: #eef0f7;
+    --tile: #ffffff; --tile-hover: #fff5f7; --shadow: rgba(40,44,70,.14); --shadow-hover: rgba(212,22,63,.28);
+}
+html[data-theme="sand"] {
+    --bg: #faf5ec; --bg2: #f0e6d3; --glow: rgba(200,74,40,.14);
+    --fg: #32261a; --muted: #6e5c47; --accent: #c84a28; --accent-hover: #de5b37;
+    --field: #fffcf6; --line: #dccdb3; --btn: #fffcf6; --btn-hover: #f6ecdb;
+    --tile: #fffcf6; --tile-hover: #fff3e2; --shadow: rgba(90,64,30,.16); --shadow-hover: rgba(200,74,40,.30);
+}
+html[data-theme="sky"] {
+    --bg: #eef5fc; --bg2: #dce9f7; --glow: rgba(0,102,204,.15);
+    --fg: #12223a; --muted: #46607f; --accent: #0066cc; --accent-hover: #1a7fe6;
+    --field: #ffffff; --line: #b9cde6; --btn: #ffffff; --btn-hover: #e6f0fb;
+    --tile: #ffffff; --tile-hover: #eaf3ff; --shadow: rgba(24,56,100,.15); --shadow-hover: rgba(0,102,204,.30);
 }
 
-html[data-theme="light"] a { color: #d4163f; }
-html[data-theme="light"] #wordmark span { text-shadow: none; }
-html[data-theme="light"] #searchText { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
+html[data-theme="light"],
+html[data-theme="sand"],
+html[data-theme="sky"] {
+    color-scheme: light;
+    background-color: var(--bg);
+    background-image: linear-gradient(to bottom, var(--glow), rgba(255,255,255,0) 360px),
+                      linear-gradient(to bottom, var(--bg), var(--bg2));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: var(--fg);
+}
+
+html[data-theme="light"] a,
+html[data-theme="sand"] a,
+html[data-theme="sky"] a { color: var(--accent); }
+
+html[data-theme="light"] #wordmark,
+html[data-theme="sand"] #wordmark,
+html[data-theme="sky"] #wordmark { color: var(--fg); }
+
+html[data-theme="light"] #wordmark span,
+html[data-theme="sand"] #wordmark span,
+html[data-theme="sky"] #wordmark span { color: var(--accent); text-shadow: none; }
+
+html[data-theme="light"] #searchText,
+html[data-theme="sand"] #searchText,
+html[data-theme="sky"] #searchText {
+    color: var(--fg);
+    background: var(--field);
+    border-color: var(--line);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+html[data-theme="light"] #searchText:focus,
+html[data-theme="sand"] #searchText:focus,
+html[data-theme="sky"] #searchText:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow), 0 2px 8px var(--shadow);
+}
+
+html[data-theme="light"] #searchSubmit,
+html[data-theme="sand"] #searchSubmit,
+html[data-theme="sky"] #searchSubmit { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+html[data-theme="light"] #searchSubmit:hover,
+html[data-theme="sand"] #searchSubmit:hover,
+html[data-theme="sky"] #searchSubmit:hover { background: var(--accent-hover); }
+
 html[data-theme="light"] #askGemini,
 html[data-theme="light"] #askCopilot,
 html[data-theme="light"] #searchProvider,
-html[data-theme="light"] #themeToggle { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
-html[data-theme="light"] .tile {
-    color: #0b0c10;
-    background-image: url("img/gx-tile-light.png");
+html[data-theme="light"] #themeToggle,
+html[data-theme="sand"] #askGemini,
+html[data-theme="sand"] #askCopilot,
+html[data-theme="sand"] #searchProvider,
+html[data-theme="sand"] #themeToggle,
+html[data-theme="sky"] #askGemini,
+html[data-theme="sky"] #askCopilot,
+html[data-theme="sky"] #searchProvider,
+html[data-theme="sky"] #themeToggle {
+    color: var(--fg);
+    background: var(--btn);
+    border-color: var(--line);
+    box-shadow: 0 1px 3px var(--shadow);
 }
-html[data-theme="light"] .tile:hover {
-    background-image: url("img/gx-tile-hover-light.png");
-}
-html[data-theme="light"] #dialForm input { color: #0b0c10; background: #fff; border-color: #c9cbd8; }
-html[data-theme="light"] #footer li a { color: #34364a; }
-html[data-theme="light"] #footer li a:hover { color: #0b0c10; background: #e4e6ee; }
 
+html[data-theme="light"] #askGemini:hover,
+html[data-theme="light"] #askCopilot:hover,
+html[data-theme="light"] #searchProvider:hover,
+html[data-theme="light"] #themeToggle:hover,
+html[data-theme="sand"] #askGemini:hover,
+html[data-theme="sand"] #askCopilot:hover,
+html[data-theme="sand"] #searchProvider:hover,
+html[data-theme="sand"] #themeToggle:hover,
+html[data-theme="sky"] #askGemini:hover,
+html[data-theme="sky"] #askCopilot:hover,
+html[data-theme="sky"] #searchProvider:hover,
+html[data-theme="sky"] #themeToggle:hover {
+    background: var(--btn-hover);
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px var(--shadow-hover);
+}
+
+/* Tiles are drawn with CSS in the light themes so they take the palette */
+html[data-theme="light"] .tile,
+html[data-theme="sand"] .tile,
+html[data-theme="sky"] .tile {
+    color: var(--fg);
+    background: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+html[data-theme="light"] .tile:hover,
+html[data-theme="sand"] .tile:hover,
+html[data-theme="sky"] .tile:hover {
+    background: var(--tile-hover);
+    border-color: var(--accent);
+    box-shadow: 0 8px 18px var(--shadow-hover);
+    filter: none;
+}
+
+html[data-theme="light"] .tile .remove,
+html[data-theme="light"] .tile .edit,
+html[data-theme="sand"] .tile .remove,
+html[data-theme="sand"] .tile .edit,
+html[data-theme="sky"] .tile .remove,
+html[data-theme="sky"] .tile .edit { color: var(--muted); }
+
+html[data-theme="light"] .tile .remove:hover,
+html[data-theme="light"] .tile .edit:hover,
+html[data-theme="sand"] .tile .remove:hover,
+html[data-theme="sand"] .tile .edit:hover,
+html[data-theme="sky"] .tile .remove:hover,
+html[data-theme="sky"] .tile .edit:hover { color: var(--accent); }
+
+html[data-theme="light"] .tile .icon.letter,
+html[data-theme="sand"] .tile .icon.letter,
+html[data-theme="sky"] .tile .icon.letter { background-color: var(--accent); color: #fff; }
+
+html[data-theme="light"] #dialForm input,
+html[data-theme="sand"] #dialForm input,
+html[data-theme="sky"] #dialForm input { color: var(--fg); background: var(--field); border-color: var(--line); }
+
+html[data-theme="light"] #dialForm input::placeholder,
+html[data-theme="sand"] #dialForm input::placeholder,
+html[data-theme="sky"] #dialForm input::placeholder { color: var(--muted); }
+
+html[data-theme="light"] #footer,
+html[data-theme="sand"] #footer,
+html[data-theme="sky"] #footer { border-top-color: var(--accent); }
+
+html[data-theme="light"] #footer li a,
+html[data-theme="sand"] #footer li a,
+html[data-theme="sky"] #footer li a { color: var(--muted); }
+
+html[data-theme="light"] #footer li a:hover,
+html[data-theme="sand"] #footer li a:hover,
+html[data-theme="sky"] #footer li a:hover { color: var(--fg); background: var(--btn-hover); }
+
+html[data-theme="light"] ::selection,
+html[data-theme="sand"] ::selection,
+html[data-theme="sky"] ::selection { background: var(--glow); color: var(--fg); }
 /* Add-site form */
 #dialForm {
     margin: 0 auto 14px;
