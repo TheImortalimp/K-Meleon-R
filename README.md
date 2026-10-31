@@ -18,7 +18,8 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 ## Changelog
 
 ### r10 (8.2.0)
-- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), Basic tracking prevention, true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
+- Fixed web apps that detect a native WebView2 host (the AI WARP web edition could not play YouTube in K-Meleon-R): the host bridge is now hidden from ordinary web pages.
+- Better WebView2 handling: autoplay allowed for embedded players (YouTube, Spotify), tracking prevention off for embedded players, true fullscreen for video (tabs and toolbar hide), automatic reload after a renderer crash or hang, autofill, password save, zoom, swipe navigation and F12 DevTools.
 - NOTICE now carries the licence wording published at imortalimp.nl.
 ### r9 (8.1.0)
 - New Opera and Opera GX quick-dial tiles after the five curated tiles (added once to existing dials).

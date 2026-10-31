@@ -114,7 +114,9 @@ internal sealed class MainForm : Form
     {
         try
         {
-            var opts = new CoreWebView2EnvironmentOptions("--autoplay-policy=no-user-gesture-required") { AllowSingleSignOnUsingOSPrimaryAccount = false };
+            var dbg = Environment.GetEnvironmentVariable("KMR_DEBUG_PORT");
+            var args = "--autoplay-policy=no-user-gesture-required" + (string.IsNullOrEmpty(dbg) ? "" : " --remote-debugging-port=" + dbg);
+            var opts = new CoreWebView2EnvironmentOptions(args) { AllowSingleSignOnUsingOSPrimaryAccount = false };
             env = await CoreWebView2Environment.CreateAsync(null, Settings.ProfileDir, opts);
         }
         catch (Exception ex)
@@ -257,6 +259,29 @@ internal sealed class MainForm : Form
             CoreWebView2HostResourceAccessKind.Allow);
         core.Settings.AreDefaultContextMenusEnabled = true;
         core.Settings.IsStatusBarEnabled = true;
+        // Web pages (e.g. the AI WARP web edition) treat window.chrome.webview as a native app host; only the start page may see it.
+        await core.AddScriptToExecuteOnDocumentCreatedAsync("if(location.hostname!=='kmr.start'&&window.chrome){try{Object.defineProperty(window.chrome,'webview',{value:undefined,configurable:true})}catch(e){}}");
+        core.Settings.AreDevToolsEnabled = true;
+        core.Settings.AreBrowserAcceleratorKeysEnabled = true;
+        core.Settings.IsGeneralAutofillEnabled = true;
+        core.Settings.IsPasswordAutosaveEnabled = true;
+        core.Settings.IsZoomControlEnabled = true;
+        core.Settings.IsSwipeNavigationEnabled = true;
+        core.Settings.IsReputationCheckingRequired = false;
+        // Embedded players (YouTube, Spotify) break when tracking prevention blocks CDN and player storage.
+        core.Profile.PreferredTrackingPreventionLevel = CoreWebView2TrackingPreventionLevel.None;
+        core.ContainsFullScreenElementChanged += (_, _) => SetFullScreen(core.ContainsFullScreenElement);
+        core.ProcessFailed += (_, e) =>
+        {
+            if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessExited ||
+                e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessUnresponsive)
+                BeginInvoke(new Action(() => { try { core.Reload(); } catch { } }));
+        };
+        core.PermissionRequested += (_, e) =>
+        {
+            if (e.PermissionKind == CoreWebView2PermissionKind.ClipboardRead)
+                e.State = CoreWebView2PermissionState.Allow;
+        };
         core.NewWindowRequested += async (_, e) =>
         {
             e.Handled = true;
