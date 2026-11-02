@@ -6,3 +6,4 @@
 kmr-shell/bin/
 kmr-shell/obj/
 kmr-shell/publish/
+kmr-shell/*.zip

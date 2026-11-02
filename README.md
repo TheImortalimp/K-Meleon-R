@@ -6,11 +6,9 @@ Defender/Safe Browsing/anti-screencap hardening.**
 
 ## Download and install
 
-r14 is currently source-only; build it from [kmr-shell/](kmr-shell/)
-([instructions](kmr-shell/README.md)). The latest published installer is
-[r13 for Windows x64](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.5.0-r13/K-Meleon-R-r13-x64-setup.exe)
-| [r14 release notes](RELEASE_NOTES_r14.md)
-| [r13 release notes](RELEASE_NOTES_r13.md)
+[Download the r14 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-setup.exe)
+| [r14 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r14.md)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
@@ -19,11 +17,14 @@ r14 is currently source-only; build it from [kmr-shell/](kmr-shell/)
   policy hardening, including local profiles. Review [protection boundaries](ABOUT.md#protection-boundaries).
 - The installer is unsigned and may trigger SmartScreen. Verify its hash and
   source before deciding whether to run it; a hash is not a safety certificate.
+- The portable ZIP runs without installation; the Windows hardening scripts are
+  included but must be run manually (elevated) if wanted.
 
-Installer SHA-256 (r13):
+SHA-256 (r14):
 
 ```text
-5CD14BA6F6D297B9E2D492DF69D04477699A8A46F581FE5AD188DA8F5EFE9EFB
+K-Meleon-R-r14-x64-setup.exe    28920544B2237C7FAE6BAFB3AC612CA303DD472F4D10D32F81228C7EDD7315FE
+K-Meleon-R-r14-x64-portable.zip 7D537CA9705258AA92962278006B0F3516E602C99CEB29CE55E5332F4BE82F05
 ```
 
 ## What's new in r14

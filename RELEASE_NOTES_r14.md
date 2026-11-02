@@ -86,11 +86,18 @@ Copilot/Gemini get first-class query support.
 ## Version and download
 
 - App version: **8.6.0**; release label: **r14**; tag: **v8.6.0-r14**.
-- Until a v8.6.0-r14 release with an installer is published, r14 exists in
-  source only; build it from [kmr-shell](kmr-shell/README.md). The latest
-  published installer remains
-  [r13](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.5.0-r13).
+- [Download K-Meleon-R-r14-x64-setup.exe](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-setup.exe)
+  (installer, applies the Windows hardening policies under UAC) or
+  [K-Meleon-R-r14-x64-portable.zip](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-portable.zip)
+  (portable; the hardening scripts are included but must be run manually).
 - Requires Windows 10/11 x64 and Microsoft Edge WebView2.
+
+SHA-256:
+
+```text
+K-Meleon-R-r14-x64-setup.exe    28920544B2237C7FAE6BAFB3AC612CA303DD472F4D10D32F81228C7EDD7315FE
+K-Meleon-R-r14-x64-portable.zip 7D537CA9705258AA92962278006B0F3516E602C99CEB29CE55E5332F4BE82F05
+```
 
 ## Retained changes
 

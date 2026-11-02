@@ -12,8 +12,9 @@ repository for reference.
 
 ## Current version
 
-**r14 / 8.6.0**, tag **v8.6.0-r14** (source; the latest published installer is
-[r13](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.5.0-r13)).
+**r14 / 8.6.0**, tag
+**[v8.6.0-r14](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.6.0-r14)**
+(installer and portable ZIP).
 
 r14 integrates the Microsoft and Google protection layers directly into every
 tab: SmartScreen reputation checking, Attachment Execution Service + AMSI
