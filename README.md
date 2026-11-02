@@ -1,4 +1,4 @@
-# K-Meleon-R r14 (8.6.0)
+# K-Meleon-R r15 (8.7.0)
 
 **A small standalone Windows browser with a GX-style start page, tabs,
 five synchronized themes, Microsoft Edge WebView2 rendering and layered

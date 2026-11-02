@@ -2,7 +2,7 @@
 
 ## GitHub About
 
-K-Meleon-R r14 (8.6.0): standalone Windows WebView2 browser with GX-style speed dial, tabs, five themes and Copilot/Gemini query support. Defender/SmartScreen download scanning, Google Safe Browsing, anti-screencap shield, system-pointer protection and private tabs.
+K-Meleon-R r15 (8.7.0): standalone Windows WebView2 browser with GX-style speed dial, tabs, five themes and Copilot/Gemini query support. Defender/SmartScreen download scanning, Google Safe Browsing, anti-screencap shield, system-pointer protection and private tabs.
 
 ## Summary
 

@@ -442,7 +442,7 @@ internal sealed class MainForm : Form
     private async Task AskCopilot()
     {
         var q = omnibox.Text.Trim();
-        var url = q.Length > 0 && Normalize(q) == null
+        var url = q.Length > 0
             ? "https://copilot.microsoft.com/?q=" + Uri.EscapeDataString(q)
             : "https://copilot.microsoft.com/";
         await AddTab(url);
@@ -452,7 +452,7 @@ internal sealed class MainForm : Form
     {
         var q = omnibox.Text.Trim();
         // Google AI Mode (udm=50) is the Gemini-powered search; the bare app takes no query URL.
-        var url = q.Length > 0 && Normalize(q) == null
+        var url = q.Length > 0
             ? "https://www.google.com/search?udm=50&q=" + Uri.EscapeDataString(q)
             : "https://gemini.google.com/app";
         await AddTab(url);

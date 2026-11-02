@@ -41,8 +41,10 @@ const PROVIDER_PREF = "kmeleon.search.provider";
 const PROVIDERS = {
     bing: { label: "Bing", url: "https://www.bing.com/search?q=_searchTerms_" },
     google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_" },
-    copilot: { label: "Copilot", url: "https://www.bing.com/copilotsearch?q=_searchTerms_" }
+    copilot: { label: "Copilot", url: "https://www.bing.com/copilotsearch?q=_searchTerms_" },
+    gemini: { label: "Gemini", url: "https://www.google.com/search?udm=50&q=_searchTerms_" }
 };
+const GEMINI_HOME = "https://gemini.google.com/app";
 const COPILOT_HOME = "https://www.bing.com/copilotsearch";
 
 function getProvider() {
@@ -53,7 +55,7 @@ function getProvider() {
     return "bing";
 }
 
-const PROVIDER_ORDER = ["bing", "google", "copilot"];
+const PROVIDER_ORDER = ["bing", "google", "copilot", "gemini"];
 
 function applyProvider() {
     let p = PROVIDERS[getProvider()];
@@ -357,16 +359,10 @@ window.addEventListener("load", function () {
         window.location.href = q ? PROVIDERS.copilot.url.replace("_searchTerms_", encodeURIComponent(q)) : COPILOT_HOME;
     });
     applyProvider();
-    // Gemini has no documented URL for prefilling a prompt, so just open it.
+    // Google AI Mode (udm=50) is Gemini-powered search and accepts the query in the URL.
     document.getElementById("askGemini").addEventListener("click", function () {
         let q = document.getElementById("searchText").value.trim();
-        if (q) {
-            try {
-                Components.classes["@mozilla.org/widget/clipboardhelper;1"]
-                    .getService(Components.interfaces.nsIClipboardHelper).copyString(q);
-            } catch (ex) {}
-        }
-        window.location.href = "https://gemini.google.com/app";
+        window.location.href = q ? PROVIDERS.gemini.url.replace("_searchTerms_", encodeURIComponent(q)) : GEMINI_HOME;
     });
     renderDial();
 });

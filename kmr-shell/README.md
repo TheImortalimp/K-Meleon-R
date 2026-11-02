@@ -1,4 +1,4 @@
-# K-Meleon-R shell r14 (8.6.0)
+# K-Meleon-R shell r15 (8.7.0)
 
 The current Windows browser is a .NET 8 WinForms application using Microsoft
 Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
