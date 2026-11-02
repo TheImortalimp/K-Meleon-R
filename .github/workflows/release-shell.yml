@@ -2,7 +2,7 @@
 on:
   push:
     branches: [kmeleon-r]
-    paths: ['kmr-shell/**', '.github/workflows/release-shell.yml']
+    paths: ['kmr-shell/**', 'kmr-shell.tests/**', '.github/workflows/release-shell.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -14,12 +14,23 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test search routing
+        shell: pwsh
+        run: |
+          dotnet test kmr-shell.tests/KMeleonR.Search.Tests.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node --test kmr-shell.tests/start-page.test.cjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Publish
         shell: pwsh
         run: |
           dotnet publish kmr-shell/kmr-shell.csproj -c Release -r win-x64 --self-contained true `
             -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true `
             -p:DebugType=None -o publish
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item kmr-shell/NOTICE-K-Meleon-R.md publish/; Remove-Item publish/*.xml
           Copy-Item kmr-shell/README.md publish/README.md
           Get-ChildItem publish | Select Name, Length
@@ -32,6 +43,7 @@ jobs:
       - name: Zip
         shell: pwsh
         run: |
+          Copy-Item kmr-shell/cursor_lockdown.ps1, kmr-shell/harden_against_gem_os.ps1 publish/
           Compress-Archive publish/* K-Meleon-R-r15-x64-portable.zip
           $s = Get-ChildItem -Recurse -Filter K-Meleon-R-r15-x64-setup.exe | Select -First 1
           if ($s.DirectoryName -ne $PWD.Path) { Move-Item $s.FullName . -Force }

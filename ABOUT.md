@@ -17,7 +17,9 @@ repository for reference.
 (installer and portable ZIP). r15 is a bugfix release that completes the
 Google/Gemini search query support begun in r14: Ask Gemini and Ask Copilot
 always send your query, and the start page has a Gemini (Google AI Mode)
-provider. Direct downloads are also kept in
+provider. The selected search provider is synchronized between the toolbar
+and start page. Questions containing URLs are sent in full as queries, while
+standalone website addresses still navigate normally. Direct downloads are also kept in
 [`dist/r15`](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15).
 
 r14 introduced the Microsoft and Google protection layers directly into every
@@ -31,8 +33,9 @@ native-bridge compatibility fix.
 ## Protection boundaries
 
 The Windows guard prevents custom web pointer replacement and validates active
-pointer paths against the system cursor directory. The installer requires UAC
-elevation and applies cursor/theme/sound policies across local profiles.
+pointer paths against the system cursor directory. The installer requests UAC
+elevation when possible; only elevated installs apply cursor/theme/sound
+policies across local profiles.
 Quarantine is opt-in, not part of normal installation.
 
 Downloads are screened by SmartScreen, the Windows attachment service and AMSI
@@ -61,7 +64,12 @@ still be unavailable. Safe Browsing lookups, when enabled, send only the
 visited URL to Google.
 
 The native host bridge is hidden from ordinary web pages and retained only
-for local start-page theme syncing. Settings/profile are local under
+for local start-page theme and provider syncing. Gemini searches use Google
+AI Mode; Copilot searches use Copilot Search in Bing. Only the selected
+service receives a submitted query, encoded in its search URL. Typing is not
+streamed to either service, and neither can read browser controls or other
+tabs. Ask buttons explicitly choose the destination for that submission.
+Settings/profile are local under
 `%LOCALAPPDATA%\K-Meleon-R`; optional `KMR_DEBUG_PORT` enables remote debugging.
 
 ## Credits and license

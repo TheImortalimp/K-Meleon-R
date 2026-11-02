@@ -18,7 +18,11 @@ saving and renderer reload handling.
 - **r15 / 8.7.0:** bugfix release completing Google/Gemini query support:
   Ask Gemini/Ask Copilot always send the query (dotted single words are no
   longer treated as URLs) and the start page gains a Gemini (Google AI Mode)
-  provider.
+  provider. Provider selection is synchronized with the native toolbar.
+  Address-bar questions containing URLs are correctly searched; standalone
+  website addresses still navigate normally. Copilot shortcuts consistently
+  use Copilot Search in Bing, and start-page searches are no longer truncated
+  at 256 characters.
 - **r14 / 8.6.0:** Microsoft Defender integration (SmartScreen on, attachment
   service + AMSI download scanning, Security Center watchdog), Google Safe
   Browsing lookups, anti-screencap shield, `javascript:`/`data:`/`vbscript:`
@@ -43,13 +47,23 @@ Requires the .NET 8 SDK, Windows x64 and
 From the repository root:
 
 ```powershell
-Set-Location kmr-shell
-dotnet publish -c Release -r win-x64 --self-contained true -o publish
-& "C:\Program Files (x86)\NSIS\makensis.exe" setup.nsi
+dotnet test kmr-shell.tests\KMeleonR.Search.Tests.csproj -c Release
+node --test kmr-shell.tests\start-page.test.cjs
+dotnet publish kmr-shell\kmr-shell.csproj -c Release -r win-x64 --self-contained true `
+  -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
+  -p:EnableCompressionInSingleFile=true -p:DebugType=None -o kmr-shell\publish
+Copy-Item kmr-shell\NOTICE-K-Meleon-R.md, kmr-shell\README.md kmr-shell\publish
+& "C:\Program Files (x86)\NSIS\makensis.exe" /DVERSION=r15 kmr-shell\setup.nsi
+Copy-Item kmr-shell\cursor_lockdown.ps1, kmr-shell\harden_against_gem_os.ps1 kmr-shell\publish
+Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r15-x64-portable.zip
 ```
 
 Output: `K-Meleon-R-r15-x64-setup.exe`. The project version is `8.7.0`;
 the release tag is `v8.7.0-r15`.
+Run each command only after the previous one succeeds. Search tests require
+Node.js 22+ as well as the .NET SDK. They exercise query encoding, provider
+selection and URL routing without launching the browser or changing Windows
+policies. The release workflow runs both suites before packaging.
 
 WebView2 must be available on the target computer. If initialization fails, the
 shell offers Microsoft's runtime download page.
@@ -102,7 +116,10 @@ Settings/profile use `%LOCALAPPDATA%\K-Meleon-R`.
 Set `KMR_DEBUG_PORT` only when intentionally enabling Chromium remote debugging.
 Set `gsbApiKey` in settings.json (or `KMR_GSB_API_KEY`) to enable Google Safe
 Browsing lookups. Ordinary pages cannot access the native host bridge;
-`https://kmr.start/index.html` retains it for theme synchronization.
+`https://kmr.start/index.html` retains it for theme/provider synchronization.
+Only submitted searches are sent, and only to the selected provider. No
+query text passes through the native host bridge. Ask buttons override the
+destination for one submission and keep native private tabs private.
 
 SmartScreen reputation checking is forced on and silently re-asserted on every
 tab each minute while the browser runs; tracking prevention defaults to
@@ -115,7 +132,8 @@ remains outside the shell's control.
 
 ## Validation and limits
 
-The r15 code builds cleanly (CI-packaged installer and portable ZIP); the r14
+The r15 query-routing and start-page regression suites pass, and the Windows
+release build is verified locally. The r14
 shell was smoke-tested (launch, window, clean shutdown). Download scanning and the watchdog depend on the installed
 antivirus and Security Center (absent on Windows Server); the capture shield
 needs Windows 10 2004+. Machine-policy `-Apply` has not been validated

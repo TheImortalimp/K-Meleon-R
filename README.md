@@ -32,7 +32,10 @@ K-Meleon-R-r15-x64-portable.zip 503C49275B6171DB9F77218B3C731B6191F2ECC007BA1AC7
 
 ## What's new in r15
 
-Bugfix release: Ask Gemini/Copilot always send the query, and the start page gains a Gemini provider with query support. See the [release notes](RELEASE_NOTES_r15.md).
+Bugfix release: complete query routing to the selected provider, synchronized
+between the address bar and start page. Questions containing URLs remain
+searches, and the start page no longer truncates queries at 256 characters.
+See the [release notes](RELEASE_NOTES_r15.md).
 
 ## What's new in r14
 
@@ -67,17 +70,38 @@ guarantee. Administrators can undo policies.
   tabs, toolbar and WebView2 background.
 - Address/search bar with Bing, Google, Copilot and Gemini (Google AI Mode)
   search providers.
-- **Ask Copilot** opens Microsoft Copilot with your query; **Ask Gemini** opens
+- **Ask Copilot** opens Copilot Search in Bing with your query; **Ask Gemini** opens
   Google AI Mode with your query (or the Gemini app without one). These are
   external web services.
 - Tabs (including private tabs), video fullscreen, browser zoom, autofill,
   password saving, developer tools and renderer-crash/unresponsive reload
   handling.
 - Ordinary web pages do not receive the native host bridge; the local start
-  page retains it for theme synchronization.
+  page retains it for theme and search-provider synchronization.
 
 Website availability, sign-in, codecs and runtime behavior can change.
 Compatibility is not guaranteed for every site.
+
+## Search and AI query routing
+
+- Choose **Search: Gemini** for Google AI Mode or **Search: Copilot** for
+  Copilot Search in Bing. The choice stays synchronized between the toolbar
+  and all local start pages and is remembered for the next launch.
+- In the address bar, Enter opens a website address normally. Other text goes
+  in full to the selected provider, including questions containing a URL,
+  Unicode and punctuation. A dotted hostname such as `foo.bar` is still an
+  address; use an **Ask** button to search for it instead.
+- The start-page search field always searches with its selected provider.
+  **Ask Gemini** and **Ask Copilot** explicitly send the current field text to
+  that service, including a URL, without changing the default provider.
+  Native Ask buttons preserve private-tab mode.
+- Only submission sends the query. The browser does not stream your typing
+  or send each search to both AI services. Queries are URL-encoded into the
+  selected service's search URL; they can appear in that service's history.
+  Neither service receives access to browser controls or other tabs.
+- Gemini here means **Google AI Mode**, not a Gemini chat/API integration.
+  An empty Ask Gemini opens the Gemini app; an empty Ask Copilot opens Copilot
+  Search. Availability and account requirements are controlled by those sites.
 
 ## Shortcuts and settings
 
@@ -113,8 +137,7 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
-| r15 / 8.7.0 | Bugfix: complete Google/Gemini search query support (Ask Gemini/Copilot, start-page Gemini provider) |
-| r15 / 8.7.0 | Bugfix: complete Google/Gemini search query support (Ask Gemini/Copilot, start-page Gemini provider) |
+| r15 / 8.7.0 | Complete query routing, synchronized search providers, Gemini/Copilot Ask shortcuts and long-query support |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |

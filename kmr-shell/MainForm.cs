@@ -1,5 +1,8 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
+using System.Runtime.InteropServices;
+using System.Text.Json;
+using static KMeleonR.SearchNavigation;
 
 namespace KMeleonR;
 
@@ -13,16 +16,6 @@ internal sealed class BrowserTab
 
 internal sealed class MainForm : Form
 {
-    private const string StartUrl = "https://kmr.start/index.html";
-
-    private static readonly (string Name, string Url)[] Providers =
-    {
-        ("Bing", "https://www.bing.com/search?q={0}"),
-        ("Google", "https://www.google.com/search?q={0}"),
-        ("Copilot", "https://www.bing.com/copilotsearch?q={0}"),
-        ("Gemini", "https://www.google.com/search?udm=50&q={0}"),
-    };
-
     private readonly Panel tabStrip = new() { Dock = DockStyle.Top, Height = 34 };
     private readonly FlowLayoutPanel tabFlow = new() { Dock = DockStyle.Fill, WrapContents = false, AutoScroll = false };
     private readonly Button newTabButton = MakeButton("+", 30);
@@ -88,12 +81,10 @@ internal sealed class MainForm : Form
         omnibox.GotFocus += (_, _) => omnibox.SelectAll();
         provider.Click += (_, _) =>
         {
-            providerIndex = (providerIndex + 1) % Providers.Length;
-            Settings.Set("provider", Providers[providerIndex].Name);
-            ApplyChrome();
+            SetProvider((providerIndex + 1) % Providers.Length);
         };
-        askCopilot.Click += async (_, _) => await AskCopilot();
-        askGemini.Click += async (_, _) => await AskGemini();
+        askCopilot.Click += async (_, _) => await Ask("Copilot");
+        askGemini.Click += async (_, _) => await Ask("Gemini");
         theme.Click += (_, _) => CycleTheme();
         // Silent self-healing: the capture shield is re-applied on every guard refresh cycle.
         DefenderGuard.Reasserted += () => { try { CaptureGuard.Apply(this, ShieldOn); } catch { } };
@@ -142,7 +133,7 @@ internal sealed class MainForm : Form
             Close();
             return;
         }
-        await AddTab(string.IsNullOrWhiteSpace(initialUrl) ? StartUrl : Normalize(initialUrl));
+        await AddTab(Resolve(initialUrl, Providers[providerIndex]) ?? StartUrl);
     }
 
     private static readonly string[] ThemeModes = { "dark", "light", "sand", "sky", "system" };
@@ -216,18 +207,40 @@ internal sealed class MainForm : Form
             t.View.DefaultBackgroundColor = p.Bg;
             if (t.View.CoreWebView2 != null) t.View.CoreWebView2.Profile.PreferredColorScheme = scheme;
         }
-        PushThemeToStartPage();
+        PushSettingsToStartPage();
     }
 
-    // Keeps the start page (kmr.start) in step with the native chrome.
-    private void PushThemeToStartPage()
+    // Only the local start page receives settings; queries never enter the host bridge.
+    private async void PushSettingsToStartPage()
     {
-        foreach (var t in tabs)
+        foreach (var t in tabs.ToArray())
         {
+            if (t.View.IsDisposed) continue;
             var core = t.View.CoreWebView2;
-            if (core?.Source != null && core.Source.StartsWith(StartUrl, StringComparison.OrdinalIgnoreCase))
-                _ = core.ExecuteScriptAsync($"window.kmrSetTheme&&kmrSetTheme('{themeMode}')");
+            if (core == null || !IsStartPage(core.Source)) continue;
+            var themeValue = JsonSerializer.Serialize(themeMode);
+            var providerValue = JsonSerializer.Serialize(Providers[providerIndex].Name.ToLowerInvariant());
+            try
+            {
+                await core.ExecuteScriptAsync(
+                    "if(location.origin==='https://kmr.start'&&location.pathname==='/index.html'){" +
+                    $"window.kmrSetTheme&&kmrSetTheme({themeValue});window.kmrSetProvider&&kmrSetProvider({providerValue});}}");
+            }
+            catch (Exception ex) when (ex is InvalidOperationException or COMException)
+            {
+                System.Diagnostics.Trace.TraceError("Start-page settings sync failed: {0}", ex);
+                if (!IsDisposed && !Disposing)
+                    MessageBox.Show(this, "Could not synchronize start-page settings.\n\n" + ex.Message,
+                        "K-Meleon-R", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+    }
+
+    private void SetProvider(int index)
+    {
+        providerIndex = index;
+        Settings.Set("provider", Providers[index].Name);
+        ApplyChrome();
     }
 
     private void StyleHeader(BrowserTab t, Palette p)
@@ -312,19 +325,30 @@ internal sealed class MainForm : Form
         };
         core.SourceChanged += (_, _) => { if (tab == current) ShowUrl(core.Source); };
         core.DocumentTitleChanged += (_, _) => { tab.Title = Shorten(core.DocumentTitle); tab.Header.Text = (tab.IsPrivate ? "[P] " : "") + tab.Title + "  "; if (tab == current) Text = WindowTitle(tab.Title == "New Tab" ? core.DocumentTitle : core.DocumentTitle); };
-        core.NavigationCompleted += (_, _) => { UpdateNav(); PushThemeToStartPage(); };
-        // The start page tells the shell when its own Theme button is used.
+        core.NavigationCompleted += (_, _) => { UpdateNav(); PushSettingsToStartPage(); };
         core.WebMessageReceived += (_, e) =>
         {
+            if (!IsStartPage(core.Source) || !IsStartPage(e.Source)) return;
+            string msg;
             try
             {
-                if (core.Source != null && core.Source.StartsWith(StartUrl, StringComparison.OrdinalIgnoreCase))
-                {
-                    var msg = e.TryGetWebMessageAsString();
-                    if (msg != null && msg.StartsWith("theme:")) CycleTheme(msg[6..]);
-                }
+                msg = e.TryGetWebMessageAsString();
             }
-            catch { }
+            catch (ArgumentException ex)
+            {
+                System.Diagnostics.Trace.TraceWarning("Invalid start-page message: {0}", ex.Message);
+                return;
+            }
+            if (msg != null && msg.StartsWith("theme:") && Array.IndexOf(ThemeModes, msg[6..]) >= 0)
+                CycleTheme(msg[6..]);
+            else if (msg != null && msg.StartsWith("provider:"))
+            {
+                var index = Array.FindIndex(Providers,
+                    p => p.Name.Equals(msg[9..], StringComparison.OrdinalIgnoreCase));
+                if (index >= 0) SetProvider(index);
+                else System.Diagnostics.Trace.TraceWarning("Unknown start-page search provider.");
+            }
+            else System.Diagnostics.Trace.TraceWarning("Unrecognized start-page settings message.");
         };
         core.WindowCloseRequested += (_, _) => CloseTab(tab);
         view.KeyDown += (_, e) => HandleShortcut(e);
@@ -358,9 +382,11 @@ internal sealed class MainForm : Form
 
     private static string Shorten(string s) => string.IsNullOrEmpty(s) ? "New Tab" : s.Length > 22 ? s[..22] + "\u2026" : s;
 
-    private void ShowUrl(string src)
+    private void ShowUrl(string src, bool force = false)
     {
-        omnibox.Text = src != null && src.StartsWith(StartUrl, StringComparison.OrdinalIgnoreCase) ? "" : src ?? "";
+        if (!force && omnibox.Modified) return;
+        omnibox.Text = IsStartPage(src) ? "" : src ?? "";
+        omnibox.Modified = false;
     }
 
     private void UpdateNav()
@@ -376,7 +402,7 @@ internal sealed class MainForm : Form
         foreach (var t in tabs) t.View.Visible = t == tab;
         tab.View.BringToFront();
         ApplyChrome();
-        ShowUrl(tab.View.CoreWebView2?.Source);
+        ShowUrl(tab.View.CoreWebView2?.Source, force: true);
         Text = WindowTitle(tab.View.CoreWebView2?.DocumentTitle);
         UpdateNav();
         if (omnibox.Text.Length == 0) omnibox.Focus(); else tab.View.Focus();
@@ -416,19 +442,17 @@ internal sealed class MainForm : Form
         base.OnKeyDown(e);
     }
 
-    private static string Normalize(string input)
-    {
-        input = input.Trim();
-        if (input.Contains("://") || input.StartsWith("about:", StringComparison.OrdinalIgnoreCase)) return input;
-        if (!input.Contains(' ') && (input.Contains('.') || input.StartsWith("localhost", StringComparison.OrdinalIgnoreCase)))
-            return "https://" + input;
-        return null;
-    }
-
     private void Navigate(string text)
     {
-        if (string.IsNullOrWhiteSpace(text) || current?.View.CoreWebView2 == null) return;
-        var url = Normalize(text) ?? string.Format(Providers[providerIndex].Url, Uri.EscapeDataString(text.Trim()));
+        var url = Resolve(text, Providers[providerIndex]);
+        if (url == null) return;
+        if (current?.View.CoreWebView2 == null)
+        {
+            MessageBox.Show(this, "The browser is still starting. Please submit your search again in a moment.",
+                "K-Meleon-R", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+        omnibox.Modified = false;
         current.View.CoreWebView2.Navigate(url);
     }
 
@@ -439,22 +463,9 @@ internal sealed class MainForm : Form
         return opts;
     }
 
-    private async Task AskCopilot()
+    private async Task Ask(string providerName)
     {
-        var q = omnibox.Text.Trim();
-        var url = q.Length > 0
-            ? "https://copilot.microsoft.com/?q=" + Uri.EscapeDataString(q)
-            : "https://copilot.microsoft.com/";
-        await AddTab(url);
-    }
-
-    private async Task AskGemini()
-    {
-        var q = omnibox.Text.Trim();
-        // Google AI Mode (udm=50) is the Gemini-powered search; the bare app takes no query URL.
-        var url = q.Length > 0
-            ? "https://www.google.com/search?udm=50&q=" + Uri.EscapeDataString(q)
-            : "https://gemini.google.com/app";
-        await AddTab(url);
+        var url = Providers.Single(p => p.Name == providerName).Search(omnibox.Text);
+        await AddTab(url, current?.IsPrivate ?? false);
     }
 }

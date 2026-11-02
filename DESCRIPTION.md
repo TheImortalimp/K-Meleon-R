@@ -10,7 +10,10 @@ K-Meleon-R combines a lightweight WinForms/WebView2 browser shell with editable
 speed dials, synchronized themes, browser tabs, private tabs and web search/AI
 shortcuts. It runs on Windows 10/11 x64 with Microsoft Edge WebView2.
 
-r15 completes Google/Gemini search query support. Since r14 the browser integrates SmartScreen, attachment-service/AMSI download scanning through
+r15 completes Gemini (Google AI Mode)/Copilot Search query routing, synchronizes
+the selected provider between toolbar and start page, and preserves full
+submitted queries without sharing typing or sending searches to both services.
+Website addresses still open normally. Since r14 the browser integrates SmartScreen, attachment-service/AMSI download scanning through
 the installed antivirus, a Security Center watchdog, optional Google Safe
 Browsing lookups, an anti-screencap window shield and a script-scheme phishing
 filter, on top of the r12/r13 theme/cursor takeover defenses.
