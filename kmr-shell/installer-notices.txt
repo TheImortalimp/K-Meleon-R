@@ -1,0 +1,65 @@
+K-Meleon-R r14 (8.6.0) - License and Security Notices
+======================================================
+
+SECURITY NOTICE - PLEASE READ
+-----------------------------
+* This installer is NOT code-signed. Microsoft Defender SmartScreen may show
+  "Windows protected your PC". Only continue if you downloaded this installer
+  from the official GitHub release page and its SHA-256 checksum matches the
+  one published there:
+  https://github.com/TheImortalimp/K-Meleon-R/releases
+* With ADMINISTRATOR rights (UAC) the installer applies Windows
+  pointer/theme/sound policy hardening across local profiles (anti GEM OS /
+  cursor-theft defenses). Uninstalling the browser does NOT automatically
+  restore these Windows policy changes.
+* WITHOUT administrator rights the browser installs per-user and the Windows
+  policy hardening steps are skipped; the hardening scripts are installed
+  alongside the application and can be run elevated later.
+
+Project home: https://imortalimp.nl | https://github.com/TheImortalimp/K-Meleon-R
+
+K-MELEON-R
+----------
+Copyright (c) River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub
+Copilot. See NOTICE-K-Meleon-R.md (installed alongside the application) for
+full attribution. K-Meleon, Goanna/Pale Moon, Babel and other third-party
+components retain their own licenses; this application does not override them.
+
+.NET RUNTIME TRIBUTE (MIT LICENSE)
+----------------------------------
+This application is self-contained and ships with the Microsoft .NET 8
+Runtime and Windows Forms libraries, built with gratitude on the work of the
+.NET Foundation and its contributors.
+
+    The MIT License (MIT)
+
+    Copyright (c) .NET Foundation and Contributors
+
+    All rights reserved.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+    .NET source and license: https://github.com/dotnet/runtime
+
+MICROSOFT EDGE WEBVIEW2
+-----------------------
+Rendering uses the Microsoft Edge WebView2 Runtime and the Microsoft.Web.WebView2
+SDK, distributed under Microsoft's WebView2 license terms. The WebView2
+Runtime itself is installed and serviced by Microsoft.

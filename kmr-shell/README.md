@@ -52,9 +52,13 @@ shell offers Microsoft's runtime download page.
 
 ## Installation and policy effects
 
-The installer requests administrator elevation and defaults to
-`%LOCALAPPDATA%\Programs\K-Meleon-R`. It runs both `cursor_lockdown.ps1` and
-`harden_against_gem_os.ps1 -Apply`, affecting Windows settings/local profiles.
+The installer elevates when possible (`RequestExecutionLevel highest`) and
+defaults to `%LOCALAPPDATA%\Programs\K-Meleon-R`. It shows a license/security
+notices page (.NET MIT tribute, SmartScreen/administrator warning) and carries
+imortalimp.nl publisher metadata. With administrator rights it runs both
+`cursor_lockdown.ps1` and `harden_against_gem_os.ps1 -Apply`, affecting
+Windows settings/local profiles; without them the hardening steps are skipped
+and the scripts remain installed for later elevated use.
 Quarantine is not enabled by the installer.
 
 The runtime guard accepts empty pointer slots or valid system `.cur`/`.ani`
@@ -96,10 +100,12 @@ Set `gsbApiKey` in settings.json (or `KMR_GSB_API_KEY`) to enable Google Safe
 Browsing lookups. Ordinary pages cannot access the native host bridge;
 `https://kmr.start/index.html` retains it for theme synchronization.
 
-SmartScreen reputation checking is forced on; tracking prevention defaults to
+SmartScreen reputation checking is forced on and silently re-asserted on every
+tab each minute while the browser runs; tracking prevention defaults to
 Balanced (`tracking` setting: `none`/`balanced`/`strict`). The capture shield
-is on by default and hides the window from the user's own screenshots too -
-toggle the toolbar Shield button to capture. Clipboard-read requests are
+is on by default, has no UI and hides the window from the user's own
+screenshots too - set `"shield": "off"` in settings.json to capture.
+Clipboard-read requests are
 automatically allowed and autoplay is enabled. External-service availability
 remains outside the shell's control.
 

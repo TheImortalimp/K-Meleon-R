@@ -4,7 +4,7 @@ using Microsoft.Web.WebView2.Core;
 
 namespace KMeleonR;
 
-// Microsoft Defender / Windows security integration. Four layers, all automatic:
+// Microsoft Defender / Windows security integration. Five layers, all automatic and silent:
 //  1. SmartScreen: WebView2 reputation checking is forced on for every navigation and download.
 //  2. Downloads: every completed download goes through the Windows Attachment Execution Service
 //     (IAttachmentExecute.Save), which stamps the Mark-of-the-Web and hands the file to the
@@ -12,15 +12,23 @@ namespace KMeleonR;
 //     AMSI, the same interface Defender uses for script scanning. Flagged files are removed.
 //  3. Watchdog: Windows Security Center is polled so the user is warned when no real-time
 //     antivirus protection is active or definitions are stale.
-//  4. Phishing filter: javascript:, data: and vbscript: top-level navigations are refused and
-//     punycode (IDN homograph) hosts are logged.
+//  4. Self-healing: the Defender hooks are silently re-asserted on launch and every minute while
+//     the browser runs, on every live tab, so nothing can quietly switch them off.
+//  5. Phishing filter: javascript:, data: and vbscript: top-level navigations are refused and
+//     punycode (IDN homograph) hosts are logged. Logs are size-capped (no loose tails).
 internal static class DefenderGuard
 {
     private static string logPath = "";
     private static Action<string> notify = _ => { };
     private static System.Windows.Forms.Timer watchdog;
+    private static System.Windows.Forms.Timer healer;
     private static string lastAvWarning;
+    private static readonly List<WeakReference<CoreWebView2>> attached = new();
     private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<CoreWebView2, object> expectedDataNav = new();
+
+    // Raised after each silent re-assert cycle so other guards (e.g. the capture shield)
+    // can re-apply themselves too.
+    public static event Action Reasserted;
 
     // SafeBrowsingGuard renders its local warning via NavigateToString, which WebView2 implements
     // as a data: navigation; this one-shot token keeps the phishing filter from cancelling it.
@@ -39,11 +47,38 @@ internal static class DefenderGuard
         watchdog.Tick += (_, _) => CheckSecurityCenter();
         watchdog.Start();
         CheckSecurityCenter();
+        // Silent self-healing: re-assert the hooks on every live tab, each minute, no UI.
+        healer = new System.Windows.Forms.Timer { Interval = 60_000 };
+        healer.Tick += (_, _) => Reassert();
+        healer.Start();
+    }
+
+    // Re-applies the Defender hooks to every live WebView2 without any user-visible output.
+    public static void Reassert()
+    {
+        lock (attached)
+        {
+            for (var i = attached.Count - 1; i >= 0; i--)
+            {
+                if (!attached[i].TryGetTarget(out var core)) { attached.RemoveAt(i); continue; }
+                try
+                {
+                    if (!core.Settings.IsReputationCheckingRequired)
+                    {
+                        core.Settings.IsReputationCheckingRequired = true;
+                        Log("re-enabled SmartScreen reputation checking");
+                    }
+                }
+                catch { attached.RemoveAt(i); }   // tab was disposed
+            }
+        }
+        try { Reasserted?.Invoke(); } catch { }
     }
 
     public static void Attach(CoreWebView2 core)
     {
         core.Settings.IsReputationCheckingRequired = true;   // SmartScreen URL + download reputation
+        lock (attached) attached.Add(new WeakReference<CoreWebView2>(core));
 
         core.NavigationStarting += (_, e) =>
         {
@@ -208,11 +243,15 @@ internal static class DefenderGuard
 
     private static string Shorten(string s) => s.Length > 120 ? s[..120] + "\u2026" : s;
 
+    private const long MaxLogBytes = 512 * 1024;   // no loose tails: logs are capped, never unbounded
+
     private static void Log(string line)
     {
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
+            var info = new FileInfo(logPath);
+            if (info.Exists && info.Length > MaxLogBytes) info.Delete();
             File.AppendAllText(logPath, $"{DateTime.Now:s} {line}{Environment.NewLine}");
         }
         catch { }

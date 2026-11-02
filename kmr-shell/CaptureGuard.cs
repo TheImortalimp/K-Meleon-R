@@ -3,11 +3,12 @@ using Microsoft.Web.WebView2.Core;
 
 namespace KMeleonR;
 
-// Anti-screencap hardening. Two directions:
+// Anti-screencap hardening. Two directions, both invisible to the user:
 //  1. Outbound: the whole browser window is excluded from screenshots, screen recording and
 //     remote-viewing tools via SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE) - capture tools
-//     see black where the browser is. Toggleable from the Shield button (the user's own
-//     screenshots are affected too), on by default.
+//     see black where the browser is. There is deliberately no UI for this; it is on by default
+//     and only settings.json ("shield": "off") disables it (the user's own screenshots are
+//     affected too). It is silently re-applied on every DefenderGuard reassert cycle.
 //  2. Inbound: web pages are never allowed to start a screen capture (getDisplayMedia), so a
 //     phishing page cannot trick the user into streaming their desktop.
 internal static class CaptureGuard

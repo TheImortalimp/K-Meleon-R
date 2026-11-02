@@ -35,7 +35,6 @@ internal sealed class MainForm : Form
     private readonly Button provider = MakeButton("", 84);
     private readonly Button askCopilot = MakeButton("Ask Copilot", 96);
     private readonly Button askGemini = MakeButton("Ask Gemini", 92);
-    private readonly Button shield = MakeButton("", 92);
     private readonly Button theme = MakeButton("", 92);
     private readonly Panel host = new() { Dock = DockStyle.Fill };
     private readonly List<BrowserTab> tabs = new();
@@ -63,7 +62,7 @@ internal sealed class MainForm : Form
         tabStrip.Controls.Add(newTabButton);
 
         var right = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, WrapContents = false, Padding = new Padding(0, 4, 4, 0) };
-        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, shield, theme });
+        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, theme });
         var left = new FlowLayoutPanel { Dock = DockStyle.Left, AutoSize = true, WrapContents = false, Padding = new Padding(4, 4, 0, 0) };
         left.Controls.AddRange(new Control[] { back, fwd, reload, home });
         omnibox.Dock = DockStyle.Fill;
@@ -95,19 +94,15 @@ internal sealed class MainForm : Form
         };
         askCopilot.Click += async (_, _) => await AskCopilot();
         askGemini.Click += async (_, _) => await AskGemini();
-        shield.Click += (_, _) =>
-        {
-            Settings.Set("shield", ShieldOn ? "off" : "on");
-            CaptureGuard.Apply(this, ShieldOn);
-            ApplyChrome();
-        };
         theme.Click += (_, _) => CycleTheme();
+        // Silent self-healing: the capture shield is re-applied on every guard refresh cycle.
+        DefenderGuard.Reasserted += () => { try { CaptureGuard.Apply(this, ShieldOn); } catch { } };
 
         ApplyChrome();
         Shown += async (_, _) => await Start();
     }
 
-    // Capture shield (anti-screencap) is on unless the user turns it off.
+    // Capture guard (anti-screencap) runs invisibly; it is on unless settings.json sets "shield" to "off".
     private bool ShieldOn => Settings.Get("shield", "on") == "on";
 
     protected override void OnHandleCreated(EventArgs e)
@@ -198,7 +193,7 @@ internal sealed class MainForm : Form
         foreach (Control c in toolbar.Controls) c.BackColor = p.Bg;
         omnibox.BackColor = p.Field;
         omnibox.ForeColor = p.Fg;
-        foreach (var b in new[] { back, fwd, reload, home, provider, askCopilot, askGemini, shield, theme, newTabButton })
+        foreach (var b in new[] { back, fwd, reload, home, provider, askCopilot, askGemini, theme, newTabButton })
         {
             b.BackColor = p.Button;
             b.ForeColor = p.Fg;
@@ -212,7 +207,6 @@ internal sealed class MainForm : Form
         askGemini.ForeColor = Color.White;
         askGemini.FlatAppearance.MouseOverBackColor = Color.FromArgb(88, 124, 232);
         provider.Text = "Search: " + Providers[providerIndex].Name;
-        shield.Text = "Shield: " + (ShieldOn ? "On" : "Off");
         theme.Text = "Theme: " + ThemeLabel(themeMode);
         foreach (var t in tabs) StyleHeader(t, p);
 

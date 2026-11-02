@@ -13,8 +13,10 @@ Defender/Safe Browsing/anti-screencap hardening.**
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
 - The installer defaults to `%LOCALAPPDATA%\Programs\K-Meleon-R`.
-- **Approve UAC elevation:** installation applies Windows pointer/theme/sound
-  policy hardening, including local profiles. Review [protection boundaries](ABOUT.md#protection-boundaries).
+- **UAC elevation is optional:** with administrator rights the installer
+  applies Windows pointer/theme/sound policy hardening, including local
+  profiles ([protection boundaries](ABOUT.md#protection-boundaries)); without
+  them the browser installs per-user and the hardening steps are skipped.
 - The installer is unsigned and may trigger SmartScreen. Verify its hash and
   source before deciding whether to run it; a hash is not a safety certificate.
 - The portable ZIP runs without installation; the Windows hardening scripts are
@@ -23,8 +25,8 @@ Defender/Safe Browsing/anti-screencap hardening.**
 SHA-256 (r14):
 
 ```text
-K-Meleon-R-r14-x64-setup.exe    28920544B2237C7FAE6BAFB3AC612CA303DD472F4D10D32F81228C7EDD7315FE
-K-Meleon-R-r14-x64-portable.zip 7D537CA9705258AA92962278006B0F3516E602C99CEB29CE55E5332F4BE82F05
+K-Meleon-R-r14-x64-setup.exe    440808FF57BA7DC881CE41719A8E8C2ED3E2B0A48019EE6431A0C18B94D9556E
+K-Meleon-R-r14-x64-portable.zip A876BB2810E0A945546D9D3AF940BB87531C210D47B46109D426BC2B8B0F91EE
 ```
 
 ## What's new in r14
@@ -36,9 +38,9 @@ K-Meleon-R-r14-x64-portable.zip 7D537CA9705258AA92962278006B0F3516E602C99CEB29CE
 - **Google Safe Browsing:** navigations are checked against the Safe Browsing
   v4 blocklists and flagged pages replaced by a local warning page (needs a
   free API key - `gsbApiKey` setting or `KMR_GSB_API_KEY`).
-- **Anti-screencap shield (on by default):** the window is excluded from
+- **Anti-screencap shield (on by default, no UI):** the window is excluded from
   screenshots/recording/remote-viewing tools, and web pages can never start a
-  screen capture. Toggleable from the toolbar Shield button.
+  screen capture. Runs invisibly; `"shield": "off"` in settings.json disables it.
 - **Phishing filter:** `javascript:`/`data:`/`vbscript:` navigations blocked,
   punycode (IDN homograph) hosts logged.
 - **Private tabs** (Ctrl+Shift+N, in-memory profile) and tracking prevention

@@ -8,6 +8,10 @@ Copilot/Gemini get first-class query support.
 
 - **SmartScreen on:** WebView2 reputation checking is now forced on for every
   navigation and download (it was previously disabled).
+- **Silent self-healing:** the Defender hooks are re-asserted on launch and
+  every minute while the browser runs, on every live tab, with no UI - if
+  anything switches SmartScreen off it is silently switched back on, and the
+  capture shield is re-applied in the same cycle. Guard logs are size-capped.
 - **Download scanning:** every completed download is handed to the Windows
   Attachment Execution Service (`IAttachmentExecute.Save`), which stamps the
   Mark-of-the-Web and invokes the registered antivirus - Microsoft Defender by
@@ -35,11 +39,12 @@ Copilot/Gemini get first-class query support.
 
 ## Anti-screencap hardening (CaptureGuard)
 
-- **Shield button (on by default):** the whole browser window is excluded from
-  screenshots, screen recording and remote-viewing tools via
+- **Capture shield (on by default, no UI):** the whole browser window is
+  excluded from screenshots, screen recording and remote-viewing tools via
   `SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE)` - capture tools see black
-  where the browser is. Because this also affects the user's own screenshots,
-  the toolbar Shield button toggles it and the choice is persisted.
+  where the browser is. The shield runs invisibly and is silently re-applied
+  each guard cycle; it can only be disabled by setting `"shield": "off"` in
+  `settings.json` (it affects the user's own screenshots too).
 - **Inbound block:** web pages can never start a screen capture
   (`getDisplayMedia`); the WebView2 `ScreenCaptureStarting` request is always
   cancelled, so a phishing page cannot trick the user into streaming their
@@ -68,6 +73,16 @@ Copilot/Gemini get first-class query support.
 
 - Installer version r14; the hardening scripts now run with
   `-ExecutionPolicy RemoteSigned` instead of `Bypass`.
+- **License and security notices page:** the installer shows a notices page
+  with a .NET Runtime MIT license tribute (the app ships the self-contained
+  .NET 8 runtime), the WebView2 license note and an explicit
+  SmartScreen/administrator warning dialog before installing.
+- **Non-admin installs:** elevation is no longer required
+  (`RequestExecutionLevel highest`). Without administrator rights the browser
+  installs per-user and the Windows policy hardening steps are skipped; the
+  scripts are installed alongside the app for later elevated use.
+- **Publisher metadata:** installer version info and the Windows uninstall
+  entry carry imortalimp.nl (publisher, about link).
 - WebView2 SDK updated to 1.0.4314.35 (needed for the screen-capture block);
   `System.Management` added for the Security Center watchdog; the unused
   WebView2 WPF assembly is pruned from the build.
@@ -75,7 +90,8 @@ Copilot/Gemini get first-class query support.
 ## Limits
 
 - The capture shield needs Windows 10 2004+ and hides the window from the
-  user's own screenshots too (toggle the Shield button off to capture).
+  user's own screenshots too (set `"shield": "off"` in settings.json to
+  capture; there is intentionally no button for it).
 - Download scanning and the watchdog depend on the installed antivirus and on
   Security Center (absent on Windows Server); Safe Browsing needs an API key.
 - An administrator can still undo policies; the installer remains unsigned, so
@@ -95,8 +111,8 @@ Copilot/Gemini get first-class query support.
 SHA-256:
 
 ```text
-K-Meleon-R-r14-x64-setup.exe    28920544B2237C7FAE6BAFB3AC612CA303DD472F4D10D32F81228C7EDD7315FE
-K-Meleon-R-r14-x64-portable.zip 7D537CA9705258AA92962278006B0F3516E602C99CEB29CE55E5332F4BE82F05
+K-Meleon-R-r14-x64-setup.exe    440808FF57BA7DC881CE41719A8E8C2ED3E2B0A48019EE6431A0C18B94D9556E
+K-Meleon-R-r14-x64-portable.zip A876BB2810E0A945546D9D3AF940BB87531C210D47B46109D426BC2B8B0F91EE
 ```
 
 ## Retained changes
