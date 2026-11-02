@@ -15,6 +15,10 @@ dial, Dark/Light/Sand/Sky/System themes, Bing/Google/Copilot/Gemini search,
 Copilot/Gemini query shortcuts, fullscreen video, zoom, autofill, password
 saving and renderer reload handling.
 
+- **r15 / 8.7.0:** bugfix release completing Google/Gemini query support:
+  Ask Gemini/Ask Copilot always send the query (dotted single words are no
+  longer treated as URLs) and the start page gains a Gemini (Google AI Mode)
+  provider.
 - **r14 / 8.6.0:** Microsoft Defender integration (SmartScreen on, attachment
   service + AMSI download scanning, Security Center watchdog), Google Safe
   Browsing lookups, anti-screencap shield, `javascript:`/`data:`/`vbscript:`
@@ -111,8 +115,8 @@ remains outside the shell's control.
 
 ## Validation and limits
 
-The r14 code builds cleanly and the shell was smoke-tested (launch, window,
-clean shutdown). Download scanning and the watchdog depend on the installed
+The r15 code builds cleanly (CI-packaged installer and portable ZIP); the r14
+shell was smoke-tested (launch, window, clean shutdown). Download scanning and the watchdog depend on the installed
 antivirus and Security Center (absent on Windows Server); the capture shield
 needs Windows 10 2004+. Machine-policy `-Apply` has not been validated
 end-to-end on a real machine. An administrator can undo policies; unsigned

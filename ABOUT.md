@@ -14,9 +14,13 @@ repository for reference.
 
 **r15 / 8.7.0**, tag
 **[v8.7.0-r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)**
-(installer and portable ZIP).
+(installer and portable ZIP). r15 is a bugfix release that completes the
+Google/Gemini search query support begun in r14: Ask Gemini and Ask Copilot
+always send your query, and the start page has a Gemini (Google AI Mode)
+provider. Direct downloads are also kept in
+[`dist/r15`](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15).
 
-r14 integrates the Microsoft and Google protection layers directly into every
+r14 introduced the Microsoft and Google protection layers directly into every
 tab: SmartScreen reputation checking, Attachment Execution Service + AMSI
 download scanning through the installed antivirus (Microsoft Defender by
 default), a Security Center watchdog, optional Google Safe Browsing lookups,

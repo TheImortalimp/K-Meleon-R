@@ -9,6 +9,7 @@ Defender/Safe Browsing/anti-screencap hardening.**
 [Download the r15 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
 | [r15 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
 | [Release notes](RELEASE_NOTES_r15.md)
+| [Direct download from dist/r15](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
