@@ -38,7 +38,10 @@ undo; portable policy scripts are optional and are not run automatically.
 Release validation does not run the installer or change machine policies.
 
 ## SHA-256
+
+Built from source commit `c6eb4eef2cf8eefc9d5b225ca0012d0919319358`.
+
 ```
-K-Meleon-R-r15-x64-setup.exe    CCA7FFB5F8337EE22E17185B1C3E719D0C0E703B2A16670C8A49DE800ED80B66
-K-Meleon-R-r15-x64-portable.zip 503C49275B6171DB9F77218B3C731B6191F2ECC007BA1AC7471C2685678D4AAD
+K-Meleon-R-r15-x64-setup.exe    0589C06DFB74CA380A68ACAAD51002925689BAA65008F9DFF6C4391E628FD701
+K-Meleon-R-r15-x64-portable.zip 16A81FA5DD87E176AEF799E7CB5CD0A84DCFFAD32E8AC52EA467B41464870824
 ```
