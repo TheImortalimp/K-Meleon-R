@@ -10,6 +10,8 @@ internal static class Program
         CursorGuard.HardenProcess();
         ApplicationConfiguration.Initialize();
         CursorGuard.Start("K-Meleon-R");
+        DefenderGuard.Init("K-Meleon-R", msg => MessageBox.Show(msg, "K-Meleon-R security", MessageBoxButtons.OK, MessageBoxIcon.Warning));
+        SafeBrowsingGuard.Init();
         Application.Run(new MainForm(args.Length > 0 ? args[0] : null));
     }
 }

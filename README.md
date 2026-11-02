@@ -1,12 +1,16 @@
-# K-Meleon-R r13 (8.5.0)
+# K-Meleon-R r14 (8.6.0)
 
 **A small standalone Windows browser with a GX-style start page, tabs,
-five synchronized themes and Microsoft Edge WebView2 rendering.**
+five synchronized themes, Microsoft Edge WebView2 rendering and layered
+Defender/Safe Browsing/anti-screencap hardening.**
 
 ## Download and install
 
-[Download the r13 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.5.0-r13/K-Meleon-R-r13-x64-setup.exe)
-| [Release notes](RELEASE_NOTES_r13.md)
+r14 is currently source-only; build it from [kmr-shell/](kmr-shell/)
+([instructions](kmr-shell/README.md)). The latest published installer is
+[r13 for Windows x64](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.5.0-r13/K-Meleon-R-r13-x64-setup.exe)
+| [r14 release notes](RELEASE_NOTES_r14.md)
+| [r13 release notes](RELEASE_NOTES_r13.md)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
@@ -15,28 +19,37 @@ five synchronized themes and Microsoft Edge WebView2 rendering.**
   policy hardening, including local profiles. Review [protection boundaries](ABOUT.md#protection-boundaries).
 - The installer is unsigned and may trigger SmartScreen. Verify its hash and
   source before deciding whether to run it; a hash is not a safety certificate.
-- r13 currently provides an installer only; earlier releases may have portable
-  archives. Do not assume an older portable download contains r13 fixes.
 
-Installer SHA-256:
+Installer SHA-256 (r13):
 
 ```text
 5CD14BA6F6D297B9E2D492DF69D04477699A8A46F581FE5AD188DA8F5EFE9EFB
 ```
 
-## What's new in r13
+## What's new in r14
 
-- Blocks theme/pointer package downloads and navigation for `.theme`,
-  `.themepack`, `.deskthemepack`, `.cur` and `.ani`, including trailing-dot/space
-  variants; blocks `ms-settings:` navigation.
-- Adds `NoChangingSoundScheme` alongside `NoChangingMousePointers`.
-- Ships and runs `harden_against_gem_os.ps1 -Apply`; quarantine remains opt-in.
-- Retains r12 system-pointer guards and process hardening, plus the r11
-  native-host bridge fix used by embedded-player web apps.
+- **Microsoft Defender hooks:** SmartScreen reputation checking forced on;
+  every completed download is scanned through the Windows Attachment Execution
+  Service (Mark-of-the-Web + Defender) and AMSI, with flagged files removed;
+  a Security Center watchdog warns when real-time antivirus protection is off.
+- **Google Safe Browsing:** navigations are checked against the Safe Browsing
+  v4 blocklists and flagged pages replaced by a local warning page (needs a
+  free API key - `gsbApiKey` setting or `KMR_GSB_API_KEY`).
+- **Anti-screencap shield (on by default):** the window is excluded from
+  screenshots/recording/remote-viewing tools, and web pages can never start a
+  screen capture. Toggleable from the toolbar Shield button.
+- **Phishing filter:** `javascript:`/`data:`/`vbscript:` navigations blocked,
+  punycode (IDN homograph) hosts logged.
+- **Private tabs** (Ctrl+Shift+N, in-memory profile) and tracking prevention
+  raised to Balanced by default.
+- **Copilot/Gemini:** Ask Copilot passes the query to `copilot.microsoft.com`;
+  Ask Gemini opens Google AI Mode with the query; Gemini joins the search
+  provider cycle.
+- Installer hardening scripts now run with `-ExecutionPolicy RemoteSigned`
+  instead of `Bypass`.
 
-These are targeted defenses against theme/cursor takeover, not general
-anti-malware protection. Administrators can undo policies. The machine-policy
-apply path was not validated end-to-end on a real machine.
+These are layered defenses, not general anti-malware protection or a safety
+guarantee. Administrators can undo policies.
 
 ## Browser features
 
@@ -44,11 +57,14 @@ apply path was not validated end-to-end on a real machine.
   Opera GX, plus editable custom tiles and thumbnails.
 - Dark, Light, Sand, Sky and System themes, synchronized across start page,
   tabs, toolbar and WebView2 background.
-- Address/search bar with Bing, Google and Copilot Search providers.
-- **Ask Copilot** opens Copilot Search; **Ask Gemini** copies the text to the
-  clipboard and opens Gemini for pasting. These are external web services.
-- Tabs, video fullscreen, browser zoom, autofill, password saving, developer
-  tools and renderer-crash/unresponsive reload handling.
+- Address/search bar with Bing, Google, Copilot and Gemini (Google AI Mode)
+  search providers.
+- **Ask Copilot** opens Microsoft Copilot with your query; **Ask Gemini** opens
+  Google AI Mode with your query (or the Gemini app without one). These are
+  external web services.
+- Tabs (including private tabs), video fullscreen, browser zoom, autofill,
+  password saving, developer tools and renderer-crash/unresponsive reload
+  handling.
 - Ordinary web pages do not receive the native host bridge; the local start
   page retains it for theme synchronization.
 
@@ -60,6 +76,7 @@ Compatibility is not guaranteed for every site.
 | Shortcut | Action |
 |----------|--------|
 | Ctrl+T / Ctrl+W | New tab / close tab |
+| Ctrl+Shift+N | New private tab |
 | Ctrl+Tab / Ctrl+Shift+Tab | Next / previous tab |
 | Ctrl+L / F6 | Focus address bar |
 | F5 | Reload |
@@ -67,13 +84,14 @@ Compatibility is not guaranteed for every site.
 | F12 | WebView2 developer tools |
 
 Settings and browser profile live under `%LOCALAPPDATA%\K-Meleon-R`.
-The cursor runtime log is `cursor-guard.log` in that folder.
+Runtime logs in that folder: `cursor-guard.log` and `defender-guard.log`.
 Optional `KMR_DEBUG_PORT` enables local Chromium remote debugging; leave it
-unset for normal use.
+unset for normal use. Optional `gsbApiKey` (settings.json) or
+`KMR_GSB_API_KEY` enables Google Safe Browsing lookups.
 
-Tracking prevention and reputation checking are disabled in the current host.
-This favors embedded-player compatibility but is not a privacy-hardened
-configuration. Clipboard-read requests are automatically allowed.
+SmartScreen reputation checking is always on; tracking prevention defaults to
+Balanced (`tracking` setting: `none`/`balanced`/`strict`). Clipboard-read
+requests are still automatically allowed.
 See [About](ABOUT.md) for these boundaries.
 
 ## Source and build
@@ -83,13 +101,11 @@ WinForms/WebView2 shell; it is not the old Gecko/Goanna C++ browser.
 See [shell documentation](kmr-shell/README.md) for build commands and policy logs.
 The older r1-r5 builds and original K-Meleon sources remain for reference.
 
-This update refreshes r13 documentation and GitHub About only. It does not
-replace the existing r13 installer or claim new runtime testing.
-
 ## Version history
 
 | Release | Changes |
 |---------|---------|
+| r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |
 | r11 / 8.3.0 | Hide native host bridge from ordinary pages; embedded-player compatibility; optional debug port |

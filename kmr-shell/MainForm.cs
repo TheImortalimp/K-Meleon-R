@@ -8,6 +8,7 @@ internal sealed class BrowserTab
     public WebView2 View;
     public Button Header;
     public string Title = "New Tab";
+    public bool IsPrivate;
 }
 
 internal sealed class MainForm : Form
@@ -19,6 +20,7 @@ internal sealed class MainForm : Form
         ("Bing", "https://www.bing.com/search?q={0}"),
         ("Google", "https://www.google.com/search?q={0}"),
         ("Copilot", "https://www.bing.com/copilotsearch?q={0}"),
+        ("Gemini", "https://www.google.com/search?udm=50&q={0}"),
     };
 
     private readonly Panel tabStrip = new() { Dock = DockStyle.Top, Height = 34 };
@@ -33,6 +35,7 @@ internal sealed class MainForm : Form
     private readonly Button provider = MakeButton("", 84);
     private readonly Button askCopilot = MakeButton("Ask Copilot", 96);
     private readonly Button askGemini = MakeButton("Ask Gemini", 92);
+    private readonly Button shield = MakeButton("", 92);
     private readonly Button theme = MakeButton("", 92);
     private readonly Panel host = new() { Dock = DockStyle.Fill };
     private readonly List<BrowserTab> tabs = new();
@@ -60,7 +63,7 @@ internal sealed class MainForm : Form
         tabStrip.Controls.Add(newTabButton);
 
         var right = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, WrapContents = false, Padding = new Padding(0, 4, 4, 0) };
-        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, theme });
+        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, shield, theme });
         var left = new FlowLayoutPanel { Dock = DockStyle.Left, AutoSize = true, WrapContents = false, Padding = new Padding(4, 4, 0, 0) };
         left.Controls.AddRange(new Control[] { back, fwd, reload, home });
         omnibox.Dock = DockStyle.Fill;
@@ -92,10 +95,25 @@ internal sealed class MainForm : Form
         };
         askCopilot.Click += async (_, _) => await AskCopilot();
         askGemini.Click += async (_, _) => await AskGemini();
+        shield.Click += (_, _) =>
+        {
+            Settings.Set("shield", ShieldOn ? "off" : "on");
+            CaptureGuard.Apply(this, ShieldOn);
+            ApplyChrome();
+        };
         theme.Click += (_, _) => CycleTheme();
 
         ApplyChrome();
         Shown += async (_, _) => await Start();
+    }
+
+    // Capture shield (anti-screencap) is on unless the user turns it off.
+    private bool ShieldOn => Settings.Get("shield", "on") == "on";
+
+    protected override void OnHandleCreated(EventArgs e)
+    {
+        base.OnHandleCreated(e);
+        CaptureGuard.Apply(this, ShieldOn);
     }
 
     private static Button MakeButton(string text, int width) => new()
@@ -180,7 +198,7 @@ internal sealed class MainForm : Form
         foreach (Control c in toolbar.Controls) c.BackColor = p.Bg;
         omnibox.BackColor = p.Field;
         omnibox.ForeColor = p.Fg;
-        foreach (var b in new[] { back, fwd, reload, home, provider, askCopilot, askGemini, theme, newTabButton })
+        foreach (var b in new[] { back, fwd, reload, home, provider, askCopilot, askGemini, shield, theme, newTabButton })
         {
             b.BackColor = p.Button;
             b.ForeColor = p.Fg;
@@ -194,6 +212,7 @@ internal sealed class MainForm : Form
         askGemini.ForeColor = Color.White;
         askGemini.FlatAppearance.MouseOverBackColor = Color.FromArgb(88, 124, 232);
         provider.Text = "Search: " + Providers[providerIndex].Name;
+        shield.Text = "Shield: " + (ShieldOn ? "On" : "Off");
         theme.Text = "Theme: " + ThemeLabel(themeMode);
         foreach (var t in tabs) StyleHeader(t, p);
 
@@ -234,14 +253,14 @@ internal sealed class MainForm : Form
         ApplyChrome();
     }
 
-    private async Task<BrowserTab> AddTab(string url)
+    private async Task<BrowserTab> AddTab(string url, bool inPrivate = false)
     {
         var view = new WebView2 { Dock = DockStyle.Fill, Visible = false };
-        var tab = new BrowserTab { View = view };
+        var tab = new BrowserTab { View = view, IsPrivate = inPrivate };
         tab.Header = new Button
         {
             Width = 190, Height = 30, FlatStyle = FlatStyle.Flat, TextAlign = ContentAlignment.MiddleLeft,
-            Margin = new Padding(2, 4, 0, 0), TabStop = false, Text = "New Tab",
+            Margin = new Padding(2, 4, 0, 0), TabStop = false, Text = inPrivate ? "[P] New Tab" : "New Tab",
         };
         tab.Header.Click += (_, e) =>
         {
@@ -253,10 +272,13 @@ internal sealed class MainForm : Form
         host.Controls.Add(view);
         Select(tab);
 
-        await view.EnsureCoreWebView2Async(env);
+        await view.EnsureCoreWebView2Async(env, inPrivate ? PrivateOptions() : null);
         var core = view.CoreWebView2;
         await CursorGuard.AttachAsync(core);
         CursorGuard.HardenBrowser(core);
+        DefenderGuard.Attach(core);
+        SafeBrowsingGuard.Attach(core);
+        CaptureGuard.HardenBrowser(core);
         core.SetVirtualHostNameToFolderMapping("kmr.start", Path.Combine(AppContext.BaseDirectory, "start"),
             CoreWebView2HostResourceAccessKind.Allow);
         core.Settings.AreDefaultContextMenusEnabled = true;
@@ -269,9 +291,14 @@ internal sealed class MainForm : Form
         core.Settings.IsPasswordAutosaveEnabled = true;
         core.Settings.IsZoomControlEnabled = true;
         core.Settings.IsSwipeNavigationEnabled = true;
-        core.Settings.IsReputationCheckingRequired = false;
-        // Embedded players (YouTube, Spotify) break when tracking prevention blocks CDN and player storage.
-        core.Profile.PreferredTrackingPreventionLevel = CoreWebView2TrackingPreventionLevel.None;
+        // SmartScreen reputation checking is forced on by DefenderGuard.Attach above.
+        // Balanced keeps embedded players (YouTube, Spotify) working while still blocking known trackers.
+        core.Profile.PreferredTrackingPreventionLevel = Settings.Get("tracking", "balanced") switch
+        {
+            "none" => CoreWebView2TrackingPreventionLevel.None,
+            "strict" => CoreWebView2TrackingPreventionLevel.Strict,
+            _ => CoreWebView2TrackingPreventionLevel.Balanced,
+        };
         core.ContainsFullScreenElementChanged += (_, _) => SetFullScreen(core.ContainsFullScreenElement);
         core.ProcessFailed += (_, e) =>
         {
@@ -287,10 +314,10 @@ internal sealed class MainForm : Form
         core.NewWindowRequested += async (_, e) =>
         {
             e.Handled = true;
-            await AddTab(e.Uri);
+            await AddTab(e.Uri, tab.IsPrivate);
         };
         core.SourceChanged += (_, _) => { if (tab == current) ShowUrl(core.Source); };
-        core.DocumentTitleChanged += (_, _) => { tab.Title = Shorten(core.DocumentTitle); tab.Header.Text = tab.Title + "  "; if (tab == current) Text = WindowTitle(tab.Title == "New Tab" ? core.DocumentTitle : core.DocumentTitle); };
+        core.DocumentTitleChanged += (_, _) => { tab.Title = Shorten(core.DocumentTitle); tab.Header.Text = (tab.IsPrivate ? "[P] " : "") + tab.Title + "  "; if (tab == current) Text = WindowTitle(tab.Title == "New Tab" ? core.DocumentTitle : core.DocumentTitle); };
         core.NavigationCompleted += (_, _) => { UpdateNav(); PushThemeToStartPage(); };
         // The start page tells the shell when its own Theme button is used.
         core.WebMessageReceived += (_, e) =>
@@ -376,6 +403,7 @@ internal sealed class MainForm : Form
     private void HandleShortcut(KeyEventArgs e)
     {
         if (e.Control && e.KeyCode == Keys.T) { e.Handled = true; _ = AddTab(StartUrl); }
+        else if (e.Control && e.Shift && e.KeyCode == Keys.N) { e.Handled = true; _ = AddTab(StartUrl, inPrivate: true); }
         else if (e.Control && e.KeyCode == Keys.W) { e.Handled = true; if (current != null) CloseTab(current); }
         else if (e.Control && e.KeyCode == Keys.L || e.KeyCode == Keys.F6) { e.Handled = true; omnibox.Focus(); }
         else if (e.Control && e.KeyCode == Keys.Tab && tabs.Count > 1)
@@ -410,22 +438,29 @@ internal sealed class MainForm : Form
         current.View.CoreWebView2.Navigate(url);
     }
 
+    private CoreWebView2ControllerOptions PrivateOptions()
+    {
+        var opts = env.CreateCoreWebView2ControllerOptions();
+        opts.IsInPrivateModeEnabled = true;   // in-memory profile: no history, cookies or cache on disk
+        return opts;
+    }
+
     private async Task AskCopilot()
     {
         var q = omnibox.Text.Trim();
         var url = q.Length > 0 && Normalize(q) == null
-            ? string.Format(Providers[2].Url, Uri.EscapeDataString(q))
-            : "https://www.bing.com/copilotsearch";
+            ? "https://copilot.microsoft.com/?q=" + Uri.EscapeDataString(q)
+            : "https://copilot.microsoft.com/";
         await AddTab(url);
     }
 
     private async Task AskGemini()
     {
         var q = omnibox.Text.Trim();
-        if (q.Length > 0 && Normalize(q) == null)
-        {
-            try { Clipboard.SetText(q); } catch { }
-        }
-        await AddTab("https://gemini.google.com/app");
+        // Google AI Mode (udm=50) is the Gemini-powered search; the bare app takes no query URL.
+        var url = q.Length > 0 && Normalize(q) == null
+            ? "https://www.google.com/search?udm=50&q=" + Uri.EscapeDataString(q)
+            : "https://gemini.google.com/app";
+        await AddTab(url);
     }
 }

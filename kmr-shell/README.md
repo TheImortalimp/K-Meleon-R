@@ -1,19 +1,25 @@
-# K-Meleon-R shell r13 (8.5.0)
+# K-Meleon-R shell r14 (8.6.0)
 
 The current Windows browser is a .NET 8 WinForms application using Microsoft
 Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
 [Project README](../README.md) | [About](../ABOUT.md) |
-[r13 release notes](../RELEASE_NOTES_r13.md) |
+[r14 release notes](../RELEASE_NOTES_r14.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
 
 ## Features and version changes
 
-The shell provides tabs, an editable GX-style speed dial, Dark/Light/Sand/Sky/
-System themes, Bing/Google/Copilot Search, Copilot/Gemini web shortcuts,
-fullscreen video, zoom, autofill, password saving and renderer reload handling.
+The shell provides tabs (including private tabs), an editable GX-style speed
+dial, Dark/Light/Sand/Sky/System themes, Bing/Google/Copilot/Gemini search,
+Copilot/Gemini query shortcuts, fullscreen video, zoom, autofill, password
+saving and renderer reload handling.
 
+- **r14 / 8.6.0:** Microsoft Defender integration (SmartScreen on, attachment
+  service + AMSI download scanning, Security Center watchdog), Google Safe
+  Browsing lookups, anti-screencap shield, `javascript:`/`data:`/`vbscript:`
+  blocking, private tabs, Balanced tracking prevention, Copilot/Gemini query
+  URLs, installer scripts run with `RemoteSigned`.
 - **r13 / 8.5.0:** theme/pointer download/navigation blocking, `ms-settings:`
   blocking, sound-scheme policy and installer GEM OS hardening.
 - **r12 / 8.4.0:** page-level system-pointer guard, runtime cursor validation,
@@ -38,9 +44,8 @@ dotnet publish -c Release -r win-x64 --self-contained true -o publish
 & "C:\Program Files (x86)\NSIS\makensis.exe" setup.nsi
 ```
 
-Output: `K-Meleon-R-r13-x64-setup.exe`. The project version is `8.5.0`;
-the release tag is `v8.5.0-r13`. The current GitHub release supplies an installer,
-not an r13 portable ZIP.
+Output: `K-Meleon-R-r14-x64-setup.exe`. The project version is `8.6.0`;
+the release tag is `v8.6.0-r14`.
 
 WebView2 must be available on the target computer. If initialization fails, the
 shell offers Microsoft's runtime download page.
@@ -56,10 +61,18 @@ The runtime guard accepts empty pointer slots or valid system `.cur`/`.ani`
 files under `%WINDIR%\Cursors`, resets unapproved paths and protects pointers
 against page CSS/JavaScript replacement. It runs for each browser tab.
 Theme/pointer files and `ms-settings:` are blocked by the WebView2 guard.
+The installer runs the hardening scripts with `-ExecutionPolicy RemoteSigned`.
+
+Per-tab security guards (r14): `DefenderGuard` (SmartScreen, attachment
+service + AMSI download scanning, script-scheme navigation blocking),
+`SafeBrowsingGuard` (Google Safe Browsing v4, key required) and
+`CaptureGuard` (window capture exclusion, page screen-capture blocking).
+The Security Center watchdog warns when real-time antivirus protection is off.
 
 Logs and backups:
 
 - `%LOCALAPPDATA%\K-Meleon-R\cursor-guard.log`
+- `%LOCALAPPDATA%\K-Meleon-R\defender-guard.log`
 - `%ProgramData%\GEM-OS-HARDENING.log`
 - `%ProgramData%\GEM-OS-HARDENING-BACKUP\<timestamp>\previous-values.txt`
 - `%ProgramData%\AI-WARP-CURSOR-LOCKDOWN.log`
@@ -72,24 +85,30 @@ Do not run apply/quarantine merely to test documentation.
 
 ## Shortcuts, profile and debugging
 
-Ctrl+T creates a tab; Ctrl+W closes it; Ctrl+Tab and Ctrl+Shift+Tab navigate tabs.
+Ctrl+T creates a tab; Ctrl+Shift+N creates a private (in-memory profile) tab;
+Ctrl+W closes a tab; Ctrl+Tab and Ctrl+Shift+Tab navigate tabs.
 Ctrl+L or F6 focuses the address bar; F5 reloads; Alt+Home opens the start page.
 WebView2 browser accelerators and F12 developer tools are enabled.
 
 Settings/profile use `%LOCALAPPDATA%\K-Meleon-R`.
 Set `KMR_DEBUG_PORT` only when intentionally enabling Chromium remote debugging.
-Ordinary pages cannot access the native host bridge; `https://kmr.start/index.html`
-retains it for theme synchronization.
+Set `gsbApiKey` in settings.json (or `KMR_GSB_API_KEY`) to enable Google Safe
+Browsing lookups. Ordinary pages cannot access the native host bridge;
+`https://kmr.start/index.html` retains it for theme synchronization.
 
-The current host disables tracking prevention and reputation checking and
-automatically allows clipboard-read requests. Autoplay is enabled. These
-choices favor compatibility, not strict privacy isolation; external-service
-availability remains outside the shell's control.
+SmartScreen reputation checking is forced on; tracking prevention defaults to
+Balanced (`tracking` setting: `none`/`balanced`/`strict`). The capture shield
+is on by default and hides the window from the user's own screenshots too -
+toggle the toolbar Shield button to capture. Clipboard-read requests are
+automatically allowed and autoplay is enabled. External-service availability
+remains outside the shell's control.
 
 ## Validation and limits
 
-This documentation refresh was checked against r13 source/version metadata and
-the existing GitHub asset checksum. No executable was rebuilt or replaced.
-Machine-policy `-Apply` has not been validated end-to-end on a real machine.
-An administrator can undo policies; unsigned installers may trigger SmartScreen,
-and a clean targeted scan is not proof of machine safety.
+The r14 code builds cleanly and the shell was smoke-tested (launch, window,
+clean shutdown). Download scanning and the watchdog depend on the installed
+antivirus and Security Center (absent on Windows Server); the capture shield
+needs Windows 10 2004+. Machine-policy `-Apply` has not been validated
+end-to-end on a real machine. An administrator can undo policies; unsigned
+installers may trigger SmartScreen, and a clean targeted scan is not proof of
+machine safety.
