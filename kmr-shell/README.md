@@ -5,7 +5,7 @@ Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
 [Project README](../README.md) | [About](../ABOUT.md) |
-[r14 release notes](../RELEASE_NOTES_r14.md) |
+[r14 release notes](../RELEASE_NOTES_r15.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
 
 ## Features and version changes
@@ -44,8 +44,8 @@ dotnet publish -c Release -r win-x64 --self-contained true -o publish
 & "C:\Program Files (x86)\NSIS\makensis.exe" setup.nsi
 ```
 
-Output: `K-Meleon-R-r14-x64-setup.exe`. The project version is `8.6.0`;
-the release tag is `v8.6.0-r14`.
+Output: `K-Meleon-R-r15-x64-setup.exe`. The project version is `8.7.0`;
+the release tag is `v8.7.0-r15`.
 
 WebView2 must be available on the target computer. If initialization fails, the
 shell offers Microsoft's runtime download page.

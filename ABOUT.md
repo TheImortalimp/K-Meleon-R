@@ -12,8 +12,8 @@ repository for reference.
 
 ## Current version
 
-**r14 / 8.6.0**, tag
-**[v8.6.0-r14](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.6.0-r14)**
+**r15 / 8.7.0**, tag
+**[v8.7.0-r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)**
 (installer and portable ZIP).
 
 r14 integrates the Microsoft and Google protection layers directly into every
@@ -67,5 +67,5 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 and license wording. Legacy K-Meleon, Goanna/Pale Moon, Babel and dependencies
 retain their own licenses.
 
-[README](README.md) | [Release notes](RELEASE_NOTES_r14.md) |
+[README](README.md) | [Release notes](RELEASE_NOTES_r15.md) |
 [Description](DESCRIPTION.md)

@@ -6,9 +6,9 @@ Defender/Safe Browsing/anti-screencap hardening.**
 
 ## Download and install
 
-[Download the r14 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-setup.exe)
-| [r14 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-portable.zip)
-| [Release notes](RELEASE_NOTES_r14.md)
+[Download the r15 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
+| [r15 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r15.md)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
@@ -22,12 +22,16 @@ Defender/Safe Browsing/anti-screencap hardening.**
 - The portable ZIP runs without installation; the Windows hardening scripts are
   included but must be run manually (elevated) if wanted.
 
-SHA-256 (r14):
+SHA-256 (r15):
 
 ```text
-K-Meleon-R-r14-x64-setup.exe    440808FF57BA7DC881CE41719A8E8C2ED3E2B0A48019EE6431A0C18B94D9556E
-K-Meleon-R-r14-x64-portable.zip A876BB2810E0A945546D9D3AF940BB87531C210D47B46109D426BC2B8B0F91EE
+K-Meleon-R-r15-x64-setup.exe    CCA7FFB5F8337EE22E17185B1C3E719D0C0E703B2A16670C8A49DE800ED80B66
+K-Meleon-R-r15-x64-portable.zip 503C49275B6171DB9F77218B3C731B6191F2ECC007BA1AC7471C2685678D4AAD
 ```
+
+## What's new in r15
+
+Bugfix release: Ask Gemini/Copilot always send the query, and the start page gains a Gemini provider with query support. See the [release notes](RELEASE_NOTES_r15.md).
 
 ## What's new in r14
 
@@ -108,6 +112,8 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
+| r15 / 8.7.0 | Bugfix: complete Google/Gemini search query support (Ask Gemini/Copilot, start-page Gemini provider) |
+| r15 / 8.7.0 | Bugfix: complete Google/Gemini search query support (Ask Gemini/Copilot, start-page Gemini provider) |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |
