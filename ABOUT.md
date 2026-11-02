@@ -1,4 +1,4 @@
-# About K-Meleon-R r14 (8.6.0)
+# About K-Meleon-R r15 (8.7.0)
 
 K-Meleon-R is a small standalone Windows browser inspired by K-Meleon, with
 a GX-style speed-dial start page, tabs and synchronized Dark, Light, Sand,
@@ -10,13 +10,28 @@ Copilot/Gemini query shortcuts. These buttons open external services; they are
 not local AI models. Legacy K-Meleon/Gecko/Goanna sources remain in the
 repository for reference.
 
-## Current version
+## Current/latest release
 
-**r14 / 8.6.0**, tag
-**[v8.6.0-r14](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.6.0-r14)**
-(installer and portable ZIP).
+**r15 / 8.7.0**, released **2 November 2026**, is the current query-search fix
+and general bug-fix build, replacing r14 and earlier versions. Release tag:
+**[v8.7.0-r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)**
+(Windows x64 EXE installer and portable ZIP). r15 completes the
+Google/Gemini search query support begun in r14: Ask Gemini and Ask Copilot
+always send your query, and the start page has a Gemini (Google AI Mode)
+provider. The selected search provider is synchronized between the toolbar
+and start page. Questions containing URLs are sent in full as queries, while
+standalone website addresses still navigate normally. Direct downloads are also kept in
+[`dist/r15`](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15).
+This build also fixes unfinished address-bar text being replaced, preserves
+private-tab mode for native Ask buttons, removes the start-page query-length
+restriction, and corrects the portable package's documented script contents.
 
-r14 integrates the Microsoft and Google protection layers directly into every
+[Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
+| [EXE installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
+| [Portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+| [Release notice](kmr-shell/RELEASE_NOTICE.md)
+
+r14 introduced the Microsoft and Google protection layers directly into every
 tab: SmartScreen reputation checking, Attachment Execution Service + AMSI
 download scanning through the installed antivirus (Microsoft Defender by
 default), a Security Center watchdog, optional Google Safe Browsing lookups,
@@ -27,8 +42,9 @@ native-bridge compatibility fix.
 ## Protection boundaries
 
 The Windows guard prevents custom web pointer replacement and validates active
-pointer paths against the system cursor directory. The installer requires UAC
-elevation and applies cursor/theme/sound policies across local profiles.
+pointer paths against the system cursor directory. The installer requests UAC
+elevation when possible; only elevated installs apply cursor/theme/sound
+policies across local profiles.
 Quarantine is opt-in, not part of normal installation.
 
 Downloads are screened by SmartScreen, the Windows attachment service and AMSI
@@ -57,7 +73,12 @@ still be unavailable. Safe Browsing lookups, when enabled, send only the
 visited URL to Google.
 
 The native host bridge is hidden from ordinary web pages and retained only
-for local start-page theme syncing. Settings/profile are local under
+for local start-page theme and provider syncing. Gemini searches use Google
+AI Mode; Copilot searches use Copilot Search in Bing. Only the selected
+service receives a submitted query, encoded in its search URL. Typing is not
+streamed to either service, and neither can read browser controls or other
+tabs. Ask buttons explicitly choose the destination for that submission.
+Settings/profile are local under
 `%LOCALAPPDATA%\K-Meleon-R`; optional `KMR_DEBUG_PORT` enables remote debugging.
 
 ## Credits and license
@@ -67,5 +88,5 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 and license wording. Legacy K-Meleon, Goanna/Pale Moon, Babel and dependencies
 retain their own licenses.
 
-[README](README.md) | [Release notes](RELEASE_NOTES_r14.md) |
+[README](README.md) | [Release notes](RELEASE_NOTES_r15.md) |
 [Description](DESCRIPTION.md)

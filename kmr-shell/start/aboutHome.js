@@ -34,16 +34,13 @@ window.addEventListener('beforeunload', function () {
     Services.prefs.removeObserver("kmeleon.general.searchEngineName", setEngine);
 });
 	
-const SEARCH_FALLBACK = "https://www.bing.com/search?q=";
-
-// Search providers for the start page: Google (default) or Microsoft Copilot.
 const PROVIDER_PREF = "kmeleon.search.provider";
 const PROVIDERS = {
-    bing: { label: "Bing", url: "https://www.bing.com/search?q=_searchTerms_" },
-    google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_" },
-    copilot: { label: "Copilot", url: "https://www.bing.com/copilotsearch?q=_searchTerms_" }
+    bing: { label: "Bing", url: "https://www.bing.com/search?q=_searchTerms_", home: "https://www.bing.com/" },
+    google: { label: "Google", url: "https://www.google.com/search?q=_searchTerms_", home: "https://www.google.com/" },
+    copilot: { label: "Copilot", url: "https://www.bing.com/copilotsearch?q=_searchTerms_", home: "https://www.bing.com/copilotsearch" },
+    gemini: { label: "Gemini", url: "https://www.google.com/search?udm=50&q=_searchTerms_", home: "https://gemini.google.com/app" }
 };
-const COPILOT_HOME = "https://www.bing.com/copilotsearch";
 
 function getProvider() {
     try {
@@ -53,7 +50,7 @@ function getProvider() {
     return "bing";
 }
 
-const PROVIDER_ORDER = ["bing", "google", "copilot"];
+const PROVIDER_ORDER = ["bing", "google", "copilot", "gemini"];
 
 function applyProvider() {
     let p = PROVIDERS[getProvider()];
@@ -61,70 +58,26 @@ function applyProvider() {
     document.getElementById("searchProvider").value = "Search: " + p.label;
 }
 
-function getSearchURL() {
-    return PROVIDERS[getProvider()].url;
+function getSearchURL(providerName, text) {
+    let provider = PROVIDERS[providerName];
+    let query = text.trim();
+    return query ? provider.url.replace("_searchTerms_", encodeURIComponent(query)) : provider.home;
 }
 
-function getLegacySearchURL() {
-    // The search service may be missing in this build, so fall back to the prefs.
-    try {
-        let submission = Services.search.defaultEngine.getSubmission("_searchTerms_", null, "homepage");
-        if (submission && submission.uri) return submission.uri.spec;
-    } catch (ex) {}
-    try {
-        return Services.prefs.getComplexValue("kmeleon.general.searchEngine", Ci.nsIPrefLocalizedString).data + "_searchTerms_";
-    } catch (ex) {}
-    try {
-        return Services.prefs.getCharPref("kmeleon.general.searchEngine") + "_searchTerms_";
-    } catch (ex) {}
-    return SEARCH_FALLBACK + "_searchTerms_";
-}
+window.kmrSetProvider = function (name) {
+    if (PROVIDER_ORDER.indexOf(name) < 0) {
+        console.error("Unknown K-Meleon-R search provider:", name);
+        return;
+    }
+    Services.prefs.setCharPref(PROVIDER_PREF, name);
+    applyProvider();
+};
 
 function onSearchSubmit(aEvent)
 {
     aEvent.preventDefault();
-    var searchURL = getSearchURL();
-    var searchTerms = document.getElementById("searchText").value;
-   
-    if (searchURL && searchTerms.length > 0) {
-
-        const SEARCH_TOKEN = "_searchTerms_";
-        let searchPostData = document.documentElement.getAttribute("searchEnginePostData");
-        if (searchPostData) {
-            // Check if a post form already exists. If so, remove it.
-            const POST_FORM_NAME = "searchFormPost";
-            let form = document.forms[POST_FORM_NAME];
-            if (form) {
-                form.parentNode.removeChild(form);
-            }
-
-            // Create a new post form.
-            form = document.body.appendChild(document.createElement("form"));
-            form.setAttribute("name", POST_FORM_NAME);
-            // Set the URL to submit the form to.
-            form.setAttribute("action", searchURL.replace(SEARCH_TOKEN, searchTerms));
-            form.setAttribute("method", "post");
-
-            // Create new <input type=hidden> elements for search param.
-            searchPostData = searchPostData.split("&");
-            for (let postVar of searchPostData) {
-                let [name, value] = postVar.split("=");
-                if (value == SEARCH_TOKEN) {
-                    value = searchTerms;
-                }
-                let input = document.createElement("input");
-                input.setAttribute("type", "hidden");
-                input.setAttribute("name", name);
-                input.setAttribute("value", value);
-                form.appendChild(input);
-            }
-            // Submit the form.
-            form.submit();
-        } else {
-            searchURL = searchURL.replace(SEARCH_TOKEN, encodeURIComponent(searchTerms));
-            window.location.href = searchURL;
-        }
-    }
+    let query = document.getElementById("searchText").value.trim();
+    if (query) window.location.href = getSearchURL(getProvider(), query);
 }
 
 /* ---- K-Meleon-R speed dial ---- */
@@ -349,24 +302,18 @@ window.addEventListener("load", function () {
         document.getElementById("dialImageStatus").textContent = "Picture will be removed";
     });
     document.getElementById("searchProvider").addEventListener("click", function () {
-        Services.prefs.setCharPref(PROVIDER_PREF, PROVIDER_ORDER[(PROVIDER_ORDER.indexOf(getProvider()) + 1) % PROVIDER_ORDER.length]);
-        applyProvider();
+        let next = PROVIDER_ORDER[(PROVIDER_ORDER.indexOf(getProvider()) + 1) % PROVIDER_ORDER.length];
+        window.kmrSetProvider(next);
+        if (window.chrome && window.chrome.webview)
+            window.chrome.webview.postMessage("provider:" + next);
     });
     document.getElementById("askCopilot").addEventListener("click", function () {
-        let q = document.getElementById("searchText").value.trim();
-        window.location.href = q ? PROVIDERS.copilot.url.replace("_searchTerms_", encodeURIComponent(q)) : COPILOT_HOME;
+        window.location.href = getSearchURL("copilot", document.getElementById("searchText").value);
     });
     applyProvider();
-    // Gemini has no documented URL for prefilling a prompt, so just open it.
+    // Google AI Mode (udm=50) is Gemini-powered search and accepts the query in the URL.
     document.getElementById("askGemini").addEventListener("click", function () {
-        let q = document.getElementById("searchText").value.trim();
-        if (q) {
-            try {
-                Components.classes["@mozilla.org/widget/clipboardhelper;1"]
-                    .getService(Components.interfaces.nsIClipboardHelper).copyString(q);
-            } catch (ex) {}
-        }
-        window.location.href = "https://gemini.google.com/app";
+        window.location.href = getSearchURL("gemini", document.getElementById("searchText").value);
     });
     renderDial();
 });

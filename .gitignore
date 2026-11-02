@@ -7,3 +7,6 @@ kmr-shell/bin/
 kmr-shell/obj/
 kmr-shell/publish/
 kmr-shell/*.zip
+kmr-shell.tests/bin/
+kmr-shell.tests/obj/
+kmr-shell.tests/TestResults/

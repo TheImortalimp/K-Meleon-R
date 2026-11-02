@@ -1,4 +1,8 @@
-# K-Meleon-R r14 (8.6.0)
+# K-Meleon-R r15 (8.7.0)
+
+**Current/latest release: r15 (8.7.0), 2 November 2026.**
+This is the **query-search fix and general bug-fix build**, superseding r14
+and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
 
 **A small standalone Windows browser with a GX-style start page, tabs,
 five synchronized themes, Microsoft Edge WebView2 rendering and layered
@@ -6,9 +10,11 @@ Defender/Safe Browsing/anti-screencap hardening.**
 
 ## Download and install
 
-[Download the r14 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-setup.exe)
-| [r14 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.6.0-r14/K-Meleon-R-r14-x64-portable.zip)
-| [Release notes](RELEASE_NOTES_r14.md)
+[Download the r15 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
+| [r15 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r15.md)
+| [Release notice](kmr-shell/RELEASE_NOTICE.md)
+| [Direct download from dist/r15](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
@@ -22,12 +28,21 @@ Defender/Safe Browsing/anti-screencap hardening.**
 - The portable ZIP runs without installation; the Windows hardening scripts are
   included but must be run manually (elevated) if wanted.
 
-SHA-256 (r14):
+SHA-256 (r15):
 
 ```text
-K-Meleon-R-r14-x64-setup.exe    440808FF57BA7DC881CE41719A8E8C2ED3E2B0A48019EE6431A0C18B94D9556E
-K-Meleon-R-r14-x64-portable.zip A876BB2810E0A945546D9D3AF940BB87531C210D47B46109D426BC2B8B0F91EE
+K-Meleon-R-r15-x64-setup.exe    5BA4A9C5922FC05D2CF77A42CC635E661FA145228A8EE35FEF921F7141265E6B
+K-Meleon-R-r15-x64-portable.zip 765FF18706221C9044FC4C91E4242EAF820FD7637EEC2A052D10C9AFC6DB85AA
 ```
+
+## What's new in r15
+
+The current query-search and general bug-fix release provides complete query routing to the selected provider, synchronized
+between the address bar and start page. Questions containing URLs remain
+searches, and the start page no longer truncates queries at 256 characters.
+Additional fixes preserve unfinished address-bar input, retain private-tab
+mode for native Ask buttons, and correct portable-package contents.
+See the [release notes](RELEASE_NOTES_r15.md).
 
 ## What's new in r14
 
@@ -62,17 +77,38 @@ guarantee. Administrators can undo policies.
   tabs, toolbar and WebView2 background.
 - Address/search bar with Bing, Google, Copilot and Gemini (Google AI Mode)
   search providers.
-- **Ask Copilot** opens Microsoft Copilot with your query; **Ask Gemini** opens
+- **Ask Copilot** opens Copilot Search in Bing with your query; **Ask Gemini** opens
   Google AI Mode with your query (or the Gemini app without one). These are
   external web services.
 - Tabs (including private tabs), video fullscreen, browser zoom, autofill,
   password saving, developer tools and renderer-crash/unresponsive reload
   handling.
 - Ordinary web pages do not receive the native host bridge; the local start
-  page retains it for theme synchronization.
+  page retains it for theme and search-provider synchronization.
 
 Website availability, sign-in, codecs and runtime behavior can change.
 Compatibility is not guaranteed for every site.
+
+## Search and AI query routing
+
+- Choose **Search: Gemini** for Google AI Mode or **Search: Copilot** for
+  Copilot Search in Bing. The choice stays synchronized between the toolbar
+  and all local start pages and is remembered for the next launch.
+- In the address bar, Enter opens a website address normally. Other text goes
+  in full to the selected provider, including questions containing a URL,
+  Unicode and punctuation. A dotted hostname such as `foo.bar` is still an
+  address; use an **Ask** button to search for it instead.
+- The start-page search field always searches with its selected provider.
+  **Ask Gemini** and **Ask Copilot** explicitly send the current field text to
+  that service, including a URL, without changing the default provider.
+  Native Ask buttons preserve private-tab mode.
+- Only submission sends the query. The browser does not stream your typing
+  or send each search to both AI services. Queries are URL-encoded into the
+  selected service's search URL; they can appear in that service's history.
+  Neither service receives access to browser controls or other tabs.
+- Gemini here means **Google AI Mode**, not a Gemini chat/API integration.
+  An empty Ask Gemini opens the Gemini app; an empty Ask Copilot opens Copilot
+  Search. Availability and account requirements are controlled by those sites.
 
 ## Shortcuts and settings
 
@@ -108,6 +144,7 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
+| **r15 / 8.7.0 (current)** | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |
