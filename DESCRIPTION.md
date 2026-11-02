@@ -17,6 +17,6 @@ filter, on top of the r12/r13 theme/cursor takeover defenses.
 The installer changes Windows settings; it is unsigned, quarantine is opt-in,
 and these layered defenses are not a general safety guarantee.
 
-[Download r14](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)
+[Download r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)
 | [README](README.md) | [About](ABOUT.md) |
-[r14 release notes](RELEASE_NOTES_r15.md)
+[r15 release notes](RELEASE_NOTES_r15.md)

@@ -5,7 +5,7 @@ Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
 [Project README](../README.md) | [About](../ABOUT.md) |
-[r14 release notes](../RELEASE_NOTES_r15.md) |
+[r15 release notes](../RELEASE_NOTES_r15.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
 
 ## Features and version changes
