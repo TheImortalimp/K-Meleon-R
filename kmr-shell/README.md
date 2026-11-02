@@ -1,11 +1,18 @@
 # K-Meleon-R shell r15 (8.7.0)
 
+**Current release as of 2 November 2026: r15 (8.7.0), the query-search fix
+and general bug-fix build.** It supersedes r14 and earlier versions and is
+available as a Windows x64 EXE installer and a portable ZIP.
+
 The current Windows browser is a .NET 8 WinForms application using Microsoft
 Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
-[Project README](../README.md) | [About](../ABOUT.md) |
-[r15 release notes](../RELEASE_NOTES_r15.md) |
+[Project README](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.7.0-r15/README.md) |
+[About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.7.0-r15/ABOUT.md) |
+[r15 release notes and checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15) |
+[Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest) |
+[Included release notice](RELEASE_NOTICE.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
 
 ## Features and version changes
@@ -15,14 +22,16 @@ dial, Dark/Light/Sand/Sky/System themes, Bing/Google/Copilot/Gemini search,
 Copilot/Gemini query shortcuts, fullscreen video, zoom, autofill, password
 saving and renderer reload handling.
 
-- **r15 / 8.7.0:** bugfix release completing Google/Gemini query support:
+- **r15 / 8.7.0 (current):** query-search and general bug-fix release:
   Ask Gemini/Ask Copilot always send the query (dotted single words are no
   longer treated as URLs) and the start page gains a Gemini (Google AI Mode)
   provider. Provider selection is synchronized with the native toolbar.
   Address-bar questions containing URLs are correctly searched; standalone
   website addresses still navigate normally. Copilot shortcuts consistently
   use Copilot Search in Bing, and start-page searches are no longer truncated
-  at 256 characters.
+  at 256 characters. Unfinished address-bar input is preserved during
+  background navigation, native Ask buttons retain private-tab mode, and
+  portable-package contents match the documentation.
 - **r14 / 8.6.0:** Microsoft Defender integration (SmartScreen on, attachment
   service + AMSI download scanning, Security Center watchdog), Google Safe
   Browsing lookups, anti-screencap shield, `javascript:`/`data:`/`vbscript:`
@@ -60,6 +69,8 @@ Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r15-x64-portable.zip
 
 Output: `K-Meleon-R-r15-x64-setup.exe`. The project version is `8.7.0`;
 the release tag is `v8.7.0-r15`.
+Both packages include this README and `RELEASE_NOTICE.md`. Published checksums
+are kept on the release page, outside the packages they verify.
 Run each command only after the previous one succeeds. Search tests require
 Node.js 22+ as well as the .NET SDK. They exercise query encoding, provider
 selection and URL routing without launching the browser or changing Windows

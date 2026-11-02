@@ -10,17 +10,26 @@ Copilot/Gemini query shortcuts. These buttons open external services; they are
 not local AI models. Legacy K-Meleon/Gecko/Goanna sources remain in the
 repository for reference.
 
-## Current version
+## Current/latest release
 
-**r15 / 8.7.0**, tag
+**r15 / 8.7.0**, released **2 November 2026**, is the current query-search fix
+and general bug-fix build, replacing r14 and earlier versions. Release tag:
 **[v8.7.0-r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)**
-(installer and portable ZIP). r15 is a bugfix release that completes the
+(Windows x64 EXE installer and portable ZIP). r15 completes the
 Google/Gemini search query support begun in r14: Ask Gemini and Ask Copilot
 always send your query, and the start page has a Gemini (Google AI Mode)
 provider. The selected search provider is synchronized between the toolbar
 and start page. Questions containing URLs are sent in full as queries, while
 standalone website addresses still navigate normally. Direct downloads are also kept in
 [`dist/r15`](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15).
+This build also fixes unfinished address-bar text being replaced, preserves
+private-tab mode for native Ask buttons, removes the start-page query-length
+restriction, and corrects the portable package's documented script contents.
+
+[Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
+| [EXE installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
+| [Portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+| [Release notice](kmr-shell/RELEASE_NOTICE.md)
 
 r14 introduced the Microsoft and Google protection layers directly into every
 tab: SmartScreen reputation checking, Attachment Execution Service + AMSI

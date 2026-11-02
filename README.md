@@ -1,5 +1,9 @@
 # K-Meleon-R r15 (8.7.0)
 
+**Current/latest release: r15 (8.7.0), 2 November 2026.**
+This is the **query-search fix and general bug-fix build**, superseding r14
+and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+
 **A small standalone Windows browser with a GX-style start page, tabs,
 five synchronized themes, Microsoft Edge WebView2 rendering and layered
 Defender/Safe Browsing/anti-screencap hardening.**
@@ -9,6 +13,7 @@ Defender/Safe Browsing/anti-screencap hardening.**
 [Download the r15 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
 | [r15 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
 | [Release notes](RELEASE_NOTES_r15.md)
+| [Release notice](kmr-shell/RELEASE_NOTICE.md)
 | [Direct download from dist/r15](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15)
 | [About](ABOUT.md)
 
@@ -32,9 +37,11 @@ K-Meleon-R-r15-x64-portable.zip 16A81FA5DD87E176AEF799E7CB5CD0A84DCFFAD32E8AC52E
 
 ## What's new in r15
 
-Bugfix release: complete query routing to the selected provider, synchronized
+The current query-search and general bug-fix release provides complete query routing to the selected provider, synchronized
 between the address bar and start page. Questions containing URLs remain
 searches, and the start page no longer truncates queries at 256 characters.
+Additional fixes preserve unfinished address-bar input, retain private-tab
+mode for native Ask buttons, and correct portable-package contents.
 See the [release notes](RELEASE_NOTES_r15.md).
 
 ## What's new in r14
@@ -137,7 +144,7 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
-| r15 / 8.7.0 | Complete query routing, synchronized search providers, Gemini/Copilot Ask shortcuts and long-query support |
+| **r15 / 8.7.0 (current)** | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Content Include="start\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="RELEASE_NOTICE.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <!-- The WebView2 package also references its WPF assembly; this shell is WinForms-only. -->

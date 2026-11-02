@@ -1,6 +1,17 @@
-# K-Meleon-R r15 (8.7.0) - bugfix release
+# K-Meleon-R r15 (8.7.0) - query-search fix and general bug-fix release
 
-Completes the Google/Gemini search query support that was only partly done in r14.
+**Current/latest stable release - 2 November 2026.**
+r15 supersedes r14 and earlier builds. This maintenance release completes
+Gemini/Copilot query-search support and fixes related input, provider
+synchronization, private-tab and packaging behavior.
+
+## Downloads
+
+- [Windows x64 EXE installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
+- [Windows x64 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+- [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
+
+Both packages include updated documentation and `RELEASE_NOTICE.md`.
 
 ## Fixes
 - **Ask Gemini / Ask Copilot:** a one-word query containing a dot (e.g. `foo.bar`)
@@ -36,6 +47,13 @@ The installer is unsigned. Verify its checksum and source before running it.
 An elevated install applies Windows policy hardening that uninstall does not
 undo; portable policy scripts are optional and are not run automatically.
 Release validation does not run the installer or change machine policies.
+
+## Validation
+
+The search fix passed 59 native regression tests and 10 start-page tests.
+The Windows x64 release build and NSIS installer compilation succeeded.
+Package contents and SHA-256 hashes are checked before publication; these
+checks are not a guarantee that all websites or machine-policy behavior work.
 
 ## SHA-256
 
