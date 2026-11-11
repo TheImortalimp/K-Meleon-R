@@ -6,6 +6,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+env:
+  KMR_VERSION: r16
 jobs:
   package:
     runs-on: windows-latest
@@ -13,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 10.0.x
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -24,6 +26,22 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node --test kmr-shell.tests/start-page.test.cjs
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build and bundle the SHODAN side pane
+        shell: pwsh
+        run: |
+          git clone --depth 1 https://github.com/TheImortalimp/SHODAN-A.I.-Voice.git shodan-src
+          if ($LASTEXITCODE) { exit 1 }
+          Push-Location shodan-src
+          npm ci
+          if ($LASTEXITCODE) { exit 1 }
+          npm run build
+          if ($LASTEXITCODE) { exit 1 }
+          Pop-Location
+          Remove-Item kmr-shell/shodan -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Force kmr-shell/shodan | Out-Null
+          Copy-Item shodan-src/dist/* kmr-shell/shodan -Recurse -Force
+          if (-not (Test-Path kmr-shell/shodan/shodan.html)) { throw 'SHODAN build did not produce shodan.html' }
+          "Bundled SHODAN pane: $((Get-ChildItem kmr-shell/shodan -Recurse -File | Measure-Object).Count) files."
       - name: Publish
         shell: pwsh
         run: |
@@ -33,23 +51,26 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item kmr-shell/NOTICE-K-Meleon-R.md publish/; Remove-Item publish/*.xml
           Copy-Item kmr-shell/README.md publish/README.md
+          if (-not (Test-Path publish/shodan/shodan.html)) { throw 'Published output is missing the bundled SHODAN pane' }
           Get-ChildItem publish | Select Name, Length
       - name: Installer
         shell: pwsh
         run: |
           choco install nsis -y --no-progress | Out-Null
-          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" /DVERSION=r15 /DSRC="$PWD\publish" kmr-shell/setup.nsi
+          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" /DVERSION=${env:KMR_VERSION} /DSRC="$PWD\publish" kmr-shell/setup.nsi
           if ($LASTEXITCODE) { exit 1 }
       - name: Zip
         shell: pwsh
         run: |
-          Copy-Item kmr-shell/cursor_lockdown.ps1, kmr-shell/harden_against_gem_os.ps1 publish/
-          Compress-Archive publish/* K-Meleon-R-r15-x64-portable.zip
-          $s = Get-ChildItem -Recurse -Filter K-Meleon-R-r15-x64-setup.exe | Select -First 1
+          Copy-Item kmr-shell/cursor_lockdown.ps1, kmr-shell/harden_against_gem_os.ps1, `
+            kmr-shell/Hardening_Lockdown_Standalone.bat, kmr-shell/install_hourly_hardening.ps1, `
+            kmr-shell/install-flint.ps1 publish/
+          Compress-Archive publish/* "K-Meleon-R-${env:KMR_VERSION}-x64-portable.zip"
+          $s = Get-ChildItem -Recurse -Filter "K-Meleon-R-${env:KMR_VERSION}-x64-setup.exe" | Select -First 1
           if ($s.DirectoryName -ne $PWD.Path) { Move-Item $s.FullName . -Force }
       - uses: actions/upload-artifact@v4
         with:
-          name: r15
+          name: ${{ env.KMR_VERSION }}
           path: |
-            K-Meleon-R-r15-x64-portable.zip
-            K-Meleon-R-r15-x64-setup.exe
+            K-Meleon-R-${{ env.KMR_VERSION }}-x64-portable.zip
+            K-Meleon-R-${{ env.KMR_VERSION }}-x64-setup.exe

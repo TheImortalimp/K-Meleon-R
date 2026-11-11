@@ -1,14 +1,16 @@
-# About K-Meleon-R r15 (8.7.0)
+# About K-Meleon-R r16 (8.8.0)
 
 K-Meleon-R is a small standalone Windows browser inspired by K-Meleon, with
 a GX-style speed-dial start page, tabs and synchronized Dark, Light, Sand,
 Sky and System themes. The current browser uses Microsoft Edge WebView2
-through a .NET 8 WinForms shell.
+through a .NET 10 WinForms shell, and bundles the SHODAN voice-AI side pane.
 
 It offers Bing, Google, Copilot and Gemini (Google AI Mode) search, plus
 Copilot/Gemini query shortcuts. These buttons open external services; they are
-not local AI models. Legacy K-Meleon/Gecko/Goanna sources remain in the
-repository for reference.
+not local AI models. The bundled SHODAN pane runs its CORTEX generator and
+speech on-device, and its optional flint:40b neural link only ever contacts a
+local (loopback) model server. Legacy K-Meleon/Gecko/Goanna sources remain in
+the repository for reference.
 
 ## Current/latest release
 

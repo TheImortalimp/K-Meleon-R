@@ -29,6 +29,7 @@ internal sealed class MainForm : Form
     private readonly Button askCopilot = MakeButton("Ask Copilot", 96);
     private readonly Button askGemini = MakeButton("Ask Gemini", 92);
     private readonly Button theme = MakeButton("", 92);
+    private readonly Button shodan = MakeButton("SHODAN", 86);
     private readonly Panel host = new() { Dock = DockStyle.Fill };
     private readonly List<BrowserTab> tabs = new();
     private BrowserTab current;
@@ -36,6 +37,24 @@ internal sealed class MainForm : Form
     private readonly string initialUrl;
     private int providerIndex;
     private string themeMode;
+
+    // SHODAN side pane: a right-docked, resizable WebView2 that hosts the bundled SHODAN voice AI.
+    // It can be widened ("expand") to show every panel and popped out into its own floating window.
+    private const int ShodanNormalWidth = 440;
+    private const int ShodanExpandedWidth = 820;
+    private readonly Splitter shodanSplit = new() { Dock = DockStyle.Right, Width = 4 };
+    private readonly Panel shodanDock = new() { Dock = DockStyle.Right, Width = ShodanNormalWidth, Visible = false };
+    private readonly Panel shodanInner = new() { Dock = DockStyle.Fill };
+    private readonly Panel shodanHeader = new() { Dock = DockStyle.Top, Height = 30 };
+    private readonly Panel shodanBody = new() { Dock = DockStyle.Fill };
+    private readonly Label shodanTitle = new() { Text = "SHODAN", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft, Padding = new Padding(8, 0, 0, 0), Font = new Font("Segoe UI", 9f, FontStyle.Bold) };
+    private readonly Button shodanExpandBtn = MakeButton("\u2194", 28);
+    private readonly Button shodanFloatBtn = MakeButton("\u2197", 28);
+    private readonly Button shodanCloseBtn = MakeButton("\u2715", 28);
+    private WebView2 shodanView;
+    private Form shodanFloat;
+    private bool shodanReady;
+    private bool shodanExpanded;
 
     public MainForm(string initialUrl)
     {
@@ -55,7 +74,7 @@ internal sealed class MainForm : Form
         tabStrip.Controls.Add(newTabButton);
 
         var right = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, WrapContents = false, Padding = new Padding(0, 4, 4, 0) };
-        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, theme });
+        right.Controls.AddRange(new Control[] { provider, askCopilot, askGemini, theme, shodan });
         var left = new FlowLayoutPanel { Dock = DockStyle.Left, AutoSize = true, WrapContents = false, Padding = new Padding(4, 4, 0, 0) };
         left.Controls.AddRange(new Control[] { back, fwd, reload, home });
         omnibox.Dock = DockStyle.Fill;
@@ -65,7 +84,11 @@ internal sealed class MainForm : Form
         toolbar.Controls.Add(right);
         toolbar.Controls.Add(left);
 
+        BuildShodanPane();
+
         Controls.Add(host);
+        Controls.Add(shodanSplit);
+        Controls.Add(shodanDock);
         Controls.Add(toolbar);
         Controls.Add(tabStrip);
 
@@ -86,6 +109,10 @@ internal sealed class MainForm : Form
         askCopilot.Click += async (_, _) => await Ask("Copilot");
         askGemini.Click += async (_, _) => await Ask("Gemini");
         theme.Click += (_, _) => CycleTheme();
+        shodan.Click += async (_, _) => await ToggleShodan();
+        shodanExpandBtn.Click += (_, _) => SetShodanExpanded(!shodanExpanded);
+        shodanFloatBtn.Click += (_, _) => FloatShodan();
+        shodanCloseBtn.Click += (_, _) => CloseShodan();
         // Silent self-healing: the capture shield is re-applied on every guard refresh cycle.
         DefenderGuard.Reasserted += () => { try { CaptureGuard.Apply(this, ShieldOn); } catch { } };
 
@@ -199,6 +226,7 @@ internal sealed class MainForm : Form
         askGemini.FlatAppearance.MouseOverBackColor = Color.FromArgb(88, 124, 232);
         provider.Text = "Search: " + Providers[providerIndex].Name;
         theme.Text = "Theme: " + ThemeLabel(themeMode);
+        StyleShodanPane(p);
         foreach (var t in tabs) StyleHeader(t, p);
 
         var scheme = !IsLight ? CoreWebView2PreferredColorScheme.Dark : CoreWebView2PreferredColorScheme.Light;
@@ -281,48 +309,8 @@ internal sealed class MainForm : Form
 
         await view.EnsureCoreWebView2Async(env, inPrivate ? PrivateOptions() : null);
         var core = view.CoreWebView2;
-        await CursorGuard.AttachAsync(core);
-        CursorGuard.HardenBrowser(core);
-        DefenderGuard.Attach(core);
-        SafeBrowsingGuard.Attach(core);
-        CaptureGuard.HardenBrowser(core);
-        core.SetVirtualHostNameToFolderMapping("kmr.start", Path.Combine(AppContext.BaseDirectory, "start"),
-            CoreWebView2HostResourceAccessKind.Allow);
-        core.Settings.AreDefaultContextMenusEnabled = true;
-        core.Settings.IsStatusBarEnabled = true;
-        // Web pages (e.g. the AI WARP web edition) treat window.chrome.webview as a native app host; only the start page may see it.
-        await core.AddScriptToExecuteOnDocumentCreatedAsync("if(location.hostname!=='kmr.start'&&window.chrome){try{Object.defineProperty(window.chrome,'webview',{value:undefined,configurable:true})}catch(e){}}");
-        core.Settings.AreDevToolsEnabled = true;
-        core.Settings.AreBrowserAcceleratorKeysEnabled = true;
-        core.Settings.IsGeneralAutofillEnabled = true;
-        core.Settings.IsPasswordAutosaveEnabled = true;
-        core.Settings.IsZoomControlEnabled = true;
-        core.Settings.IsSwipeNavigationEnabled = true;
-        // SmartScreen reputation checking is forced on by DefenderGuard.Attach above.
-        // Balanced keeps embedded players (YouTube, Spotify) working while still blocking known trackers.
-        core.Profile.PreferredTrackingPreventionLevel = Settings.Get("tracking", "balanced") switch
-        {
-            "none" => CoreWebView2TrackingPreventionLevel.None,
-            "strict" => CoreWebView2TrackingPreventionLevel.Strict,
-            _ => CoreWebView2TrackingPreventionLevel.Balanced,
-        };
+        await HardenCore(core, inPrivate);
         core.ContainsFullScreenElementChanged += (_, _) => SetFullScreen(core.ContainsFullScreenElement);
-        core.ProcessFailed += (_, e) =>
-        {
-            if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessExited ||
-                e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessUnresponsive)
-                BeginInvoke(new Action(() => { try { core.Reload(); } catch { } }));
-        };
-        core.PermissionRequested += (_, e) =>
-        {
-            if (e.PermissionKind == CoreWebView2PermissionKind.ClipboardRead)
-                e.State = CoreWebView2PermissionState.Allow;
-        };
-        core.NewWindowRequested += async (_, e) =>
-        {
-            e.Handled = true;
-            await AddTab(e.Uri, tab.IsPrivate);
-        };
         core.SourceChanged += (_, _) => { if (tab == current) ShowUrl(core.Source); };
         core.DocumentTitleChanged += (_, _) => { tab.Title = Shorten(core.DocumentTitle); tab.Header.Text = (tab.IsPrivate ? "[P] " : "") + tab.Title + "  "; if (tab == current) Text = WindowTitle(tab.Title == "New Tab" ? core.DocumentTitle : core.DocumentTitle); };
         core.NavigationCompleted += (_, _) => { UpdateNav(); PushSettingsToStartPage(); };
@@ -424,6 +412,7 @@ internal sealed class MainForm : Form
     {
         if (e.Control && e.KeyCode == Keys.T) { e.Handled = true; _ = AddTab(StartUrl); }
         else if (e.Control && e.Shift && e.KeyCode == Keys.N) { e.Handled = true; _ = AddTab(StartUrl, inPrivate: true); }
+        else if (e.Control && e.Shift && e.KeyCode == Keys.S) { e.Handled = true; _ = ToggleShodan(); }
         else if (e.Control && e.KeyCode == Keys.W) { e.Handled = true; if (current != null) CloseTab(current); }
         else if (e.Control && e.KeyCode == Keys.L || e.KeyCode == Keys.F6) { e.Handled = true; omnibox.Focus(); }
         else if (e.Control && e.KeyCode == Keys.Tab && tabs.Count > 1)
@@ -462,6 +451,270 @@ internal sealed class MainForm : Form
         opts.IsInPrivateModeEnabled = true;   // in-memory profile: no history, cookies or cache on disk
         return opts;
     }
+
+    // ── SHODAN side pane ──────────────────────────────────────────────────────────────────────
+    private const string ShodanUrl = "https://kmr.shodan/shodan.html";
+
+    private void BuildShodanPane()
+    {
+        var btns = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, WrapContents = false, Margin = new Padding(0) };
+        foreach (var b in new[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn })
+        {
+            b.Margin = new Padding(1, 2, 1, 2);
+            b.MinimumSize = new Size(26, 24);
+        }
+        btns.Controls.AddRange(new Control[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn });
+        shodanHeader.Controls.Add(shodanTitle);
+        shodanHeader.Controls.Add(btns);
+        shodanInner.Controls.Add(shodanBody);
+        shodanInner.Controls.Add(shodanHeader);
+        shodanDock.Controls.Add(shodanInner);
+
+        var tips = new ToolTip();
+        tips.SetToolTip(shodanExpandBtn, "Expand / collapse the pane width");
+        tips.SetToolTip(shodanFloatBtn, "Pop the pane out into a floating window / dock it back");
+        tips.SetToolTip(shodanCloseBtn, "Close the SHODAN pane");
+    }
+
+    private async Task ToggleShodan()
+    {
+        if (shodanFloat != null) { shodanFloat.Activate(); return; }
+        if (shodanDock.Visible) { CloseShodan(); return; }
+        shodanDock.Visible = true;
+        shodanSplit.Visible = true;
+        await EnsureShodanView();
+    }
+
+    private async Task EnsureShodanView()
+    {
+        if (shodanReady) return;
+        shodanReady = true;
+        shodanView = new WebView2 { Dock = DockStyle.Fill };
+        shodanBody.Controls.Add(shodanView);
+        try
+        {
+            await shodanView.EnsureCoreWebView2Async(env);
+            var core = shodanView.CoreWebView2;
+            await HardenCore(core, isPrivate: false);
+            core.DocumentTitleChanged += (_, _) =>
+            {
+                var t = core.DocumentTitle;
+                shodanTitle.Text = string.IsNullOrWhiteSpace(t) ? "SHODAN" : "SHODAN \u2014 " + t;
+                if (shodanFloat != null) shodanFloat.Text = shodanTitle.Text;
+            };
+            if (Directory.Exists(Path.Combine(AppContext.BaseDirectory, "shodan")))
+                core.Navigate(ShodanUrl);
+            else
+                ShowShodanMissing(core);
+        }
+        catch (Exception ex)
+        {
+            shodanReady = false;
+            MessageBox.Show(this, "The SHODAN pane could not start.\n\n" + ex.Message,
+                "K-Meleon-R", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+
+    private static void ShowShodanMissing(CoreWebView2 core)
+    {
+        DefenderGuard.AllowNextDataNavigation(core);
+        core.NavigateToString(
+            "<!doctype html><html><head><meta charset=\"utf-8\"><style>" +
+            "body{background:#07100b;color:#9effc6;font:14px/1.6 'Segoe UI',sans-serif;display:flex;" +
+            "align-items:center;justify-content:center;min-height:95vh;margin:0;text-align:center}" +
+            "main{max-width:420px;padding:28px}h1{color:#3cff9e;font-size:18px}code{color:#d7ffe8}</style></head>" +
+            "<body><main><h1>SHODAN is not bundled in this build</h1>" +
+            "<p>The <code>shodan</code> folder was not shipped next to K-Meleon-R.exe. " +
+            "Release builds bundle it automatically.</p></main></body></html>");
+    }
+
+    private void SetShodanExpanded(bool on)
+    {
+        shodanExpanded = on;
+        if (shodanFloat != null) shodanFloat.Width = (on ? ShodanExpandedWidth : ShodanNormalWidth) + 16;
+        else shodanDock.Width = on ? ShodanExpandedWidth : ShodanNormalWidth;
+        shodanExpandBtn.Text = on ? "\u21A4\u21A6" : "\u2194";
+    }
+
+    private void FloatShodan()
+    {
+        if (shodanFloat != null) { shodanFloat.Activate(); return; }
+        var f = new Form
+        {
+            Text = shodanTitle.Text,
+            StartPosition = FormStartPosition.CenterParent,
+            ClientSize = new Size(shodanExpanded ? ShodanExpandedWidth : ShodanNormalWidth, 760),
+            KeyPreview = true,
+            BackColor = CurrentPalette().Panel,
+        };
+        try { f.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
+        shodanDock.Controls.Remove(shodanInner);
+        f.Controls.Add(shodanInner);
+        shodanInner.Dock = DockStyle.Fill;
+        shodanFloat = f;
+        shodanDock.Visible = false;
+        shodanSplit.Visible = false;
+        shodanFloatBtn.Text = "\u2199";
+        f.HandleCreated += (_, _) => { try { CaptureGuard.Apply(f, ShieldOn); } catch { } };
+        f.FormClosing += (_, e) =>
+        {
+            // Closing the float docks the pane back instead of destroying the live SHODAN session.
+            if (shodanFloat != null) { e.Cancel = true; DockShodan(); }
+        };
+        f.Show(this);
+    }
+
+    private void DockShodan()
+    {
+        var f = shodanFloat;
+        if (f == null) return;
+        shodanFloat = null;
+        f.Controls.Remove(shodanInner);
+        shodanDock.Controls.Add(shodanInner);
+        shodanInner.Dock = DockStyle.Fill;
+        shodanFloatBtn.Text = "\u2197";
+        shodanDock.Visible = true;
+        shodanSplit.Visible = true;
+        try { f.Close(); } catch { }
+        f.Dispose();
+    }
+
+    private void CloseShodan()
+    {
+        if (shodanFloat != null) { var f = shodanFloat; shodanFloat = null; try { f.Close(); } catch { } f.Dispose(); DockReparent(); }
+        shodanDock.Visible = false;
+        shodanSplit.Visible = false;
+    }
+
+    // Puts the inner pane back under the docked panel without making it visible (used by CloseShodan
+    // when the pane was floating), so a later re-open finds the SHODAN session where it expects it.
+    private void DockReparent()
+    {
+        if (shodanInner.Parent == shodanDock) return;
+        shodanInner.Parent?.Controls.Remove(shodanInner);
+        shodanDock.Controls.Add(shodanInner);
+        shodanInner.Dock = DockStyle.Fill;
+        shodanFloatBtn.Text = "\u2197";
+    }
+
+    private void StyleShodanPane(Palette p)
+    {
+        shodanDock.BackColor = p.Panel;
+        shodanInner.BackColor = p.Panel;
+        shodanHeader.BackColor = p.Button;
+        shodanBody.BackColor = p.Bg;
+        shodanSplit.BackColor = p.Accent;
+        shodanTitle.ForeColor = p.Fg;
+        shodan.BackColor = p.Button;
+        shodan.ForeColor = p.Fg;
+        shodan.FlatAppearance.BorderSize = 0;
+        shodan.FlatAppearance.MouseOverBackColor = p.ButtonHover;
+        foreach (var b in new[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn })
+        {
+            b.BackColor = p.Button;
+            b.ForeColor = p.Fg;
+            b.FlatAppearance.BorderSize = 0;
+            b.FlatAppearance.MouseOverBackColor = p.ButtonHover;
+        }
+        if (shodanFloat != null) shodanFloat.BackColor = p.Panel;
+    }
+
+    // Shared hardening applied to every WebView2 the shell creates: tabs, pop-up windows and the
+    // SHODAN side pane. Keeps the guard stack identical everywhere so a pop-up is never a weak spot.
+    private async Task HardenCore(CoreWebView2 core, bool isPrivate)
+    {
+        await CursorGuard.AttachAsync(core);
+        CursorGuard.HardenBrowser(core);
+        DefenderGuard.Attach(core);
+        SafeBrowsingGuard.Attach(core);
+        CaptureGuard.HardenBrowser(core);
+        MapLocalHosts(core);
+        core.Settings.AreDefaultContextMenusEnabled = true;
+        core.Settings.IsStatusBarEnabled = true;
+        // Web pages (e.g. the AI WARP web edition) treat window.chrome.webview as a native app host; only the start page may see it.
+        await core.AddScriptToExecuteOnDocumentCreatedAsync("if(location.hostname!=='kmr.start'&&window.chrome){try{Object.defineProperty(window.chrome,'webview',{value:undefined,configurable:true})}catch(e){}}");
+        core.Settings.AreDevToolsEnabled = true;
+        core.Settings.AreBrowserAcceleratorKeysEnabled = true;
+        core.Settings.IsGeneralAutofillEnabled = true;
+        core.Settings.IsPasswordAutosaveEnabled = true;
+        core.Settings.IsZoomControlEnabled = true;
+        core.Settings.IsSwipeNavigationEnabled = true;
+        // SmartScreen reputation checking is forced on by DefenderGuard.Attach above.
+        // Balanced keeps embedded players (YouTube, Spotify) working while still blocking known trackers.
+        core.Profile.PreferredTrackingPreventionLevel = Settings.Get("tracking", "balanced") switch
+        {
+            "none" => CoreWebView2TrackingPreventionLevel.None,
+            "strict" => CoreWebView2TrackingPreventionLevel.Strict,
+            _ => CoreWebView2TrackingPreventionLevel.Balanced,
+        };
+        core.ProcessFailed += (_, e) =>
+        {
+            if (e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessExited ||
+                e.ProcessFailedKind == CoreWebView2ProcessFailedKind.RenderProcessUnresponsive)
+                BeginInvoke(new Action(() => { try { core.Reload(); } catch { } }));
+        };
+        core.PermissionRequested += (_, e) =>
+        {
+            if (e.PermissionKind == CoreWebView2PermissionKind.ClipboardRead)
+                e.State = CoreWebView2PermissionState.Allow;
+        };
+        core.NewWindowRequested += async (_, e) => await HandleNewWindowRequested(e, isPrivate);
+    }
+
+    private static void MapLocalHosts(CoreWebView2 core)
+    {
+        core.SetVirtualHostNameToFolderMapping("kmr.start", Path.Combine(AppContext.BaseDirectory, "start"),
+            CoreWebView2HostResourceAccessKind.Allow);
+        var shodanDir = Path.Combine(AppContext.BaseDirectory, "shodan");
+        if (Directory.Exists(shodanDir))
+            core.SetVirtualHostNameToFolderMapping("kmr.shodan", shodanDir,
+                CoreWebView2HostResourceAccessKind.Allow);
+    }
+
+    // Hardened pop-up handler. Pop-ups are allowed to load their content, but never silently:
+    //  * a verified-malicious target (Google Safe Browsing) is refused outright;
+    //  * anything else opens in its own guarded window carrying an "allowed pop-up" notice so a
+    //    page can never sneak a background window past the user. Content still loads either way.
+    private async Task HandleNewWindowRequested(CoreWebView2NewWindowRequestedEventArgs e, bool isPrivate)
+    {
+        var deferral = e.GetDeferral();
+        try
+        {
+            var uri = e.Uri;
+            string threat = null;
+            try { threat = await SafeBrowsingGuard.CheckAsync(uri); }
+            catch { threat = null; }   // a failed check never blocks a pop-up
+            if (threat != null)
+            {
+                e.Handled = true;
+                PopupWindow.ShowBlocked(this, uri, threat);
+                return;
+            }
+
+            var popup = new PopupWindow(this, isPrivate, ShieldOn);
+            var core = await popup.CreateCoreAsync(env, isPrivate ? PrivateOptions() : null,
+                c => HardenCore(c, isPrivate));
+            if (core == null) { e.Handled = true; return; }
+            e.NewWindow = core;   // WebView2 drives the pop-up into our guarded window
+            ApplyPopupWindowFeatures(popup, e.WindowFeatures);
+            popup.Show(this);
+        }
+        finally { deferral.Complete(); }
+    }
+
+    private static void ApplyPopupWindowFeatures(PopupWindow popup, CoreWebView2WindowFeatures f)
+    {
+        try
+        {
+            var w = f != null && f.HasSize && f.Width >= 240 ? (int)f.Width : 900;
+            var h = f != null && f.HasSize && f.Height >= 180 ? (int)f.Height : 680;
+            popup.ClientSize = new Size(Math.Min(w, 1600), Math.Min(h + PopupWindow.BannerHeight, 1200));
+        }
+        catch { }
+    }
+
+    // Opens a URL as a brand-new guarded tab (used by pop-up windows that the user promotes).
+    internal Task PromoteToTab(string url, bool isPrivate) => AddTab(url, isPrivate);
 
     private async Task Ask(string providerName)
     {

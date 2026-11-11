@@ -1,48 +1,53 @@
-# K-Meleon-R r15 (8.7.0)
+# K-Meleon-R r16 (8.8.0)
 
-**Current/latest release: r15 (8.7.0), 2 November 2026.**
-This is the **query-search fix and general bug-fix build**, superseding r14
-and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+**Current/latest release: r16 (8.8.0).**
+This is the **.NET 10, SHODAN side pane, hourly hardening and hardened pop-up
+build**, superseding r15 and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
 
 **A small standalone Windows browser with a GX-style start page, tabs,
-five synchronized themes, Microsoft Edge WebView2 rendering and layered
-Defender/Safe Browsing/anti-screencap hardening.**
+five synchronized themes, Microsoft Edge WebView2 rendering, a bundled SHODAN
+voice-AI side pane and layered Defender/Safe Browsing/anti-screencap hardening.**
 
 ## Download and install
 
-[Download the r15 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
-| [r15 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
-| [Release notes](RELEASE_NOTES_r15.md)
+[Download the r16 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.0-r16/K-Meleon-R-r16-x64-setup.exe)
+| [r16 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.0-r16/K-Meleon-R-r16-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r16.md)
 | [Release notice](kmr-shell/RELEASE_NOTICE.md)
-| [Direct download from dist/r15](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15)
 | [About](ABOUT.md)
 
 - Requires Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime.
 - The installer defaults to `%LOCALAPPDATA%\Programs\K-Meleon-R`.
 - **UAC elevation is optional:** with administrator rights the installer
-  applies Windows pointer/theme/sound policy hardening, including local
-  profiles ([protection boundaries](ABOUT.md#protection-boundaries)); without
-  them the browser installs per-user and the hardening steps are skipped.
+  applies Windows pointer/theme/sound policy hardening (including local
+  profiles) and registers a hidden scheduled task that runs the GEM-OS lockdown
+  engine silently every hour ([protection boundaries](ABOUT.md#protection-boundaries));
+  without elevation the browser installs per-user and those steps are skipped.
 - The installer is unsigned and may trigger SmartScreen. Verify its hash and
   source before deciding whether to run it; a hash is not a safety certificate.
-- The portable ZIP runs without installation; the Windows hardening scripts are
-  included but must be run manually (elevated) if wanted.
+- The portable ZIP runs without installation; the Windows hardening scripts and
+  the hourly-task / flint provisioning scripts are included but must be run
+  manually (elevated) if wanted.
 
-SHA-256 (r15):
+SHA-256 (r16): published with the [GitHub release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
 
-```text
-K-Meleon-R-r15-x64-setup.exe    5BA4A9C5922FC05D2CF77A42CC635E661FA145228A8EE35FEF921F7141265E6B
-K-Meleon-R-r15-x64-portable.zip 765FF18706221C9044FC4C91E4242EAF820FD7637EEC2A052D10C9AFC6DB85AA
-```
+## What's new in r16
 
-## What's new in r15
+- **.NET 10 (LTS).** The shell and tests moved off .NET 8 (end of support
+  10 November 2026) with no feature or UI change.
+- **SHODAN side pane.** A right-docked, resizable pane (toolbar **SHODAN** button
+  or Ctrl+Shift+S) hosts the bundled SHODAN voice AI; it expands to full width
+  and pops out into a floating window. SHODAN's merged **flint:40b** neural link
+  is her default conversational and monologue voice, with CORTEX as her soul and
+  instant fallback; `install-flint.ps1` provisions the model on loopback.
+- **Hourly silent hardening.** An elevated install runs the bundled GEM-OS
+  lockdown engine silently every hour via a hidden, highest-privilege scheduled
+  task that is removed on uninstall.
+- **Hardened pop-up handler.** Pop-ups load their content but never silently:
+  verified-malicious targets are refused and everything else opens in its own
+  guarded "allowed pop-up" window with an "Open as tab" button.
 
-The current query-search and general bug-fix release provides complete query routing to the selected provider, synchronized
-between the address bar and start page. Questions containing URLs remain
-searches, and the start page no longer truncates queries at 256 characters.
-Additional fixes preserve unfinished address-bar input, retain private-tab
-mode for native Ask buttons, and correct portable-package contents.
-See the [release notes](RELEASE_NOTES_r15.md).
+See the [release notes](RELEASE_NOTES_r16.md).
 
 ## What's new in r14
 
@@ -135,7 +140,7 @@ See [About](ABOUT.md) for these boundaries.
 
 ## Source and build
 
-The current implementation is [kmr-shell/](kmr-shell/), a .NET 8
+The current implementation is [kmr-shell/](kmr-shell/), a .NET 10
 WinForms/WebView2 shell; it is not the old Gecko/Goanna C++ browser.
 See [shell documentation](kmr-shell/README.md) for build commands and policy logs.
 The older r1-r5 builds and original K-Meleon sources remain for reference.
@@ -144,7 +149,8 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
-| **r15 / 8.7.0 (current)** | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
+| **r16 / 8.8.0 (current)** | .NET 10 (LTS); bundled SHODAN voice-AI side pane (dock/expand/float) with a merged flint:40b neural link; hourly silent GEM-OS hardening task; hardened pop-up handler that blocks verified-malicious targets and opens the rest in a guarded window |
+| r15 / 8.7.0 | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |
 | r12 / 8.4.0 | System-pointer-only page/runtime guard; process hardening and elevated cursor lockdown |

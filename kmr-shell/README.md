@@ -1,16 +1,16 @@
-# K-Meleon-R shell r15 (8.7.0)
+# K-Meleon-R shell r16 (8.8.0)
 
-**Current release as of 2 November 2026: r15 (8.7.0), the query-search fix
-and general bug-fix build.** It supersedes r14 and earlier versions and is
-available as a Windows x64 EXE installer and a portable ZIP.
+**Current release: r16 (8.8.0), the .NET 10, SHODAN side pane, hourly
+hardening and hardened pop-up build.** It supersedes r15 and earlier versions
+and is available as a Windows x64 EXE installer and a portable ZIP.
 
-The current Windows browser is a .NET 8 WinForms application using Microsoft
+The current Windows browser is a .NET 10 WinForms application using Microsoft
 Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
-[Project README](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.7.0-r15/README.md) |
-[About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.7.0-r15/ABOUT.md) |
-[r15 release notes and checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15) |
+[Project README](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.0-r16/README.md) |
+[About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.0-r16/ABOUT.md) |
+[r16 release notes and checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.0-r16) |
 [Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest) |
 [Included release notice](RELEASE_NOTICE.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
@@ -22,7 +22,15 @@ dial, Dark/Light/Sand/Sky/System themes, Bing/Google/Copilot/Gemini search,
 Copilot/Gemini query shortcuts, fullscreen video, zoom, autofill, password
 saving and renderer reload handling.
 
-- **r15 / 8.7.0 (current):** query-search and general bug-fix release:
+- **r16 / 8.8.0 (current):** moved to **.NET 10 (LTS)**; added the bundled
+  **SHODAN** voice-AI side pane (toolbar button or Ctrl+Shift+S) that docks on
+  the right, expands to full width and pops out into a floating window; SHODAN's
+  merged **flint:40b** neural link is her default conversational and monologue
+  voice with CORTEX kept as her soul and fallback; an elevated install runs the
+  GEM-OS lockdown engine silently **every hour** via a hidden scheduled task;
+  and a **hardened pop-up handler** refuses verified-malicious targets and opens
+  everything else in its own guarded "allowed pop-up" window.
+- **r15 / 8.7.0:** query-search and general bug-fix release:
   Ask Gemini/Ask Copilot always send the query (dotted single words are no
   longer treated as URLs) and the start page gains a Gemini (Google AI Mode)
   provider. Provider selection is synchronized with the native toolbar.
@@ -50,25 +58,36 @@ saving and renderer reload handling.
 
 ## Build
 
-Requires the .NET 8 SDK, Windows x64 and
-[NSIS](https://nsis.sourceforge.io/).
+Requires the .NET 10 SDK, Node.js 22+, Windows x64 and
+[NSIS](https://nsis.sourceforge.io/). The SHODAN side pane is bundled from the
+[SHODAN-A.I.-Voice](https://github.com/TheImortalimp/SHODAN-A.I.-Voice) repo: the
+release workflow clones it, runs `npm ci && npm run build`, and copies `dist/`
+into `kmr-shell/shodan/` before publishing (that folder is git-ignored).
 
 From the repository root:
 
 ```powershell
 dotnet test kmr-shell.tests\KMeleonR.Search.Tests.csproj -c Release
 node --test kmr-shell.tests\start-page.test.cjs
+# Bundle the SHODAN pane (optional for a dev build; required for a full release):
+git clone --depth 1 https://github.com/TheImortalimp/SHODAN-A.I.-Voice.git shodan-src
+pushd shodan-src; npm ci; npm run build; popd
+Remove-Item kmr-shell\shodan -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory kmr-shell\shodan | Out-Null
+Copy-Item shodan-src\dist\* kmr-shell\shodan -Recurse -Force
 dotnet publish kmr-shell\kmr-shell.csproj -c Release -r win-x64 --self-contained true `
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
   -p:EnableCompressionInSingleFile=true -p:DebugType=None -o kmr-shell\publish
 Copy-Item kmr-shell\NOTICE-K-Meleon-R.md, kmr-shell\README.md kmr-shell\publish
-& "C:\Program Files (x86)\NSIS\makensis.exe" /DVERSION=r15 kmr-shell\setup.nsi
-Copy-Item kmr-shell\cursor_lockdown.ps1, kmr-shell\harden_against_gem_os.ps1 kmr-shell\publish
-Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r15-x64-portable.zip
+& "C:\Program Files (x86)\NSIS\makensis.exe" /DVERSION=r16 kmr-shell\setup.nsi
+Copy-Item kmr-shell\cursor_lockdown.ps1, kmr-shell\harden_against_gem_os.ps1, `
+  kmr-shell\Hardening_Lockdown_Standalone.bat, kmr-shell\install_hourly_hardening.ps1, `
+  kmr-shell\install-flint.ps1 kmr-shell\publish
+Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r16-x64-portable.zip
 ```
 
-Output: `K-Meleon-R-r15-x64-setup.exe`. The project version is `8.7.0`;
-the release tag is `v8.7.0-r15`.
+Output: `K-Meleon-R-r16-x64-setup.exe`. The project version is `8.8.0`;
+the release tag is `v8.8.0-r16`.
 Both packages include this README and `RELEASE_NOTICE.md`. Published checksums
 are kept on the release page, outside the packages they verify.
 Run each command only after the previous one succeeds. Search tests require

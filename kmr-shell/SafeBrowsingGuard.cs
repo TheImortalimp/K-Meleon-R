@@ -25,6 +25,30 @@ internal static class SafeBrowsingGuard
 
     public static bool Enabled => apiKey.Length > 0;
 
+    // On-demand verdict for the hardened pop-up handler. Returns the threat type when the target is
+    // verified malicious, or null when it is clean, unverifiable, or Safe Browsing is not configured
+    // (no API key). A null result means "not verified malicious", so the pop-up is allowed.
+    public static async Task<string> CheckAsync(string rawUrl)
+    {
+        if (!Enabled) return null;
+        var url = Canonical(rawUrl);
+        if (url == null) return null;
+        if (cache.TryGetValue(url, out var v) && !Expired(v)) return v.Threat;
+        var threat = await Lookup(url);
+        cache[url] = new Verdict(threat, DateTime.UtcNow);
+        return threat;
+    }
+
+    // Human-readable description of a Safe Browsing threat type, shared by the warning surfaces.
+    public static string Describe(string threat) => threat switch
+    {
+        "SOCIAL_ENGINEERING" => "a phishing / social-engineering page",
+        "MALWARE" => "a malware page",
+        "UNWANTED_SOFTWARE" => "a page distributing unwanted software",
+        "POTENTIALLY_HARMFUL_APPLICATION" => "a page distributing potentially harmful applications",
+        _ => "a dangerous page (" + threat + ")",
+    };
+
     public static void Attach(CoreWebView2 core)
     {
         if (!Enabled) return;
@@ -111,14 +135,7 @@ internal static class SafeBrowsingGuard
     private static void ShowWarning(CoreWebView2 core, string url, string threat)
     {
         var safeUrl = WebUtility.HtmlEncode(url ?? "");
-        var safeThreat = WebUtility.HtmlEncode(threat switch
-        {
-            "SOCIAL_ENGINEERING" => "a phishing / social-engineering page",
-            "MALWARE" => "a malware page",
-            "UNWANTED_SOFTWARE" => "a page distributing unwanted software",
-            "POTENTIALLY_HARMFUL_APPLICATION" => "a page distributing potentially harmful applications",
-            _ => "a dangerous page (" + threat + ")",
-        });
+        var safeThreat = WebUtility.HtmlEncode(Describe(threat));
         try
         {
             DefenderGuard.AllowNextDataNavigation(core);
