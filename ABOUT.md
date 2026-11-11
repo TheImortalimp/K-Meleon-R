@@ -14,23 +14,28 @@ the repository for reference.
 
 ## Current/latest release
 
-**r15 / 8.7.0**, released **2 November 2026**, is the current query-search fix
-and general bug-fix build, replacing r14 and earlier versions. Release tag:
-**[v8.7.0-r15](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.7.0-r15)**
-(Windows x64 EXE installer and portable ZIP). r15 completes the
-Google/Gemini search query support begun in r14: Ask Gemini and Ask Copilot
-always send your query, and the start page has a Gemini (Google AI Mode)
-provider. The selected search provider is synchronized between the toolbar
-and start page. Questions containing URLs are sent in full as queries, while
-standalone website addresses still navigate normally. Direct downloads are also kept in
-[`dist/r15`](https://github.com/TheImortalimp/K-Meleon-R/tree/r15/dist/r15).
-This build also fixes unfinished address-bar text being replaced, preserves
-private-tab mode for native Ask buttons, removes the start-page query-length
-restriction, and corrects the portable package's documented script contents.
+**r18 / 8.8.2** is the current release, a patch that fixes the bundled SHODAN
+avatar (face) not rendering in the shipped single-file build: `PublishSingleFile`
+silently dropped `shodan/avatar.png`, so the pane's `kmr.shodan` virtual host
+returned 404 for the face image. The SHODAN pane assets now ship via
+`ExcludeFromSingleFile`, and the release workflow fails fast if the avatar is
+missing. Release tag:
+**[v8.8.2-r18](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.2-r18)**
+(Windows x64 EXE installer and portable ZIP).
+
+This continues the r16-r17 line: **r16 / 8.8.0** moved the shell to **.NET 10
+(LTS)** (.NET 8 reached end of support on 10 November 2026), added the bundled
+**SHODAN** voice-AI side pane (toolbar button or Ctrl+Shift+S) that docks on the
+right, expands, and pops out into a floating window; made **flint:40b** SHODAN's
+default conversational and monologue voice with CORTEX kept as her soul and
+fallback; added an hourly silent GEM-OS hardening task; and added a hardened
+pop-up handler that refuses verified-malicious targets and opens the rest in a
+guarded window. **r17 / 8.8.1** made the pane window modes (minimize, expand,
+fullscreen, float, dock, close) coherent and exception-safe.
 
 [Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
-| [EXE installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-setup.exe)
-| [Portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.7.0-r15/K-Meleon-R-r15-x64-portable.zip)
+| [EXE installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.2-r18/K-Meleon-R-r18-x64-setup.exe)
+| [Portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.2-r18/K-Meleon-R-r18-x64-portable.zip)
 | [Release notice](kmr-shell/RELEASE_NOTICE.md)
 
 r14 introduced the Microsoft and Google protection layers directly into every
@@ -90,5 +95,5 @@ River Lyle Reuveni (TheImortalimp), AI & .co, with GitHub Copilot.
 and license wording. Legacy K-Meleon, Goanna/Pale Moon, Babel and dependencies
 retain their own licenses.
 
-[README](README.md) | [Release notes](RELEASE_NOTES_r15.md) |
+[README](README.md) | [Release notes](RELEASE_NOTES_r18.md) |
 [Description](DESCRIPTION.md)
