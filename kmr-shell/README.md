@@ -1,16 +1,17 @@
-# K-Meleon-R shell r16 (8.8.0)
+# K-Meleon-R shell r17 (8.8.1)
 
-**Current release: r16 (8.8.0), the .NET 10, SHODAN side pane, hourly
-hardening and hardened pop-up build.** It supersedes r15 and earlier versions
-and is available as a Windows x64 EXE installer and a portable ZIP.
+**Current release: r17 (8.8.1), a patch that makes the SHODAN side-pane window
+modes (minimize, expand, fullscreen, float, dock, close) coherent and
+exception-safe.** It supersedes r16 and earlier versions and is available as a
+Windows x64 EXE installer and a portable ZIP.
 
 The current Windows browser is a .NET 10 WinForms application using Microsoft
 Edge WebView2. It reuses the K-Meleon-R start-page design, not the legacy
 Gecko/Goanna C++ implementation. Pale Moon is not required.
 
-[Project README](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.0-r16/README.md) |
-[About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.0-r16/ABOUT.md) |
-[r16 release notes and checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.0-r16) |
+[Project README](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.1-r17/README.md) |
+[About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.1-r17/ABOUT.md) |
+[r17 release notes and checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.1-r17) |
 [Latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest) |
 [Included release notice](RELEASE_NOTICE.md) |
 [License and attribution](NOTICE-K-Meleon-R.md)
@@ -22,7 +23,12 @@ dial, Dark/Light/Sand/Sky/System themes, Bing/Google/Copilot/Gemini search,
 Copilot/Gemini query shortcuts, fullscreen video, zoom, autofill, password
 saving and renderer reload handling.
 
-- **r16 / 8.8.0 (current):** moved to **.NET 10 (LTS)**; added the bundled
+- **r17 / 8.8.1 (current):** patch that makes the SHODAN side-pane window modes
+  (minimize, expand, fullscreen, float, dock, close) coherent and exception-safe.
+  The float/dock/close paths no longer dispose the live SHODAN WebView2 before
+  reparenting (which previously threw and made the avatar/face appear to fail),
+  and closing the float window via the OS button docks the pane back intact.
+- **r16 / 8.8.0:** moved to **.NET 10 (LTS)**; added the bundled
   **SHODAN** voice-AI side pane (toolbar button or Ctrl+Shift+S) that docks on
   the right, expands to full width and pops out into a floating window; SHODAN's
   merged **flint:40b** neural link is her default conversational and monologue
@@ -79,15 +85,15 @@ dotnet publish kmr-shell\kmr-shell.csproj -c Release -r win-x64 --self-contained
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
   -p:EnableCompressionInSingleFile=true -p:DebugType=None -o kmr-shell\publish
 Copy-Item kmr-shell\NOTICE-K-Meleon-R.md, kmr-shell\README.md kmr-shell\publish
-& "C:\Program Files (x86)\NSIS\makensis.exe" /DVERSION=r16 kmr-shell\setup.nsi
+& "C:\Program Files (x86)\NSIS\makensis.exe" /DVERSION=r17 kmr-shell\setup.nsi
 Copy-Item kmr-shell\cursor_lockdown.ps1, kmr-shell\harden_against_gem_os.ps1, `
   kmr-shell\Hardening_Lockdown_Standalone.bat, kmr-shell\install_hourly_hardening.ps1, `
   kmr-shell\install-flint.ps1 kmr-shell\publish
-Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r16-x64-portable.zip
+Compress-Archive kmr-shell\publish\* kmr-shell\K-Meleon-R-r17-x64-portable.zip
 ```
 
-Output: `K-Meleon-R-r16-x64-setup.exe`. The project version is `8.8.0`;
-the release tag is `v8.8.0-r16`.
+Output: `K-Meleon-R-r17-x64-setup.exe`. The project version is `8.8.1`;
+the release tag is `v8.8.1-r17`.
 Both packages include this README and `RELEASE_NOTICE.md`. Published checksums
 are kept on the release page, outside the packages they verify.
 Run each command only after the previous one succeeds. Search tests require

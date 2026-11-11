@@ -2,7 +2,7 @@ Unicode true
 !include "MUI2.nsh"
 !include "LogicLib.nsh"
 !ifndef VERSION
-  !define VERSION "r16"
+  !define VERSION "r17"
 !endif
 !ifndef SRC
   !define SRC "publish"
@@ -16,10 +16,10 @@ InstallDir "$LOCALAPPDATA\Programs\K-Meleon-R"
 InstallDirRegKey HKCU "Software\K-Meleon-R" "InstallDir"
 
 ; Installer metadata (imortalimp.nl)
-VIProductVersion "8.8.0.0"
+VIProductVersion "8.8.1.0"
 VIAddVersionKey "ProductName" "K-Meleon-R"
 VIAddVersionKey "ProductVersion" "${VERSION}"
-VIAddVersionKey "FileVersion" "8.8.0.0"
+VIAddVersionKey "FileVersion" "8.8.1.0"
 VIAddVersionKey "FileDescription" "K-Meleon-R hardened WebView2 browser installer"
 VIAddVersionKey "CompanyName" "imortalimp.nl"
 VIAddVersionKey "LegalCopyright" "River Lyle Reuveni (TheImortalimp) - imortalimp.nl"

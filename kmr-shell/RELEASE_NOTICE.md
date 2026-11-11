@@ -1,8 +1,8 @@
-# K-Meleon-R r16 (8.8.0) - release notice
+# K-Meleon-R r17 (8.8.1) - release notice
 
-**.NET 10, SHODAN side pane, hourly hardening and hardened pop-ups.**
-This is the current stable release, superseding r15 and earlier builds.
-Release tag: **v8.8.0-r16**.
+**SHODAN side-pane window-mode fixes (patch).**
+This is the current stable release, superseding r16 and earlier builds.
+Release tag: **v8.8.1-r17**.
 
 ## About this build
 
@@ -12,7 +12,17 @@ a layered, self-healing security stack (Cursor/Defender/SafeBrowsing/Capture
 guards). Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime are required.
 The release is available as an EXE installer and a portable ZIP.
 
-## What's new in r16
+## What's new in r17
+
+- **SHODAN pane window modes fixed.** Minimize (to a rail when docked, or the
+  window when floating), expand width, fullscreen (Esc to exit), float into a
+  real window and dock back, and close are now coherent and exception-safe. The
+  float/dock/close paths no longer dispose the live SHODAN WebView2 before
+  reparenting (which previously threw and made the avatar/face appear to fail),
+  and closing the float window via the OS button docks the pane back with its
+  session intact.
+
+## From r16 (.NET 10, SHODAN side pane, hourly hardening and hardened pop-ups)
 
 - **.NET 10 (LTS).** The shell and tests moved from .NET 8 (end of support
   10 November 2026) to the current .NET LTS, with no change to features or UI.
@@ -45,8 +55,8 @@ These defenses and package checks are not a general safety guarantee.
 
 ## Downloads, checksums and documentation
 
-- [This release and SHA-256 checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.0-r16)
+- [This release and SHA-256 checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.1-r17)
 - [Latest available release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
-- [Project About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.0-r16/ABOUT.md)
+- [Project About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.1-r17/ABOUT.md)
 - [Browser documentation](README.md)
 - [License and attribution](NOTICE-K-Meleon-R.md)

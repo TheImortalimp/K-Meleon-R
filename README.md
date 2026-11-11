@@ -1,8 +1,9 @@
-# K-Meleon-R r16 (8.8.0)
+# K-Meleon-R r17 (8.8.1)
 
-**Current/latest release: r16 (8.8.0).**
-This is the **.NET 10, SHODAN side pane, hourly hardening and hardened pop-up
-build**, superseding r15 and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+**Current/latest release: r17 (8.8.1).**
+This is a **patch release** that fixes the SHODAN side-pane window modes
+(minimize, expand, fullscreen, float, dock, close) introduced in r16, superseding
+r16 and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
 
 **A small standalone Windows browser with a GX-style start page, tabs,
 five synchronized themes, Microsoft Edge WebView2 rendering, a bundled SHODAN
@@ -10,9 +11,9 @@ voice-AI side pane and layered Defender/Safe Browsing/anti-screencap hardening.*
 
 ## Download and install
 
-[Download the r16 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.0-r16/K-Meleon-R-r16-x64-setup.exe)
-| [r16 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.0-r16/K-Meleon-R-r16-x64-portable.zip)
-| [Release notes](RELEASE_NOTES_r16.md)
+[Download the r17 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.1-r17/K-Meleon-R-r17-x64-setup.exe)
+| [r17 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.1-r17/K-Meleon-R-r17-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r17.md)
 | [Release notice](kmr-shell/RELEASE_NOTICE.md)
 | [About](ABOUT.md)
 
@@ -29,7 +30,17 @@ voice-AI side pane and layered Defender/Safe Browsing/anti-screencap hardening.*
   the hourly-task / flint provisioning scripts are included but must be run
   manually (elevated) if wanted.
 
-SHA-256 (r16): published with the [GitHub release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+SHA-256 (r17): published with the [GitHub release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+
+## What's new in r17
+
+A patch release that makes the SHODAN side-pane window modes coherent and
+exception-safe: minimize (to a rail when docked, or the window when floating),
+expand width, fullscreen (Esc to exit), float into a real window and dock back,
+and close. The float/dock/close paths no longer dispose the live SHODAN WebView2
+before reparenting (which previously threw and made the avatar/face appear to
+fail), and closing the float window via the OS button now docks the pane back
+with its session intact. See the [release notes](RELEASE_NOTES_r17.md).
 
 ## What's new in r16
 
@@ -149,7 +160,8 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
-| **r16 / 8.8.0 (current)** | .NET 10 (LTS); bundled SHODAN voice-AI side pane (dock/expand/float) with a merged flint:40b neural link; hourly silent GEM-OS hardening task; hardened pop-up handler that blocks verified-malicious targets and opens the rest in a guarded window |
+| **r17 / 8.8.1 (current)** | Patch: SHODAN side-pane window modes (minimize / expand / fullscreen / float / dock / close) made coherent and exception-safe; float/dock/close no longer dispose the live pane (which had made the avatar appear to fail) |
+| r16 / 8.8.0 | .NET 10 (LTS); bundled SHODAN voice-AI side pane (dock/expand/float) with a merged flint:40b neural link; hourly silent GEM-OS hardening task; hardened pop-up handler that blocks verified-malicious targets and opens the rest in a guarded window |
 | r15 / 8.7.0 | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |
 | r13 / 8.5.0 | Theme/pointer package blocking, sound-scheme policy, elevated GEM OS hardening |

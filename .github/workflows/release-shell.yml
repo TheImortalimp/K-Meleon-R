@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 env:
-  KMR_VERSION: r16
+  KMR_VERSION: r17
 jobs:
   package:
     runs-on: windows-latest

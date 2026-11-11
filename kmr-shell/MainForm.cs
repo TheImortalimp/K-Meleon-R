@@ -39,22 +39,31 @@ internal sealed class MainForm : Form
     private string themeMode;
 
     // SHODAN side pane: a right-docked, resizable WebView2 that hosts the bundled SHODAN voice AI.
-    // It can be widened ("expand") to show every panel and popped out into its own floating window.
+    // Modes (all coherent and exception-safe): minimize to a rail, expand width, fullscreen,
+    // pop out into a floating window and dock back, and close (the live session is kept either way).
     private const int ShodanNormalWidth = 440;
     private const int ShodanExpandedWidth = 820;
+    private const int ShodanRailWidth = 34;
     private readonly Splitter shodanSplit = new() { Dock = DockStyle.Right, Width = 4 };
     private readonly Panel shodanDock = new() { Dock = DockStyle.Right, Width = ShodanNormalWidth, Visible = false };
     private readonly Panel shodanInner = new() { Dock = DockStyle.Fill };
     private readonly Panel shodanHeader = new() { Dock = DockStyle.Top, Height = 30 };
     private readonly Panel shodanBody = new() { Dock = DockStyle.Fill };
     private readonly Label shodanTitle = new() { Text = "SHODAN", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft, Padding = new Padding(8, 0, 0, 0), Font = new Font("Segoe UI", 9f, FontStyle.Bold) };
+    private readonly Button shodanMinBtn = MakeButton("\u2013", 28);
     private readonly Button shodanExpandBtn = MakeButton("\u2194", 28);
+    private readonly Button shodanFullBtn = MakeButton("\u26F6", 28);
     private readonly Button shodanFloatBtn = MakeButton("\u2197", 28);
     private readonly Button shodanCloseBtn = MakeButton("\u2715", 28);
+    private readonly Button shodanRestoreRail = new() { Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat, Text = "S\nH\nO\nD\nA\nN", Font = new Font("Segoe UI", 8f, FontStyle.Bold), TabStop = false, Visible = false };
     private WebView2 shodanView;
     private Form shodanFloat;
     private bool shodanReady;
     private bool shodanExpanded;
+    private bool shodanMinimized;
+    private bool shodanFullscreen;
+    private FormWindowState shodanFloatState = FormWindowState.Normal;
+    private FormBorderStyle shodanFloatBorder = FormBorderStyle.Sizable;
 
     public MainForm(string initialUrl)
     {
@@ -110,9 +119,12 @@ internal sealed class MainForm : Form
         askGemini.Click += async (_, _) => await Ask("Gemini");
         theme.Click += (_, _) => CycleTheme();
         shodan.Click += async (_, _) => await ToggleShodan();
+        shodanMinBtn.Click += (_, _) => ToggleShodanMinimized();
         shodanExpandBtn.Click += (_, _) => SetShodanExpanded(!shodanExpanded);
-        shodanFloatBtn.Click += (_, _) => FloatShodan();
+        shodanFullBtn.Click += (_, _) => ToggleShodanFullscreen();
+        shodanFloatBtn.Click += (_, _) => { if (shodanFloat != null) DockShodan(); else FloatShodan(); };
         shodanCloseBtn.Click += (_, _) => CloseShodan();
+        shodanRestoreRail.Click += (_, _) => ToggleShodanMinimized();
         // Silent self-healing: the capture shield is re-applied on every guard refresh cycle.
         DefenderGuard.Reasserted += () => { try { CaptureGuard.Apply(this, ShieldOn); } catch { } };
 
@@ -458,28 +470,37 @@ internal sealed class MainForm : Form
     private void BuildShodanPane()
     {
         var btns = new FlowLayoutPanel { Dock = DockStyle.Right, AutoSize = true, WrapContents = false, Margin = new Padding(0) };
-        foreach (var b in new[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn })
+        var headerButtons = new[] { shodanMinBtn, shodanExpandBtn, shodanFullBtn, shodanFloatBtn, shodanCloseBtn };
+        foreach (var b in headerButtons)
         {
             b.Margin = new Padding(1, 2, 1, 2);
             b.MinimumSize = new Size(26, 24);
         }
-        btns.Controls.AddRange(new Control[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn });
+        btns.Controls.AddRange(headerButtons);
         shodanHeader.Controls.Add(shodanTitle);
         shodanHeader.Controls.Add(btns);
         shodanInner.Controls.Add(shodanBody);
         shodanInner.Controls.Add(shodanHeader);
         shodanDock.Controls.Add(shodanInner);
+        shodanDock.Controls.Add(shodanRestoreRail);   // shown only while minimized to a rail
 
         var tips = new ToolTip();
+        tips.SetToolTip(shodanMinBtn, "Minimize the pane to a rail / restore it");
         tips.SetToolTip(shodanExpandBtn, "Expand / collapse the pane width");
+        tips.SetToolTip(shodanFullBtn, "Fullscreen the pane / exit fullscreen");
         tips.SetToolTip(shodanFloatBtn, "Pop the pane out into a floating window / dock it back");
         tips.SetToolTip(shodanCloseBtn, "Close the SHODAN pane");
     }
 
     private async Task ToggleShodan()
     {
-        if (shodanFloat != null) { shodanFloat.Activate(); return; }
-        if (shodanDock.Visible) { CloseShodan(); return; }
+        if (shodanFloat != null) { try { shodanFloat.Activate(); } catch { } return; }
+        if (shodanDock.Visible)
+        {
+            if (shodanMinimized) { SetShodanMinimized(false); return; }
+            CloseShodan();
+            return;
+        }
         shodanDock.Visible = true;
         shodanSplit.Visible = true;
         await EnsureShodanView();
@@ -528,73 +549,141 @@ internal sealed class MainForm : Form
             "Release builds bundle it automatically.</p></main></body></html>");
     }
 
+    // Moves the live pane (header + SHODAN WebView2) between the dock and a float window WITHOUT
+    // disposing it. All reparenting goes through here so the WebView2 is never destroyed by accident.
+    private void AttachInner(Control parent)
+    {
+        if (shodanInner.IsDisposed || parent == null) return;
+        if (shodanInner.Parent == parent) return;
+        shodanInner.Parent?.Controls.Remove(shodanInner);
+        parent.Controls.Add(shodanInner);
+        shodanInner.Dock = DockStyle.Fill;
+        shodanInner.BringToFront();
+    }
+
     private void SetShodanExpanded(bool on)
     {
         shodanExpanded = on;
-        if (shodanFloat != null) shodanFloat.Width = (on ? ShodanExpandedWidth : ShodanNormalWidth) + 16;
-        else shodanDock.Width = on ? ShodanExpandedWidth : ShodanNormalWidth;
+        if (shodanMinimized) SetShodanMinimized(false);
+        if (shodanFloat != null)
+        {
+            if (!shodanFullscreen) shodanFloat.Width = (on ? ShodanExpandedWidth : ShodanNormalWidth) + 16;
+        }
+        else
+        {
+            shodanDock.Width = on ? ShodanExpandedWidth : ShodanNormalWidth;
+        }
         shodanExpandBtn.Text = on ? "\u21A4\u21A6" : "\u2194";
+    }
+
+    private void ToggleShodanMinimized() => SetShodanMinimized(!shodanMinimized);
+
+    // Minimize: when floating, minimize the OS window; when docked, collapse to a slim labelled rail.
+    private void SetShodanMinimized(bool on)
+    {
+        if (shodanFloat != null)
+        {
+            try { shodanFloat.WindowState = on ? FormWindowState.Minimized : FormWindowState.Normal; } catch { }
+            shodanMinimized = on;
+            return;
+        }
+        shodanMinimized = on;
+        shodanInner.Visible = !on;
+        shodanRestoreRail.Visible = on;
+        if (on) shodanRestoreRail.BringToFront(); else shodanInner.BringToFront();
+        shodanDock.Width = on ? ShodanRailWidth : (shodanExpanded ? ShodanExpandedWidth : ShodanNormalWidth);
+        shodanSplit.Visible = !on;
+    }
+
+    private void ToggleShodanFullscreen()
+    {
+        if (shodanFloat == null) FloatShodan();
+        if (shodanFloat == null) return;
+        SetShodanFullscreen(!shodanFullscreen);
+    }
+
+    private void SetShodanFullscreen(bool on)
+    {
+        var f = shodanFloat;
+        if (f == null) return;
+        if (on)
+        {
+            shodanFloatState = f.WindowState == FormWindowState.Minimized ? FormWindowState.Normal : f.WindowState;
+            shodanFloatBorder = f.FormBorderStyle;
+            f.WindowState = FormWindowState.Normal;   // required before changing the border style
+            f.FormBorderStyle = FormBorderStyle.None;
+            f.WindowState = FormWindowState.Maximized;
+        }
+        else
+        {
+            f.FormBorderStyle = shodanFloatBorder;
+            f.WindowState = shodanFloatState;
+        }
+        shodanFullscreen = on;
+        shodanFullBtn.Text = on ? "\u2715\u26F6" : "\u26F6";
     }
 
     private void FloatShodan()
     {
-        if (shodanFloat != null) { shodanFloat.Activate(); return; }
+        if (shodanFloat != null) { try { shodanFloat.Activate(); } catch { } return; }
+        if (shodanMinimized) SetShodanMinimized(false);
         var f = new Form
         {
             Text = shodanTitle.Text,
             StartPosition = FormStartPosition.CenterParent,
             ClientSize = new Size(shodanExpanded ? ShodanExpandedWidth : ShodanNormalWidth, 760),
+            MinimumSize = new Size(300, 240),
             KeyPreview = true,
+            ShowInTaskbar = true,
             BackColor = CurrentPalette().Panel,
         };
         try { f.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
-        shodanDock.Controls.Remove(shodanInner);
-        f.Controls.Add(shodanInner);
-        shodanInner.Dock = DockStyle.Fill;
-        shodanFloat = f;
+        shodanFloat = f;                 // set before reparenting so handlers see the floating state
+        AttachInner(f);
         shodanDock.Visible = false;
         shodanSplit.Visible = false;
         shodanFloatBtn.Text = "\u2199";
         f.HandleCreated += (_, _) => { try { CaptureGuard.Apply(f, ShieldOn); } catch { } };
-        f.FormClosing += (_, e) =>
+        f.FormClosing += (_, _) =>
         {
-            // Closing the float docks the pane back instead of destroying the live SHODAN session.
-            if (shodanFloat != null) { e.Cancel = true; DockShodan(); }
+            // User closed the float window (OS button / Alt+F4): dock the live pane back out BEFORE
+            // the form disposes its children, so the SHODAN session and WebView2 are never destroyed.
+            // During the programmatic DockShodan() close, shodanFloat is already null, so this is inert.
+            if (shodanFloat == f) DockShodanCore();
         };
-        f.Show(this);
+        f.KeyDown += (_, e) => { if (e.KeyCode == Keys.Escape && shodanFullscreen) SetShodanFullscreen(false); };
+        try { f.Show(this); } catch { }
+    }
+
+    // Reparents the live pane from the float window back under the dock and restores the docked UI
+    // state. Never disposes anything; the caller decides whether to also close the empty float form.
+    private void DockShodanCore()
+    {
+        shodanFloat = null;
+        if (shodanFullscreen) { shodanFullscreen = false; shodanFullBtn.Text = "\u26F6"; }
+        AttachInner(shodanDock);
+        shodanFloatBtn.Text = "\u2197";
+        shodanDock.Visible = true;
+        shodanSplit.Visible = true;
+        if (shodanMinimized) SetShodanMinimized(true);
     }
 
     private void DockShodan()
     {
         var f = shodanFloat;
         if (f == null) return;
-        shodanFloat = null;
-        f.Controls.Remove(shodanInner);
-        shodanDock.Controls.Add(shodanInner);
-        shodanInner.Dock = DockStyle.Fill;
-        shodanFloatBtn.Text = "\u2197";
-        shodanDock.Visible = true;
-        shodanSplit.Visible = true;
-        try { f.Close(); } catch { }
-        f.Dispose();
+        if (shodanFullscreen) SetShodanFullscreen(false);
+        DockShodanCore();                // reparents the live pane out BEFORE the form is disposed
+        try { if (!f.IsDisposed) f.Close(); } catch { }
+        try { if (!f.IsDisposed) f.Dispose(); } catch { }
     }
 
     private void CloseShodan()
     {
-        if (shodanFloat != null) { var f = shodanFloat; shodanFloat = null; try { f.Close(); } catch { } f.Dispose(); DockReparent(); }
+        if (shodanFloat != null) DockShodan();   // reparents the live pane back safely first
+        if (shodanMinimized) SetShodanMinimized(false);
         shodanDock.Visible = false;
         shodanSplit.Visible = false;
-    }
-
-    // Puts the inner pane back under the docked panel without making it visible (used by CloseShodan
-    // when the pane was floating), so a later re-open finds the SHODAN session where it expects it.
-    private void DockReparent()
-    {
-        if (shodanInner.Parent == shodanDock) return;
-        shodanInner.Parent?.Controls.Remove(shodanInner);
-        shodanDock.Controls.Add(shodanInner);
-        shodanInner.Dock = DockStyle.Fill;
-        shodanFloatBtn.Text = "\u2197";
     }
 
     private void StyleShodanPane(Palette p)
@@ -605,11 +694,15 @@ internal sealed class MainForm : Form
         shodanBody.BackColor = p.Bg;
         shodanSplit.BackColor = p.Accent;
         shodanTitle.ForeColor = p.Fg;
+        shodanRestoreRail.BackColor = p.Button;
+        shodanRestoreRail.ForeColor = p.Fg;
+        shodanRestoreRail.FlatAppearance.BorderSize = 0;
+        shodanRestoreRail.FlatAppearance.MouseOverBackColor = p.ButtonHover;
         shodan.BackColor = p.Button;
         shodan.ForeColor = p.Fg;
         shodan.FlatAppearance.BorderSize = 0;
         shodan.FlatAppearance.MouseOverBackColor = p.ButtonHover;
-        foreach (var b in new[] { shodanExpandBtn, shodanFloatBtn, shodanCloseBtn })
+        foreach (var b in new[] { shodanMinBtn, shodanExpandBtn, shodanFullBtn, shodanFloatBtn, shodanCloseBtn })
         {
             b.BackColor = p.Button;
             b.ForeColor = p.Fg;
