@@ -1,4 +1,4 @@
-# About K-Meleon-R r17 (8.8.1)
+# About K-Meleon-R r18 (8.8.2)
 
 K-Meleon-R is a small standalone Windows browser inspired by K-Meleon, with
 a GX-style speed-dial start page, tabs and synchronized Dark, Light, Sand,

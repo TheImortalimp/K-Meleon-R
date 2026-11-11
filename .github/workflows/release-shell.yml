@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 env:
-  KMR_VERSION: r17
+  KMR_VERSION: r18
 jobs:
   package:
     runs-on: windows-latest
@@ -52,6 +52,10 @@ jobs:
           Copy-Item kmr-shell/NOTICE-K-Meleon-R.md publish/; Remove-Item publish/*.xml
           Copy-Item kmr-shell/README.md publish/README.md
           if (-not (Test-Path publish/shodan/shodan.html)) { throw 'Published output is missing the bundled SHODAN pane' }
+          if (-not (Test-Path publish/shodan/avatar.png)) { throw 'Published output is missing the SHODAN avatar (single-file bundling dropped it)' }
+          $src = (Get-ChildItem shodan-src/dist -Recurse -File).Count
+          $out = (Get-ChildItem publish/shodan -Recurse -File).Count
+          if ($out -lt $src) { throw "Published SHODAN pane is incomplete: $out of $src files" }
           Get-ChildItem publish | Select Name, Length
       - name: Installer
         shell: pwsh

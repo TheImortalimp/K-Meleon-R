@@ -1,9 +1,9 @@
-# K-Meleon-R r17 (8.8.1)
+# K-Meleon-R r18 (8.8.2)
 
-**Current/latest release: r17 (8.8.1).**
-This is a **patch release** that fixes the SHODAN side-pane window modes
-(minimize, expand, fullscreen, float, dock, close) introduced in r16, superseding
-r16 and earlier releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+**Current/latest release: r18 (8.8.2).**
+This is a **patch release** that fixes the bundled SHODAN avatar (face) not
+rendering in the shipped single-file build, superseding r17 and earlier
+releases. [Always get the latest release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
 
 **A small standalone Windows browser with a GX-style start page, tabs,
 five synchronized themes, Microsoft Edge WebView2 rendering, a bundled SHODAN
@@ -11,9 +11,9 @@ voice-AI side pane and layered Defender/Safe Browsing/anti-screencap hardening.*
 
 ## Download and install
 
-[Download the r17 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.1-r17/K-Meleon-R-r17-x64-setup.exe)
-| [r17 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.1-r17/K-Meleon-R-r17-x64-portable.zip)
-| [Release notes](RELEASE_NOTES_r17.md)
+[Download the r18 Windows x64 installer](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.2-r18/K-Meleon-R-r18-x64-setup.exe)
+| [r18 portable ZIP](https://github.com/TheImortalimp/K-Meleon-R/releases/download/v8.8.2-r18/K-Meleon-R-r18-x64-portable.zip)
+| [Release notes](RELEASE_NOTES_r18.md)
 | [Release notice](kmr-shell/RELEASE_NOTICE.md)
 | [About](ABOUT.md)
 
@@ -30,7 +30,16 @@ voice-AI side pane and layered Defender/Safe Browsing/anti-screencap hardening.*
   the hourly-task / flint provisioning scripts are included but must be run
   manually (elevated) if wanted.
 
-SHA-256 (r17): published with the [GitHub release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+SHA-256 (r18): published with the [GitHub release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest).
+
+## What's new in r18
+
+A patch release that fixes the bundled SHODAN avatar (face) not rendering in the
+shipped build: the single-file publish silently dropped `shodan/avatar.png`, so
+the pane's `kmr.shodan` virtual host returned 404 for the face image and the
+canvas portrait never became ready. The SHODAN pane assets are now marked
+`ExcludeFromSingleFile` so every file ships on disk, and the release workflow
+fails fast if the avatar is missing. See the [release notes](RELEASE_NOTES_r18.md).
 
 ## What's new in r17
 
@@ -160,7 +169,8 @@ The older r1-r5 builds and original K-Meleon sources remain for reference.
 
 | Release | Changes |
 |---------|---------|
-| **r17 / 8.8.1 (current)** | Patch: SHODAN side-pane window modes (minimize / expand / fullscreen / float / dock / close) made coherent and exception-safe; float/dock/close no longer dispose the live pane (which had made the avatar appear to fail) |
+| **r18 / 8.8.2 (current)** | Patch: fixes the bundled SHODAN avatar (face) not rendering in the shipped single-file build (`shodan/avatar.png` was dropped by `PublishSingleFile`); assets now ship via `ExcludeFromSingleFile` |
+| r17 / 8.8.1 | Patch: SHODAN side-pane window modes (minimize / expand / fullscreen / float / dock / close) made coherent and exception-safe; float/dock/close no longer dispose the live pane (which had made the avatar appear to fail) |
 | r16 / 8.8.0 | .NET 10 (LTS); bundled SHODAN voice-AI side pane (dock/expand/float) with a merged flint:40b neural link; hourly silent GEM-OS hardening task; hardened pop-up handler that blocks verified-malicious targets and opens the rest in a guarded window |
 | r15 / 8.7.0 | Query-search and general bug-fix build: complete query routing, synchronized providers, preserved input/private tabs and corrected packaging |
 | r14 / 8.6.0 | Defender download scanning + SmartScreen + AV watchdog, Google Safe Browsing, anti-screencap shield, private tabs, Copilot/Gemini query support |

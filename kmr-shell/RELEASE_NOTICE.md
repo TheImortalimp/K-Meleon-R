@@ -1,8 +1,8 @@
-# K-Meleon-R r17 (8.8.1) - release notice
+# K-Meleon-R r18 (8.8.2) - release notice
 
-**SHODAN side-pane window-mode fixes (patch).**
-This is the current stable release, superseding r16 and earlier builds.
-Release tag: **v8.8.1-r17**.
+**SHODAN face/avatar bundling fix (patch).**
+This is the current stable release, superseding r17 and earlier builds.
+Release tag: **v8.8.2-r18**.
 
 ## About this build
 
@@ -11,6 +11,15 @@ Edge WebView2, with tabs, private tabs, a GX-style start page, five themes, and
 a layered, self-healing security stack (Cursor/Defender/SafeBrowsing/Capture
 guards). Windows 10/11 x64 and the Microsoft Edge WebView2 Runtime are required.
 The release is available as an EXE installer and a portable ZIP.
+
+## What's new in r18
+
+- **SHODAN face now renders in the release build.** The single-file publish
+  silently dropped `shodan/avatar.png` (the face image) from the shipped `shodan`
+  folder, so the `kmr.shodan` virtual host returned 404 for it and the avatar
+  canvas never became ready. The SHODAN pane assets are now marked
+  `ExcludeFromSingleFile`, so every file ships on disk; the release workflow also
+  fails fast if the avatar is missing.
 
 ## What's new in r17
 
@@ -55,8 +64,8 @@ These defenses and package checks are not a general safety guarantee.
 
 ## Downloads, checksums and documentation
 
-- [This release and SHA-256 checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.1-r17)
+- [This release and SHA-256 checksums](https://github.com/TheImortalimp/K-Meleon-R/releases/tag/v8.8.2-r18)
 - [Latest available release](https://github.com/TheImortalimp/K-Meleon-R/releases/latest)
-- [Project About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.1-r17/ABOUT.md)
+- [Project About](https://github.com/TheImortalimp/K-Meleon-R/blob/v8.8.2-r18/ABOUT.md)
 - [Browser documentation](README.md)
 - [License and attribution](NOTICE-K-Meleon-R.md)

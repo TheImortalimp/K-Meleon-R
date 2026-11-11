@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>K-Meleon-R</AssemblyName>
     <RootNamespace>KMeleonR</RootNamespace>
-    <Version>8.8.1</Version>
+    <Version>8.8.2</Version>
     <ApplicationIcon>app.ico</ApplicationIcon>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Content Include="start\**\*" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="shodan\**\*" CopyToOutputDirectory="PreserveNewest" Condition="Exists('shodan')" />
+    <Content Include="shodan\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" Condition="Exists('shodan')" />
     <Content Include="RELEASE_NOTICE.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
